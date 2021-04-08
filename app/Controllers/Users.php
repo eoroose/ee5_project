@@ -39,7 +39,7 @@ class Users extends BaseController
                 $this->setUserSession($user);
               
                 return redirect()->to('dashboard');
-
+                echo 'test';
             }
         }
 
