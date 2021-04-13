@@ -33,5 +33,15 @@ class customModel{
         }
     }
 
+    function newInhabitantProgress($inhabitant_id){
+        $builder=$this->db->table('task');
+        $result=$builder->where(['isActive'=>1])->select('taskID')->get()->getResultArray();
+        foreach($result as $row)
+        {
+            $query_text="INSERT INTO `progress` ( `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES ( :inhabitant_id:, :id:, NULL, '0')";
+            $this->db->query($query_text,['inhabitant_id'=>$inhabitant_id,'id'=>$row['taskID']]);
+        }
+    }
+
 
 }

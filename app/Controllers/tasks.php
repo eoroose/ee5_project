@@ -8,6 +8,7 @@ use App\Models\godchildModel;
 use App\Models\godparentModel;
 use App\Models\inhabitantModel;
 use App\Models\JournalModel;
+use App\Models\progressmodel;
 use App\Models\taskmodel;
 use App\Models\UserModel;
 use App\Models\customModel;
@@ -57,10 +58,20 @@ class tasks extends BaseController
     public function delete()
     {
         $taskmodel=new taskmodel();
-
-        $taskmodel->where('taskID',$this->request->getVar('taskId3'))->set('isActive',false)->update();
+        $id=$this->request->getVar('taskId3');
+        $taskmodel->where('taskID',$id)->set('isActive',false)->update();
+        $progressmodel=new progressmodel();
+        $progressmodel->where('taskID',$id)->delete();
         return redirect()->to('/tasks');
     }
+
+    public function note_progress(){
+        $data=[];
+
+        echo view('templates/header', $data);
+        echo view('note_progress');
+        echo view('templates/footer');
+}
 }
 
 

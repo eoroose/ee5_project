@@ -180,26 +180,24 @@ class Users extends BaseController
                         ];
                     $appointmentmodel->save($appointmentdata1);
                     $appointmentmodel->save($appointmentdata2);
+                    $customModel->newInhabitantProgress($inhabitantId);
                 }
-                else{
+                else {
                     $employeemodel = new employeeModel();
-                    if($select=='3')
-                    {
-                        $employeedata=[
-                            'userID'=>$id,
-                            'isAdmin'=>true
+                    if ($select == '3') {
+                        $employeedata = [
+                            'userID' => $id,
+                            'isAdmin' => true
                         ];
                         $employeemodel->save($employeedata);
-                    }
-                    else{
-                        $employeedata=[
-                            'userID'=>$id,
-                            'isAdmin'=>false
+                    } else {
+                        $employeedata = [
+                            'userID' => $id,
+                            'isAdmin' => false
                         ];
                         $employeemodel->save($employeedata);
                     }
                 }
-
 	            $session=session();
 	            $session->setFlashdata('succes','Succesful Registration');
 	            return redirect()->to('/dashboard');

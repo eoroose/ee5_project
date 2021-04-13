@@ -91,7 +91,7 @@
                         <img src="/assets/images/development.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center">Note progress</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/note-progress" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <img src="/assets/images/development.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center">Note progress</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/note-progress" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
