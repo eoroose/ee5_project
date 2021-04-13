@@ -22,9 +22,16 @@ class customModel{
 
     }
 
-    function insert_godparent(int $id)
-    {
+    function activateNewTask($id){
+        $builder= $this->db->table('inhabitant');
+        $builder->join('user','inhabitant.userID=user.userID');
+        $result=$builder->where(['isActive' => 1])->select('inhabitantID')->get()->getResultArray();
 
-       return $this->db->query('INSERT INTO godparent (inhabitantID,isActive) values ('.$id.',true)');
+        foreach($result as $row){
+            $query_text="INSERT INTO `progress` ( `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES ( :inhabitant_id:, :id:, NULL, '0')";
+            $this->db->query($query_text,['inhabitant_id'=>$row['inhabitantID'],'id'=>$id]);
+        }
     }
+
+
 }

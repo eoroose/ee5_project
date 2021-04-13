@@ -81,6 +81,42 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md card">
+                        <img src="/assets/images/clipboard.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title"style="text-align: center">Tasks</h5>
+                            <a href="/tasks" class="stretched-link"></a>
+                        </div>
+                    </div>
+                    <div class="col-md card">
+                        <img src="/assets/images/development.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">Note progress</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md card">
+                        <img src="/assets/images/sweeping.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title"style="text-align: center">Chores</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                    <div class="col-md card">
+                        <img src="/assets/images/backup.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title"style="text-align: center">Backup</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md card">
                         <img src="/assets/images/backup.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
                         <div class="card-body">
                             <h5 class="card-title"style="text-align: center">Backup</h5>
@@ -126,6 +162,35 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md card">
+                        <img src="/assets/images/clipboard.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title"style="text-align: center">Tasks</h5>
+                            <a href="/tasks" class="stretched-link"></a>
+                        </div>
+                    </div>
+                    <div class="col-md card">
+                        <img src="/assets/images/development.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center">Note progress</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md card">
+                        <img src="/assets/images/sweeping.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
+                        <div class="card-body">
+                            <h5 class="card-title"style="text-align: center">Chores</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php else:?>
             <div class="container">
                 <div class="row">
@@ -133,7 +198,7 @@
                         <img src="/assets/images/journal.svg" class="card-img-top" alt="Register image" height="90em" width="90em" style="margin-top: 1em">
                         <div class="card-body">
                             <h5 class="card-title"style="text-align: center">Journal</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/new_task" class="stretched-link"></a>
                         </div>
                     </div>
                     <div class="col-md card">

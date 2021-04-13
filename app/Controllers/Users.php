@@ -37,9 +37,8 @@ class Users extends BaseController
                     ->first();
                 $user['role']=$this->findRole($user);
                 $this->setUserSession($user);
-              
+
                 return redirect()->to('dashboard');
-                echo 'test';
             }
         }
 
@@ -79,6 +78,7 @@ class Users extends BaseController
 
         $journalmodel=new JournalModel();
         $data=$journalmodel->getWeekappoint($date,23);
+
         echo '<pre>'; print_r($data); echo '</pre>';
     }
 
@@ -157,6 +157,7 @@ class Users extends BaseController
                         'userID'=>$id,
                         'arrivalDate'=>$this->request->getVar('arrival_data'),
                         'halfwayDate'=>$this->request->getVar('halfway_assignement'),
+                        'godParentID'=>$this->request->getVar('godfather')
                     ];
                     $inhabitantmodel->save($inhabitantdata);
 
@@ -179,22 +180,6 @@ class Users extends BaseController
                         ];
                     $appointmentmodel->save($appointmentdata1);
                     $appointmentmodel->save($appointmentdata2);
-
-                    $godparentUserID=$this->request->getVar('godfather');
-                    $customModel->insert_godparent($godparentUserID);
-
-
-                    $godparentmodel=new godparentModel();
-                    $godparent = $godparentmodel->where('inhabitantID', $godparentUserID)
-                        ->first();
-                    $godparentID=$godparent['godParentID'];
-                    $godchildmodel= new godchildModel();
-                    $godchilddata=[
-                        'inhabitantID'=>$inhabitantId,
-                        'godParentID'=>$godparentID,
-                        'isActive'=>true
-                    ];
-                    $godchildmodel->save($godchilddata);
                 }
                 else{
                     $employeemodel = new employeeModel();

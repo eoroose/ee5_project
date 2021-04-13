@@ -4,6 +4,7 @@ $date_doctor_1=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 8, date('Y')
 $date_doctor_2=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 22, date('Y')));
 $date_halfway=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 21, date('Y')));
 
+
 ?>
     <div class="container">
      <div class="row"">

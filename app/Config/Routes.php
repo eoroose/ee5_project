@@ -38,9 +38,11 @@ $routes->get ('/', 'Users::index',['filter'=>'noauth']);
 $routes->get('/splashscreen', 'Users::splashscreen');
 $routes->get('logout' ,'Users::logout');
 $routes->get('dashboard','Dashboard::index', ['filter'=>'auth']);
-$routes->match(['get','post'],'register','Users::register');
+$routes->match(['get','post'],'register','Users::register',['filter'=>'auth']);
 $routes->get('/week','Users::getWeek');
 $routes->get('/month','Users::getMonth');
+$routes->match(['get','post'],'tasks',"tasks::index",['filter'=>'auth']);
+
 
 /*
  * --------------------------------------------------------------------
