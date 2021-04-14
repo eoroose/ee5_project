@@ -26,6 +26,7 @@ class JournalModel{
         $query_text="SELECT appointment.date, appointment.date, appointment.inhabitantID from appointment WHERE MONTH(:date:)=MONTH(appointment.date) and appointment.inhabitantID=:id:";
         $query=$this->db->query($query_text,['date'=>$date,'id'=>$id]);
         return $query->getResultArray();
+        echo "works";
     }
 
     public function getWeekappoint($date,$id){
