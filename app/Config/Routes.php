@@ -40,7 +40,7 @@ $routes->get('logout' ,'Users::logout');
 $routes->get('dashboard','Dashboard::index', ['filter'=>'auth']);
 $routes->match(['get','post'],'register','Users::register',['filter'=>'auth']);
 $routes->get('/week','Users::getWeek');
-$routes->get('/month','Users::getMonth');
+$routes->get('/month','dashboard::progress');
 $routes->match(['get','post'],'tasks',"tasks::index",['filter'=>'auth']);
 $routes->match(['get','post'],'note-progress',"tasks::note_progress",['filter'=>'auth']);
 

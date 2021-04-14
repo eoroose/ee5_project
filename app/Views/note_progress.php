@@ -1,42 +1,68 @@
+<?php $phase=0;?>
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        height: 800px;
+        overflow: auto;
+        max-width: 800px;
+    }
+    .table-wrapper-scroll-y {
+        display: block;
+    }
 
-<h1></h1>
-<div class="container" style="padding-top: 2em">
+</style>
+
+<div class="container table-wrapper-scroll-y my-custom-scrollbar" style="padding-top: 2em">
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered">
+            <table class="table table-bordered  table-striped mb-0" id="dtVerticalScrollExample">
                 <thead>
                 <tr>
-                    <th scope="col">phase</th>
-                    <th scope="col">description</th>
-                    <th scope="col">edit</th>
-                    <th scope="col">delete</th>
+                    <th scope="col" class="first-col">phase</th>
+                    <th scope="col" class="first-col">tasks</th>
+                    <?php foreach ($inhabitants as $row1)
+                    {?>
+                    <th scope="col"><?php echo $row1['firstname'] ?> <?php echo $row1['lastname'] ?></th>
+                    <?php }?>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach($tasks as $row)
                 { ?>
-                <tr id="<?php echo "row".$row['taskID']?>">
+                    <tr id="<?php echo "row".$row['taskID']?>">
+                        <?php if($row['phase']==$phase){ ?>
+                        <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"></th>
+                        <?php
+                        }
+                        else{
+                            $phase=$row['phase'];
+                            ?>
+                            <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"><?php echo $phase; ?></th>
+                        <?php
+                        }
+                        ?>
+                        <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"><?php echo $row['description']?></th>
+                        <?php foreach ($inhabitants as $row1)
+                        {?>
+                            <?php foreach ($progress as $progress_row){
+                                if($progress_row['taskID']==$row['taskID'])
+                                {if ($progress_row['inhabitantID']==$row1['inhabitantID'])
+                                {
+                            ?>
+                                <td>
+                                    <button type="edit" id="<?php echo "complete".$progress_row['progressID']?>" class="btn btn-success" onclick="uncomplete('<?php echo $progress_row['progressID']?>')" style="width: 50px; display: <?php if($progress_row['isCompleted']==1){echo 'block';}else{echo 'none';} ?>"><img src="/assets/images/edit.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
+                                    <button type="save" id="<?php echo "uncomplete".$progress_row['progressID']?>" class="btn btn-danger" onclick="complete('<?php echo $progress_row['progressID']?>')" style="width: 50px; display: <?php if($progress_row['isCompleted']==0){echo 'block';}else{echo 'none';} ?>"><img src="/assets/images/download.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
+                                </td>
+                                <?php    }
+                                }
 
-                    <th id="<?php echo "phase_row".$row['taskID']?>"><?php echo $row['phase']?></th>
-                    <td id="<?php echo "description_row".$row['taskID']?>"><?php echo $row['description']?></td>
-                    <td>
+                             }
+                        }?>
 
-                            <button type="edit" id="<?php echo "edit".$row['taskID']?>" class="btn btn-success" onclick="edit_row('<?php echo $row['taskID']?>')" style="width: 50px;"><img src="/assets/images/edit.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
-                            <button type="save" id="<?php echo "save".$row['taskID']?>" class="btn btn-success" onclick="save_row('<?php echo $row['taskID']?>')" style="width: 50px; display: none"><img src="/assets/images/download.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
-
-                    </td>
-                    <td>
-                        <button type="button" id="<?php echo "delete".$row['taskID']?>" class="btn btn-danger" style="width: 50px;" onclick="delete_row('<?php echo $row['taskID']?>')"><img src="/assets/images/delete.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button></td>
-
-                </tr>
+                    </tr>
                 <?php }
                 ?>
-                <tr>
-                    <td><input type="number" id="new_phase"></td>
-                    <td><input type="text" id="new_description"></td>
-                    <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
 
-                </tr>
 
                 </tbody>
             </table>
@@ -44,54 +70,30 @@
     </div>
 </div>
 <div class="popup" id="edidt_popup" style="display: none"><span class="popuptext" id="myPopup">Popup text...</span></div>
-<form action="/tasks/edit" id="form1">
-    <input type="hidden" id="taskId" name="taskId" value="">
-    <input type="hidden" id="phase" name="phase" value="">
-    <input type="hidden" id="description" name="description" value="">
+<form action="/tasks/complete" id="form1">
+    <input type="hidden" id="id" name="id" value="">
 </form>
-<form action="/tasks/insert" id="form2">
-    <input type="hidden" id="phase2" name="phase2" value="">
-    <input type="hidden" id="description2" name="description2" value="">
-</form>
-<form action="/tasks/insert" id="form2">
-    <input type="hidden" id="phase2" name="phase2" value="">
-    <input type="hidden" id="description2" name="description2" value="">
-</form>
-<form action="/tasks/delete" id="form3">
-    <input type="hidden" id="taskId3" name="taskId3" value="">
+<form action="/tasks/uncomplete" id="form2">
+    <input type="hidden" id="id2" name="id2" value="">
 </form>
 <script>
-    function edit_row(no)
+    function complete(no)
     {
-        document.getElementById("edit"+no).style.display="none";
-        document.getElementById("save"+no).style.display="block";
+        document.getElementById("complete"+no).style.display="none";
+        document.getElementById("uncomplete"+no).style.display="block";
 
-        var phase=document.getElementById("phase_row"+no);
-        var description=document.getElementById("description_row"+no);
-
-        var phase_data=phase.innerHTML;
-        var description_data=description.innerHTML;
-
-        phase.innerHTML="<input type='number' id='phase_text"+no+"' value='"+phase_data+"'>";
-        description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"'>";
+        document.getElementById("id").value=no;
+        document.getElementById("form1").submit();
     }
 
 
-    function save_row(no)
+    function uncomplete(no)
     {
-        var phase_val=document.getElementById("phase_text"+no).value;
-        var description_val=document.getElementById("description_text"+no).value;
+        document.getElementById("complete"+no).style.display="block";
+        document.getElementById("uncomplete"+no).style.display="none";
 
-        document.getElementById("phase_row"+no).innerHTML=phase_val;
-        document.getElementById("description_row"+no).innerHTML=description_val;
-
-        document.getElementById("edit"+no).style.display="block";
-        document.getElementById("save"+no).style.display="none";
-
-        document.getElementById("phase").value=phase_val;
-        document.getElementById("description").value=description_val;
-        document.getElementById("taskId").value=no;
-        document.getElementById("form1").submit();
+        document.getElementById("id2").value=no;
+        document.getElementById("form2").submit();
     }
 
     function delete_row(no)
@@ -113,4 +115,14 @@
 
     }
 
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtVerticalScrollExample').DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "scrollX": true
+
+        });
+    });
 </script>

@@ -212,8 +212,11 @@
             </div>
             <div class="container">
                 <div class="row">
-                   <h1>progress!!==> to be implemented</h1>
-                    <h2>Or better something else?</h2>
+                    <div style="height: 4px" class="progress rounded-pill">
+                        <div role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%" class="progress-bar"></div>
+                        <div role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style="width: 22%" class="progress-bar bg-warning"></div>
+                        <div role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%" class="progress-bar bg-danger"></div>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>

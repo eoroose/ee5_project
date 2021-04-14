@@ -66,12 +66,46 @@ class tasks extends BaseController
     }
 
     public function note_progress(){
-        $data=[];
+
+        $taskmodel=new taskmodel();
+        $result_tasks=$taskmodel->select()->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
+        $db=db_connect();
+        $custommodel=new customModel($db);
+        $results_inhabitants =$custommodel->getActiveInhabitants();
+
+        $progressmodel=new progressmodel();
+        $id=[];
+        foreach($results_inhabitants as $rows)
+        {
+            array_push($id,$rows['inhabitantID']);
+        }
+        $results_progress=$progressmodel->select()->whereIn('inhabitantID',$id)->get()->getResultArray();
+        $data=array(
+            'inhabitants'=>$results_inhabitants,
+            'tasks'=>$result_tasks,
+            'id'=>$id,
+            'progress'=>$results_progress
+        );
 
         echo view('templates/header', $data);
         echo view('note_progress');
         echo view('templates/footer');
-}
+    }
+
+    public function complete()
+    {
+        $progressmodel=new progressmodel();
+        $id=$this->request->getVar('id');
+        $progressmodel->where('progressID',$id)->set('isCompleted',1)->update();
+        return redirect()->to('/note-progress');
+    }
+
+    public function uncomplete(){
+        $progressmodel=new progressmodel();
+        $id=$this->request->getVar('id2');
+        $progressmodel->where('progressID',$id)->set('isCompleted',0)->update();
+        return redirect()->to('/note-progress');
+    }
 }
 
 

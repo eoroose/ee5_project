@@ -13,7 +13,6 @@ class customModel{
        $builder= $this->db->table('inhabitant');
        $builder->join('user','inhabitant.userID=user.userID');
        return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname')->get()->getResultArray();
-
     }
 
     function getDoctors(){
@@ -41,6 +40,14 @@ class customModel{
             $query_text="INSERT INTO `progress` ( `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES ( :inhabitant_id:, :id:, NULL, '0')";
             $this->db->query($query_text,['inhabitant_id'=>$inhabitant_id,'id'=>$row['taskID']]);
         }
+    }
+    function getCompletedTasksPhases($id)
+    {
+        $builder=$this->db->table('progress');
+        $builder->join('task','progress.taskID=task.taskID');
+        $result= $builder->where('inhabitantID',$id)->where('isCompleted',1)->groupBy('phase')->selectCount('phase')->get()->getResultArray();
+
+        return $result;
     }
 
 
