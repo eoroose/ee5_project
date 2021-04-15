@@ -1,12 +1,13 @@
 <?php namespace App\Models;
 
+use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 
-class godchildModel extends  Model{
+class progressmodel extends  Model{
 
-    protected $table='godchild';
-    protected $primaryKey='godChildID';
-    protected $allowedFields=['inhabitantID','godParentID','isActive'];
+    protected $table='progress';
+    protected $primaryKey='progressID';
+    protected $allowedFields=['inhabitantID','taskID','isCompleted','status'];
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
 

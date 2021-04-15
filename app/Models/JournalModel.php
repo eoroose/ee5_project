@@ -35,6 +35,12 @@ class JournalModel{
         return $query->getResultArray();
     }
 
+    public function getBetweendates($date1 , $date2, $id){
+        $query_text="SELECT  appointment.date, appointment.inhabitantID from appointment WHERE appointment.date>=:date1: AND appointment.date<=:date2: and appointment.inhabitantID=:id:";
+        $query=$this->db->query($query_text,['date1'=>$date1,'date2'=>$date2,'id'=>$id]);
+        return $query->getResultArray();
+    }
+
     protected function beforeInsert(array $data)
     {
 //are things he has to execute before inserting

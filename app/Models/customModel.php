@@ -13,7 +13,6 @@ class customModel{
        $builder= $this->db->table('inhabitant');
        $builder->join('user','inhabitant.userID=user.userID');
        return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname')->get()->getResultArray();
-
     }
 
     function getDoctors(){
@@ -22,9 +21,40 @@ class customModel{
 
     }
 
-    function insert_godparent(int $id)
-    {
+    function activateNewTask($id){
+        $builder= $this->db->table('inhabitant');
+        $builder->join('user','inhabitant.userID=user.userID');
+        $result=$builder->where(['isActive' => 1])->select('inhabitantID')->get()->getResultArray();
 
-       return $this->db->query('INSERT INTO godparent (inhabitantID,isActive) values ('.$id.',true)');
+        foreach($result as $row){
+            $query_text="INSERT INTO `progress` ( `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES ( :inhabitant_id:, :id:, NULL, '0')";
+            $this->db->query($query_text,['inhabitant_id'=>$row['inhabitantID'],'id'=>$id]);
+        }
     }
+
+    function newInhabitantProgress($inhabitant_id){
+        $builder=$this->db->table('task');
+        $result=$builder->where(['isActive'=>1])->select('taskID')->get()->getResultArray();
+        foreach($result as $row)
+        {
+            $query_text="INSERT INTO `progress` ( `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES ( :inhabitant_id:, :id:, NULL, '0')";
+            $this->db->query($query_text,['inhabitant_id'=>$inhabitant_id,'id'=>$row['taskID']]);
+        }
+    }
+    function getCompletedTasksPhases($id)
+    {
+        $query_text="SELECT PHASE , COUNT(PHASE) AS Quantity FROM `progress` INNER JOIN task ON progress.taskID=task.taskID WHERE inhabitantID=:id: AND task.isActive=1 AND isCompleted=1 GROUP BY PHASE";
+        $query=$this->db->query($query_text,['id'=>$id]);
+        return $query->getResultArray();
+    }
+
+    function getActiveTasks()
+    {
+        $query_text="SELECT PHASE , COUNT(PHASE) AS Quantity FROM `task` WHERE task.isActive=1 GROUP BY PHASE";
+        $query=$this->db->query($query_text);
+        return $query->getResultArray();
+        return $result;
+    }
+
+
 }

@@ -1,12 +1,13 @@
 <?php namespace App\Models;
 
+use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 
-class godparentModel extends  Model{
+class taskmodel extends  Model{
 
-    protected $table='godparent';
-    protected $primaryKey='godParentID';
-    protected $allowedFields=['inhabitantID','isActive'];
+    protected $table='task';
+    protected $primaryKey='taskID';
+    protected $allowedFields=['phase','isActive','description'];
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
 

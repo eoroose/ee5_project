@@ -37,9 +37,8 @@ class Users extends BaseController
                     ->first();
                 $user['role']=$this->findRole($user);
                 $this->setUserSession($user);
-              
-                return redirect()->to('dashboard');
 
+                return redirect()->to('dashboard');
             }
         }
 
@@ -75,10 +74,11 @@ class Users extends BaseController
         }
     }
     public  function getWeek(){
+        $date_halfway=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 21, date('Y')));
         $date=date('Y-m-d');
-
         $journalmodel=new JournalModel();
-        $data=$journalmodel->getWeekappoint($date,23);
+        $data=$journalmodel->getBetweendates($date,$date_halfway,2);
+
         echo '<pre>'; print_r($data); echo '</pre>';
     }
 
@@ -157,6 +157,7 @@ class Users extends BaseController
                         'userID'=>$id,
                         'arrivalDate'=>$this->request->getVar('arrival_data'),
                         'halfwayDate'=>$this->request->getVar('halfway_assignement'),
+                        'godParentID'=>$this->request->getVar('godfather')
                     ];
                     $inhabitantmodel->save($inhabitantdata);
 
@@ -179,42 +180,24 @@ class Users extends BaseController
                         ];
                     $appointmentmodel->save($appointmentdata1);
                     $appointmentmodel->save($appointmentdata2);
-
-                    $godparentUserID=$this->request->getVar('godfather');
-                    $customModel->insert_godparent($godparentUserID);
-
-
-                    $godparentmodel=new godparentModel();
-                    $godparent = $godparentmodel->where('inhabitantID', $godparentUserID)
-                        ->first();
-                    $godparentID=$godparent['godParentID'];
-                    $godchildmodel= new godchildModel();
-                    $godchilddata=[
-                        'inhabitantID'=>$inhabitantId,
-                        'godParentID'=>$godparentID,
-                        'isActive'=>true
-                    ];
-                    $godchildmodel->save($godchilddata);
+                    $customModel->newInhabitantProgress($inhabitantId);
                 }
-                else{
+                else {
                     $employeemodel = new employeeModel();
-                    if($select=='3')
-                    {
-                        $employeedata=[
-                            'userID'=>$id,
-                            'isAdmin'=>true
+                    if ($select == '3') {
+                        $employeedata = [
+                            'userID' => $id,
+                            'isAdmin' => true
                         ];
                         $employeemodel->save($employeedata);
-                    }
-                    else{
-                        $employeedata=[
-                            'userID'=>$id,
-                            'isAdmin'=>false
+                    } else {
+                        $employeedata = [
+                            'userID' => $id,
+                            'isAdmin' => false
                         ];
                         $employeemodel->save($employeedata);
                     }
                 }
-
 	            $session=session();
 	            $session->setFlashdata('succes','Succesful Registration');
 	            return redirect()->to('/dashboard');

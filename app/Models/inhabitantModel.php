@@ -6,7 +6,7 @@ class inhabitantModel extends  Model{
 
     protected $table='inhabitant';
     protected $primaryKey='inhabitantID';
-    protected $allowedFields=['userID','arrivalDate','halfwayDate','departureDate'];
+    protected $allowedFields=['userID','godParentID','arrivalDate','halfwayDate','departureDate'];
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
 

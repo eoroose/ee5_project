@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 
 class eventsModel extends  Model{
 
-    protected $table='events';
+    protected $table='event';
     protected $primaryKey='eventsId';
     protected $allowedFields=['date','startTime','duration','description'];
     protected $beforeInsert=['beforeInsert'];
