@@ -38,18 +38,34 @@ class Dashboard extends BaseController
         return $events;
     }
 
-    public function progress(){
+    public function progress($id){
 	    $inhabitantmodel=new inhabitantModel();
-	    $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',3)->first();
+	    $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',$id)->first();
 
         $db=db_connect();
         $custommodel=new customModel($db);
         $resultProgress =$custommodel->getCompletedTasksPhases($inhabitantID);
-        $taskmodel=new taskmodel();
-        $resulttask=$taskmodel->where('isActive',1)->groupBy('phase')->selectCount('phase')->select('phase')->get()->getResultArray();
-        echo '<pre>'; print_r($resulttask); echo '</pre>';
-        echo '<pre>'; print_r($resultProgress); echo '</pre>';
-	    $progressmodel=new progressmodel();
-	    //$progressmodel->selectCount('phase')->where('inhabitantId',$inhabitantID)->groupBy('phase')->get()->getResultArray();
-    }
+        $resulttask=$custommodel->getActiveTasks();
+       // echo '<pre>'; print_r($resulttask); echo '</pre>';
+       // echo '<pre>'; print_r($resultProgress); echo '</pre>';
+        $data=array();
+        foreach ($resulttask as $tasks)
+        {
+            $percentage=0;
+            foreach ($resultProgress as $progress)
+            {
+                if($tasks['PHASE']==$progress['PHASE'])
+                {
+                    $percentage= round(($progress['Quantity']/$tasks['Quantity'])*100,2);
+             //       echo '<pre>'; echo  $percentage; echo '</pre>';
+                }
+            }
+            $a=array('phase'=>$tasks['PHASE']
+            ,'percentage'=>$percentage);
+            array_push($data,$a);
+
+        }
+        //echo '<pre>'; print_r($data); echo '</pre>';
+        return $data;
+	}
 }

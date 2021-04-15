@@ -211,14 +211,21 @@
                 </div>
             </div>
             <div class="container">
+
+
+                        <?php foreach ($progress as $row){?>
                 <div class="row">
-                    <div style="height: 4px" class="progress rounded-pill">
-                        <div role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%" class="progress-bar"></div>
-                        <div role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" style="width: 22%" class="progress-bar bg-warning"></div>
-                        <div role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%" class="progress-bar bg-danger"></div>
-                    </div>
+                            <div class="card shadow">
+                                <div class="card-body p-5">
+                                    <h4>step <?php echo $row['phase']?></h4>
+                                    <div class="progress rounded-pill">
+                                        <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill"><?php echo $row['percentage']?>%</div>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
-            </div>
+                            <?php }?>
+
         <?php endif; ?>
 
 

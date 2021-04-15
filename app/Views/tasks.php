@@ -44,21 +44,10 @@
     </div>
 </div>
 <div class="popup" id="edidt_popup" style="display: none"><span class="popuptext" id="myPopup">Popup text...</span></div>
-<form action="/tasks/edit" id="form1">
-    <input type="hidden" id="taskId" name="taskId" value="">
-    <input type="hidden" id="phase" name="phase" value="">
-    <input type="hidden" id="description" name="description" value="">
-</form>
+
 <form action="/tasks/insert" id="form2">
     <input type="hidden" id="phase2" name="phase2" value="">
     <input type="hidden" id="description2" name="description2" value="">
-</form>
-<form action="/tasks/insert" id="form2">
-    <input type="hidden" id="phase2" name="phase2" value="">
-    <input type="hidden" id="description2" name="description2" value="">
-</form>
-<form action="/tasks/delete" id="form3">
-    <input type="hidden" id="taskId3" name="taskId3" value="">
 </form>
 <script>
     function edit_row(no)
@@ -88,18 +77,20 @@
         document.getElementById("edit"+no).style.display="block";
         document.getElementById("save"+no).style.display="none";
 
-        document.getElementById("phase").value=phase_val;
-        document.getElementById("description").value=description_val;
-        document.getElementById("taskId").value=no;
-        document.getElementById("form1").submit();
+
+        $.post('http://localhost/tasks/edit',{id:no,phase:phase_val,description:description_val})
+
     }
 
     function delete_row(no)
     {
-        document.getElementById("row"+no+"").outerHTML="";
+        var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+        if(r==true)
+        {
+            document.getElementById("row"+no+"").outerHTML="";
+            $.post('http://localhost/tasks/delete',{id:no})
+        }
 
-        document.getElementById("taskId3").value=no;
-        document.getElementById("form3").submit();
     }
 
     function add_row()

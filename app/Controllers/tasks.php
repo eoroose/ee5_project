@@ -26,16 +26,16 @@ class tasks extends BaseController
     }
     public function edit()
     {
-        ;
-        $data=array(
-            'taskID'=>$this->request->getVar('taskId'),
-            'phase'=>$this->request->getVar('phase'),
-            'description'=>$this->request->getVar('description'),
-            'isActive'=>1
-        );
-        $taskmodel=new taskmodel();
-        $taskmodel->where('taskID',$this->request->getVar('taskId'))->replace($data);
-        return redirect()->to('/tasks');
+        if(isset($_POST['id'])){
+            $data=array(
+                'phase'=>$_POST['phase'],
+                'description'=>$_POST['description'],
+            );
+            $taskmodel=new taskmodel();
+            $taskmodel->where('taskID',$_POST['id'])->set($data)->update();
+
+        }
+
     }
     public function insert()
     {
@@ -57,12 +57,15 @@ class tasks extends BaseController
 
     public function delete()
     {
-        $taskmodel=new taskmodel();
-        $id=$this->request->getVar('taskId3');
-        $taskmodel->where('taskID',$id)->set('isActive',false)->update();
-        $progressmodel=new progressmodel();
-        $progressmodel->where('taskID',$id)->delete();
-        return redirect()->to('/tasks');
+        if(isset($_POST['id'])){
+            $taskmodel=new taskmodel();
+            $id=$_POST['id'];
+            $taskmodel->where('taskID',$id)->set('isActive',false)->update();
+            $progressmodel=new progressmodel();
+            $progressmodel->where('taskID',$id)->delete();
+
+        }
+
     }
 
     public function note_progress(){
