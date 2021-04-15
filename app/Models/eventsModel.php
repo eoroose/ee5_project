@@ -17,6 +17,7 @@ class eventsModel extends  Model{
     }
     protected function beforeUpdate(array $data)
     {
+        //test
 //are things he has to execute before updating
         return $data;
     }
