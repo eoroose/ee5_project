@@ -1,0 +1,102 @@
+.container {
+    --purple: #6959CC;
+    --button-width: 90vw;
+    --button-max-width: 415px;
+    --button-height: 40px;
+    --button-radius: 20px;
+}
+
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 80vw;
+    max-width: 300px;
+    padding-top: 50px;
+}
+
+.form-control {
+    margin-left: auto;
+    margin-right: auto;
+    border-color: var(--purple);
+    border-width: 2px;
+    width: var(--button-width);;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+    border-radius: var(--button-radius);
+    
+}
+
+.form-control:focus {
+    box-shadow: 1px 1px 5px 1px var(--purple);
+    border-color: var(--purple);
+}
+
+a {
+    text-decoration: none;
+}
+
+.login-btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    background-color: var(--purple);
+    border: 2px solid var(--purple);
+    width: var(--button-width);;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+    border-radius: var(--button-radius);
+    z-index: 1;
+
+    transition: color, box-shadow 300ms ease-in-out;
+    color: white;
+    box-shadow: none;   
+}
+
+.login-btn::before {
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    background-color: white;
+    border-radius: var(--button-radius);
+    
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+    
+}
+
+.login-btn:hover,
+.login-btn:focus {
+    color: var(--purple); 
+    box-shadow: 1px 1px 5px 1px var(--purple); 
+}
+
+.login-btn:hover::before,
+.login-btn:focus::before {
+    transform: scaleX(1);
+}
+
+@keyframes alert-popup {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.alert-message {
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--button-width);
+    max-width: var(--button-max-width);
+    padding-top: 20px;
+    animation: 300ms ease-in 0s 1 alert-popup;
+}
