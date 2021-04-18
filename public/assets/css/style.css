@@ -101,62 +101,200 @@ a {
     margin-left: auto;
     margin-right: auto;
     display: block;
-
-    --header-top-logo-size: 35px;
-}
-
-.header-account {
-    height: var(--header-top-logo-size);
 }
 
 .header-logo {
-    height: calc(var(--header-top-logo-size) + 5px );
+    height: 45px;
 }
 
 .header-logout {
-    height: var(--header-top-logo-size);
+    height: 35px;
 }
 
-.header-navbar-tabs {
-    background-color: var(--black);
-    overflow: hidden;
-    --header-tab-logo-size: 30px;
+/* DASHBOARD PAGES */
+
+.dashboard-container {
+    --dashboard-top-padding: 15px;
+    --dashboard-card-border-width: 3px;
+    --dashboard-card-animation-duration: 200ms;
+    --dashboard-card-border-radius: 20px;
 }
 
-.header-tab-container {
-    display: flex;
-    align-items: center;
+.dashboard-pages-row {
+    padding-top: var(--dashboard-top-padding);
+}
+
+.dashboard-pages-card {
+    border-color: var(--purple);
+    border-radius: var(--dashboard-card-border-radius);
+    border-width: var(--dashboard-card-border-width);
     position: relative;
+    overflow: hidden;
     z-index: 1;
+    transition: border-color var(--dashboard-card-animation-duration) ease-in-out;
 }
 
-.header-tab-container::before {
+.dashboard-pages-card:hover,
+.dashboard-pages-card:focus {
+    border-color: white;
+}
+
+.dashboard-pages-card::before {
     content: '';
     position: absolute;
-    top: -20px;
-    bottom: -10px;
-    left: -10px;
-    right: -20px;
-    background-color: var(--purple);
-
-    transition: transform 200ms ease-in;
-    transform: scaleY(0);
-    transform-origin: bottom;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--dashboard-card-border-radius);
+
+    transition: transform var(--dashboard-card-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
 }
 
-.header-tab-container:hover::before,
-.header-tab-container:focus::before {
-    transform: scaleY(1);
+.dashboard-pages-card:hover::before,
+.dashboard-pages-card:focus::before {
+    transform: scaleX(1) scaleY(1);
 }
 
-.header-tab-logo {
-    height: var(--header-tab-logo-size);
+.dashboard-pages-img {
+    margin-top: 1em;
+    width: 90px;
+    align-self: center;
+    transition: filter var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-pages-img,
+.dashboard-pages-card:focus .dashboard-pages-img {
+    filter: brightness(0) invert(1);
+}
+
+.dashboard-pages-title {
+    color: var(--purple);
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-pages-title,
+.dashboard-pages-card:focus .dashboard-pages-title {
+    color:white;
     
 }
 
-.header-tab-text {
-    color: white;
-    padding-left: 5px;
+.dashboard-pages-separator {
+    border: none;
+    height: var(--dashboard-top-padding);
+    max-width: 10px;
 }
 
+/* DASHBOARD PROGRESS */
+
+.dashboard-progress {
+    padding-top: var(--dashboard-top-padding);
+    /* padding-bottom: 50px; */
+}
+
+.dashboard-progress-container {
+    border: var(--dashboard-card-border-width) solid var(--purple);
+    border-radius: var(--dashboard-card-border-radius);
+}
+
+.dashboard-progress-title {
+    margin-top: 0.5em;
+    color: var(--purple);
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-progress-title,
+.dashboard-pages-card:focus .dashboard-progress-title {
+    color: white;
+}
+
+.dashboard-progress-row {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.dashboard-progress-card {
+    background: none;
+    border: none;
+}
+
+.dashboard-progress-card-body {
+    display: flex;
+    align-content: center;
+    color: var(--purple);
+    white-space: nowrap;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-progress-card-body,
+.dashboard-pages-card:focus .dashboard-progress-card-body {
+    color: white;
+}
+
+.dashboard-progress-rounded-pill {
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    background-color: lightgray;
+    transition: background-color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-progress-rounded-pill,
+.dashboard-pages-card:focus .dashboard-progress-rounded-pill {
+    background-color: darkgray;
+}
+
+.dashboard-progress-percentage {
+    background-color: var(--purple);
+    color: white;
+    transition: color, background-color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-progress-percentage,
+.dashboard-pages-card:focus .dashboard-progress-percentage {
+    background-color: white;
+    color: var(--black);
+}
+
+/* DASHBOARD GREETINGS */
+
+.dashboard-greetings {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    color: var(--purple);
+    font-size: 7vw;
+}
+
+/* DASHBOARD FIRST ROW */
+
+.dashboard-first-row-card {
+    border-color: var(--purple);
+    border-radius: var(--dashboard-card-border-radius);
+    border-width: var(--dashboard-card-border-width);
+    position: relative;
+}
+
+.dashboard-quote-of-the-day {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    color: var(--purple);
+    text-align: center;
+    font-size: 3em;
+}
+
+.dashboard-quote {
+    font-family: "garamond";
+    font-weight: bold;
+    color: var(--black);
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.dashboard-last-element {
+    padding-bottom: 50px;
+}

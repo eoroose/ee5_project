@@ -18,31 +18,31 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark header-navbar-top">
         <div class="container">
-            <a href=/dashboard>
+            <!-- <a href=/dashboard>
                 <img class="header-account" src="./assets/images/account-circle.svg"/>
-            </a>
+            </a> -->
         
             <a href=/dashboard>
-                <img class="header-logo" src="./assets/images/header_logo.svg"/>
+                <img class="header-logo" src="./assets/images/header/header_logo.svg" alt="header logo image"/>
             </a>
 
             <a href=/logout>
-                <img class="header-logout" src="./assets/images/logout.svg"/>
+                <img class="header-logout" src="./assets/images/header/log_out.svg" alt="logout image"/>
             </a>
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-dark header-navbar-tabs">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark header-navbar-tabs">
         <div class="container">
             
-            <a class="nav-item <?($uri->getSegment(1)=='dashboard' ? 'active' : null) ?> " href=/dashboard>
+            <a class="nav-item </?($uri->getSegment(1)=='dashboard' ? 'active' : null) ?> " href=/dashboard>
                 <div class="container header-tab-container">
                     <img class="header-tab-logo" src="./assets/images/account-circle.svg"/>
                     <span class="header-tab-text">dashboard</span>
                 </div>
             </a>
             
-            <a class="nav-item <?($uri->getSegment(1)=='register' ? 'active' : null) ?> " href=/register>
+            <a class="nav-item </?($uri->getSegment(1)=='register' ? 'active' : null) ?> " href=/register>
                 <div class="container header-tab-container">
                     <img class="header-tab-logo" src="./assets/images/account-circle.svg"/>
                     <span class="header-tab-text">calendar</span>
@@ -50,14 +50,14 @@
             </a>
 
             
-            <a class="nav-item <?($uri->getSegment(1)=='register' ? 'active' : null) ?> " href=/register>
+            <a class="nav-item </?($uri->getSegment(1)=='register' ? 'active' : null) ?> " href=/register>
                 <div class="container header-tab-container">
                     <img class="header-tab-logo" src="./assets/images/account-circle.svg"/>
                     <span class="header-tab-text">inhabitants</span>
                 </div>
             </a>
         </div>
-    </nav>
+    </nav> -->
 
 <?php endif; ?>
 <!-- 

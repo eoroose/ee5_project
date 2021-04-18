@@ -1,7 +1,7 @@
 
 <div class="container login-page">
 
-    <object class="login-logo" data="<?php echo base_url('./assets/images/login_logo.svg'); ?>"></object>
+    <object class="login-logo" data="<?php echo base_url('./assets/images/login_page/login_logo.svg'); ?>"></object>
     
     <div class="login-container">
         
