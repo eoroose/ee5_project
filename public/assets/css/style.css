@@ -1,10 +1,162 @@
 
-form {
-    max-width: 900px;
-    display: block;
-    margin: 0 auto;
+* {
+    --purple: #6959CC;
+    --black:  #333333;
 }
 
-a:link {
+a {
     text-decoration: none;
 }
+
+/* LOGIN PAGE */
+
+.login-page {
+    --button-width: 90vw;
+    --button-max-width: 415px;
+    --button-height: 40px;
+    --button-radius: 20px;
+    --button-border-width: 2px;
+}
+
+.login-logo {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 80vw;
+    max-width: 300px;
+    padding-top: 50px;
+}
+
+.login-input {
+    margin-left: auto;
+    margin-right: auto;
+    border-color: var(--purple);
+    border-width: var(--button-border-width);
+    width: var(--button-width);;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+    border-radius: var(--button-radius);
+}
+
+.login-input:focus {
+    box-shadow: none;
+    border-color: var(--purple);
+}
+
+.login-btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    
+    border: var(--button-border-width) solid var(--purple);
+    width: var(--button-width);;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+    border-radius: var(--button-radius);
+
+    background-color: var(--purple);
+    color: white;
+}
+
+@keyframes login_btn_hover {
+    0% {
+        background-color: var(--purple);
+        color: white;
+    }
+    100% {
+        background-color: white;
+        color: var(--purple);
+    }
+}
+
+.login-btn:hover,
+.login-btn:focus {
+    background-color: white;
+    color: var(--purple); 
+    animation: 100ms ease-in 0s 1 login_btn_hover;
+}
+
+@keyframes login-alert-popup {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.login-alert-message {
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--button-width);
+    max-width: var(--button-max-width);
+    padding-top: 20px;
+    animation: 300ms ease-in 0s 1 login-alert-popup;
+}
+
+/* HEADER */
+
+.header-navbar-top {
+    background-color: var(--purple);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+    --header-top-logo-size: 35px;
+}
+
+.header-account {
+    height: var(--header-top-logo-size);
+}
+
+.header-logo {
+    height: calc(var(--header-top-logo-size) + 5px );
+}
+
+.header-logout {
+    height: var(--header-top-logo-size);
+}
+
+.header-navbar-tabs {
+    background-color: var(--black);
+    overflow: hidden;
+    --header-tab-logo-size: 30px;
+}
+
+.header-tab-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.header-tab-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -10px;
+    left: -10px;
+    right: -20px;
+    background-color: var(--purple);
+
+    transition: transform 200ms ease-in;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    z-index: -1;
+}
+
+.header-tab-container:hover::before,
+.header-tab-container:focus::before {
+    transform: scaleY(1);
+}
+
+.header-tab-logo {
+    height: var(--header-tab-logo-size);
+    
+}
+
+.header-tab-text {
+    color: white;
+    padding-left: 5px;
+}
+
