@@ -240,6 +240,17 @@
                 </div>
             </div>
 
+            <!-- Chores -->
+            <div class="row dashboard-pages-row">
+                <div class="col-md card dashboard-pages-card">
+                    <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-pages-img" alt="sweeping image">
+                    <div class="card-body dashboard-pages-card-body">
+                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Chores</h5>
+                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="container dashboard-progress dashboard-last-element">

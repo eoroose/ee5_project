@@ -56,24 +56,13 @@ a {
 
     background-color: var(--purple);
     color: white;
-}
-
-@keyframes login_btn_hover {
-    0% {
-        background-color: var(--purple);
-        color: white;
-    }
-    100% {
-        background-color: white;
-        color: var(--purple);
-    }
+    transition: color, background-color 100ms ease-in;
 }
 
 .login-btn:hover,
 .login-btn:focus {
     background-color: white;
-    color: var(--purple); 
-    animation: 100ms ease-in 0s 1 login_btn_hover;
+    color: var(--purple);
 }
 
 @keyframes login-alert-popup {
@@ -323,3 +312,83 @@ a {
 .dashboard-last-element {
     padding-bottom: 50px;
 }
+
+
+/* REGISTER PAGE */
+
+.register-container {
+    --register-top-padding: 30px;
+    --register-border-width: 3px;
+    --register-animation-duration: 200ms;
+    --register-border-radius: 20px;
+
+    --button-width: 90vw;
+    --button-max-width: 415px;
+    --button-height: 40px;
+    --button-radius: 20px;
+    --button-border-width: 2px;
+
+    --input-border-width: 2px;
+    --input-border-radius: 15px;
+}
+
+.register-row {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--register-top-padding);
+    max-width: 700px;
+}
+
+.register-card {
+    border-color: var(--purple);
+    border-radius: var(--register-border-radius);
+    border-width: var(--register-border-width);
+    position: relative;
+}
+
+.register-title {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    color: var(--purple);
+    font-size: 4em;
+}
+
+.register-first-btn-container {
+    margin-top: -16px;
+}
+
+.register-hr {
+    background: var(--purple);
+    background-image: linear-gradient(to right, #ccc, var(--black), #ccc);
+}
+
+.register-input-container {
+    padding-bottom: 10px;
+}
+
+.register-input-label {
+    color: var(--purple);
+    font-weight: 500;
+    padding-left: 0.5em;
+    transition: color 200ms ease-in-out;
+}
+
+.register-input {
+    border: var(--input-border-width) solid var(--purple);
+    border-radius: var(--input-border-radius);
+}
+
+.register-input:focus,
+.register-input:hover {
+    box-shadow: none;
+    border-color: var(--purple);
+}
+
+.register-last-btn-container {
+    margin-top: -16px;
+    padding-top: 0.1em;
+    padding-bottom: 15px;
+}
+
+
+
