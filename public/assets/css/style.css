@@ -270,9 +270,9 @@ a {
     font-size: 7vw;
 }
 
-/* DASHBOARD FIRST ROW */
+/* DASHBOARD QUOTE OF THE DAY */
 
-.dashboard-first-row-card {
+.dashboard-quote-card {
     border-color: var(--purple);
     border-radius: var(--dashboard-card-border-radius);
     border-width: var(--dashboard-card-border-width);
@@ -285,14 +285,39 @@ a {
     color: var(--purple);
     text-align: center;
     font-size: 3em;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
 }
 
-.dashboard-quote {
+.dashboard-pages-card:hover .dashboard-quote-of-the-day,
+.dashboard-pages-card:focus .dashboard-quote-of-the-day {
+    color: var(--black);
+}
+
+.dashboard-quote-text {
     font-family: "garamond";
     font-weight: bold;
     color: var(--black);
     text-align: center;
     font-size: 1.1em;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-quote-text,
+.dashboard-pages-card:focus .dashboard-quote-text {
+    color: white;
+}
+
+/* DASHBOARD AGENDA */
+
+.dashboard-agenda-title {
+    margin-top: 0.5em;
+    color: var(--purple);
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-pages-card:hover .dashboard-agenda-title,
+.dashboard-pages-card:focus .dashboard-agenda-title {
+    color: white;
 }
 
 .dashboard-last-element {
