@@ -13,16 +13,24 @@
 
         <div class="row dashboard-first-row">
 
-            <div class="col-md card dashboard-first-row-card">
-                <div class="card-body dashboard-first-row-card-body">
+            <?php if(session()->get('role')=='inhabitant'): ?>
+            <div class="col-md card dashboard-quote-card">
+            <?php else:?>
+            <div class="col-md card dashboard-pages-card">
+                <a href="/register" class="stretched-link dashboard-pages-link"></a>
+            <?php endif; ?>
+
+                <div class="card-body dashboard-quote-card-body">
                     <h5 class="card-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote">"In some ways, programming is like painting. You start with a blank canvas and certain basic raw materials. You use a combination of science, art, and craft to determine what to do with them."</p>
+                    <p class="dashboard-quote-text">"In some ways, programming is like painting. You start with a blank canvas and certain basic raw materials. You use a combination of science, art, and craft to determine what to do with them."</p>
                 </div>
             </div>
 
             <div class="col-md card dashboard-pages-separator"></div>
 
-            <div class="col-md card dashboard-first-row-card">
+            <div class="col-md card dashboard-pages-card dashboard-agenda-card">
+                <h5 class="card-title dashboard-agenda-title" style="text-align: center">Agenda</h5>
+                <a href="/register" class="stretched-link dashboard-pages-link"></a>
                 <div class="table-responsive">
                     <table id="productSizes" class="table">
                         <thead>
@@ -94,15 +102,15 @@
                 </div>
             </div>
 
-            <!-- Agenda & Chores -->
+            <!-- Register & Chores -->
             <div class="row dashboard-pages-row">
                 <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/calendar.svg" class="card-img-top dashboard-pages-img" alt="calendar image">
+                    <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-pages-img" alt="verify image">
                     <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Agenda</h5>
+                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Register</h5>
                         <a href="/register" class="stretched-link dashboard-pages-link"></a>
                     </div>
-                </div>
+                </div>                
 
                 <div class="col-md card dashboard-pages-separator"></div>
 
@@ -115,18 +123,8 @@
                 </div>
             </div>
 
-            <!-- Register & Celebration -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-pages-img" alt="verify image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Register</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
+            <!-- Celebration & Backup -->
+            <div class="row dashboard-pages-row dashboard-last-element">
                 <div class="col-md card dashboard-pages-card">
                     <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-pages-img" alt="party image">
                     <div class="card-body dashboard-pages-card-body">
@@ -134,10 +132,9 @@
                         <a href="/register" class="stretched-link dashboard-pages-link"></a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Backup -->
-            <div class="row dashboard-pages-row dashboard-last-element">
+                <div class="col-md card dashboard-pages-separator"></div>
+
                 <div class="col-md card dashboard-pages-card">
                     <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-pages-img">
                     <div class="card-body dashboard-pages-card-body">
@@ -195,18 +192,8 @@
                 </div>
             </div>
 
-            <!-- Agenda & Chores -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/calendar.svg" class="card-img-top dashboard-pages-img" alt="calendar image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Agenda</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
+            <!-- Chores & Celebration -->
+            <div class="row dashboard-pages-row dashboard-last-element">
                 <div class="col-md card dashboard-pages-card">
                     <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-pages-img" alt="sweeping image">
                     <div class="card-body dashboard-pages-card-body">
@@ -214,10 +201,9 @@
                         <a href="/register" class="stretched-link dashboard-pages-link"></a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Celebration -->
-            <div class="row dashboard-pages-row dashboard-last-element">
+                <div class="col-md card dashboard-pages-separator"></div>
+
                 <div class="col-md card dashboard-pages-card">
                     <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-pages-img" alt="party image">
                     <div class="card-body dashboard-pages-card-body">
@@ -254,21 +240,10 @@
                 </div>
             </div>
 
-            <!-- Agenda -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/calendar.svg" class="card-img-top dashboard-pages-img" alt="calendar image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Agenda</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div class="container dashboard-progress dashboard-last-element">
-            <div class="row card dashboard-pages-card">
+            <div class="row card dashboard-pages-card dashboard-progress-container">
                 <h4 class="card-title dashboard-progress-title"style="text-align: center">Progress</h4>
                 <a href="/note-progress" class="stretched-link dashboard-progress-link"></a>
                 <?php foreach ($progress as $row){?>
