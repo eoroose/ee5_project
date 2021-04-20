@@ -1,3 +1,5 @@
+# REMOVE 8080 FROM .ENV
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
