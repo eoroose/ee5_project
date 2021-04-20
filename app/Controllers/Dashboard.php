@@ -3,10 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\customModel;
+use App\Models\dailyQuote;
 use App\Models\eventsModel;
 use App\Models\inhabitantModel;
 use App\Models\progressmodel;
 use App\Models\taskmodel;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Dashboard extends BaseController
 {
@@ -15,9 +17,11 @@ class Dashboard extends BaseController
 
 	    $data=[];
 	    $data['event']=$this->dashAgenda();
+	    $data['quote']=$this->quote();
 	    if (session()->get('role')=='inhabitant'){
 	        $data['progress']=$this->progress(session()->get('id'));
 	    }
+
 
         echo view('templates/header',$data);
         echo view('dashboard',$data);
@@ -36,6 +40,18 @@ class Dashboard extends BaseController
             ->get()
             ->getResultArray();
         return $events;
+    }
+
+    private function quote(){
+        $quoteModel=new dailyQuote();
+        $date=date('Y-m-d');
+        $data= $quoteModel->where('date=',$date)->first();
+        if($data==NULL){
+            return NULL;
+        }
+        else{
+            return $data;
+        }
     }
 
     public function progress($id){

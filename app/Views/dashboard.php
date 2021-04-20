@@ -17,12 +17,12 @@
             <div class="col-md card dashboard-quote-card">
             <?php else:?>
             <div class="col-md card dashboard-pages-card">
-                <a href="/register" class="stretched-link dashboard-pages-link"></a>
+                <a href="/quote" class="stretched-link dashboard-pages-link"></a>
             <?php endif; ?>
 
                 <div class="card-body dashboard-quote-card-body">
                     <h5 class="card-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote-text">"In some ways, programming is like painting. You start with a blank canvas and certain basic raw materials. You use a combination of science, art, and craft to determine what to do with them."</p>
+                    <p class="dashboard-quote-text">""</p>
                 </div>
             </div>
 

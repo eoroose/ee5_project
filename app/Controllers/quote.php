@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\appointmentModel;
+use App\Models\dailyQuote;
 use App\Models\employeeModel;
 use App\Models\godchildModel;
 use App\Models\godparentModel;
@@ -13,7 +14,7 @@ use App\Models\taskmodel;
 use App\Models\UserModel;
 use App\Models\customModel;
 
-class tasks extends BaseController
+class quote extends BaseController
 {
     public function index()
     {
@@ -22,32 +23,41 @@ class tasks extends BaseController
                 return redirect()->to('/');
         }
         else{
-        $taskmodel=new taskmodel();
-        $result=$taskmodel->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
-        $data=array('tasks'=> $result);
+        $quotemodel=new dailyQuote();
+        $date=date('Y-m-d');
+        $result=$quotemodel->where('date >=',$date)->get()->getResultArray();
+        $data=array('quotes'=> $result);
         echo view('templates/header', $data);
-        echo view('tasks');
+        echo view('quote');
         echo view('templates/footer');
 
     }}
     public function edit()
+    {
+       echo 'test';
+    }
+
+    public function test()
     {
         if(session()->get('role')=='inhabitant')
         {
             return redirect()->to('/');
         }
         else{
-        if(isset($_POST['id'])){
-            $data=array(
-                'phase'=>$_POST['phase'],
-                'description'=>$_POST['description'],
-            );
-            $taskmodel=new taskmodel();
-            $taskmodel->where('taskID',$_POST['id'])->set($data)->update();
+            if(isset($_POST['id'])){
+                $data=array(
+                    'date'=>$_POST['date'],
+                    'description'=>$_POST['description'],
+                );
+                $quotemodel=new dailyQuote();
+                $quotemodel->where('dailyQuoteID',$_POST['id'])->set($data)->update();
+            }
+            else{
+               echo "echo werkt niet";
+            }
 
-        }
+        }}
 
-    }}
     public function insert()
     {
         if(session()->get('role')=='inhabitant')
@@ -56,18 +66,13 @@ class tasks extends BaseController
         }
         else{
         $data=array(
-            'phase'=>$this->request->getVar('phase2'),
-            'description'=>$this->request->getVar('description2'),
-            'isActive'=>1
+            'date'=>$this->request->getVar('date'),
+            'description'=>$this->request->getVar('description'),
         );
-        $taskmodel=new taskmodel();
-        $taskmodel->save($data);
-        $id=$taskmodel->select('taskId')->orderBy('taskId','DESC')->first();
-
-        $db=db_connect();
-        $customModel=new customModel($db);
-        $customModel->activateNewTask($id['taskId']);
-        return redirect()->to('/tasks');
+        $quotemodel=new dailyQuote();
+        $quotemodel->save($data);
+        $id=$quotemodel->select('dailyQuoteID')->orderBy('dailyQuoteID','DESC')->first();
+        return redirect()->to('/quote');
     }}
 
     public function delete()
