@@ -22,7 +22,7 @@
 
                 <div class="card-body dashboard-quote-card-body">
                     <h5 class="card-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote-text">""</p>
+                    <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
                 </div>
             </div>
 
@@ -50,6 +50,11 @@
                         ?>
                         </tbody>
                     </table>
+                    <?php if($apointment==null){}
+                    else{?>
+
+                    <h5 class="card-title dashboard-agenda-title" style="text-align: center">Doctors Apointment at <?php echo $apointment['time']?></h5>
+                    <?php }?>
                 </div>
             </div>
 
@@ -275,5 +280,24 @@
         </div>
 
     <?php endif; ?>
+        <!-- new code -->
+        <?php if(session()->get('role')=='inhabitant'): ?>
+            <?php if($yellowCard==1){?>
+            <div class="col-md card dashboard-pages-card">
+                <img src="/assets/images/dashboard_page/yellow-card.svg" class="card-img-top dashboard-pages-img" alt="user image">
+                <div class="card-body dashboard-pages-card-body">
+                    <a onclick="yellowCard()" class="stretched-link dashboard-pages-link"></a>
+            </div>
+            <?php
+            }?>
+        <?php endif; ?>
+
+
 
 </div>
+
+        <script>
+            function yellowCard() {
+                alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
+            }
+        </script>

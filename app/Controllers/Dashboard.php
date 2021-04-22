@@ -2,12 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\appointmentModel;
 use App\Models\customModel;
 use App\Models\dailyQuote;
 use App\Models\eventsModel;
 use App\Models\inhabitantModel;
 use App\Models\progressmodel;
 use App\Models\taskmodel;
+use App\Models\yellowCardModel;
 use phpDocumentor\Reflection\Types\Null_;
 
 class Dashboard extends BaseController
@@ -17,12 +19,36 @@ class Dashboard extends BaseController
 
 	    $data=[];
 	    $data['event']=$this->dashAgenda();
-	    $data['quote']=$this->quote();
+	    $quote=$this->quote();
+	    if($quote==NULL){
+            $data['quote']= "Geen quote vandaag";
+        }
+	    else{
+            $data['quote']=$quote['description'];
+        }
 	    if (session()->get('role')=='inhabitant'){
-	        $data['progress']=$this->progress(session()->get('id'));
+	        $id=session()->get('id');
+	        $data['progress']=$this->progress($id);
+	        $yellowcard=$this->checkYellowCards($id);
+	        if($yellowcard==null){
+	            $data['yellowCard']=0;
+            }
+	        else{
+	            $data['yellowCard']=1;
+                $data['info']=$yellowcard;
+            }
+	        $appointment=$this->getDoctorsApointment($id);
+	        if($appointment==null)
+            {
+                $data['apointment']=null;
+            }
+	        else
+            {
+                $data['apointment']=$appointment;
+            }
 	    }
 
-
+       // echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/header',$data);
         echo view('dashboard',$data);
         echo view('templates/footer',$data);
@@ -54,10 +80,24 @@ class Dashboard extends BaseController
         }
     }
 
-    public function progress($id){
-	    $inhabitantmodel=new inhabitantModel();
-	    $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',$id)->first();
+    public function getInhabitantid($id){
+        $inhabitantmodel=new inhabitantModel();
+        $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',$id)->first();
+        return $inhabitantID;
+    }
 
+    public function getDoctorsApointment($id){
+	    $inhabitantID= $this->getInhabitantid($id);
+	    $apointmentModel=new appointmentModel();
+
+        $date=date('Y-m-d');
+	    $data=$apointmentModel->where('date',$date)->where('inhabitantID',$inhabitantID)->first();
+        //echo '<pre>'; print_r($data ); echo '</pre>';
+        return $data;
+    }
+    public function progress($id){
+
+	    $inhabitantID= $this->getInhabitantid($id);
         $db=db_connect();
         $custommodel=new customModel($db);
         $resultProgress =$custommodel->getCompletedTasksPhases($inhabitantID);
@@ -84,4 +124,18 @@ class Dashboard extends BaseController
         //echo '<pre>'; print_r($data); echo '</pre>';
         return $data;
 	}
+
+	public function checkYellowCards($id)
+    {
+        $inhabitantID=$this->getInhabitantid($id);
+        $yellowcardModel=new yellowCardModel();
+        $result=$yellowcardModel->where('inhabitantID',$inhabitantID)->where('isActive',1)->first();
+        //echo '<pre>'; print_r($result); echo '</pre>';
+        if($result==Null){
+            return null;
+        }
+        else{
+            return $result;
+        }
+    }
 }

@@ -68,8 +68,7 @@
 
     function save_row(no)
     {
-       // var date_val="2021-04-19"
-        var document.getElementById("date_text"+no).value;
+        var date_val=document.getElementById("date_text"+no).value;
         var description_val=document.getElementById("description_text"+no).value;
 
         document.getElementById("date_row"+no).innerHTML=date_val;
@@ -77,8 +76,6 @@
 
         document.getElementById("edit"+no).style.display="block";
         document.getElementById("save"+no).style.display="none";
-
-        var r= confirm(""+no);
         $.post('http://localhost/quote/edit',{id:no,date:date_val,description:description_val})
 
     }
@@ -89,17 +86,17 @@
         if(r==true)
         {
             document.getElementById("row"+no+"").outerHTML="";
-            $.post('http://localhost/tasks/delete',{id:no})
+            $.post('http://localhost/quote/delete',{id:no})
         }
 
     }
 
     function add_row()
     {
-        var new_phase=document.getElementById("new_date").value;
+        var new_date=document.getElementById("new_date").value;
         var new_description=document.getElementById("new_description").value;
 
-        document.getElementById("date").value=new_phase;
+        document.getElementById("date").value=new_date;
         document.getElementById("description").value=new_description;
         document.getElementById("form2").submit();
 
