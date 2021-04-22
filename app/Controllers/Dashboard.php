@@ -9,6 +9,7 @@ use App\Models\eventsModel;
 use App\Models\inhabitantModel;
 use App\Models\progressmodel;
 use App\Models\taskmodel;
+use App\Models\UserModel;
 use App\Models\yellowCardModel;
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -46,13 +47,24 @@ class Dashboard extends BaseController
             {
                 $data['apointment']=$appointment;
             }
+	        $data['godParent']=$this->getGodparent($id);
+            $godchilds=$this->getGodChilds($id);
+            if($godchilds==null)
+            {
+                $data['godchilds']=null;
+            }
+            else
+            {
+                $data['godchilds']=$godchilds;
+            }
 	    }
 
-       // echo '<pre>'; print_r($data); echo '</pre>';
+        echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/header',$data);
         echo view('dashboard',$data);
         echo view('templates/footer',$data);
 	}
+
 	private function dashAgenda()
     {
         date_default_timezone_set('Europe/Brussels');
@@ -79,14 +91,44 @@ class Dashboard extends BaseController
             return $data;
         }
     }
+    private function getGodparent($id)
+    {
+        $inhabitantID=$this->getInhabitantid($id);
+        $inhabitantmodel= new inhabitantModel();
+        $inhabitant= $inhabitantmodel->where('inhabitantID',$inhabitantID)->first();
+        $godparentID=$inhabitant['godParentID'];
+        $godparent=$inhabitantmodel->where('inhabitantID',$godparentID)->first();
+        $userID=$godparent['userID'];
+        $userModel=new UserModel();
+        $user=$userModel->where('userID',$userID)->select('firstname, lastname')->first();
+        ///echo print_r($user);
+        return $user;
+    }
 
-    public function getInhabitantid($id){
+    public function getGodChilds($id){
+        $inhabitantID=$this->getInhabitantid($id);
+        $inhabitantmodel= new inhabitantModel();
+        $godchilds= $inhabitantmodel->where('godParentID',$inhabitantID)->get()->getResultArray();
+        echo 'godchilds';
+       //echo '<pre>'; print_r($godchilds ); echo '</pre>';
+        $data=[];
+        foreach ($godchilds as $row)
+        {
+            $userModel=new UserModel();
+            $user=$userModel->where('userID',$row['userID'])->select('firstname, lastname')->first();
+            array_push($data,$user);
+
+        }
+        //echo '<pre>'; print_r($data ); echo '</pre>';
+        return $data;
+    }
+    private function getInhabitantid($id){
         $inhabitantmodel=new inhabitantModel();
         $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',$id)->first();
         return $inhabitantID;
     }
 
-    public function getDoctorsApointment($id){
+    private function getDoctorsApointment($id){
 	    $inhabitantID= $this->getInhabitantid($id);
 	    $apointmentModel=new appointmentModel();
 
@@ -95,7 +137,7 @@ class Dashboard extends BaseController
         //echo '<pre>'; print_r($data ); echo '</pre>';
         return $data;
     }
-    public function progress($id){
+    private function progress($id){
 
 	    $inhabitantID= $this->getInhabitantid($id);
         $db=db_connect();
@@ -125,7 +167,7 @@ class Dashboard extends BaseController
         return $data;
 	}
 
-	public function checkYellowCards($id)
+	private function checkYellowCards($id)
     {
         $inhabitantID=$this->getInhabitantid($id);
         $yellowcardModel=new yellowCardModel();

@@ -50,11 +50,11 @@
                         ?>
                         </tbody>
                     </table>
-                    <?php if($apointment==null){}
+                    <?php
+                    if(session()->get('role')=='inhabitant'){if($apointment==null){}
                     else{?>
-
-                    <h5 class="card-title dashboard-agenda-title" style="text-align: center">Doctors Apointment at <?php echo $apointment['time']?></h5>
-                    <?php }?>
+                    <h5 class="card-title dashboard-agenda-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
+                    <?php }}?>
                 </div>
             </div>
 
@@ -290,14 +290,29 @@
             </div>
             <?php
             }?>
+
+            <?php if($godParent!=null){?>
+            <div class="col-md card dashboard-pages-card">
+                <img src="/assets/images/dashboard_page/magic-wand.svg" class="card-img-top dashboard-pages-img" alt="user image">
+                <div class="card-body dashboard-pages-card-body">
+                    <a onclick="godParents()" class="stretched-link dashboard-pages-link"></a>
+                </div>
+                <?php
+                }?>
         <?php endif; ?>
 
 
 
 </div>
-
+        <?php if(session()->get('role')=='inhabitant'){ ?>
         <script>
             function yellowCard() {
                 alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
             }
+            function godParents(){
+                 alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?>\n<?php }?>");
+
+            }
+
         </script>
+        <?php }?>
