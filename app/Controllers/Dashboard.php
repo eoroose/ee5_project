@@ -59,7 +59,7 @@ class Dashboard extends BaseController
             }
 	    }
 
-        echo '<pre>'; print_r($data); echo '</pre>';
+        //echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/header',$data);
         echo view('dashboard',$data);
         echo view('templates/footer',$data);
@@ -109,7 +109,7 @@ class Dashboard extends BaseController
         $inhabitantID=$this->getInhabitantid($id);
         $inhabitantmodel= new inhabitantModel();
         $godchilds= $inhabitantmodel->where('godParentID',$inhabitantID)->get()->getResultArray();
-        echo 'godchilds';
+        //echo 'godchilds';
        //echo '<pre>'; print_r($godchilds ); echo '</pre>';
         $data=[];
         foreach ($godchilds as $row)
