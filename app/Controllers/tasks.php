@@ -17,15 +17,26 @@ class tasks extends BaseController
 {
     public function index()
     {
+        if(session()->get('role')=='inhabitant')
+        {
+                return redirect()->to('/');
+        }
+        else{
         $taskmodel=new taskmodel();
         $result=$taskmodel->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
         $data=array('tasks'=> $result);
         echo view('templates/header', $data);
         echo view('tasks');
         echo view('templates/footer');
-    }
+
+    }}
     public function edit()
     {
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         if(isset($_POST['id'])){
             $data=array(
                 'phase'=>$_POST['phase'],
@@ -36,10 +47,14 @@ class tasks extends BaseController
 
         }
 
-    }
+    }}
     public function insert()
     {
-
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         $data=array(
             'phase'=>$this->request->getVar('phase2'),
             'description'=>$this->request->getVar('description2'),
@@ -53,10 +68,15 @@ class tasks extends BaseController
         $customModel=new customModel($db);
         $customModel->activateNewTask($id['taskId']);
         return redirect()->to('/tasks');
-    }
+    }}
 
     public function delete()
     {
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         if(isset($_POST['id'])){
             $taskmodel=new taskmodel();
             $id=$_POST['id'];
@@ -66,10 +86,15 @@ class tasks extends BaseController
 
         }
 
-    }
+    }}
 
     public function note_progress(){
 
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         $taskmodel=new taskmodel();
         $result_tasks=$taskmodel->select()->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
         $db=db_connect();
@@ -93,22 +118,32 @@ class tasks extends BaseController
         echo view('templates/header', $data);
         echo view('note_progress');
         echo view('templates/footer');
-    }
+    }}
 
     public function complete()
     {
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         $progressmodel=new progressmodel();
         $id=$this->request->getVar('id');
         $progressmodel->where('progressID',$id)->set('isCompleted',1)->update();
         return redirect()->to('/note-progress');
-    }
+    }}
 
     public function uncomplete(){
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
         $progressmodel=new progressmodel();
         $id=$this->request->getVar('id2');
         $progressmodel->where('progressID',$id)->set('isCompleted',0)->update();
         return redirect()->to('/note-progress');
-    }
+    }}
 }
 
 

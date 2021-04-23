@@ -43,6 +43,7 @@ $routes->get('/week','Users::getWeek');
 $routes->get('/month','dashboard::progress');
 $routes->match(['get','post'],'tasks',"tasks::index",['filter'=>'auth']);
 $routes->match(['get','post'],'note-progress',"tasks::note_progress",['filter'=>'auth']);
+$routes->match(['get','post'],'quote',"quote::index",['filter'=>'auth']);
 
 
 /*

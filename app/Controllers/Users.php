@@ -114,7 +114,8 @@ class Users extends BaseController
     }
 
     public function register(){
-
+        if(session()->get('role')==='admin')
+	    {
 	    helper(['form']);
 
         $db=db_connect();
@@ -209,6 +210,11 @@ class Users extends BaseController
         echo view('register',$data);
         echo view('templates/footer',$data);
     }
+    else
+        {
+        return redirect()->to('/');
+        }
+}
 
     }
 

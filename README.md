@@ -1,4 +1,11 @@
-# REMOVE 8080 FROM .ENV
+# ADD/REMOVE REQUIRED PORT FROM .ENV (EX. app.baseURL = 'http://localhost:8080/')
+
+# RUN SQL QUERY DE_SPIEGEL-3.SQL
+
+# AT XAMPP > APACHE CONFIG > APACHE (HTTDP.CONF)
+## @ line 252 > DocumentRoot "C:/xampp/htdocs/ee5_project/public"
+## @ line 253 > <Directory "C:/xampp/htdocs/ee5_project/public">
+
 
 # CodeIgniter 4 Application Starter
 

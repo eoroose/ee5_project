@@ -17,12 +17,12 @@
             <div class="col-md card dashboard-quote-card">
             <?php else:?>
             <div class="col-md card dashboard-pages-card">
-                <a href="/register" class="stretched-link dashboard-pages-link"></a>
+                <a href="/quote" class="stretched-link dashboard-pages-link"></a>
             <?php endif; ?>
 
                 <div class="card-body dashboard-quote-card-body">
                     <h5 class="card-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote-text">"In some ways, programming is like painting. You start with a blank canvas and certain basic raw materials. You use a combination of science, art, and craft to determine what to do with them."</p>
+                    <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
                 </div>
             </div>
 
@@ -50,6 +50,11 @@
                         ?>
                         </tbody>
                     </table>
+                    <?php
+                    if(session()->get('role')=='inhabitant'){if($apointment==null){}
+                    else{?>
+                    <h5 class="card-title dashboard-agenda-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
+                    <?php }}?>
                 </div>
             </div>
 
@@ -275,5 +280,39 @@
         </div>
 
     <?php endif; ?>
+        <!-- new code -->
+        <?php if(session()->get('role')=='inhabitant'): ?>
+            <?php if($yellowCard==1){?>
+            <div class="col-md card dashboard-pages-card">
+                <img src="/assets/images/dashboard_page/yellow-card.svg" class="card-img-top dashboard-pages-img" alt="user image">
+                <div class="card-body dashboard-pages-card-body">
+                    <a onclick="yellowCard()" class="stretched-link dashboard-pages-link"></a>
+            </div>
+            <?php
+            }?>
+
+            <?php if($godParent!=null){?>
+            <div class="col-md card dashboard-pages-card">
+                <img src="/assets/images/dashboard_page/magic-wand.svg" class="card-img-top dashboard-pages-img" alt="user image">
+                <div class="card-body dashboard-pages-card-body">
+                    <a onclick="godParents()" class="stretched-link dashboard-pages-link"></a>
+                </div>
+                <?php
+                }?>
+        <?php endif; ?>
+
+
 
 </div>
+        <?php if(session()->get('role')=='inhabitant'){ ?>
+        <script>
+            function yellowCard() {
+                alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
+            }
+            function godParents(){
+                 alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?>\n<?php }?>");
+
+            }
+
+        </script>
+        <?php }?>
