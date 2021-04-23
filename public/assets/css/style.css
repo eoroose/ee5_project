@@ -8,6 +8,11 @@ a {
     text-decoration: none;
 }
 
+@font-face {
+    font-family: "freestyle script regular";
+    src: url(./assets/fonts/freestyle-script-regular.ttf);
+  }
+
 /* LOGIN PAGE */
 
 .login-page {
@@ -257,6 +262,7 @@ a {
     font-weight: bold;
     color: var(--purple);
     font-size: 7vw;
+    white-space: nowrap;
 }
 
 /* DASHBOARD QUOTE OF THE DAY */
