@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- Gegenereerd op: 25 apr 2021 om 11:18
+=======
+-- Gegenereerd op: 22 apr 2021 om 20:53
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Serverversie: 10.4.17-MariaDB
 -- PHP-versie: 7.4.15
 
@@ -40,6 +44,7 @@ CREATE TABLE `appointment` (
 -- Gegevens worden geëxporteerd voor tabel `appointment`
 --
 
+<<<<<<< HEAD:de_spiegel_DB.sql
 INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `reason`, `isActive`) VALUES
 (1, 9, 1, '2021-03-23 00:00:00', 'standaard check', 1),
 (2, 9, 1, '2021-04-06 03:00:00', 'standaard check', 1),
@@ -63,6 +68,25 @@ INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, 
 (20, 22, 2, '2021-04-07 00:00:00', 'standaard check', 1),
 (21, 23, 1, '2021-04-09 00:00:00', 'standaard check', 1),
 (22, 23, 1, '2021-04-23 00:00:00', 'standaard check', 1);
+=======
+INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `time`, `reason`, `isActive`) VALUES
+(1, 2, 1, '2021-04-20', '00:00:00', 'standaard check', 1),
+(2, 2, 1, '2021-05-04', '00:00:00', 'standaard check', 1),
+(3, 3, 1, '2021-04-21', '15:00:00', 'standaard check', 1),
+(4, 3, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(5, 4, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(6, 4, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(7, 5, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(8, 5, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(9, 6, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(10, 6, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(11, 7, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(12, 7, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(13, 8, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(14, 8, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
+(15, 9, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
+(16, 9, 1, '2021-05-05', '00:00:00', 'standaard check', 1);
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 -- --------------------------------------------------------
 
@@ -179,6 +203,7 @@ INSERT INTO `event` (`eventID`, `date`, `startTime`, `duration`, `description`) 
 (2, '2021-04-22', '16:00:00', '01:00:00', 'dfqfdqfqdfq'),
 (3, '2021-04-22', '15:00:00', '01:00:00', 'fqsdfqfq');
 
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- --------------------------------------------------------
 
 --
@@ -245,6 +270,8 @@ INSERT INTO `events` (`id`, `start1`, `startTime`, `start`, `duration`, `title`,
 (81, '0000-00-00', '00:00:00', '2021-04-08 17:26:00', '00:00:00', 'jnkdzfv', '00:00:00', '', '2021-04-22 17:27:00', '#b602f7'),
 (82, '0000-00-00', '00:00:00', '2021-04-17 23:18:00', '00:00:00', 'tester', '00:00:00', '', '1970-01-01 01:00:00', '#e66465');
 
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- --------------------------------------------------------
 
 --
@@ -424,6 +451,7 @@ INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCom
 (173, 8, 60, NULL, 0),
 (174, 9, 60, NULL, 0);
 
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- --------------------------------------------------------
 
 --
@@ -449,6 +477,8 @@ INSERT INTO `recurringevents` (`id`, `startTime`, `endTime`, `daysOfWeek`, `titl
 (7, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e'),
 (8, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e');
 
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- --------------------------------------------------------
 
 --
@@ -555,6 +585,7 @@ CREATE TABLE `yellowcard` (
 
 --
 -- Gegevens worden geëxporteerd voor tabel `yellowcard`
+<<<<<<< HEAD:de_spiegel_DB.sql
 --
 
 INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `reason`, `date`, `isActive`) VALUES
@@ -562,9 +593,21 @@ INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `re
 
 --
 -- Indexen voor geëxporteerde tabellen
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
+--
+
+INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `reason`, `date`, `isActive`) VALUES
+(1, 1, 3, 'jljmjkljlmjmljkjmj', '2021-04-20 17:54:13', 1);
+
+--
+<<<<<<< HEAD:de_spiegel_DB.sql
+=======
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `appointment`
 --
 ALTER TABLE `appointment`
@@ -619,12 +662,15 @@ ALTER TABLE `event`
   ADD UNIQUE KEY `eventID_UNIQUE` (`eventID`);
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- Indexen voor tabel `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `inhabitant`
 --
 ALTER TABLE `inhabitant`
@@ -659,12 +705,15 @@ ALTER TABLE `progress`
   ADD KEY `taskToProgress_idx` (`taskID`);
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- Indexen voor tabel `recurringevents`
 --
 ALTER TABLE `recurringevents`
   ADD PRIMARY KEY (`id`);
 
 --
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `task`
 --
 ALTER TABLE `task`
@@ -703,7 +752,11 @@ ALTER TABLE `yellowcard`
 -- AUTO_INCREMENT voor een tabel `appointment`
 --
 ALTER TABLE `appointment`
+<<<<<<< HEAD:de_spiegel_DB.sql
   MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+=======
+  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `chore`
@@ -733,25 +786,36 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT voor een tabel `employeeadmin`
 --
 ALTER TABLE `employeeadmin`
+<<<<<<< HEAD:de_spiegel_DB.sql
   MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+=======
+  MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `event`
 --
 ALTER TABLE `event`
   MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+<<<<<<< HEAD:de_spiegel_DB.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `inhabitant`
 --
 ALTER TABLE `inhabitant`
+<<<<<<< HEAD:de_spiegel_DB.sql
   MODIFY `inhabitantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+=======
+  MODIFY `inhabitantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `journalentry`
@@ -772,12 +836,15 @@ ALTER TABLE `progress`
   MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
 -- AUTO_INCREMENT voor een tabel `recurringevents`
 --
 ALTER TABLE `recurringevents`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- AUTO_INCREMENT voor een tabel `task`
 --
 ALTER TABLE `task`
@@ -787,7 +854,11 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
+<<<<<<< HEAD:de_spiegel_DB.sql
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+=======
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `weeklyagenda`
@@ -806,6 +877,16 @@ ALTER TABLE `yellowcard`
 --
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
+=======
+-- Beperkingen voor tabel `appointment`
+--
+ALTER TABLE `appointment`
+  ADD CONSTRAINT `doctorToAppointment` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`doctorID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inhabitantToAppointment` FOREIGN KEY (`inhabitantID`) REFERENCES `inhabitant` (`inhabitantID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Beperkingen voor tabel `choreassignment`
 --
 ALTER TABLE `choreassignment`
