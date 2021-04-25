@@ -10,11 +10,12 @@
         <?php endif; ?>
         
         <div class="dashboard-greetings-container">
+            
             <h1 class="main-title dashboard-greetings">Hello, <?=session()->get('firstname')?> <?=session()->get('lastname')?></h1>
 
             <?php if(session()->get('role')=='inhabitant'): ?>
                 <?php if($yellowCard==1){ ?>
-                    <div class="card dashboard-card-animation dashboard-notification-card">
+                    <div class="card dashboard-card-animation dashboard-notification-card dashboard-yellow-card">
                         <img src="/assets/images/dashboard_page/yellow_card_yellow.svg" class="card-img-top dashboard-notification-logo" alt="yellow_card_yellow image">
                         <img src="/assets/images/dashboard_page/yellow_card_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="yellow_card_purple image">    
                         <div class="card-body dashboard-card-body">

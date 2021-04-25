@@ -1,0 +1,254 @@
+.tasks-container {
+    margin-top: 30px;
+    --tasks-button-size: 50px;
+    --tasks-button-svg-size: 30px;
+    --tasks-table-head-height: 45px;
+    --tasks-left-padding: 10px;
+
+    --tasks-table-cell-height: 70px;
+    
+    --tasks-phase-col-width: 10%;
+    --tasks-phase-col-min-width: 100px;
+    --tasks-description-col-width: 75%;
+    --tasks-edit-col-width: 15%;
+    --tasks-edit-col-min-width: 175px;
+
+    --tasks-border-width: 1px;
+    --tasks-animation-duration: 200ms;
+    --tasks-btn-margins: 20%;
+    --tasks-btn-border-radius: 15px;
+
+    --tasks-btn-add-height: 40px;
+}
+
+.tasks-title {
+    font-size: 4em;
+}
+
+.tasks-row {
+
+}
+
+.tasks-col {
+    display: flex;
+    position: relative;
+}
+
+.tasks-card-head {
+    background-color: var(--purple);
+    color: white;
+    font-weight: bold;
+    height: var(--tasks-table-head-height);
+    border-radius: 0;
+    padding-left: var(--tasks-left-padding);
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+}
+
+.tasks-card {
+    height: var(--tasks-table-cell-height);
+}
+
+.tasks-card-head-phase {
+    width: var(--tasks-phase-col-width);
+    font-weight: bold;
+    border-left: var(--tasks-border-width) solid var(--purple);
+    border-right: var(--tasks-border-width) solid white;
+    min-width: var(--tasks-phase-col-min-width);
+}
+
+.tasks-card-head-description {
+    width: var(--tasks-description-col-width);
+    border-left: var(--tasks-border-width) solid white;
+    border-right: var(--tasks-border-width) solid var(--purple);
+}
+
+.tasks-card-head-edit {
+    width: var(--tasks-edit-col-width);
+    border-left: var(--tasks-border-width) solid var(--purple);
+    border-right: var(--tasks-border-width) solid var(--purple);
+    min-width: var(--tasks-edit-col-min-width);
+}
+
+.tasks-card {
+    color: black;
+    border-top: none;
+    border-bottom: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    border-radius: 0;
+    justify-content: center;
+}
+
+.tasks-card-phase {
+    width: var(--tasks-phase-col-width);
+    font-weight: bold;
+    border-left: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    border-right: var(--tasks-border-width) solid var(--purple);
+    padding-left: var(--tasks-left-padding);
+    min-width: var(--tasks-phase-col-min-width);
+    
+}
+
+.tasks-card-description {
+    width: var(--tasks-description-col-width);
+    border-left: var(--tasks-border-width) solid var(--purple);
+    border-right: none;
+    padding-left: var(--tasks-left-padding);
+}
+
+.tasks-card-edit {
+    width: var(--tasks-edit-col-width);
+    border-left: none;
+    border-right: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    position: relative;
+    min-width: var(--tasks-edit-col-min-width);
+}
+
+.tasks-card-body {
+    display: flex;
+    position: relative;
+}
+
+.tasks-btn-push {
+    flex-grow: 1;
+    border: none;
+}
+
+.tasks-edit-save-container {
+}
+
+.tasks-btn-edit-save {
+    width:  var(--tasks-button-size);
+    height: var(--tasks-button-size);
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-left:  var(--tasks-btn-margins);
+    margin-right: var(--tasks-btn-margins);
+}
+
+.tasks-btn-edit-save::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--tasks-btn-border-radius);
+
+    transition: transform var(--tasks-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.tasks-btn-edit-save:hover::before,
+.tasks-btn-edit-save:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.tasks-btn-delete {
+    width:  var(--tasks-button-size);
+    height: var(--tasks-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-left:  var(--tasks-btn-margins);
+    margin-right: var(--tasks-btn-margins);
+}
+
+.tasks-btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--tasks-btn-border-radius);
+
+    transition: transform var(--tasks-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.tasks-btn-delete:hover::before,
+.tasks-btn-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.tasks-btn-svg {
+    width: var(--tasks-button-svg-size);
+    transition: filter var(--tasks-animation-duration) ease-in-out;
+}
+
+.tasks-btn-edit-save:hover .tasks-btn-svg,
+.tasks-btn-edit-save:focus .tasks-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.tasks-btn-delete:hover .tasks-btn-svg,
+.tasks-btn-delete:focus .tasks-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.tasks-input {
+    border-radius: 10px;
+    width: 90%;
+}
+
+.tasks-btn-add {
+    width: 90%;
+    height: var(--tasks-btn-add-height);
+    align-items: center;
+    justify-items: center;
+    border-color: var(--purple);
+    border-radius: var(--card-border-radius);
+    border-width: var(--card-border-width);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color var(--tasks-animation-duration) ease-in-out;
+}
+
+.tasks-btn-add:hover,
+.tasks-btn-add:focus {
+    border-color: white;
+}
+
+.tasks-btn-add::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--card-border-radius);
+
+    transition: transform var(--tasks-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.tasks-btn-add:hover::before,
+.tasks-btn-add:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+.tasks-btn-add-svg {
+    width: var(--tasks-button-svg-size);
+    transition: filter var(--tasks-animation-duration) ease-in-out;
+}
+
+.tasks-btn-add:hover .tasks-btn-add-svg,
+.tasks-btn-add:focus .tasks-btn-add-svg {
+    filter: brightness(0) invert(1);
+}

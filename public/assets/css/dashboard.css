@@ -92,8 +92,9 @@
 }
 
 .dashboard-greetings {
-    font-size: 7vw;
+    font-size: calc(10px + 6.5vw);
     flex-grow: 1;
+    margin-top: 10px;
 }
 
 .dashboard-notification-card {
@@ -110,7 +111,7 @@
 .dashboard-notification-logo {
     position: absolute;
     width: 60%;
-    min-width: 30px;
+    min-width: 20px;
     
     align-self: center;
     top: 20%;
@@ -133,6 +134,21 @@
     opacity: 0;
 }
 
+@keyframes yellow-card-popup {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.dashboard-yellow-card {
+    animation: 500ms ease-in-out 0s 3 yellow-card-popup;
+}
 
 /*  QUOTE OF THE DAY */
 
