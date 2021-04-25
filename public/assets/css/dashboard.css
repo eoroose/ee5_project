@@ -1,8 +1,6 @@
 .dashboard-container {
     --dashboard-top-padding: 15px;
-    --dashboard-card-border-width: 3px;
     --dashboard-card-animation-duration: 200ms;
-    --dashboard-card-border-radius: 20px;
 }
 
 .dashboard-first-row {
@@ -13,16 +11,10 @@
     padding-top: var(--dashboard-top-padding);
 }
 
-.dashboard-card {
-    border-color: var(--purple);
-    border-radius: var(--dashboard-card-border-radius);
-    border-width: var(--dashboard-card-border-width);
-}
-
 .dashboard-card-animation {
     border-color: var(--purple);
-    border-radius: var(--dashboard-card-border-radius);
-    border-width: var(--dashboard-card-border-width);
+    border-radius: var(--card-border-radius);
+    border-width: var(--card-border-width);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -43,7 +35,7 @@
     bottom: 0;
     z-index: -1;
     background-color: var(--purple);
-    border-radius: var(--dashboard-card-border-radius);
+    border-radius: var(--card-border-radius);
 
     transition: transform var(--dashboard-card-animation-duration) ease-in-out;
     transform: scaleX(0) scaleY(0);

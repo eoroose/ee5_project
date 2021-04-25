@@ -38,7 +38,7 @@
         
         <div class="row dashboard-first-row">
             <?php if(session()->get('role')=='inhabitant'): ?>
-            <div class="col-md card dashboard-card">
+            <div class="col-md card main-card">
             <?php else:?>
             <div class="col-md card dashboard-card-animation">
                 <a href="/quote" class="stretched-link"></a>
