@@ -1,318 +1,254 @@
+<div>
+    <link href="./assets/css/dashboard.css" rel="stylesheet" type="text/css" />
 
-<div class="container dashboard-container">
+    <div class="container dashboard-container">
 
-    <?php if (session()->get('succes')):?>
-        <div class="alert alert-succes" role="alert">
-            <?= session()->get('succes')?>
-        </div>
-    <?php endif; ?>
-
-    <h1 class="dashboard-greetings">Hello, <?=session()->get('firstname')?> <?=session()->get('lastname')?></h1>
-    
-    <div class="container dashboard-quote-table-container">
-
-        <div class="row dashboard-first-row">
+        <?php if (session()->get('succes')):?>
+            <div class="alert alert-succes" role="alert">
+                <?= session()->get('succes')?>
+            </div>
+        <?php endif; ?>
+        
+        <div class="dashboard-greetings-container">
+            <h1 class="main-title dashboard-greetings">Hello, <?=session()->get('firstname')?> <?=session()->get('lastname')?></h1>
 
             <?php if(session()->get('role')=='inhabitant'): ?>
-            <div class="col-md card dashboard-quote-card">
-            <?php else:?>
-            <div class="col-md card dashboard-pages-card">
-                <a href="/quote" class="stretched-link dashboard-pages-link"></a>
+                <?php if($yellowCard==1){ ?>
+                    <div class="card dashboard-card-animation dashboard-notification-card">
+                        <img src="/assets/images/dashboard_page/yellow_card_yellow.svg" class="card-img-top dashboard-notification-logo" alt="yellow_card_yellow image">
+                        <img src="/assets/images/dashboard_page/yellow_card_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="yellow_card_purple image">    
+                        <div class="card-body dashboard-card-body">
+                            <a onclick="yellowCard()" class="stretched-link"></a>
+                        </div>
+                    </div>
+                <?php }?>
+                
+                <?php if($godParent!=null){ ?>
+                    <div class="card dashboard-card-animation dashboard-notification-card">
+                        <img src="/assets/images/dashboard_page/magic_wand_cyan.svg" class="card-img-top dashboard-notification-logo" alt="magic_wand_cyan image">    
+                        <img src="/assets/images/dashboard_page/magic_wand_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="magic_wand_purple image">
+                        <div class="card-body dashboard-card-body">
+                            <a onclick="godParents()" class="stretched-link"></a>
+                        </div>
+                    </div>
+                <?php }?>
             <?php endif; ?>
 
+        </div>
+        
+        <div class="row dashboard-first-row">
+            <?php if(session()->get('role')=='inhabitant'): ?>
+            <div class="col-md card dashboard-card">
+            <?php else:?>
+            <div class="col-md card dashboard-card-animation">
+                <a href="/quote" class="stretched-link"></a>
+            <?php endif; ?>
+
+
                 <div class="card-body dashboard-quote-card-body">
-                    <h5 class="card-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
+                        <h5 class="card-title main-title dashboard-quote-of-the-day">Quote of the day</h5>
+                        <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md card dashboard-pages-separator"></div>
+                <div class="col-md card dashboard-card-separator"></div>
 
-            <div class="col-md card dashboard-pages-card dashboard-agenda-card">
-                <h5 class="card-title dashboard-agenda-title" style="text-align: center">Agenda</h5>
-                <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                <div class="table-responsive">
-                    <table id="productSizes" class="table">
-                        <thead>
-                        <tr>
-                            <th>Start hour</th>
-                            <th>Activity</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        foreach($event as $data) {?>
+                <div class="col-md card dashboard-card-animation">
+                    <h5 class="card-title dashboard-card-title dashboard-card-title-top">Agenda</h5>
+                    <a href="/register" class="stretched-link"></a>
+                    <div class="table-responsive">
+
+                        <table id="productSizes" class="table">
+                            <thead>
+                            <tr>
+                                <th>Start hour</th>
+                                <th>Activity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($event as $data) {?>
                                 <tr>
                                     <td><?php echo $data['startTime']?></td>
                                     <td><?php echo $data['description']?></td>
                                 </tr>
-                        <?php }
-                        ?>
-                        </tbody>
-                    </table>
-                    <?php
-                    if(session()->get('role')=='inhabitant'){if($apointment==null){}
-                    else{?>
-                    <h5 class="card-title dashboard-agenda-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
-                    <?php }}?>
+                            <?php } ?>
+                            
+                            </tbody>
+
+                        </table>
+                        <?php if(session()->get('role')=='inhabitant'){if($apointment==null){}
+                        else{?>
+                        <h5 class="card-title dashboard-card-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
+                        <?php }}?>
                 </div>
             </div>
+            
+        </div>
+
+
+        <div class="dsahboard-cards-container">
+            
+            <!-- PROFILE & USERS/INHABITANTS/JOURNAL -->
+            <div class="row dashboard-row">
+
+                <div class="col-md card dashboard-card-animation">
+                    <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                    <div class="card-body dashboard-card-body">
+                        <h5 class="card-title dashboard-card-title"style="text-align: center">Profile</h5>
+                        <a href="/register" class="stretched-link"></a>
+                    </div>
+                </div>
+
+                <div class="col-md card dashboard-card-separator"></div>
+                
+                <div class="col-md card dashboard-card-animation">
+                    <?php if(session()->get('role')=='admin'): ?>
+                        <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Users</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    <?php elseif(session()->get('role')=='employee'): ?>
+                        <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Inhabitants</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    <?php else:?>
+                        <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Journal</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- INHABITANT->CHORES OR TASKS & NOTE PROGRESS  -->
+            <div class="row dashboard-row">
+                <?php if(session()->get('role')=='inhabitant'): ?>
+                    <div class="col card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Chores</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+                
+                <?php else:?>
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Tasks</h5>
+                            <a href="/tasks" class="stretched-link"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md card dashboard-card-separator"></div>
+
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Note progress</h5>
+                            <a href="/note-progress" class="stretched-link"></a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+            
+            <!-- CHORES & CELEBRATION -->
+            <?php if(session()->get('role')=='admin' || session()->get('role')=='employee'): ?>
+                
+                <?php if(session()->get('role')=='admin'): ?>
+                <div class="row dashboard-row">
+                <?php else:?>
+                <div class="row dashboard-row main-bottom-padding">
+                <?php endif; ?>
+                
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Chores</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md card dashboard-card-separator"></div>
+
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Celebration</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+
+                </div>
+            <?php endif; ?>
+
+            <!-- REGISTER & BACKUP OR PROGRESS -->
+            
+            <?php if(session()->get('role')=='admin'): ?>
+                <div class="row dashboard-row main-bottom-padding">
+                    
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Register</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md card dashboard-card-separator"></div>
+
+                    <div class="col-md card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Backup</h5>
+                            <a href="/register" class="stretched-link"></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            <?php elseif(session()->get('role')=='inhabitant'): ?>
+                <div class="row dashboard-row main-bottom-padding">
+
+                    <div class="card dashboard-card-animation dashboard-progress-container">
+                        <h4 class="card-title dashboard-card-title dashboard-card-title-top">Progress</h4>
+                        <a href="/note-progress" class="stretched-link"></a>
+                        <?php foreach ($progress as $row){?>
+                            <div class="row dashboard-progress-row">
+                                <div class="card dashboard-progress-card">
+                                    <div class="card-body dashboard-progress-card-body">
+                                        <h5 class="dashboard-progress-card-text">
+                                            Step <?php echo $row['phase']?>
+                                        </h5>
+                                        <div class="progress rounded-pill dashboard-progress-rounded-pill">
+                                            <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage"><?php echo $row['percentage']?>%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
+                    </div>
+
+                </div>
+            <?php endif; ?>
 
         </div>
     </div>
-
-    <?php if(session()->get('role')=='admin'): ?>
-
-        <div class="container dashboard-pages-container">
-
-            <!-- Profile & Users -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-pages-img" alt="user image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Profile</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-pages-img" alt="users image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Users</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tasks & Note progress -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-pages-img" alt="clipboard image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Tasks</h5>
-                        <a href="/tasks" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-pages-img" alt="development image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Note progress</h5>
-                        <a href="/note-progress" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Register & Chores -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-pages-img" alt="verify image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Register</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>                
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-pages-img" alt="sweeping image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Chores</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Celebration & Backup -->
-            <div class="row dashboard-pages-row dashboard-last-element">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-pages-img" alt="party image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Celebration</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-pages-img">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Backup</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    
-    <?php elseif(session()->get('role')=='employee'): ?>
-
-        <div class="container dashboard-pages-container">
-
-            <!-- Profile & Users -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-pages-img" alt="user image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Profile</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-pages-img" alt="users image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Inhabitants</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tasks & Note progress -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-pages-img" alt="clipboard image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Tasks</h5>
-                        <a href="/tasks" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-pages-img" alt="development image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Note progress</h5>
-                        <a href="/note-progress" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chores & Celebration -->
-            <div class="row dashboard-pages-row dashboard-last-element">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-pages-img" alt="sweeping image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Chores</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-pages-img" alt="party image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Celebration</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    <?php else:?>
-
-        <div class="container dashboard-pages-container">
-
-            <!-- Profile & Journal -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-pages-img" alt="user image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title"style="text-align: center">Profile</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-
-                <div class="col-md card dashboard-pages-separator"></div>
-
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-pages-img" alt="journal image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Journal</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chores -->
-            <div class="row dashboard-pages-row">
-                <div class="col-md card dashboard-pages-card">
-                    <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-pages-img" alt="sweeping image">
-                    <div class="card-body dashboard-pages-card-body">
-                        <h5 class="card-title dashboard-pages-title" style="text-align: center">Chores</h5>
-                        <a href="/register" class="stretched-link dashboard-pages-link"></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="container dashboard-progress dashboard-last-element">
-            <div class="row card dashboard-pages-card dashboard-progress-container">
-                <h4 class="card-title dashboard-progress-title"style="text-align: center">Progress</h4>
-                <a href="/note-progress" class="stretched-link dashboard-progress-link"></a>
-                <?php foreach ($progress as $row){?>
-                    <div class="row dashboard-progress-row">
-                        <div class="card dashboard-progress-card">
-                            <div class="card-body dashboard-progress-card-body">
-                                <h5 class="dashboard-progress-card-text">
-                                    Step <?php echo $row['phase']?>
-                                </h5>
-                                <div class="progress rounded-pill dashboard-progress-rounded-pill">
-                                    <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage"><?php echo $row['percentage']?>%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php }?>
-            </div>
-        </div>
-
-    <?php endif; ?>
-        <!-- new code -->
-        <?php if(session()->get('role')=='inhabitant'): ?>
-            <?php if($yellowCard==1){?>
-            <div class="col-md card dashboard-pages-card">
-                <img src="/assets/images/dashboard_page/yellow-card.svg" class="card-img-top dashboard-pages-img" alt="user image">
-                <div class="card-body dashboard-pages-card-body">
-                    <a onclick="yellowCard()" class="stretched-link dashboard-pages-link"></a>
-            </div>
-            <?php
-            }?>
-
-            <?php if($godParent!=null){?>
-            <div class="col-md card dashboard-pages-card">
-                <img src="/assets/images/dashboard_page/magic-wand.svg" class="card-img-top dashboard-pages-img" alt="user image">
-                <div class="card-body dashboard-pages-card-body">
-                    <a onclick="godParents()" class="stretched-link dashboard-pages-link"></a>
-                </div>
-                <?php
-                }?>
-        <?php endif; ?>
-
-
-
 </div>
-        <?php if(session()->get('role')=='inhabitant'){ ?>
-        <script>
-            function yellowCard() {
-                alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
-            }
-            function godParents(){
-                 alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?>\n<?php }?>");
 
-            }
 
-        </script>
-        <?php }?>
+<?php if(session()->get('role')=='inhabitant'){ ?>
+    <script>
+        function yellowCard() {
+            alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
+        }
+
+        function godParents(){
+             alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?>\n<?php }?>");
+        }
+    </script>
+<?php }?>

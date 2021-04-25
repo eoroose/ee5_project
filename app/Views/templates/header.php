@@ -5,7 +5,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/css/header.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -16,7 +17,7 @@
 
 <?php if(session()->get('isLoggedIn')): ?>
 
-    <nav class="navbar navbar-expand-lg navbar-dark header-navbar-top">
+    <nav class="navbar navbar-expand-lg navbar-dark header-container">
         <div class="container">
             <a href=/dashboard>
                 <img class="header-logo" src="./assets/images/header/header_logo.svg" alt="header logo image"/>
