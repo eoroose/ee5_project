@@ -30,7 +30,7 @@
 
             <div class="col-md card dashboard-pages-card dashboard-agenda-card">
                 <h5 class="card-title dashboard-agenda-title" style="text-align: center">Agenda</h5>
-                <a href="/register" class="stretched-link dashboard-pages-link"></a>
+                <a href="/agenda" class="stretched-link dashboard-pages-link"></a>
                 <div class="table-responsive">
                     <table id="productSizes" class="table">
                         <thead>
