@@ -1,5 +1,5 @@
 .tasks-container {
-    margin-top: 30px;
+    margin-top: 20px;
     --tasks-button-size: 50px;
     --tasks-button-svg-size: 30px;
     --tasks-table-head-height: 45px;
@@ -15,10 +15,38 @@
 
     --tasks-border-width: 1px;
     --tasks-animation-duration: 200ms;
-    --tasks-btn-margins: 20%;
+    --tasks-btn-margins: 15%;
     --tasks-btn-border-radius: 15px;
 
     --tasks-btn-add-height: 40px;
+    --tasks-btn-add-svg-height: 25px;
+}
+
+
+/* also used for quote page */
+.quote-container {
+    margin-top: 20px;
+    --tasks-button-size: 50px;
+    --tasks-button-svg-size: 30px;
+    --tasks-table-head-height: 45px;
+    --tasks-left-padding: 10px;
+
+    --quote-table-cell-min-height: 70px;
+    --tasks-table-cell-height: 70px;
+    
+    --tasks-phase-col-width: 15%;
+    --tasks-phase-col-min-width: 160px;
+    --tasks-description-col-width: 75%;
+    --tasks-edit-col-width: 15%;
+    --tasks-edit-col-min-width: 175px;
+
+    --tasks-border-width: 1px;
+    --tasks-animation-duration: 200ms;
+    --tasks-btn-margins: 15%;
+    --tasks-btn-border-radius: 15px;
+
+    --tasks-btn-add-height: 40px;
+    --tasks-btn-add-svg-height: 25px;
 }
 
 .tasks-title {
@@ -48,6 +76,20 @@
 
 .tasks-card {
     height: var(--tasks-table-cell-height);
+    color: black;
+    border-top: none;
+    border-bottom: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    border-radius: 0;
+    justify-content: center;
+}
+
+.quote-card {
+    min-height: var(--quote-table-cell-min-height);
+    color: black;
+    border-top: none;
+    border-bottom: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    border-radius: 0;
+    justify-content: center;
 }
 
 .tasks-card-head-phase {
@@ -71,22 +113,28 @@
     min-width: var(--tasks-edit-col-min-width);
 }
 
-.tasks-card {
-    color: black;
-    border-top: none;
-    border-bottom: calc(var(--tasks-border-width) * 2) solid var(--purple);
-    border-radius: 0;
-    justify-content: center;
-}
-
 .tasks-card-phase {
     width: var(--tasks-phase-col-width);
+    font-family: "freestyle script regular";
+    font-size: 2em;
     font-weight: bold;
+    color: black;
+    text-align: center;
     border-left: calc(var(--tasks-border-width) * 2) solid var(--purple);
     border-right: var(--tasks-border-width) solid var(--purple);
     padding-left: var(--tasks-left-padding);
-    min-width: var(--tasks-phase-col-min-width);
-    
+    min-width: var(--tasks-phase-col-min-width);   
+}
+
+.quote-card-phase {
+    width: var(--tasks-phase-col-width);
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    border-left: calc(var(--tasks-border-width) * 2) solid var(--purple);
+    border-right: var(--tasks-border-width) solid var(--purple);
+    padding-left: var(--tasks-left-padding);
+    min-width: var(--tasks-phase-col-min-width);   
 }
 
 .tasks-card-description {
@@ -201,6 +249,7 @@
 .tasks-input {
     border-radius: 10px;
     width: 90%;
+    font-family: "verdana";
 }
 
 .tasks-btn-add {
@@ -244,7 +293,8 @@
 
 
 .tasks-btn-add-svg {
-    width: var(--tasks-button-svg-size);
+    margin-top: 3px;
+    width: var(--tasks-btn-add-svg-height);
     transition: filter var(--tasks-animation-duration) ease-in-out;
 }
 

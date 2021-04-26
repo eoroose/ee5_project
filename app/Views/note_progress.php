@@ -1,74 +1,81 @@
 <?php $phase=0;?>
-<style>
-    .my-custom-scrollbar {
-        position: relative;
-        height: 800px;
-        overflow: auto;
-        max-width: 800px;
-    }
-    .table-wrapper-scroll-y {
-        display: block;
-    }
+<div>
+    <link href="./assets/css/note_progress.css" rel="stylesheet" type="text/css" />
 
-</style>
+    <div class="container note-progress-container">
+        <h3 class="main-title note-progress-title">Note progress</h3>
+    
 
-<div class="container table-wrapper-scroll-y my-custom-scrollbar" style="padding-top: 2em">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered  table-striped mb-0" id="dtVerticalScrollExample">
-                <thead>
-                <tr>
-                    <th scope="col" class="first-col">phase</th>
-                    <th scope="col" class="first-col">tasks</th>
-                    <?php foreach ($inhabitants as $row1)
-                    {?>
-                    <th scope="col"><?php echo $row1['firstname'] ?> <?php echo $row1['lastname'] ?></th>
+        <div class="row note-progress-row note-progress-custom-scrollbar">
+            <div class="col-12 note-progress-col">
+                <div class="card note-progress-card-head note-progress-card-head-phase">Phase</div>
+                <div class="card note-progress-card-head note-progress-card-head-task">Task</div>
+                <?php foreach ($inhabitants as $row1){ ?>
+                    <div class="card note-progress-card-head note-progress-card-head-inhabitant">
+                        <?php echo $row1['firstname'] ?> <?php echo $row1['lastname'] ?>
+                    </div>
+                <?php }?>
+
+            </div>
+            
+            <?php foreach($tasks as $row){ ?>
+                <div class="col-12 note-progress-col" id="<?php echo "row".$row['taskID']?>">
+
+                    <!-- PHASE  -->
+                    <?php if($row['phase']==$phase) { ?>
+                        <div class="card note-progress-card-phase-blank note-progress-card-phase" id="<?php echo "phase_row".$row['taskID']?>"></div>
+                    <?php } else { ?>
+                        <div class="card note-progress-card-phase-number note-progress-card-phase" id="<?php echo "phase_row".$row['taskID']?>">
+                            <?php if($row['phase']!=$phase) { 
+                                $phase=$row['phase'];
+                                echo $phase;
+                            } ?>
+                        </div>
+                    <?php } ?>
+
+                    <!-- TASK -->
+                    <div class="card note-progress-card note-progress-card-task" id="<?php echo "phase_row".$row['taskID']?>">
+                        <?php echo $row['description']?>
+                    </div>
+
+                    <!-- PROGRESS -->
+                    <?php foreach ($inhabitants as $row1) { ?>
+                        <?php foreach ($progress as $progress_row) {
+                            if($progress_row['taskID']==$row['taskID']) {
+                                if ($progress_row['inhabitantID']==$row1['inhabitantID']) { ?>
+                                    <div class="card note-progress-card note-progress-card-inhabitant">
+                                        
+                                        <button class="note-progress-check-btn" type="edit" id="<?php echo "complete".$progress_row['progressID']?>" onclick="uncomplete('<?php echo $progress_row['progressID']?>')" style="display: <?php if($progress_row['isCompleted']==1){echo 'block';}else{echo 'none';} ?>">
+                                            <img src="/assets/images/note_progress_page/check.svg" class="note-progress-btn-svg" alt="check image">
+                                        </button>
+
+                                        <button class="note-progress-cross-btn" type="save" id="<?php echo "uncomplete".$progress_row['progressID']?>" class="btn btn-danger" onclick="complete('<?php echo $progress_row['progressID']?>')" style="display: <?php if($progress_row['isCompleted']==0){echo 'block';}else{echo 'none';} ?>">
+                                            <img src="/assets/images/note_progress_page/cross.svg" class="note-progress-btn-svg" alt="cross image">
+                                        </button>
+                                    </div>
+                        <?php }}}?>  
                     <?php }?>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($tasks as $row)
-                { ?>
-                    <tr id="<?php echo "row".$row['taskID']?>">
-                        <?php if($row['phase']==$phase){ ?>
-                        <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"></th>
-                        <?php
-                        }
-                        else{
-                            $phase=$row['phase'];
-                            ?>
-                            <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"><?php echo $phase; ?></th>
-                        <?php
-                        }
-                        ?>
-                        <th class="fixed-side" id="<?php echo "phase_row".$row['taskID']?>"><?php echo $row['description']?></th>
-                        <?php foreach ($inhabitants as $row1)
-                        {?>
-                            <?php foreach ($progress as $progress_row){
-                                if($progress_row['taskID']==$row['taskID'])
-                                {if ($progress_row['inhabitantID']==$row1['inhabitantID'])
-                                {
-                            ?>
-                                <td>
-                                    <button type="edit" id="<?php echo "complete".$progress_row['progressID']?>" class="btn btn-success" onclick="uncomplete('<?php echo $progress_row['progressID']?>')" style="width: 50px; display: <?php if($progress_row['isCompleted']==1){echo 'block';}else{echo 'none';} ?>"><img src="/assets/images/edit.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
-                                    <button type="save" id="<?php echo "uncomplete".$progress_row['progressID']?>" class="btn btn-danger" onclick="complete('<?php echo $progress_row['progressID']?>')" style="width: 50px; display: <?php if($progress_row['isCompleted']==0){echo 'block';}else{echo 'none';} ?>"><img src="/assets/images/download.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
-                                </td>
-                                <?php    }
-                                }
 
-                             }
-                        }?>
+                </div>
+            <?php }?>
 
-                    </tr>
-                <?php }
-                ?>
-
-
-                </tbody>
-            </table>
+            <div class="col-12 note-progress-col">
+                <div class="card note-progress-card-last-phase"></div>
+                <div class="card note-progress-card-last-task"></div>
+                <?php foreach ($inhabitants as $row1) { ?>
+                    <?php foreach ($progress as $progress_row) {
+                        if($progress_row['taskID']==$row['taskID']) {
+                            if ($progress_row['inhabitantID']==$row1['inhabitantID']) { ?>
+                                <div class="card note-progress-card-last-inhabitant"></div>
+                    <?php }}}?>  
+                <?php }?>
+            </div>
+            
         </div>
     </div>
 </div>
+
+
 <div class="popup" id="edidt_popup" style="display: none"><span class="popuptext" id="myPopup">Popup text...</span></div>
 <form action="/tasks/complete" id="form1">
     <input type="hidden" id="id" name="id" value="">
@@ -115,14 +122,4 @@
 
     }
 
-</script>
-<script>
-    $(document).ready(function () {
-        $('#dtVerticalScrollExample').DataTable({
-            "scrollY": "200px",
-            "scrollCollapse": true,
-            "scrollX": true
-
-        });
-    });
 </script>

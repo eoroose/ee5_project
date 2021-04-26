@@ -1,48 +1,69 @@
+<div>
+    <link href="./assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
-<h1></h1>
-<div class="container" style="padding-top: 2em">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col">date</th>
-                    <th scope="col">description</th>
-                    <th scope="col">edit</th>
-                    <th scope="col">delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($quotes as $row)
-                { ?>
-                <tr id="<?php echo "row".$row['dailyQuoteID']?>">
+    <div class="container quote-container">
+        
+        <h3 class="main-title tasks-title">Quote of the day</h3>
 
-                    <th id="<?php echo "date_row".$row['dailyQuoteID']?>"><?php echo $row['date']?></th>
-                    <td id="<?php echo "description_row".$row['dailyQuoteID']?>"><?php echo $row['description']?></td>
-                    <td>
+        <div class="row tasks-row main-bottom-padding">
+            <div class="col-12 tasks-col">
+                <div class="card tasks-card-head tasks-card-head-phase">Date</div>
+                <div class="card tasks-card-head tasks-card-head-description">Quote</div>
+                <div class="card tasks-card-head tasks-card-head-edit"></div>
+            </div>
 
-                            <button type="edit" id="<?php echo "edit".$row['dailyQuoteID']?>" class="btn btn-success" onclick="edit_row('<?php echo $row['dailyQuoteID']?>')" style="width: 50px;"><img src="/assets/images/edit.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
-                            <button type="save" id="<?php echo "save".$row['dailyQuoteID']?>" class="btn btn-success" onclick="save_row('<?php echo $row['dailyQuoteID']?>')" style="width: 50px; display: none"><img src="/assets/images/download.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button>
+            <?php foreach($quotes as $row) {?>
+                <div class="col-12 tasks-col" id="<?php echo "row".$row['dailyQuoteID']?>">
+                    <div class="card quote-card quote-card-phase" id="<?php echo "date_row".$row['dailyQuoteID']?>">
+                        <?php echo $row['date']?>
+                    </div>
+                    <div class="card quote-card tasks-card-description" id="<?php echo "description_row".$row['dailyQuoteID']?>">
+                        <?php echo $row['description']?>
+                    </div>
+                    
+                    <div class="card quote-card tasks-card-edit">
+                        <div class="card-body tasks-card-body">
 
-                    </td>
-                    <td>
-                        <button type="button" id="<?php echo "delete".$row['dailyQuoteID']?>" class="btn btn-danger" style="width: 50px;" onclick="delete_row('<?php echo $row['dailyQuoteID']?>')"><img src="/assets/images/delete.svg" width="3px" height="33px" class="card-img-top" alt="Register image"></button></td>
+                            <div class="tasks-edit-save-container">
+                                <button class="tasks-btn-edit-save" type="edit" id="<?php echo "edit".$row['dailyQuoteID']?>" onclick="edit_row('<?php echo $row['dailyQuoteID']?>')">
+                                    <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
+                                </button>
 
-                </tr>
-                <?php }
-                ?>
-                <tr>
-                    <td><input type="date" id="new_date"></td>
-                    <td><input type="text" id="new_description"></td>
-                    <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+                                <button class="tasks-btn-edit-save" type="save" id="<?php echo "save".$row['dailyQuoteID']?>" onclick="save_row('<?php echo $row['dailyQuoteID']?>')" style="display: none">
+                                    <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                                </button>
+                            </div>
 
-                </tr>
+                            <button class="tasks-btn-delete" type="button" id="<?php echo "delete".$row['dailyQuoteID']?>" onclick="delete_row('<?php echo $row['dailyQuoteID']?>')">
+                                <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
+                            </button>
+                        </div>
 
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            <?php }?>
+
+            <div class="col-12 tasks-col">
+                <div class="card quote-card quote-card-phase">
+                    <input class="form-control main-input tasks-input" type="date" id="new_date">
+                </div>
+
+                <div class="card quote-card tasks-card-description">
+                    <input class="form-control main-input tasks-input" type="text" id="new_description">
+                </div>
+
+                <div class="card quote-card tasks-card-edit">
+                    <button class="card tasks-btn-add" type="button" onclick="add_row();">
+                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
+                    </button>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </div>
+
 <div class="popup" id="edidt_popup" style="display: none"><span class="popuptext" id="myPopup">Popup text...</span></div>
 
 <form action="/quote/insert" id="form2">

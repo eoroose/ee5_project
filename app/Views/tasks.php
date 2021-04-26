@@ -14,8 +14,12 @@
             
             <?php foreach($tasks as $row) {?>
                 <div class="col-12 tasks-col" id="<?php echo "row".$row['taskID']?>">
-                    <div class="card tasks-card tasks-card-phase" id="<?php echo "phase_row".$row['taskID']?>"><?php echo $row['phase']?></div>
-                    <div class="card tasks-card tasks-card-description" id="<?php echo "description_row".$row['taskID']?>"><?php echo $row['description']?></div>
+                    <div class="card tasks-card tasks-card-phase" id="<?php echo "phase_row".$row['taskID']?>">
+                        <?php echo $row['phase']?>
+                    </div>
+                    <div class="card tasks-card tasks-card-description" id="<?php echo "description_row".$row['taskID']?>">
+                        <?php echo $row['description']?>
+                    </div>
                     
                     <div class="card tasks-card tasks-card-edit">
                         <div class="card-body tasks-card-body">
