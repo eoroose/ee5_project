@@ -111,7 +111,6 @@
             document.getElementById("row"+no+"").outerHTML="";
             $.post('http://localhost/tasks/delete',{id:no})
         }
-
     }
 
     function add_row()
@@ -122,7 +121,6 @@
         document.getElementById("phase2").value=new_phase;
         document.getElementById("description2").value=new_description;
         document.getElementById("form2").submit();
-
     }
 
 </script>

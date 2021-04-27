@@ -17,7 +17,6 @@ class Dashboard extends BaseController
 {
 	public function index()
 	{
-
 	    $data=[];
 	    $data['event']=$this->dashAgenda();
 	    $quote=$this->quote();

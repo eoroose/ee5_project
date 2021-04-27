@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- Gegenereerd op: 25 apr 2021 om 11:18
+=======
 -- Gegenereerd op: 22 apr 2021 om 20:53
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Serverversie: 10.4.17-MariaDB
 -- PHP-versie: 7.4.15
 
@@ -31,8 +35,7 @@ CREATE TABLE `appointment` (
   `appointmentID` int(11) NOT NULL,
   `inhabitantID` int(11) NOT NULL,
   `doctorID` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL,
+  `date` datetime NOT NULL,
   `reason` varchar(100) NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -41,6 +44,31 @@ CREATE TABLE `appointment` (
 -- Gegevens worden geëxporteerd voor tabel `appointment`
 --
 
+<<<<<<< HEAD:de_spiegel_DB.sql
+INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `reason`, `isActive`) VALUES
+(1, 9, 1, '2021-03-23 00:00:00', 'standaard check', 1),
+(2, 9, 1, '2021-04-06 03:00:00', 'standaard check', 1),
+(3, 14, 2, '2021-03-24 00:00:00', 'standaard check', 1),
+(4, 14, 2, '2021-04-07 00:00:00', 'standaard check', 1),
+(5, 15, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(6, 15, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(7, 16, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(8, 16, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(9, 17, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(10, 17, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(11, 18, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(12, 18, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(13, 19, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(14, 19, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(15, 20, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(16, 20, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(17, 21, 1, '2021-03-24 00:00:00', 'standaard check', 1),
+(18, 21, 1, '2021-04-07 00:00:00', 'standaard check', 1),
+(19, 22, 2, '2021-03-24 00:00:00', 'standaard check', 1),
+(20, 22, 2, '2021-04-07 00:00:00', 'standaard check', 1),
+(21, 23, 1, '2021-04-09 00:00:00', 'standaard check', 1),
+(22, 23, 1, '2021-04-23 00:00:00', 'standaard check', 1);
+=======
 INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `time`, `reason`, `isActive`) VALUES
 (1, 2, 1, '2021-04-20', '00:00:00', 'standaard check', 1),
 (2, 2, 1, '2021-05-04', '00:00:00', 'standaard check', 1),
@@ -58,6 +86,7 @@ INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, 
 (14, 8, 1, '2021-05-05', '00:00:00', 'standaard check', 1),
 (15, 9, 1, '2021-04-21', '00:00:00', 'standaard check', 1),
 (16, 9, 1, '2021-05-05', '00:00:00', 'standaard check', 1);
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 -- --------------------------------------------------------
 
@@ -174,6 +203,75 @@ INSERT INTO `event` (`eventID`, `date`, `startTime`, `duration`, `description`) 
 (2, '2021-04-22', '16:00:00', '01:00:00', 'dfqfdqfqdfq'),
 (3, '2021-04-22', '15:00:00', '01:00:00', 'fqsdfqfq');
 
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `start1` date NOT NULL,
+  `startTime` time NOT NULL,
+  `start` datetime DEFAULT NULL,
+  `duration` time NOT NULL,
+  `title` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `endTime` time NOT NULL,
+  `allDay` varchar(5) NOT NULL,
+  `end` datetime DEFAULT NULL,
+  `color` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `events`
+--
+
+INSERT INTO `events` (`id`, `start1`, `startTime`, `start`, `duration`, `title`, `endTime`, `allDay`, `end`, `color`) VALUES
+(1, '2021-04-13', '15:00:00', '2021-04-14 14:00:00', '01:00:00', 'eerste', '16:00:00', 'true', '0000-00-00 00:00:00', ''),
+(2, '2021-01-07', '16:00:00', '2021-01-05 16:09:02', '01:00:00', 'tweede', '17:00:00', 'false', NULL, ''),
+(6, '2021-04-07', '17:00:00', '2021-04-13 21:32:27', '01:00:00', 'derde', '18:00:00', 'true', '0000-00-00 00:00:00', ''),
+(7, '2021-04-07', '18:00:00', '2021-04-18 20:17:03', '01:00:00', 'eten', '19:00:00', 'false', NULL, ''),
+(8, '2021-04-07', '19:00:00', '0000-00-00 00:00:00', '01:00:00', 'afwassen', '20:00:00', 'false', NULL, ''),
+(43, '2021-04-14', '00:00:00', '0000-00-00 00:00:00', '00:00:00', 'test', '00:00:00', 'false', NULL, ''),
+(45, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', 'test', '00:00:00', '', NULL, ''),
+(46, '0000-00-00', '00:00:00', '2021-04-19 00:00:00', '00:00:00', 'azert', '00:00:00', '', NULL, ''),
+(47, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '8', '00:00:00', '', NULL, ''),
+(48, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '8', '00:00:00', '', NULL, ''),
+(49, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '8', '00:00:00', '', NULL, ''),
+(50, '0000-00-00', '00:00:00', NULL, '00:00:00', NULL, '00:00:00', '', NULL, ''),
+(51, '0000-00-00', '00:00:00', NULL, '00:00:00', NULL, '00:00:00', '', NULL, ''),
+(52, '0000-00-00', '00:00:00', '2021-04-08 00:00:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-11 00:00:00', ''),
+(53, '0000-00-00', '00:00:00', '2021-04-12 10:30:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-12 16:30:00', ''),
+(54, '0000-00-00', '00:00:00', '2021-03-29 00:00:00', '00:00:00', 'New event 2', '00:00:00', '', '2021-04-03 00:00:00', ''),
+(55, '0000-00-00', '00:00:00', '2021-04-16 00:00:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-17 00:00:00', ''),
+(56, '0000-00-00', '00:00:00', '2021-03-31 00:00:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-01 00:00:00', ''),
+(57, '0000-00-00', '00:00:00', '2021-04-05 00:00:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-06 00:00:00', ''),
+(58, '0000-00-00', '00:00:00', '2021-04-06 00:00:00', '00:00:00', 'qsdf', '00:00:00', '', '2021-04-22 00:00:00', ''),
+(59, '0000-00-00', '00:00:00', '2021-04-23 00:00:00', '00:00:00', 'dvf', '00:00:00', '', '2021-04-24 00:00:00', ''),
+(60, '0000-00-00', '00:00:00', '2021-04-27 00:00:00', '00:00:00', 'sdf', '00:00:00', '', '2021-04-25 00:00:00', ''),
+(61, '0000-00-00', '00:00:00', '2021-04-25 00:00:00', '00:00:00', 'sdsd', '00:00:00', '', '2021-04-26 00:00:00', ''),
+(62, '0000-00-00', '00:00:00', '2021-03-30 04:06:00', '00:00:00', 'test', '00:00:00', '', '2021-04-08 21:32:00', ''),
+(65, '0000-00-00', '00:00:00', '2021-04-13 00:00:00', '00:00:00', 'azert', '00:00:00', '', '2021-04-10 00:00:00', ''),
+(66, '0000-00-00', '00:00:00', '2021-04-29 00:00:00', '00:00:00', 'azert', '00:00:00', '', '2021-04-29 00:00:00', ''),
+(67, '0000-00-00', '00:00:00', '2021-05-01 00:00:00', '00:00:00', 'azert', '00:00:00', '', '0000-00-00 00:00:00', ''),
+(68, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '', '00:00:00', '', '0000-00-00 00:00:00', ''),
+(69, '0000-00-00', '00:00:00', '2021-04-15 00:00:00', '00:00:00', 'green', '00:00:00', '', '2021-04-15 00:00:00', ''),
+(71, '0000-00-00', '00:00:00', '2021-04-01 00:00:00', '00:00:00', 'New event', '00:00:00', '', '2021-04-04 00:00:00', ''),
+(72, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', 'test', '00:00:00', '', '0000-00-00 00:00:00', '#e66465'),
+(73, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', 'sdf', '00:00:00', '', '0000-00-00 00:00:00', '#e66465'),
+(74, '0000-00-00', '00:00:00', '2021-04-14 00:00:00', '00:00:00', 'azert', '00:00:00', '', '2021-04-14 00:00:00', '#e66465'),
+(75, '0000-00-00', '00:00:00', '2021-04-14 05:44:00', '00:00:00', 'test', '00:00:00', '', '2021-04-14 22:52:00', '#e66465'),
+(76, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '', '00:00:00', '', '0000-00-00 00:00:00', '#e66465'),
+(77, '0000-00-00', '00:00:00', '2021-04-13 00:00:00', '00:00:00', '', '00:00:00', '', '2021-04-16 00:00:00', '#e66465'),
+(78, '0000-00-00', '00:00:00', '2021-04-01 00:00:00', '00:00:00', 'test2', '00:00:00', '', '2021-04-02 00:00:00', '#e66465'),
+(79, '0000-00-00', '00:00:00', '2021-03-30 00:00:00', '00:00:00', 'test2', '00:00:00', '', '2021-04-04 00:00:00', '#e66465'),
+(80, '0000-00-00', '00:00:00', '2021-04-20 05:06:00', '00:00:00', 'test2', '00:00:00', '', '2021-04-20 03:00:00', '#e66465'),
+(81, '0000-00-00', '00:00:00', '2021-04-08 17:26:00', '00:00:00', 'jnkdzfv', '00:00:00', '', '2021-04-22 17:27:00', '#b602f7'),
+(82, '0000-00-00', '00:00:00', '2021-04-17 23:18:00', '00:00:00', 'tester', '00:00:00', '', '1970-01-01 01:00:00', '#e66465');
+
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- --------------------------------------------------------
 
 --
@@ -218,6 +316,13 @@ CREATE TABLE `journalentry` (
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `journalentry`
+--
+
+INSERT INTO `journalentry` (`journalEntryID`, `inhabitantID`, `title`, `entry`, `date`, `isActive`) VALUES
+(1, 9, 'tst', 'tstsdfqfdq', '2021-04-24 16:55:09', 1);
 
 -- --------------------------------------------------------
 
@@ -346,6 +451,34 @@ INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCom
 (173, 8, 60, NULL, 0),
 (174, 9, 60, NULL, 0);
 
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `recurringevents`
+--
+
+CREATE TABLE `recurringevents` (
+  `id` int(11) NOT NULL,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL,
+  `daysOfWeek` varchar(30) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `color` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `recurringevents`
+--
+
+INSERT INTO `recurringevents` (`id`, `startTime`, `endTime`, `daysOfWeek`, `title`, `color`) VALUES
+(4, '20:54:36', '22:54:36', '1,2,3,4,5', 'recurring event', ''),
+(6, '00:00:00', '00:00:00', '1,5,', '', '#e66465'),
+(7, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e'),
+(8, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e');
+
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- --------------------------------------------------------
 
 --
@@ -452,6 +585,7 @@ CREATE TABLE `yellowcard` (
 
 --
 -- Gegevens worden geëxporteerd voor tabel `yellowcard`
+<<<<<<< HEAD:de_spiegel_DB.sql
 --
 
 INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `reason`, `date`, `isActive`) VALUES
@@ -459,9 +593,21 @@ INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `re
 
 --
 -- Indexen voor geëxporteerde tabellen
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
+--
+
+INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `reason`, `date`, `isActive`) VALUES
+(1, 1, 3, 'jljmjkljlmjmljkjmj', '2021-04-20 17:54:13', 1);
+
+--
+<<<<<<< HEAD:de_spiegel_DB.sql
+=======
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `appointment`
 --
 ALTER TABLE `appointment`
@@ -516,6 +662,15 @@ ALTER TABLE `event`
   ADD UNIQUE KEY `eventID_UNIQUE` (`eventID`);
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- Indexen voor tabel `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `inhabitant`
 --
 ALTER TABLE `inhabitant`
@@ -550,6 +705,15 @@ ALTER TABLE `progress`
   ADD KEY `taskToProgress_idx` (`taskID`);
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- Indexen voor tabel `recurringevents`
+--
+ALTER TABLE `recurringevents`
+  ADD PRIMARY KEY (`id`);
+
+--
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Indexen voor tabel `task`
 --
 ALTER TABLE `task`
@@ -588,7 +752,11 @@ ALTER TABLE `yellowcard`
 -- AUTO_INCREMENT voor een tabel `appointment`
 --
 ALTER TABLE `appointment`
+<<<<<<< HEAD:de_spiegel_DB.sql
+  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+=======
   MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `chore`
@@ -612,31 +780,48 @@ ALTER TABLE `dailyquote`
 -- AUTO_INCREMENT voor een tabel `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `employeeadmin`
 --
 ALTER TABLE `employeeadmin`
+<<<<<<< HEAD:de_spiegel_DB.sql
+  MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+=======
   MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `event`
 --
 ALTER TABLE `event`
   MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+<<<<<<< HEAD:de_spiegel_DB.sql
+
+--
+-- AUTO_INCREMENT voor een tabel `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `inhabitant`
 --
 ALTER TABLE `inhabitant`
+<<<<<<< HEAD:de_spiegel_DB.sql
+  MODIFY `inhabitantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+=======
   MODIFY `inhabitantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `journalentry`
 --
 ALTER TABLE `journalentry`
-  MODIFY `journalEntryID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `journalEntryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT voor een tabel `note`
@@ -651,6 +836,15 @@ ALTER TABLE `progress`
   MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
+-- AUTO_INCREMENT voor een tabel `recurringevents`
+--
+ALTER TABLE `recurringevents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+=======
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- AUTO_INCREMENT voor een tabel `task`
 --
 ALTER TABLE `task`
@@ -660,7 +854,11 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
+<<<<<<< HEAD:de_spiegel_DB.sql
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+=======
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 
 --
 -- AUTO_INCREMENT voor een tabel `weeklyagenda`
@@ -679,6 +877,8 @@ ALTER TABLE `yellowcard`
 --
 
 --
+<<<<<<< HEAD:de_spiegel_DB.sql
+=======
 -- Beperkingen voor tabel `appointment`
 --
 ALTER TABLE `appointment`
@@ -686,6 +886,7 @@ ALTER TABLE `appointment`
   ADD CONSTRAINT `inhabitantToAppointment` FOREIGN KEY (`inhabitantID`) REFERENCES `inhabitant` (`inhabitantID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+>>>>>>> f8e6e514113cb93bf577b60a902970cde638648b:de_spiegel-3.sql
 -- Beperkingen voor tabel `choreassignment`
 --
 ALTER TABLE `choreassignment`

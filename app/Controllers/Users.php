@@ -73,21 +73,22 @@ class Users extends BaseController
                }
         }
     }
-    public  function getWeek(){
-        $date_halfway=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 21, date('Y')));
-        $date=date('Y-m-d');
-        $journalmodel=new JournalModel();
-        $data=$journalmodel->getBetweendates($date,$date_halfway,2);
+    // public  function getWeek(){
+    //    $date_halfway=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 21, date('Y')));
+    //    $date=date('Y-m-d');
+    //    $journalmodel=new JournalModel();
+    //    $data=$journalmodel->getBetweendates($date,$date_halfway,2);
 
-        echo '<pre>'; print_r($data); echo '</pre>';
-    }
+    //    echo '<pre>'; print_r($data); echo '</pre>';
+    //}
 
-    public function getMonth(){
-        $date=date('Y-m-d');
-        $journalmodel=new JournalModel();
-        $data=$journalmodel->getMonthappoint($date,23);
-        echo '<pre>'; print_r($data); echo '</pre>';
-    }
+    //public function getMonth(){
+    //    $date=date('Y-m-d');
+    //    $journalmodel=new JournalModel();
+    //    $data=$journalmodel->getMonthappoint($date,23);
+    //    echo '<pre>'; print_r($data); echo '</pre>';
+    //}
+
     private function setUserSession($user){
         $data = [
             'id' => $user['userID'],

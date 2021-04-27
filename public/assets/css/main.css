@@ -21,7 +21,7 @@ a {
 
 @font-face {
     font-family: "freestyle script regular";
-    src: url(gi/assets/fonts/freestyle-script-regular.ttf);
+    src: url(/assets/fonts/freestyle-script-regular.ttf);
 }
 
 @keyframes login-alert-popup {

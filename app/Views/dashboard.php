@@ -56,10 +56,9 @@
 
                 <div class="col-md card dashboard-card-animation">
                     <h5 class="card-title dashboard-card-title dashboard-card-title-top">Agenda</h5>
-                    <a href="/register" class="stretched-link"></a>
+                    <a href="/agenda" class="stretched-link"></a>
                     <div class="table-responsive">
-
-                        <table id="productSizes" class="table">
+                  <table id="productSizes" class="table">
                             <thead>
                             <tr>
                                 <th>Start hour</th>
@@ -68,6 +67,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($event as $data) {?>
+
                                 <tr>
                                     <td><?php echo $data['startTime']?></td>
                                     <td><?php echo $data['description']?></td>
@@ -119,7 +119,7 @@
                         <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Journal</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/journal" class="stretched-link"></a>
                         </div>
                     <?php endif; ?>
                 </div>
