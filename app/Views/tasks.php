@@ -1,5 +1,5 @@
 <div>
-    <link href="./assets/css/tasks.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
     <div class="container tasks-container">
 
@@ -14,11 +14,12 @@
             
             <?php foreach($tasks as $row) {?>
                 <div class="col-12 tasks-col" id="<?php echo "row".$row['taskID']?>">
-                    <div class="card tasks-card tasks-card-phase" id="<?php echo "phase_row".$row['taskID']?>">
-                        <?php echo $row['phase']?>
+                    <div class="card tasks-card tasks-card-phase">
+                        <p id="<?php echo "phase_row".$row['taskID']?>"><?php echo $row['phase']?></p>
+
                     </div>
-                    <div class="card tasks-card tasks-card-description" id="<?php echo "description_row".$row['taskID']?>">
-                        <?php echo $row['description']?>
+                    <div class="card tasks-card tasks-card-description" >
+                        <p id="<?php echo "description_row".$row['taskID']?>"><?php echo $row['description']?></p>
                     </div>
                     
                     <div class="card tasks-card tasks-card-edit">
@@ -64,13 +65,13 @@
     </div>
 </div>
 
-<div class="popup" id="edidt_popup" style="display: none"><span class="popuptext" id="myPopup">Popup text...</span></div>
 
 <form action="/tasks/insert" id="form2">
     <input type="hidden" id="phase2" name="phase2" value="">
     <input type="hidden" id="description2" name="description2" value="">
 </form>
 <script>
+
     function edit_row(no)
     {
         document.getElementById("edit"+no).style.display="none";
@@ -83,7 +84,7 @@
         var description_data=description.innerHTML;
 
         phase.innerHTML="<input type='number' id='phase_text"+no+"' value='"+phase_data+"'>";
-        description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"'>";
+        description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"' style='width: 90%;border-radius: 10px;'>";
     }
 
 
@@ -99,7 +100,7 @@
         document.getElementById("save"+no).style.display="none";
 
 
-        $.post('http://localhost/tasks/edit',{id:no,phase:phase_val,description:description_val})
+        $.post('/tasks/edit',{id:no,phase:phase_val,description:description_val})
 
     }
 
@@ -109,7 +110,7 @@
         if(r==true)
         {
             document.getElementById("row"+no+"").outerHTML="";
-            $.post('http://localhost/tasks/delete',{id:no})
+            $.post('/tasks/delete',{id:no})
         }
     }
 

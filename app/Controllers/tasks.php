@@ -25,6 +25,7 @@ class tasks extends BaseController
         $taskmodel=new taskmodel();
         $result=$taskmodel->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
         $data=array('tasks'=> $result);
+        //echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/header', $data);
         echo view('tasks');
         echo view('templates/footer');

@@ -27,7 +27,7 @@ class quote extends BaseController
             $data = array('quotes' => $result);
             echo view('templates/header', $data);
             echo view('quote');
-            // echo '<pre>'; print_r($data); echo '</pre>';
+            //echo '<pre>'; print_r($data); echo '</pre>';
 
             echo view('templates/footer');
 

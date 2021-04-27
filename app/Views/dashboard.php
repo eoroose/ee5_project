@@ -1,3 +1,23 @@
+<style>
+
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    }
+
+
+</style>
+
 <div>
     <link href="./assets/css/dashboard.css" rel="stylesheet" type="text/css" />
 
@@ -19,7 +39,7 @@
                         <img src="/assets/images/dashboard_page/yellow_card_yellow.svg" class="card-img-top dashboard-notification-logo" alt="yellow_card_yellow image">
                         <img src="/assets/images/dashboard_page/yellow_card_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="yellow_card_purple image">    
                         <div class="card-body dashboard-card-body">
-                            <a onclick="yellowCard()" class="stretched-link"></a>
+                            <a onclick="openForm2()" class="stretched-link"></a>
                         </div>
                     </div>
                 <?php }?>
@@ -29,7 +49,7 @@
                         <img src="/assets/images/dashboard_page/magic_wand_cyan.svg" class="card-img-top dashboard-notification-logo" alt="magic_wand_cyan image">    
                         <img src="/assets/images/dashboard_page/magic_wand_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="magic_wand_purple image">
                         <div class="card-body dashboard-card-body">
-                            <a onclick="godParents()" class="stretched-link"></a>
+                            <a onclick="openForm()" class="stretched-link"></a>
                         </div>
                     </div>
                 <?php }?>
@@ -69,8 +89,12 @@
                             <?php foreach($event as $data) {?>
 
                                 <tr>
-                                    <td><?php echo $data['startTime']?></td>
-                                    <td><?php echo $data['description']?></td>
+                                    <td><?php
+                                        $time= strtotime($data['start']);
+                                        echo date('H:i:s',$time);
+
+                                                ?>
+                                    <td><?php echo $data['title']?></td>
                                 </tr>
                             <?php } ?>
                             
@@ -231,6 +255,31 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                        <div id="newEntryModal" class="modal"">
+                        <div class="modal-content">
+
+                            <h1>Godfather/godChild</h1>
+
+                            <h4>Godfather/Godmother</h4>
+                            <p><?php echo $godParent['firstname']; echo ' '; echo $godParent['lastname']?></p>
+                            <br>
+
+                            <h4>godchilds</h4>
+                            <?php foreach ($godchilds as $row){   echo $row['firstname']; echo ' '; echo $row['lastname']; ?> <br> <?php } ?>
+
+                            <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
+                        </div>
+                    </div>
+                    <div id="yellowCardModal" class="modal"">
+                    <div class="modal-content">
+                        <h4>Je hebt een gele kaart gekregen</h4>
+                        <p>Reden: <?php echo $info['reason'];?></p>
+                        <p>Ontvangen op: <?php echo $info['date'];?></p>
+                        <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+                    </div>
+                </div>
                         <?php }?>
                     </div>
 
@@ -241,15 +290,28 @@
     </div>
 </div>
 
-
 <?php if(session()->get('role')=='inhabitant'){ ?>
     <script>
-        function yellowCard() {
-            alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
-        }
+        //function yellowCard() {
+       //     alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
+     //   }
 
-        function godParents(){
-             alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?>\n<?php }?>");
+        //function godParents(){
+      //       alert("Je god parent is: <?php echo $godParent['firstname'];?> <?php echo $godParent['lastname'];?>\nJe god childs zijn: \n<?php foreach ($godchilds as $row){ ?>   <?php echo $row['firstname'];?> <?php echo $row['lastname'];?> <br> <?php }?>");
+      //  }
+        function openForm(){
+            document.querySelector('#newEntryModal').style.display = 'block';
+
+        }
+        function  closeFormEE() {
+            document.querySelector('#newEntryModal').style.display = 'none';
+        }
+        function openForm2(){
+            document.querySelector('#yellowCardModal').style.display = 'block';
+
+        }
+        function  closeForm() {
+            document.querySelector('#yellowCardModal').style.display = 'none';
         }
     </script>
 <?php }?>

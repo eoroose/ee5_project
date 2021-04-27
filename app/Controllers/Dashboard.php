@@ -67,15 +67,18 @@ class Dashboard extends BaseController
 	private function dashAgenda()
     {
         date_default_timezone_set('Europe/Brussels');
-        $current_date=date('Y-m-d');
-        $current_time=date('H:i:s',time()-3600);
+        $high_date=date('Y-m-d H:i:s',time()+(4*3600));
+        $low_date=date('Y-m-d H:i:s',time()-(2*3600));
+
         $eventmodel=new eventsModel();
-        $events=$eventmodel->where('date',$current_date)
-            ->where('startTime >',$current_time)
+        $events=$eventmodel->where('start>=',$low_date)
+            ->where('start <=',$high_date)
             ->limit(4)
-            ->select('startTime,description')
+            ->select('start,title')
             ->get()
             ->getResultArray();
+
+       // echo '<pre>'; print_r($events); echo '</pre>';
         return $events;
     }
 

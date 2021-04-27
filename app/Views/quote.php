@@ -14,11 +14,11 @@
 
             <?php foreach($quotes as $row) {?>
                 <div class="col-12 tasks-col" id="<?php echo "row".$row['dailyQuoteID']?>">
-                    <div class="card quote-card quote-card-phase" id="<?php echo "date_row".$row['dailyQuoteID']?>">
-                        <?php echo $row['date']?>
+                    <div class="card quote-card quote-card-phase">
+                        <p id="<?php echo "date_row".$row['dailyQuoteID']?>"><?php echo $row['date']?></p>
                     </div>
-                    <div class="card quote-card tasks-card-description" id="<?php echo "description_row".$row['dailyQuoteID']?>">
-                        <?php echo $row['description']?>
+                    <div class="card quote-card tasks-card-description" >
+                        <p id="<?php echo "description_row".$row['dailyQuoteID']?>"><?php echo $row['description']?></p>
                     </div>
                     
                     <div class="card quote-card tasks-card-edit">
@@ -82,8 +82,9 @@
         var date_data=date.innerHTML;
         var description_data=description.innerHTML;
 
-        date.innerHTML="<input type='date' id='date_text"+no+"' value='"+date_data+"'>";
-        description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"'>";
+        date.innerHTML="<input type='date' class='form-control main-input tasks-input' id='date_text"+no+"' value='"+date_data+"'>";
+        description.innerHTML="<input type='text' class='form-control main-input tasks-input' id='description_text"+no+"' value='"+description_data+"'>";
+        document.getElementById("description_text"+no).value=description_data;
     }
 
 
