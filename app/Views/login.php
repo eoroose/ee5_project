@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group pt-3">
-            <a href="/splashscreen">
+            <a href="/screensaver">
                 <button class="main-btn">screensaver</button>
             </a>
         </div>

@@ -101,10 +101,10 @@ class Users extends BaseController
         session()->set($data);
         return true;
     }
-    public function splashscreen()
+    public function screensaver()
     {
         echo view('templates/header');
-        echo view('splashscreen');
+        echo view('screensaver');
         echo view('templates/footer');
     }
 
