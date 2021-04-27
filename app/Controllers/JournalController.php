@@ -18,7 +18,9 @@ class JournalController extends BaseController
         if(session()->get('role')=='inhabitant')
         {
             $this->data['entries'] = $this->journalModel->get_entries(9);
-            return view('journal_page', $this->data);
+            echo view('templates/header');
+            echo view('journal_page', $this->data);
+            echo view('templates/footer');
         }
         else{
             return redirect()->to('/');
