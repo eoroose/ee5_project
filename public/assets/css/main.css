@@ -1,0 +1,95 @@
+* {
+    /* COLORS */
+    --purple: #6959CC;
+    --black:  #333333;
+
+    /* BUTTON CONSTANTS */
+    --button-width: 90vw;
+    --button-max-width: 415px;
+    --button-height: 40px;
+    --button-radius: 20px;
+    --button-border-width: 2px;
+
+    /* CARD */
+    --card-border-width: 3px;
+    --card-border-radius: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: "freestyle script regular";
+    src: url(./assets/fonts/freestyle-script-regular.ttf);
+}
+
+@keyframes login-alert-popup {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.main-alert-message {
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--button-width);
+    max-width: var(--button-max-width);
+    padding-top: 20px;
+    animation: 300ms ease-in 0s 1 login-alert-popup;
+}
+
+.main-input {
+    border-color: var(--purple);
+    border-radius: var(--button-radius);
+    border-width: var(--button-border-width);
+}
+
+.main-input:focus {
+    box-shadow: none;
+    border-color: var(--purple);
+}
+
+.main-btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    
+    border: var(--button-border-width) solid var(--purple);
+    width: var(--button-width);;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+    border-radius: var(--button-radius);
+
+    background-color: var(--purple);
+    color: white;
+    transition: color, background-color 100ms ease-in;
+}
+
+.main-btn:hover,
+.main-btn:focus {
+    background-color: white;
+    color: var(--purple);
+}
+
+.main-title {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    color: var(--purple);
+    white-space: nowrap;
+}
+
+.main-bottom-padding {
+    padding-bottom: 50px;
+}
+
+.main-card {
+    border-color: var(--purple);
+    border-radius: var(--card-border-radius);
+    border-width: var(--card-border-width);
+    position: relative;
+}
+

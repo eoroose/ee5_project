@@ -1,0 +1,245 @@
+.dashboard-container {
+    --dashboard-top-padding: 15px;
+    --dashboard-card-animation-duration: 200ms;
+}
+
+.dashboard-first-row {
+    
+}
+
+.dashboard-row {
+    padding-top: var(--dashboard-top-padding);
+}
+
+.dashboard-card-animation {
+    border-color: var(--purple);
+    border-radius: var(--card-border-radius);
+    border-width: var(--card-border-width);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover,
+.dashboard-card-animation:focus {
+    border-color: white;
+}
+
+.dashboard-card-animation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--card-border-radius);
+
+    transition: transform var(--dashboard-card-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.dashboard-card-animation:hover::before,
+.dashboard-card-animation:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.dashboard-card-body {
+    
+}
+
+.dashboard-card-title {
+    color: var(--purple);
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+    text-align: center;
+}
+
+.dashboard-card-animation:hover .dashboard-card-title,
+.dashboard-card-animation:focus .dashboard-card-title {
+    color:white;
+}
+
+.dashboard-card-title-top {
+    margin-top: 0.5em;
+}
+
+.dashboard-card-logo {
+    margin-top: 1em;
+    width: 90px;
+    align-self: center;
+    transition: filter var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .dashboard-card-logo,
+.dashboard-card-animation:focus .dashboard-card-logo {
+    filter: brightness(0) invert(1);
+}
+
+.dashboard-card-separator {
+    border: none;
+    height: var(--dashboard-top-padding);
+    max-width: 10px;
+}
+
+/* DASHBOARD GREETINGS */
+
+.dashboard-greetings-container {
+    --notification-size: 7vw;
+    display: flex;
+    
+}
+
+.dashboard-greetings {
+    font-size: calc(10px + 6.5vw);
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+.dashboard-notification-card {
+    width: var(--notification-size);
+    height: var(--notification-size); 
+    margin-left: 10px;  
+    align-self: center;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    
+}
+
+.dashboard-notification-logo {
+    position: absolute;
+    width: 60%;
+    min-width: 20px;
+    
+    align-self: center;
+    top: 20%;
+    opacity: 0;
+    transition: opacity var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-notification-card:hover .dashboard-notification-logo,
+.dashboard-notification-card:focus .dashboard-notification-logo {
+    opacity: 1;
+}
+
+.dashboard-notification-logo-purple {
+    opacity: 1;
+    transition: opacity var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-notification-card:hover .dashboard-notification-logo-purple,
+.dashboard-notification-card:focus .dashboard-notification-logo-purple {
+    opacity: 0;
+}
+
+@keyframes yellow-card-popup {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.dashboard-yellow-card {
+    animation: 500ms ease-in-out 0s 3 yellow-card-popup;
+}
+
+/*  QUOTE OF THE DAY */
+
+.dashboard-quote-card-body {
+
+}
+
+.dashboard-quote-of-the-day {
+    text-align: center;
+    font-size: 3em;
+}
+
+.dashboard-card-animation:hover .dashboard-quote-of-the-day,
+.dashboard-card-animation:focus .dashboard-quote-of-the-day {
+    color: var(--black);
+}
+
+.dashboard-quote-text {
+    font-family: "garamond";
+    font-weight: bold;
+    color: var(--black);
+    text-align: center;
+    font-size: 1.1em;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .dashboard-quote-text,
+.dashboard-card-animation:focus .dashboard-quote-text {
+    color: white;
+}
+
+/* AGENDA */
+
+
+
+/* CARDS */
+
+.dashboard-cards-container {
+
+}
+
+/* PROGRESS BARS */
+
+.dashbaord-progress-container {
+
+}
+
+.dashboard-progress-row {
+
+}
+
+.dashboard-progress-card {
+    background: none;
+    border: none;
+}
+
+.dashboard-progress-card-body {
+    display: flex;
+    align-content: center;
+    color: var(--purple);
+    white-space: nowrap;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .dashboard-progress-card-body,
+.dashboard-card-animation:focus .dashboard-progress-card-body {
+    color: white;
+}
+
+.dashboard-progress-rounded-pill {
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    background-color: lightgray;
+    transition: background-color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .dashboard-progress-rounded-pill,
+.dashboard-card-animation:focus .dashboard-progress-rounded-pill {
+    background-color: darkgray;
+}
+
+.dashboard-progress-percentage {
+    background-color: var(--purple);
+    color: white;
+    transition: color, background-color var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .dashboard-progress-percentage,
+.dashboard-card-animation:focus .dashboard-progress-percentage {
+    background-color: white;
+    color: var(--black);
+}

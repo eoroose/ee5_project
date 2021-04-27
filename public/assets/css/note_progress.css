@@ -1,0 +1,242 @@
+.note-progress-container {
+    margin-top: 20px;
+    --note-progress-table-head-height: 45px;
+    --note-progress-left-padding: 10px;
+
+    --note-progress-phase-col-min-width: 100px;
+    --note-progress-task-col-min-width:  175px;
+    --note-progress-inhabitant-col-min-width: 175px;
+
+    --note-progress-border-width: 1px;
+
+    --note-progress-table-cell-min-height: 50px;
+
+    --note-progress-animation-duration: 200ms;
+
+    --note-progress-btn-border-width: 3px;
+    --note-progress-btn-border-radius: 15px;
+
+    --note-progress-table-bottom-padding: 10px;
+
+    --note-progress-svg-size: 30px;
+}
+
+.note-progress-title {
+    font-size: 4em;
+}
+
+.note-progress-custom-scrollbar {
+    position: relative;
+    height: inherit;
+    height: 70vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-width: 100vw;
+    display: block;
+    justify-content: center;  
+
+    
+}
+
+.note-progress-row {
+    
+}
+
+.note-progress-col {
+    display: flex;
+    position: relative;
+}
+
+.note-progress-card-head {
+    background-color: var(--purple);
+    color: white;
+    font-weight: bold;
+    min-height: var(--note-progress-table-head-height);
+    border-radius: 0;
+    padding-left: var(--note-progress-left-padding);
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+    font-size: small;
+}
+
+.note-progress-card-head-phase {
+    /* width: var(--note-progress-phase-col-width); */
+    font-weight: bold;
+    border-left: var(--note-progress-border-width) solid var(--purple);
+    border-right: var(--note-progress-border-width) solid white;
+    min-width: var(--note-progress-phase-col-min-width);
+}
+
+.note-progress-card-head-task {
+    /* width: var(--note-progress-task-col-width); */
+    border-left: var(--note-progress-border-width) solid white;
+    border-right: var(--note-progress-border-width) solid white;
+    min-width: var(--note-progress-task-col-min-width);
+}
+
+.note-progress-card-head-inhabitant {
+    border-left: var(--note-progress-border-width) solid white;
+    border-right: var(--note-progress-border-width) solid white;
+    min-width: var(--note-progress-inhabitant-col-min-width);
+    text-align: center;
+}
+
+.note-progress-card {
+    min-height: var(--note-progress-table-cell-min-height);
+    color: black;
+    border-top: calc(var(--note-progress-border-width) * 2) solid var(--purple);
+    border-bottom: none;
+    border-radius: 0;
+    justify-content: center;
+    font-size: small;
+}
+
+.note-progress-card-phase {
+    font-weight: bold;
+    font-family: "freestyle script regular";
+    font-size: 2em;
+    border-left: calc(var(--note-progress-border-width) * 2) solid var(--purple);
+    border-right: var(--note-progress-border-width) solid var(--purple);
+    padding-left: var(--note-progress-left-padding);
+    min-width: var(--note-progress-phase-col-min-width);   
+}
+
+.note-progress-card-phase-number {
+    min-height: var(--note-progress-table-cell-min-height);
+    border-bottom: none;
+    border-top: calc(var(--note-progress-border-width) * 2) solid var(--purple);
+    border-radius: 0;
+    justify-content: center;
+}
+
+.note-progress-card-phase-blank {
+    min-height: var(--note-progress-table-cell-min-height);
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+.note-progress-card-last-phase {
+    max-height: var(--note-progress-table-bottom-padding);
+    border-top: calc(var(--note-progress-border-width) * 2) solid var(--purple);;
+    border-bottom: none;
+    border-radius: 0;
+    min-width: var(--note-progress-phase-col-min-width);
+}
+
+.note-progress-card-task {
+    min-width: var(--note-progress-task-col-min-width);
+    border-left: var(--note-progress-border-width) solid var(--purple);
+    border-right: var(--note-progress-border-width) solid var(--purple);
+    padding-left: var(--note-progress-left-padding);
+    font-weight: bold;
+}
+
+.note-progress-card-last-task {
+    max-height: var(--note-progress-table-bottom-padding);
+    border-top: calc(var(--note-progress-border-width) * 2) solid var(--purple);;
+    border-bottom: none;
+    border-radius: 0;
+    min-width: var(--note-progress-task-col-min-width);
+}
+
+.note-progress-card-inhabitant {
+    min-width: var(--note-progress-inhabitant-col-min-width);
+    border-left: var(--note-progress-border-width) solid var(--purple);
+    border-right: var(--note-progress-border-width) solid var(--purple);
+    padding-left: var(--note-progress-left-padding);
+    position: relative;
+    overflow: hidden;
+}
+
+.note-progress-card-last-inhabitant {
+    max-height: var(--note-progress-table-bottom-padding);
+    border-top: calc(var(--note-progress-border-width) * 2) solid var(--purple);;
+    border-bottom: none;
+    border-radius: 0;
+    min-width: var(--note-progress-inhabitant-col-min-width);
+}
+
+.note-progress-check-btn {
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.note-progress-check-btn::before {
+    content: '';
+    position: absolute;
+    mask-position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border: var(--note-progress-btn-border-width) solid white;
+    border-radius: var(--note-progress-btn-border-radius);
+    background-color: green;
+
+    transition: transform var(--note-progress-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.note-progress-check-btn:hover::before,
+.note-progress-check-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.note-progress-cross-btn {
+    position: absolute;
+    background-color: white;
+    border: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.note-progress-cross-btn::before {
+    content: '';
+    position: absolute;
+    mask-position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    border: var(--note-progress-btn-border-width) solid white;
+    border-radius: var(--note-progress-btn-border-radius);
+    background-color: red;
+
+    transition: transform var(--note-progress-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.note-progress-cross-btn:hover::before,
+.note-progress-cross-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.note-progress-btn-svg {
+    width: var(--note-progress-svg-size);
+    transition: filter var(--note-progress-animation-duration) ease-in-out;
+}
+
+.note-progress-check-btn:hover .note-progress-btn-svg,
+.note-progress-check-btn:focus .note-progress-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.note-progress-cross-btn:hover .note-progress-btn-svg,
+.note-progress-cross-btn:focus .note-progress-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+

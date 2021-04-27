@@ -1,0 +1,14 @@
+.header-container {
+    background-color: var(--purple);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.header-logo {
+    height: 45px;
+}
+
+.header-logout {
+    height: 35px;
+}
