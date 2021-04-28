@@ -120,7 +120,7 @@
                     <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-card-logo" alt="user image">
                     <div class="card-body dashboard-card-body">
                         <h5 class="card-title dashboard-card-title"style="text-align: center">Profile</h5>
-                        <a href="/register" class="stretched-link"></a>
+                        <a href="/profile" class="stretched-link"></a>
                     </div>
                 </div>
 
