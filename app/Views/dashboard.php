@@ -270,10 +270,7 @@
                             <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
                         </div>
                     </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 286bbf247ac2e23695f43a557cd2ee8fcc7b5162
                     <?php if($yellowCard==1){ ?>
                     <div id="yellowCardModal" class="modal"">
                     <div class="modal-content">
@@ -283,11 +280,10 @@
                         <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
                     </div>
                 </div>
-<<<<<<< HEAD
+
                     <?php }?>
-=======
+
                 <?php }?>
->>>>>>> 286bbf247ac2e23695f43a557cd2ee8fcc7b5162
 
                     </div>
 

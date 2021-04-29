@@ -1,5 +1,5 @@
 <div>
-    <link href="./assets/css/profile.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/profile.css" rel="stylesheet" type="text/css" />
 
     <div class="container profile-container">
         <div class="row profile-row main-bottom-padding">

@@ -17,7 +17,7 @@ class ProfileController extends BaseController
         $data['username'] = $user['username'];
         $data['firstname'] = $user['firstname'];
         $data['lastname'] = $user['lastname'];
-        $data['birthday'] = $user['birthday'];
+        $data['birthday'] = $user['birthday'];git s
 
         echo view('templates/header', $data);
         echo view('profile');
