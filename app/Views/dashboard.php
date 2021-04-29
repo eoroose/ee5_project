@@ -272,6 +272,8 @@
                             <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
                         </div>
                     </div>
+
+                    <?php if($yellowCard==1){ ?>
                     <div id="yellowCardModal" class="modal"">
                     <div class="modal-content">
                         <h4>Je hebt een gele kaart gekregen</h4>
@@ -280,6 +282,7 @@
                         <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
                     </div>
                 </div>
+                    <?php }?>
                         <?php }?>
                     </div>
 
