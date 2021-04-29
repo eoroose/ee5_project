@@ -45,7 +45,7 @@
 <script>
     function openPage(e){
         //alert(e.id);
-        $.get('http://localhost/journalController/getJournalEntry',{id:e.id}, function (data) {
+        $.get('/journalController/getJournalEntry',{id:e.id}, function (data) {
                 let Js = data.substring(1, data.length -1);
                 let Json = JSON.parse(Js);
                 let div = document.querySelector('#content');
@@ -78,7 +78,7 @@
         let title = document.getElementById('JETitle').value;
         let text = document.getElementById('JEText').value;
         let id;
-        $.get('http://localhost/journalController/addJournalEntry',{title:title,text:text}, function (data) {
+        $.get('/journalController/addJournalEntry',{title:title,text:text}, function (data) {
            id = data;
         })
 
