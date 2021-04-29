@@ -46,6 +46,7 @@ $routes->match(['get','post'],'note-progress',"tasks::note_progress",['filter'=>
 $routes->match(['get','post'],'quote',"quote::index",['filter'=>'auth']);
 $routes->match(['get','post'],'agenda',"AgendaController::index");
 $routes->match(['get','post'],'journal',"JournalController::index");
+$routes->match(['get','post'],'profile',"ProfileController::index");
 
 
 

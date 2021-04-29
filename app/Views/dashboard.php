@@ -118,7 +118,7 @@
                     <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-card-logo" alt="user image">
                     <div class="card-body dashboard-card-body">
                         <h5 class="card-title dashboard-card-title"style="text-align: center">Profile</h5>
-                        <a href="/register" class="stretched-link"></a>
+                        <a href="/profile" class="stretched-link"></a>
                     </div>
                 </div>
 
@@ -270,7 +270,10 @@
                             <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
                         </div>
                     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 286bbf247ac2e23695f43a557cd2ee8fcc7b5162
                     <?php if($yellowCard==1){ ?>
                     <div id="yellowCardModal" class="modal"">
                     <div class="modal-content">
@@ -280,8 +283,12 @@
                         <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
                     </div>
                 </div>
+<<<<<<< HEAD
                     <?php }?>
-                        <?php }?>
+=======
+                <?php }?>
+>>>>>>> 286bbf247ac2e23695f43a557cd2ee8fcc7b5162
+
                     </div>
 
                 </div>

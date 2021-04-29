@@ -1,25 +1,29 @@
-.login-page-container {
+.profile-container {
+    margin-top: 20px;
+}
+
+.profile-row {
 
 }
 
-.login-logo {
+.profile-col {
     margin-left: auto;
     margin-right: auto;
-    display: block;
-    width: 80vw;
-    max-width: 300px;
-    padding-top: 50px;
+    
 }
 
-.login-container {
-
+.profile-title {
+    font-size: 6em;
 }
 
-.login-input {
+.username-container {
+    flex-flow: row;
+}
+
+.profile-input {
     margin-left: auto;
     margin-right: auto;
     width: var(--button-width);
     max-width: var(--button-max-width);
     height: var(--button-height);
 }
-
