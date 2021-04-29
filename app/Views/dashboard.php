@@ -90,9 +90,7 @@
 
                                 <tr>
                                     <td><?php
-                                        $time= strtotime($data['start']);
-                                        echo date('H:i:s',$time);
-
+                                        echo $data['Start']
                                                 ?>
                                     <td><?php echo $data['title']?></td>
                                 </tr>

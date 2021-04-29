@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\appointmentModel;
+use App\Models\avatarModel;
 use App\Models\employeeModel;
 use App\Models\godchildModel;
 use App\Models\godparentModel;
@@ -73,6 +74,12 @@ class Users extends BaseController
                }
         }
     }
+
+    public function getAvatars(){
+	    $avatarModel=new avatarModel();
+	    $data=$avatarModel->select()->get()->getResultArray();
+        return $data;
+    }
     // public  function getWeek(){
     //    $date_halfway=date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 21, date('Y')));
     //    $date=date('Y-m-d');
@@ -123,7 +130,8 @@ class Users extends BaseController
         $customModel=new customModel($db);
         $result=$customModel->getActiveInhabitants();
         $doctor=$customModel->getDoctors();
-        $data=array('godfathers'=> $result,'doctors'=>$doctor);
+        $avatars=$this->getAvatars();
+        $data=array('godfathers'=> $result,'doctors'=>$doctor,'avatars'=>$avatars);
 	    if($this->request->getMethod()=='post'){
 	        $rules =[
 	            'firstname' => 'required|min_length[3]|max_length[50]',
@@ -131,7 +139,8 @@ class Users extends BaseController
                 'username' => 'required|min_length[3]|max_length[50]',
                 'password' => 'required|min_length[8]|max_length[255]',
                 'password_confirm' => 'matches[password]',
-                'birthday' =>'required'
+                'birthday' =>'required',
+                'avatar'=>'required'
             ];
 	        if(!$this->validate($rules)){
 	            $data['validation']= $this->validator;
@@ -145,7 +154,8 @@ class Users extends BaseController
                     'password'=> $this->request->getVar('password'),
                     'birthday' =>$this->request->getVar('birthday'),
                     'isActive' =>true,
-                    'gender'=>$this->request->getVar('gender')
+                    'gender'=>$this->request->getVar('gender'),
+                    'avatar'=>$this->request->getVar('avatar')
                 ];
                 $user_model->save($newData);
                 $user = $user_model->where('username', $this->request->getVar('username'))

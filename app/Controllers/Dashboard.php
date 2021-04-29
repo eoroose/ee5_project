@@ -8,6 +8,7 @@ use App\Models\dailyQuote;
 use App\Models\eventsModel;
 use App\Models\inhabitantModel;
 use App\Models\progressmodel;
+use App\Models\RecurringModel;
 use App\Models\taskmodel;
 use App\Models\UserModel;
 use App\Models\yellowCardModel;
@@ -69,17 +70,52 @@ class Dashboard extends BaseController
         date_default_timezone_set('Europe/Brussels');
         $high_date=date('Y-m-d H:i:s',time()+(4*3600));
         $low_date=date('Y-m-d H:i:s',time()-(2*3600));
+        $date=date('Y-m-d');
 
         $eventmodel=new eventsModel();
         $events=$eventmodel->where('start>=',$low_date)
             ->where('start <=',$high_date)
             ->limit(4)
             ->select('start,title')
+            ->orderBy('start','ASC')
             ->get()
             ->getResultArray();
+        //echo '<pre>'; print_r($events); echo '</pre>';
+        $dayofweek = date('w', strtotime($date));
+        //echo $dayofweek;
+        $recuringmodel= new RecurringModel();
+        $time_high=date('H:i:s',time()+(4*3600));
+        $time_low=date('H:i:s',time()-(2*3600));
+        $recurringEvents=$recuringmodel->like('daysOfWeek',$dayofweek)
+            ->where("startTime <=",$time_high)
+            ->where("startTime >=",$time_low)
+            ->orderBy('startTime','ASC')
+            ->get()->getResultArray();
+        //echo '<pre>'; print_r($recurringEvents); echo '</pre>';
+        $data=[];
+        foreach ($events as $row)
+        {
+            $time= strtotime($row['start']);
+            $tijd=date('H:i:s',$time);
+            //echo 'tijd:'.$tijd;
+            foreach ($recurringEvents as $col)
+            {
+                if($col['startTime']<=$tijd) {
 
-       // echo '<pre>'; print_r($events); echo '</pre>';
-        return $events;
+                    $test=array(
+                        'Start'=>$col["startTime"],
+                        'title'=>$col["title"]
+                    );
+                    array_push($data, $test);
+                }
+            }
+            $test=array(
+                'Start'=>$tijd,
+                'title'=>$row["title"]);
+            array_push($data,$test);
+        }
+        //echo '<pre>'; print_r($data); echo '</pre>';
+        return $data;
     }
 
     private function quote(){
