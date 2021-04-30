@@ -12,4 +12,13 @@ class UserRules
             return false;}
         return password_verify($data['password'],$user['password']);
     }
+
+    public function validate(string $str,string $fields,array $data): bool
+    {
+        $model = new UserModel();
+        $user=$model->where('userId',session()->get('id'))->first();
+        if(!$user){
+            return false;}
+        return password_verify($data['password'],$user['password']);
+    }
 }

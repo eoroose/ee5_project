@@ -40,13 +40,13 @@ $routes->get('logout' ,'Users::logout');
 $routes->get('dashboard','Dashboard::index', ['filter'=>'auth']);
 $routes->match(['get','post'],'register','Users::register',['filter'=>'auth']);
 $routes->get('/week','Users::getAvatars');
-$routes->get('/month','dashboard::progress');
 $routes->match(['get','post'],'tasks',"tasks::index",['filter'=>'auth']);
 $routes->match(['get','post'],'note-progress',"tasks::note_progress",['filter'=>'auth']);
 $routes->match(['get','post'],'quote',"quote::index",['filter'=>'auth']);
 $routes->match(['get','post'],'agenda',"AgendaController::index");
 $routes->match(['get','post'],'journal',"JournalController::index");
 $routes->match(['get','post'],'profile',"ProfileController::index");
+$routes->match(['get','post'],'changePassword','ProfileController::changePassword',['filter'=>'auth']);
 
 
 
