@@ -10,7 +10,7 @@
             <form class="" action="/" method="post">
 
                 <div class="form-group pt-3 ">
-                    <input type="text" class="form-control main-input login-input" name="username" id="username" value="<?= set_value('username')?>" placeholder="username">
+                    <input type="text" class="form-control main-input login-input" name="username" id="username"  placeholder="username">
                 </div>
 
                 <div class="form-group pt-3 ">

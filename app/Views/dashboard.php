@@ -19,7 +19,7 @@
 </style>
 
 <div>
-    <link href="./assets/css/dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/dashboard.css" rel="stylesheet" type="text/css" />
 
     <div class="container dashboard-container">
 
@@ -239,7 +239,7 @@
 
                     <div class="card dashboard-card-animation dashboard-progress-container">
                         <h4 class="card-title dashboard-card-title dashboard-card-title-top">Progress</h4>
-                        <a href="/note-progress" class="stretched-link"></a>
+                        <a href="/progress" class="stretched-link"></a>
                         <?php foreach ($progress as $row){?>
                             <div class="row dashboard-progress-row">
                                 <div class="card dashboard-progress-card">
