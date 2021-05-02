@@ -8,7 +8,7 @@
 }
 
 .dashboard-first-row {
-    
+
 }
 
 .dashboard-row {
@@ -157,8 +157,18 @@
 
 /*  QUOTE OF THE DAY */
 
-.dashboard-quote-card-body {
+.dashboard-quote-card {
+    /* position: relative; */
+}
 
+.dashboard-quote-card-body {
+    /* margin: 0; */
+    /* position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%); */
+
+    justify-content: center;
 }
 
 .dashboard-quote-of-the-day {
@@ -187,7 +197,27 @@
 
 /* AGENDA */
 
+.table thead tr th {
+    color: var(--purple);
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
+}
 
+.dashboard-card-animation:hover .table thead tr th,
+.dashboard-card-animation:focus .table thead tr th {
+    color: white;
+}
+
+.table tbody tr td {
+    color: var(--black);
+    border-bottom: 1px solid #6859cc6e;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out, border-bottom var(--dashboard-card-animation-duration) ease-in-out;
+}
+
+.dashboard-card-animation:hover .table tbody tr td,
+.dashboard-card-animation:focus .table tbody tr td {
+    color: rgba(255, 255, 255, 0.904);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.39);
+}
 
 /* CARDS */
 
@@ -275,7 +305,7 @@
     border: none;
     padding-top: 10px;
     text-align: center;
-
+    animation: 300ms ease-in 0s 1 login-alert-popup;
 }
 
 .modal-content h4 {
@@ -288,7 +318,6 @@
     padding-top: 5px;
     padding-bottom: 2px;
 }
-
 
 .modal-btn {
     width: 100px;

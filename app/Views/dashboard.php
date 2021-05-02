@@ -39,55 +39,52 @@
         
         <div class="row dashboard-first-row">
             <?php if(session()->get('role')=='inhabitant'): ?>
-            <div class="col-md card main-card">
+            <div class="col-md card main-card dashboard-quote-card">
             <?php else:?>
-            <div class="col-md card dashboard-card-animation">
+            <div class="col-md card dashboard-card-animation dashboard-quote-card">
                 <a href="/quote" class="stretched-link"></a>
             <?php endif; ?>
 
-
                 <div class="card-body dashboard-quote-card-body">
-                        <h5 class="card-title main-title dashboard-quote-of-the-day">Quote of the day</h5>
-                        <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
-                    </div>
+                    <h5 class="card-title main-title dashboard-quote-of-the-day">Quote of the day</h5>
+                    <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
                 </div>
+            </div>
 
-                <div class="col-md card dashboard-card-separator"></div>
+            <div class="col-md card dashboard-card-separator"></div>
 
-                <div class="col-md card dashboard-card-animation">
-                    <h5 class="card-title dashboard-card-title dashboard-card-title-top">Agenda</h5>
-                    <a href="/agenda" class="stretched-link"></a>
-                    <div class="table-responsive">
-                  <table id="productSizes" class="table">
-                            <thead>
+            <div class="col-md card dashboard-card-animation">
+                <h5 class="card-title dashboard-card-title dashboard-card-title-top">Agenda</h5>
+                <a href="/agenda" class="stretched-link"></a>
+                <div class="table-responsive">
+
+                    <table id="productSizes" class="table">
+                        <thead>
                             <tr>
                                 <th>Start hour</th>
                                 <th>Activity</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <?php foreach($event as $data) {?>
-
                                 <tr>
-                                    <td><?php
-                                        echo $data['Start']
-                                                ?>
+                                    <td><?php echo $data['Start']?></td>
                                     <td><?php echo $data['title']?></td>
                                 </tr>
                             <?php } ?>
-                            
-                            </tbody>
+                        </tbody>
+                    </table>
 
-                        </table>
-                        <?php if(session()->get('role')=='inhabitant'){if($apointment==null){}
-                        else{?>
+                    <?php if(session()->get('role')=='inhabitant'){if($apointment==null) {
+                    } else { ?>
                         <h5 class="card-title dashboard-card-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
-                        <?php }}?>
-                </div>
+                    <?php }} ?>
+
+                </div>  
             </div>
             
         </div>
-
+        
 
         <div class="dsahboard-cards-container">
             
@@ -225,7 +222,7 @@
                                 <div class="card dashboard-progress-card">
                                     <div class="card-body dashboard-progress-card-body">
                                         <h5 class="dashboard-progress-card-text">
-                                            Step <?php echo $row['phase']?>
+                                            Phase <?php echo $row['phase']?>
                                         </h5>
                                         <div class="progress rounded-pill dashboard-progress-rounded-pill">
                                             <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage"><?php echo $row['percentage']?>%</div>
