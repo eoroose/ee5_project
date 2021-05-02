@@ -1,23 +1,3 @@
-<style>
-
-
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-    }
-
-
-</style>
-
 <div>
     <link href="/assets/css/dashboard.css" rel="stylesheet" type="text/css" />
 
@@ -44,7 +24,7 @@
                     </div>
                 <?php }?>
                 
-                <?php if($godParent!=null){ ?>
+                <!-- </?php if($godParent!=null){ ?>
                     <div class="card dashboard-card-animation dashboard-notification-card">
                         <img src="/assets/images/dashboard_page/magic_wand_cyan.svg" class="card-img-top dashboard-notification-logo" alt="magic_wand_cyan image">    
                         <img src="/assets/images/dashboard_page/magic_wand_purple.svg" class="card-img-top dashboard-notification-logo dashboard-notification-logo-purple" alt="magic_wand_purple image">
@@ -52,7 +32,7 @@
                             <a onclick="openForm()" class="stretched-link"></a>
                         </div>
                     </div>
-                <?php }?>
+                </?php }?> -->
             <?php endif; ?>
 
         </div>
@@ -253,48 +233,48 @@
                                     </div>
                                 </div>
                             </div>
+                        <?php }?>
+                    </div>
+                </div>
 
+                        <!-- <div id="newEntryModal" class="modal"">
+                            <div class="modal-content">
 
-                        <div id="newEntryModal" class="modal"">
-                        <div class="modal-content">
+                                <h1>Godfather/godChild</h1>
 
-                            <h1>Godfather/godChild</h1>
+                                <h4>Godfather/Godmother</h4>
+                                <p></?php echo $godParent['firstname']; echo ' '; echo $godParent['lastname']?></p>
+                                <br>
 
-                            <h4>Godfather/Godmother</h4>
-                            <p><?php echo $godParent['firstname']; echo ' '; echo $godParent['lastname']?></p>
-                            <br>
+                                <h4>godchilds</h4>
+                                </?php foreach ($godchilds as $row){   echo $row['firstname']; echo ' '; echo $row['lastname']; ?> <br> </?php } ?>
 
-                            <h4>godchilds</h4>
-                            <?php foreach ($godchilds as $row){   echo $row['firstname']; echo ' '; echo $row['lastname']; ?> <br> <?php } ?>
+                                <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
+                            </div>
+                        </div> -->
+                        
 
-                            <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
+                <?php if($yellowCard==1) { ?>
+                    <div id="yellowCardModal" class="modal">
+                        <div class="modal-content card main-card">
+
+                            <h4>Je hebt een gele kaart gekregen</h4>
+
+                            <p><b>Reden: </b> <?php echo $info['reason'];?></p>
+                            <p><b>Ontvangen op: </b> <?php echo $info['date'];?></p>
+
+                            <button type="submit" class="modal-btn" onclick="closeForm()">close</button>
                         </div>
                     </div>
-
-                    <?php if($yellowCard==1){ ?>
-                    <div id="yellowCardModal" class="modal"">
-                    <div class="modal-content">
-                        <h4>Je hebt een gele kaart gekregen</h4>
-                        <p>Reden: <?php echo $info['reason'];?></p>
-                        <p>Ontvangen op: <?php echo $info['date'];?></p>
-                        <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
-                    </div>
-                </div>
-
-                    <?php }?>
-
                 <?php }?>
-
-                    </div>
-
-                </div>
+                    
             <?php endif; ?>
 
         </div>
     </div>
 </div>
 
-<?php if(session()->get('role')=='inhabitant'){ ?>
+<?php if(session()->get('role')=='inhabitant') { ?>
     <script>
         //function yellowCard() {
        //     alert("Je hebt een gele kaart gekregen\n reden:<?php if($yellowCard==1){ echo $info['reason'];}?> \n wanneer ontvangen <?php if($yellowCard==1){ echo $info['date'];}?> ");
