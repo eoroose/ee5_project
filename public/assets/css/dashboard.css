@@ -2,9 +2,7 @@
     --dashboard-top-padding: 15px;
     --dashboard-card-animation-duration: 200ms;
 
-    --modal-card-width: 70%;
-    --modal-card-max-width: 70%;
-    --modal-card-top: 15%;
+    --modal-yellowcard-top: 15%;
 }
 
 .dashboard-first-row {
@@ -286,13 +284,13 @@
     width: var(--modal-card-width);
     max-width: var(--modal-card-max-width);
     display: block;
-    top: var(--modal-card-top);
+    top: var(--modal-yellowcard-top);
     left: calc((100% - var(--modal-card-width)) / 2);
     background-color: gold;
     border: none;
     padding-top: 10px;
     text-align: center;
-    animation: 300ms ease-in 0s 1 login-alert-popup;
+    animation: 500ms ease-in 0s 1 login-alert-popup;
 }
 
 .modal-content h4 {

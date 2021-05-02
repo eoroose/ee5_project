@@ -1,22 +1,3 @@
-<style>
-
-
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-    }
-
-
-</style>
 <div>
     <link href="./assets/css/register.css" rel="stylesheet" type="text/css" />
     <?php
@@ -97,15 +78,18 @@
                                     </select>
                                 </div>
                             </div>
+
+
                             <!-- Choose Avatar -->
                             <input type="hidden" id="avatar" name="avatar" value="">
-                            <div class="col-md card">
-                                <img src="" class="card-img-top " id="avatarImg" alt="user image" style="display: none" height="50px" width="50px">
-                                <div class="card-body dashboard-card-body">
-                                    <h5 class="card-title "style="text-align: center">Choose Avatar</h5>
+                            <div class="col-md-12 card register-avatar-card">
+                                <img src="" class="card-img-top register-avatar-img" id="avatarImg" alt="user image">
+                                <div class="card-body register-avatar-card-body">
+                                    <h5 class="card-title register-avatar-title"style="text-align: center">Choose Avatar</h5>
                                     <a onclick="chooseAvatar()" class="stretched-link"></a>
                                 </div>
                             </div>
+
                             <!-- ROLE -->
                             <div class="col-md-12">
                                 <div class="form-group register-input-container">
@@ -195,29 +179,24 @@
             </div>
         </div>
     </div>
-</div>
 
-<div id="avatarModal" class="modal"">
-<div class="modal-content">
-    <div class="container">
-    <h4>Kies Avatar</h4>
-    <?php foreach ($avatars as $row){?>
-    <div class="card">
-        <div class="col-md card">
-            <img src="<?php echo $row['location'];?>" class="card-img-top dashboard-card-logo" alt="user image" height="50px" width="50px">
-            <div class="card-body">
-                <h5 class="card-title"style="text-align: center"><?php echo $row['title'];?></h5>
-                <a onclick="submitAvatar('<?php echo $row['id'];?>','<?php echo $row['location'];?>')" class="stretched-link"></a>
+    <!-- MODAL FOR AVATAR SELECTION -->
+    <div id="avatarModal" class="main-modal">
+        <div class="main-avatar-modal-content card main-card">
+            <h4>Kies Avatar</h4>
+            <div class="row main-avatar-modal-row">
+                <?php foreach ($avatars as $row) { ?>
+                    <div class="col-sm card main-avatar-modal-card">
+                        <img src="<?php echo $row['location'];?>" class="card-img-top main-avatar-modal-img" alt="user image">
+                        <a onclick="submitAvatar('<?php echo $row['id'];?>','<?php echo $row['location'];?>')" class="stretched-link"></a>
+                    </div>
+                    <div class="col-sm card main-avatar-modal-card-separator"></div>
+                <?php }?>
             </div>
+            <button type="submit" class="main-modal-btn" onclick="cancelAvatar()">cancel</button>
         </div>
     </div>
 
-<?php } ?>
-
-
-<button type="submit" class="btn cancel" onclick="cancelAvatar()">Cancel</button>
-</div>
-</div>
 </div>
 
 
