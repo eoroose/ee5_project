@@ -1,5 +1,17 @@
 .login-page-container {
+    --login-top-padding: 100px;
+    --login-card-max-width: 500px;
+}
 
+.login-page-row {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--login-top-padding);
+    max-width: var(--login-card-max-width);
+}
+
+.login-page-card {
+    
 }
 
 .login-logo {
@@ -21,5 +33,9 @@
     width: var(--button-width);
     max-width: var(--button-max-width);
     height: var(--button-height);
+}
+
+.login-last-element {
+    padding-bottom: 20px;
 }
 
