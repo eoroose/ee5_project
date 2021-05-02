@@ -252,7 +252,7 @@
                         
 
                 <?php if($yellowCard==1) { ?>
-                    <div id="yellowCardModal" class="modal">
+                    <div id="yellowCardModal" class="main-modal">
                         <div class="modal-content card main-card">
 
                             <h4>Je hebt een gele kaart gekregen</h4>
