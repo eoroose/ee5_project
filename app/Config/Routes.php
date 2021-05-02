@@ -48,7 +48,7 @@ $routes->match(['get','post'],'journal',"JournalController::index");
 $routes->match(['get','post'],'profile',"ProfileController::index");
 $routes->match(['get','post'],'changePassword','ProfileController::changePassword',['filter'=>'auth']);
 $routes->match(['get','post'],'progress','progress::index',['filter'=>'auth']);
-
+$routes->match(['get','post'],'chore','choreController::index',['filter'=>'auth']);
 
 
 
