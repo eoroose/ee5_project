@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Gegenereerd op: 29 apr 2021 om 21:15
+-- Gegenereerd op: 02 mei 2021 om 12:20
 -- Serverversie: 10.4.17-MariaDB
 -- PHP-versie: 7.4.15
 
@@ -41,8 +41,8 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `reason`, `isActive`) VALUES
-(1, 9, 1, '2021-03-23 00:00:00', 'standaard check', 1),
-(2, 9, 1, '2021-04-06 03:00:00', 'standaard check', 1),
+(1, 3, 1, '2021-03-23 00:00:00', 'standaard check', 1),
+(2, 3, 1, '2021-04-06 03:00:00', 'standaard check', 1),
 (3, 14, 2, '2021-03-24 00:00:00', 'standaard check', 1),
 (4, 14, 2, '2021-04-07 00:00:00', 'standaard check', 1),
 (5, 15, 1, '2021-03-24 00:00:00', 'standaard check', 1),
@@ -351,14 +351,14 @@ CREATE TABLE `inhabitant` (
 
 INSERT INTO `inhabitant` (`inhabitantID`, `userID`, `godParentID`, `arrivalDate`, `halfwayDate`, `departureDate`, `chore`) VALUES
 (1, 3, 2, '2021-03-16 16:28:59', '2021-03-19 16:28:59', NULL, 1),
-(2, 5, 3, '2021-03-16 16:28:59', '2021-03-27 16:28:59', NULL, 1),
+(2, 5, 3, '2021-03-16 16:28:59', '2021-03-27 16:28:59', NULL, 2),
 (3, 7, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(4, 8, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(5, 9, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(6, 10, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(7, 11, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(8, 12, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
-(9, 14, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1);
+(4, 8, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 2),
+(5, 9, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 2),
+(6, 10, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(7, 11, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(8, 12, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(9, 14, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -421,7 +421,7 @@ CREATE TABLE `progress` (
 --
 
 INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES
-(175, 1, 61, NULL, 0),
+(175, 1, 61, NULL, 1),
 (176, 2, 61, NULL, 0),
 (177, 3, 61, NULL, 0),
 (178, 4, 61, NULL, 0),
@@ -430,7 +430,7 @@ INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCom
 (181, 7, 61, NULL, 0),
 (182, 8, 61, NULL, 0),
 (183, 9, 61, NULL, 0),
-(184, 1, 62, NULL, 0),
+(184, 1, 62, NULL, 1),
 (185, 2, 62, NULL, 0),
 (186, 3, 62, NULL, 0),
 (187, 4, 62, NULL, 0),
@@ -438,7 +438,52 @@ INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCom
 (189, 6, 62, NULL, 0),
 (190, 7, 62, NULL, 0),
 (191, 8, 62, NULL, 0),
-(192, 9, 62, NULL, 0);
+(192, 9, 62, NULL, 0),
+(193, 1, 63, NULL, 1),
+(194, 2, 63, NULL, 0),
+(195, 3, 63, NULL, 0),
+(196, 4, 63, NULL, 0),
+(197, 5, 63, NULL, 0),
+(198, 6, 63, NULL, 0),
+(199, 7, 63, NULL, 0),
+(200, 8, 63, NULL, 0),
+(201, 9, 63, NULL, 0),
+(202, 1, 64, NULL, 1),
+(203, 2, 64, NULL, 0),
+(204, 3, 64, NULL, 0),
+(205, 4, 64, NULL, 0),
+(206, 5, 64, NULL, 0),
+(207, 6, 64, NULL, 0),
+(208, 7, 64, NULL, 0),
+(209, 8, 64, NULL, 0),
+(210, 9, 64, NULL, 0),
+(211, 1, 65, NULL, 1),
+(212, 2, 65, NULL, 0),
+(213, 3, 65, NULL, 0),
+(214, 4, 65, NULL, 0),
+(215, 5, 65, NULL, 0),
+(216, 6, 65, NULL, 0),
+(217, 7, 65, NULL, 0),
+(218, 8, 65, NULL, 0),
+(219, 9, 65, NULL, 0),
+(220, 1, 66, NULL, 1),
+(221, 2, 66, NULL, 0),
+(222, 3, 66, NULL, 0),
+(223, 4, 66, NULL, 0),
+(224, 5, 66, NULL, 0),
+(225, 6, 66, NULL, 0),
+(226, 7, 66, NULL, 0),
+(227, 8, 66, NULL, 0),
+(228, 9, 66, NULL, 0),
+(229, 1, 67, NULL, 1),
+(230, 2, 67, NULL, 0),
+(231, 3, 67, NULL, 0),
+(232, 4, 67, NULL, 0),
+(233, 5, 67, NULL, 0),
+(234, 6, 67, NULL, 0),
+(235, 7, 67, NULL, 0),
+(236, 8, 67, NULL, 0),
+(237, 9, 67, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -505,7 +550,12 @@ INSERT INTO `task` (`taskID`, `phase`, `description`, `isActive`) VALUES
 (59, '2', '                        TEST TEST                    ', 0),
 (60, '2', 'new t', 0),
 (61, '1', 'description invoegen hier', 1),
-(62, '2', 'test', 1);
+(62, '2', 'test', 1),
+(63, '3', 'Make progress page inhabitant', 1),
+(64, '1', 'Make backbone of site', 1),
+(65, '1', 'get a idea of style', 1),
+(66, '2', 'work hard on site', 1),
+(67, '3', 'present to spiegel', 1);
 
 -- --------------------------------------------------------
 
@@ -531,18 +581,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `firstname`, `lastname`, `avatar`, `birthday`, `dateAdded`, `isActive`, `gender`) VALUES
-(2, 'employee', '$2y$10$koZX.rjg4bJEiaxf0LQ6Su6A08tV7orfJFc1HKJe7HoVqrHNjASlG', 'employee', 'Marie', NULL, '2021-04-07', '2021-04-12 15:26:50', 1, 'female'),
-(3, 'inhabitant', '$2y$10$xaGdKPWP90KpAdJd2T7Ytem8vlIqVpq7MFTiEWcD2tBzxVjBChvMy', 'inhabitant', 'Thibault', NULL, '2021-04-02', '2021-04-12 15:28:51', 1, 'male'),
-(4, 'inhabitant2', '$2y$10$wFoiYglpdf7TlpphuMEH4eGLyv8is9/Twdy70PU5hQ2nNOV1zroT.', 'inhabitant', '222', NULL, '2021-04-01', '2021-04-12 15:30:56', 1, 'female'),
-(5, 'inhabitant3', '$2y$10$BoBCtdwxPUm/4wQ5VQcHnuCnLdSy7uY.n3rRVtjwWnN6D0T472Q.q', 'inhabitant', '666', NULL, '2021-04-03', '2021-04-12 15:34:54', 1, 'female'),
-(6, 'admin', '$2y$10$EXaEVl4ZxvOJFdKqCl3B5eYH68q06kv9JLBnltsyOhP3K5.bHbMk6', 'admin', 'Aaron', NULL, '2021-04-02', '2021-04-12 15:37:50', 1, 'female'),
-(7, 'inhabitanttask', '$2y$10$OmYRo9AxeNtJnU5rbTdTqOXzaLIiMuKOtrka2jjkfgHMOJ/nQ7LYu', 'inhabitant', 'testtask', NULL, '2021-04-07', '2021-04-13 17:05:32', 1, 'female'),
-(8, 'inhabitant44324', '$2y$10$rAVDmzeHBW8HT2CdOFSXc.hi0TF/vVmKHiruEJDXc/uy.0keG2GEK', 'inhabitant', 'test with more', NULL, '2021-04-14', '2021-04-13 18:41:07', 1, 'female'),
-(9, 'inhabitant231231', '$2y$10$ui1zRRh6vucrrUFhUdb3MuFsgClkOPJuQunFXG21A4Dufk.mCUba2', 'inhabitant', 'don\'tremeber', NULL, '2021-04-02', '2021-04-13 18:41:32', 1, 'female'),
-(10, 'inhabitantfdqfqqfdq', '$2y$10$rKE9x1k.T6hQkMlaj7Jw8eMXiW3Oc9DaU1VRq5xcA3msRRcCFY4k6', 'inhabitant', 'dqfqfqdfqfq', NULL, '2021-04-02', '2021-04-13 18:42:27', 1, 'female'),
-(11, 'inhabitantjdkfljq', '$2y$10$I6FBuOCqOazFVrrt3ClaT.bRtnlj0ohdfDLUVKYwonGWFQ1.7CQGa', 'inhabitant', 'tjkldjqfmkljqmjfkmqlj', NULL, '2021-04-01', '2021-04-13 18:44:11', 1, 'female'),
-(12, 'inhabitant34243', '$2y$10$gKog/PWPz8VCRroq.Yzscejdg22ApVw2zXCpMYAbGIoWggtZgmeG6', 'inhabitant', 'jdfmlkqjlfmqkfj', NULL, '2021-04-02', '2021-04-13 18:44:36', 1, 'female'),
-(14, 'inhabitanttest4', '$2y$10$/hf0RQkO14546VvDo.lqJ.f6Lez6VzCP5XuZBitg9R25YjVqyx8kO', 'inhabitant', 'test3', NULL, '2021-04-02', '2021-04-13 18:45:52', 1, 'female'),
+(2, 'employee', '$2y$10$YW.E5eHZ0nAI2F8q22QFb.6XltSBWRCuJiDON0esLNENXfou5Eiym', 'employee', 'Marie', '1', '2021-04-07', '2021-04-12 15:26:50', 1, 'female'),
+(3, 'inhabitant', '$2y$10$3r/j604B0ZDhLoOD8a5SK.oPZWsLCvCTc3Ih029/RwF.2vg0rBj72', 'inhabitant', 'Thibault', '1', '2021-04-02', '2021-04-12 15:28:51', 1, 'male'),
+(4, 'inhabitant2', '$2y$10$wFoiYglpdf7TlpphuMEH4eGLyv8is9/Twdy70PU5hQ2nNOV1zroT.', 'inhabitant', '222', '1', '2021-04-01', '2021-04-12 15:30:56', 1, 'female'),
+(5, 'inhabitant3', '$2y$10$BoBCtdwxPUm/4wQ5VQcHnuCnLdSy7uY.n3rRVtjwWnN6D0T472Q.q', 'inhabitant', '666', '1', '2021-04-03', '2021-04-12 15:34:54', 1, 'female'),
+(6, 'admin', '$2y$10$EXaEVl4ZxvOJFdKqCl3B5eYH68q06kv9JLBnltsyOhP3K5.bHbMk6', 'admin', 'Aaron', '1', '2021-04-02', '2021-04-12 15:37:50', 1, 'female'),
+(7, 'inhabitanttask', '$2y$10$OmYRo9AxeNtJnU5rbTdTqOXzaLIiMuKOtrka2jjkfgHMOJ/nQ7LYu', 'inhabitant', 'testtask', '1', '2021-04-07', '2021-04-13 17:05:32', 1, 'female'),
+(8, 'inhabitant44324', '$2y$10$rAVDmzeHBW8HT2CdOFSXc.hi0TF/vVmKHiruEJDXc/uy.0keG2GEK', 'inhabitant', 'test with more', '1', '2021-04-14', '2021-04-13 18:41:07', 1, 'female'),
+(9, 'inhabitant231231', '$2y$10$ui1zRRh6vucrrUFhUdb3MuFsgClkOPJuQunFXG21A4Dufk.mCUba2', 'inhabitant', 'don\'tremeber', '1', '2021-04-02', '2021-04-13 18:41:32', 1, 'female'),
+(10, 'inhabitantfdqfqqfdq', '$2y$10$rKE9x1k.T6hQkMlaj7Jw8eMXiW3Oc9DaU1VRq5xcA3msRRcCFY4k6', 'inhabitant', 'dqfqfqdfqfq', '1', '2021-04-02', '2021-04-13 18:42:27', 1, 'female'),
+(11, 'inhabitantjdkfljq', '$2y$10$I6FBuOCqOazFVrrt3ClaT.bRtnlj0ohdfDLUVKYwonGWFQ1.7CQGa', 'inhabitant', 'tjkldjqfmkljqmjfkmqlj', '1', '2021-04-01', '2021-04-13 18:44:11', 1, 'female'),
+(12, 'inhabitant34243', '$2y$10$gKog/PWPz8VCRroq.Yzscejdg22ApVw2zXCpMYAbGIoWggtZgmeG6', 'inhabitant', 'jdfmlkqjlfmqkfj', '1', '2021-04-02', '2021-04-13 18:44:36', 1, 'female'),
+(14, 'inhabitanttest4', '$2y$10$/hf0RQkO14546VvDo.lqJ.f6Lez6VzCP5XuZBitg9R25YjVqyx8kO', 'inhabitant', 'test3', '1', '2021-04-02', '2021-04-13 18:45:52', 1, 'female'),
 (50, 'employeeavatar', '$2y$10$a5pHflcm4NElD2S0xNiJruql0HamLrj3W2A7H0l.fES/2uK5Tm2Te', 'employee', 'avatar', '2', '2021-04-29', '2021-04-29 14:56:59', 1, 'female');
 
 -- --------------------------------------------------------
@@ -801,7 +851,7 @@ ALTER TABLE `note`
 -- AUTO_INCREMENT voor een tabel `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT voor een tabel `recurringevents`
@@ -813,7 +863,7 @@ ALTER TABLE `recurringevents`
 -- AUTO_INCREMENT voor een tabel `task`
 --
 ALTER TABLE `task`
-  MODIFY `taskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `taskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
