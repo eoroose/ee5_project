@@ -46,9 +46,9 @@
                                         </div>
                                     <?php } else {?>
                                         <div class="progress-info-incomplete">
-                                            <img src="/assets/images/note_progress_page/cross.svg" alt="cross image">    
+                                            <img src="/assets/images/note_progress_page/development.svg" alt="cross image">    
                                             <h5><?php echo $row['description'];?></h5>
-                                            <img src="/assets/images/note_progress_page/cross.svg" alt="cross image">
+                                            <img src="/assets/images/note_progress_page/development.svg" alt="cross image">
                                         </div>
                                     <?php } ?>
 

@@ -181,14 +181,14 @@
 }
 
 .progress-info-incomplete h5 {
-    color: red;
+    color: orange;
     margin-left: var(--info-side-margins);
     margin-right: var(--info-side-margins);
 }
 
 .progress-info-incomplete img {
-    width: var(--info-img-size);
-    height: var(--info-img-size);
+    width: calc(var(--info-img-size) + 10px);
+    height: calc(var(--info-img-size) + 10px);
 }
 
 .progress-info-btn {
