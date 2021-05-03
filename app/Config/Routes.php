@@ -53,6 +53,7 @@ $routes->match(['get','post'],'users','UsersController::index',['filter'=>'auth'
 $routes->match(['get','post'],'inhabitants','UsersController::inhabitantsPage',['filter'=>'auth']);
 $routes->match(['get','post'],'celebration','CelebrationController::index',['filter'=>'auth']);
 $routes->match(['get','post'],'backup','BackupController::index',['filter'=>'auth']);
+$routes->match(['get','post'],'doctors','DoctorsController::index',['filter'=>'auth']);
 
 /*
  * --------------------------------------------------------------------

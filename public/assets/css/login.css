@@ -37,5 +37,9 @@
 
 .login-last-element {
     padding-bottom: 20px;
+    width: var(--button-width);
+    max-width: var(--button-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 

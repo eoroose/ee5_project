@@ -47,7 +47,7 @@
 
                 <div class="card-body dashboard-quote-card-body">
                     <h5 class="card-title main-title dashboard-quote-of-the-day">Quote of the day</h5>
-                    <p class="dashboard-quote-text">"<?php echo $quote;?>"</p>
+                    <p class="dashboard-quote-text"><?php echo $quote;?></p>
                 </div>
             </div>
 
@@ -115,7 +115,7 @@
                             <a href="/inhabitants" class="stretched-link"></a>
                         </div>
                     <?php else:?>
-                        <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="journal image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Journal</h5>
                             <a href="/journal" class="stretched-link"></a>
@@ -128,7 +128,7 @@
             <div class="row dashboard-row">
                 <?php if(session()->get('role')=='inhabitant'): ?>
                     <div class="col card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="users image">
+                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="sweeping image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Chores</h5>
                             <a href="/chore" class="stretched-link"></a>
@@ -137,7 +137,7 @@
                 
                 <?php else:?>
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-card-logo" alt="clipboard image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Tasks</h5>
                             <a href="/tasks" class="stretched-link"></a>
@@ -147,7 +147,7 @@
                     <div class="col-md card dashboard-card-separator"></div>
 
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-card-logo" alt="development image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Note progress</h5>
                             <a href="/note-progress" class="stretched-link"></a>
@@ -159,14 +159,10 @@
             <!-- CHORES & CELEBRATION -->
             <?php if(session()->get('role')=='admin' || session()->get('role')=='employee'): ?>
                 
-                <?php if(session()->get('role')=='admin'): ?>
                 <div class="row dashboard-row">
-                <?php else:?>
-                <div class="row dashboard-row main-bottom-padding">
-                <?php endif; ?>
-                
+
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="sweeping image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Chores</h5>
                             <a href="/chore" class="stretched-link"></a>
@@ -176,7 +172,7 @@
                     <div class="col-md card dashboard-card-separator"></div>
 
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-card-logo" alt="party image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Celebration</h5>
                             <a href="/celebration" class="stretched-link"></a>
@@ -184,15 +180,15 @@
                     </div>
 
                 </div>
+
             <?php endif; ?>
 
-            <!-- REGISTER & BACKUP OR PROGRESS -->
-            
+            <!--ADMIN REGISTER & DOCTORS & BACKUP -->
             <?php if(session()->get('role')=='admin'): ?>
-                <div class="row dashboard-row main-bottom-padding">
+                <div class="row dashboard-row">
                     
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-card-logo" alt="verify image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Register</h5>
                             <a href="/register" class="stretched-link"></a>
@@ -202,15 +198,37 @@
                     <div class="col-md card dashboard-card-separator"></div>
 
                     <div class="col-md card dashboard-card-animation">
-                        <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-card-logo" alt="user image">
+                        <img src="/assets/images/dashboard_page/stethoscope.svg" class="card-img-top dashboard-card-logo" alt="stethoscope image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Doctors</h5>
+                            <a href="/doctors" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row dashboard-row main-bottom-padding">
+                    <div class="col card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-card-logo" alt="backup image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Backup</h5>
                             <a href="/backup" class="stretched-link"></a>
                         </div>
                     </div>
-
                 </div>
-
+            
+            <!-- EMPLOYEE DOCTORS -->
+            <?php elseif(session()->get('role')=='employee'): ?>
+                <div class="row dashboard-row main-bottom-padding">
+                    <div class="col card dashboard-card-animation">
+                        <img src="/assets/images/dashboard_page/stethoscope.svg" class="card-img-top dashboard-card-logo" alt="stethoscope image">
+                        <div class="card-body dashboard-card-body">
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Doctors</h5>
+                            <a href="/doctors" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- INHABITANT PROGRESS -->
             <?php elseif(session()->get('role')=='inhabitant'): ?>
                 <div class="row dashboard-row main-bottom-padding">
 
