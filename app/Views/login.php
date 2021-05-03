@@ -1,5 +1,5 @@
 <div>
-    <link href="./assets/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url();?>/assets/css/login.css" rel="stylesheet" type="text/css" />
 
     <div class="container login-page-container">
 
