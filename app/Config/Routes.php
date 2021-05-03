@@ -49,8 +49,10 @@ $routes->match(['get','post'],'profile',"ProfileController::index");
 $routes->match(['get','post'],'changePassword','ProfileController::changePassword',['filter'=>'auth']);
 $routes->match(['get','post'],'progress','progress::index',['filter'=>'auth']);
 $routes->match(['get','post'],'chore','choreController::index',['filter'=>'auth']);
-
-
+$routes->match(['get','post'],'users','UsersController::index',['filter'=>'auth']);
+$routes->match(['get','post'],'inhabitants','UsersController::inhabitantsPage',['filter'=>'auth']);
+$routes->match(['get','post'],'celebration','CelebrationController::index',['filter'=>'auth']);
+$routes->match(['get','post'],'backup','BackupController::index',['filter'=>'auth']);
 
 /*
  * --------------------------------------------------------------------

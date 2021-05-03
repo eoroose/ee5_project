@@ -18,11 +18,11 @@ class choreController extends BaseController
 
     public function index()
     {
-        if(session()->get('role')=='inhabitant')
-        {
-            return redirect()->to('/');
-        }
-        else{
+        // if(session()->get('role')=='inhabitant')
+        // {
+        //     return redirect()->to('/');
+        // }
+        // else{
             $this->data["chores"] = $this->choresModel->getChores();
             //echo sizeof($this->data["chores"]);
             $this->data["users"]=$this->getavatar();
@@ -33,7 +33,8 @@ class choreController extends BaseController
             echo view('dragndrop');
             echo view('templates/footer');
 
-        }}
+        //}
+    }
 
     public function changeChore(){
         header('Content-Type: application/json');

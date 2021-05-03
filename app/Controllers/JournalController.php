@@ -24,8 +24,8 @@ class JournalController extends BaseController
         }
         else{
             return redirect()->to('/');
-
-        }}
+        }
+    }
 
 
     public function getJournalEntry()

@@ -106,13 +106,13 @@
                         <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Users</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/users" class="stretched-link"></a>
                         </div>
                     <?php elseif(session()->get('role')=='employee'): ?>
                         <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Inhabitants</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/inhabitants" class="stretched-link"></a>
                         </div>
                     <?php else:?>
                         <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="users image">
@@ -179,7 +179,7 @@
                         <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-card-logo" alt="user image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Celebration</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/celebration" class="stretched-link"></a>
                         </div>
                     </div>
 
@@ -205,7 +205,7 @@
                         <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-card-logo" alt="user image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Backup</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/backup" class="stretched-link"></a>
                         </div>
                     </div>
 
