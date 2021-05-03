@@ -225,7 +225,9 @@
                                             Phase <?php echo $row['phase']?>
                                         </h5>
                                         <div class="progress rounded-pill dashboard-progress-rounded-pill">
-                                            <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage"><?php echo $row['percentage']?>%</div>
+                                            <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage">
+                                                <?php echo $row['percentage']?>%
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 .dashboard-container {
     --dashboard-top-padding: 15px;
-    --dashboard-card-animation-duration: 200ms;
+    --dashboard-card-animation-duration: 300ms;
 
     --modal-yellowcard-top: 15%;
 }
