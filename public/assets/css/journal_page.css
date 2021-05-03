@@ -1,6 +1,6 @@
 /* ORIGINAL CODE FOR THE TABS BY James Thomas Almond */
 
-html, body {
+/* html, body {
     font-size: 20px;
 }
 
@@ -15,23 +15,23 @@ h1 {
     line-height: 1.25;
     text-align: center;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-}
+} */
 
 
 /* wrapper */
-.wrapper {
+/* .wrapper {
     max-width: 70ch;
     padding-right: 10px;
     padding-left: 10px;
     margin-right: auto;
     margin-left: auto;
-}
+} */
 
 
 
 
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     body, html {
         font-size: 18px;
     }
@@ -46,19 +46,19 @@ h1 {
     body, html {
         font-size: 16px;
     }
-}
+} */
 
 
-input{
+/* input{
     width: 100%;
 }
 
 input[type=text2]{
     width: 100%;
     height: 90px;
-}
+} */
 
-a:link, a:visited {
+/* a:link, a:visited {
     background-color: white;
     color: black;
     border: 2px solid green;
@@ -71,22 +71,22 @@ a:link, a:visited {
 a:hover, a:active {
     background-color: green;
     color: white;
-}
+} */
 
 
 /* Include the padding and border in an element's total width and height */
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 /* Remove margins and padding from the list */
-ul {
+/* ul {
     margin: 0;
     padding: 0;
-}
+} */
 
 /* Style the list items */
-ul li {
+/* ul li {
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 40px;
@@ -95,31 +95,31 @@ ul li {
     transition: 0.2s;
 
     /* make the list items unselectable */
-    -webkit-user-select: none;
+    /*-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
+} */
 
 /* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
+/* ul li:nth-child(odd) {
     background: #f9f9f9;
-}
+} */
 
 /* Darker background-color on hover */
-ul li:hover {
-    background: #ddd;
+/* ul li:hover {
+    background: #ddd; */
 }
 
 /* When clicked on, add a background color and strike out text */
-ul li.checked {
+/* ul li.checked {
     background: #888;
     color: #fff;
     text-decoration: line-through;
-}
+} */
 
 /* Add a "checked" mark when clicked on */
-ul li.checked::before {
+/* ul li.checked::before {
     content: '';
     position: absolute;
     border-color: #1b1b1b;
@@ -130,10 +130,10 @@ ul li.checked::before {
     transform: rotate(45deg);
     height: 15px;
     width: 7px;
-}
+} */
 
 /* Style the close button */
-.close {
+/* .close {
     position: absolute;
     right: 0;
     top: 0;
@@ -143,15 +143,15 @@ ul li.checked::before {
 .close:hover {
     background-color: #f44336;
     color: white;
-}
+} */
 
 
 /* Clear floats after the header */
-.header:after {
+/* .header:after {
     content: "";
     display: table;
     clear: both;
-}
+} */
 
 /* Style the input */
 input {
@@ -165,7 +165,7 @@ input {
 }
 
 /* Style the "Add" button */
-.addBtn {
+/* .addBtn {
     padding: 10px;
     width: 25%;
     background: #d9d9d9;
@@ -180,7 +180,7 @@ input {
 
 .addBtn:hover {
     background-color: #bbb;
-}
+} */
 
 
 #paper {
@@ -249,7 +249,7 @@ input {
 }
 
 
-.inputLarge{
+/* .inputLarge{
     width: 90%;
     height: 50%;
     border-color: #1b1b1b;
@@ -260,4 +260,4 @@ input {
     height: 20%;
     border-color: #1b1b1b;
     border-style: solid;
-}
+} */

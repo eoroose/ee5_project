@@ -1,0 +1,264 @@
+.journal-container {
+    margin-top: 20px;
+
+    --journal-btn-img-size: 75px;
+    --journal-btn-border: 3px;
+    --journal-btn-border-radius: 20px;
+    --journal-animation-duration: 300ms;
+    --journal-btn-height: 100px;
+
+    --journal-card-img-size: 40px;
+}
+
+.journal-title {
+    font-size: 4em;
+}
+
+.journal-row {
+    /* gap: 1px; */
+}
+
+.journal-btn {
+    margin-bottom: 20px;
+    border: none;
+}
+
+.journal-btn button {
+    width: 50%;
+    min-width: 100px;
+    height: var(--journal-btn-height);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: var(--journal-btn-border) solid var(--purple);
+    border-radius: var(--journal-btn-border-radius);
+    background-color: white;
+
+    transition: border var(--journal-animation-duration) ease-in-out;
+}
+
+.journal-btn button:hover,
+.journal-btn button:focus {
+    border: var(--journal-btn-border) solid white;
+}
+
+.journal-btn button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--journal-btn-border-radius);
+
+    transition: transform var(--journal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.journal-btn button:hover::before,
+.journal-btn button:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.journal-btn button img {
+    width: var(--journal-btn-img-size);
+    height: var(--journal-btn-img-size);
+    filter: brightness(1) invert(0);
+    transition: filter var(--journal-animation-duration) ease-in-out;
+}
+
+.journal-btn button:hover img,
+.journal-btn button:focus img {
+    filter: brightness(0) invert(1);
+}
+
+.journal-card {
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    cursor: pointer;
+    border: 2px solid var(--purple);
+    border-radius: var(--journal-btn-border-radius);
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: border var(--journal-animation-duration) ease-in-out;
+}
+
+.journal-card:hover,
+.journal-card:focus {
+    border: 2px solid white;
+}
+
+.journal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--journal-btn-border-radius);
+
+    transition: transform var(--journal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.journal-card:hover::before,
+.journal-card:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+.journal-card-body {
+    display: flex;
+}
+
+.journal-card-body img {
+    width: var(--journal-card-img-size);
+    height: var(--journal-card-img-size);
+    transition: filter var(--journal-animation-duration) ease-in-out;
+    margin-right: 7px;
+}
+
+.journal-card:hover .journal-card-body img,
+.journal-card:focus .journal-card-body img {
+    filter: brightness(0) invert(1);
+}
+
+.journal-card-body p {
+    color: black;
+    transition: color var(--journal-animation-duration) ease-in-out;
+}
+
+.journal-card:hover .journal-card-body p,
+.journal-card:focus .journal-card-body p {
+    color: white
+}
+
+
+/* MODAL */
+
+.journal-modal-content {
+    position: absolute;
+    width: var(--modal-card-width);
+    max-width: var(--modal-card-max-width);
+    
+    top: var(--modal-card-top);
+    left: calc((100% - var(--modal-card-width)) / 2);
+    padding-top: 10px;
+    text-align: center;
+    animation: 500ms ease-in 0s 1 login-alert-popup;
+
+    max-height: 90%;
+}
+
+.journal-modal-content h4 {
+    font-family: "freestyle script regular";
+    color: var(--purple);
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.journal-input {
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    width: 95%;
+}
+
+.journal-modal-btns {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.journal-modal-btns button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+#paper {
+    width: 600px;
+    height: 700px;
+    position: relative;
+    margin: 20px auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: white;
+    box-shadow: 0px 0px 5px 0px #888;
+}
+
+/* styling red vertical line */
+#paper::before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    background-color: rgba(255,0,0,0.6);
+}
+
+/* styling blue horizontal lines */
+#pattern {
+    height: 100%;
+    background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
+}
+
+/* styling text content */
+#content {
+    padding-top: 6px;
+    padding-left: 56px;
+    padding-right: 16px;
+    line-height: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 19px;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 50%;
+    color: #1b1b1b;
+}
