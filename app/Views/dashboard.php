@@ -131,7 +131,7 @@
                         <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title" style="text-align: center">Chores</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/chore" class="stretched-link"></a>
                         </div>
                     </div>
                 
@@ -169,7 +169,7 @@
                         <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="user image">
                         <div class="card-body dashboard-card-body">
                             <h5 class="card-title dashboard-card-title"style="text-align: center">Chores</h5>
-                            <a href="/register" class="stretched-link"></a>
+                            <a href="/chore" class="stretched-link"></a>
                         </div>
                     </div>
 
