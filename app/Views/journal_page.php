@@ -1,46 +1,58 @@
-
-
+<div>
     <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
-    <link href="/assets/css/journal_page.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/journal.css" rel="stylesheet" type="text/css" />
 
-<div class="wrapper">
-    <h1>Journal</h1>
+    <div class="container journal-container main-bottom-padding">
+        <h3 class="main-title journal-title">Journal</h3>
 
-    <button class="open-button" onclick="openForm()">Add Journal Entry</button>
+        <div class="row journal-row">
+            
+            <div class="col-12 card journal-btn">
+                <button onclick="openForm()">
+                    <img src="/assets/images/journal_page/pencil.svg" alt="pencil image">
+                </button>
+            </div>
 
-    <ul id="myUL">
-        <?php foreach ($entries as $entry): ?>
-            <li id="<?php echo $entry->journalEntryID?>" onclick="openPage(this)"> <?php echo $entry->title?></li>
-        <?php endforeach; ?>
-    </ul>
-
-
-<div id="newEntryModal" class="modal"">
-    <div class="modal-content">
-
-        <h1>Create a Journal Entry</h1>
-
-        <label for="JETitle"><b>Title</b></label>
-        <input type="text" class="inputSmall" placeholder="Enter title" id="JETitle" required>
-
-        <label for="JEText"><b>Title</b></label>
-        <textarea class="inputLarge" cols="40" rows="5" placeholder="Enter title" id="JEText" required></textarea>
-
-        <button type="submit" class="btn" onclick="submitFormJE()">Create</button>
-        <button type="submit" class="btn cancel" onclick="closeFormEE()">Cancel</button>
+            <?php foreach ($entries as $entry): ?>
+                <div class="col-12 card journal-card">
+                    <div class="card-body journal-card-body">
+                        <img src="/assets/images/journal_page/agenda.svg" alt="agenda image">
+                        <p> <?php echo $entry->title?></p>
+                    </div>
+                    <a id="<?php echo $entry->journalEntryID?>" onclick="openPage(this)" class="stretched-link"></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
 
-<div id="journalModal" class="modal">
-    <div id="paper">
-        <div id="pattern">
-            <div id="content">
+    <div id="newEntryModal" class="main-modal">
+        <div class="journal-modal-content card main-card">
+    
+            <h4>New journal entry</h4>
 
+            <label for="JETitle"><b>title</b></label>
+            <input type="text" class="form-control main-input journal-input" placeholder="Enter title" id="JETitle" required>
+
+            <label for="JEText"><b>entry</b></label>
+            <textarea class="form-control main-input journal-input" cols="40" rows="5" placeholder="Enter entry" id="JEText" required></textarea>
+            <div class="journal-modal-btns">
+                <button type="submit" class="main-modal-btn" onclick="submitFormJE()">Create</button>
+                <button type="submit" class="main-modal-btn" onclick="closeFormEE()">Cancel</button>
             </div>
         </div>
     </div>
-</div>
 
+    <div id="journalModal" class="modal">
+        <div id="paper">
+            <div id="pattern">
+                <div id="content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <script>
     function openPage(e){

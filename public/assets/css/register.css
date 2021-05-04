@@ -1,6 +1,12 @@
 .register-container {
     --register-top-padding: 30px;
     --register-input-border-radius: 15px;
+
+    --avatar-img-size: 75px;
+    --avatar-card-margins: 15px;
+    --avatar-card-width: 300px;
+
+    --register-animation-duration: 200ms;
 }
 
 .register-row {
@@ -58,4 +64,82 @@
     margin-top: -16px;
     padding-top: 0.1em;
     padding-bottom: 15px;
+}
+
+/* AVATAR SELECTION */
+
+.register-avatar-card {
+    margin-top: var(--avatar-card-margins);
+    margin-bottom: var(--avatar-card-margins);
+    cursor: pointer;
+    width: 97%;
+    border-radius: var(--card-border-radius);
+    border-width: 2px;
+    border-color: var(--purple);
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    transition: border-color var(--register-animation-duration) ease-in-out;
+}
+
+.register-avatar-card:hover,
+.register-avatar-card:focus {
+    border-color: white;
+}
+
+.register-avatar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--card-border-radius);
+
+    transition: transform var(--register-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.register-avatar-card:hover::before,
+.register-avatar-card:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.register-avatar-img {
+    display: none;
+    height: var(--avatar-img-size);
+    width: var(--avatar-img-size);
+    border-radius: calc(var(--avatar-img-size) / 2);
+    background-color: var(--purple);
+    border: var(--modal-img-border-size) solid var(--purple);
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-top: 10px;
+    transition: border var(--register-animation-duration) ease-in-out, background-color var(--register-animation-duration) ease-in-out;
+}
+
+.register-avatar-card:hover .register-avatar-img,
+.register-avatar-card:focus .register-avatar-img {
+    background-color: white;
+    border: var(--modal-img-border-size) solid white;
+}
+
+.register-avatar-card-body {
+
+}
+
+.register-avatar-title {
+    color: var(--purple);
+    transition: color var(--register-animation-duration) ease-in-out;
+}
+
+.register-avatar-card:hover .register-avatar-title,
+.register-avatar-card:focus .register-avatar-title {
+    color: white;
 }
