@@ -3,8 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
-
--- Gegenereerd op: 22 apr 2021 om 20:53
+-- Gegenereerd op: 02 mei 2021 om 12:20
 -- Serverversie: 10.4.17-MariaDB
 -- PHP-versie: 7.4.15
 
@@ -42,8 +41,8 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, `reason`, `isActive`) VALUES
-(1, 9, 1, '2021-03-23 00:00:00', 'standaard check', 1),
-(2, 9, 1, '2021-04-06 03:00:00', 'standaard check', 1),
+(1, 3, 1, '2021-03-23 00:00:00', 'standaard check', 1),
+(2, 3, 1, '2021-04-06 03:00:00', 'standaard check', 1),
 (3, 14, 2, '2021-03-24 00:00:00', 'standaard check', 1),
 (4, 14, 2, '2021-04-07 00:00:00', 'standaard check', 1),
 (5, 15, 1, '2021-03-24 00:00:00', 'standaard check', 1),
@@ -68,6 +67,73 @@ INSERT INTO `appointment` (`appointmentID`, `inhabitantID`, `doctorID`, `date`, 
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `avatars`
+--
+
+CREATE TABLE `avatars` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `avatars`
+--
+
+INSERT INTO `avatars` (`id`, `title`, `location`) VALUES
+(1, 'Vrouw 1', '/assets/avatars/avatar-1.svg'),
+(2, 'Vrouw 2', '/assets/avatars/avatar-2.svg'),
+(3, 'Vrouw 3', '/assets/avatars/avatar-3.svg'),
+(4, 'Vrouw 4', '/assets/avatars/avatar-4.svg'),
+(5, 'Vrouw 5', '/assets/avatars/avatar-5.svg'),
+(6, 'Vrouw 6', '/assets/avatars/avatar-6.svg'),
+(7, 'Vrouw 7', '/assets/avatars/avatar-7.svg'),
+(8, 'Vrouw 8', '/assets/avatars/avatar-8.svg'),
+(9, 'Vrouw 9', '/assets/avatars/avatar.svg'),
+(10, 'Jongen 1', '/assets/avatars/boy.svg'),
+(11, 'Meisje 1', '/assets/avatars/girl (1).svg'),
+(12, 'Meisje 2', '/assets/avatars/girl (2).svg'),
+(13, 'Meisje 3', '/assets/avatars/girl.svg'),
+(14, 'Hippie 1', '/assets/avatars/hippie.svg'),
+(15, 'Man 2', '/assets/avatars/man (2).svg'),
+(16, 'Man 3', '/assets/avatars/man (3).svg'),
+(17, 'Man 4', '/assets/avatars/man (4).svg'),
+(18, 'Man 5', '/assets/avatars/man (5).svg'),
+(19, 'Man 6', '/assets/avatars/man (6).svg'),
+(20, 'Man 7', '/assets/avatars/man (7).svg'),
+(21, 'Man 8', '/assets/avatars/man (8).svg'),
+(22, 'Man 9', '/assets/avatars/man (9).svg'),
+(23, 'Man 10', '/assets/avatars/man (10).svg'),
+(24, 'Man 11', '/assets/avatars/man (11).svg'),
+(25, 'Man 12', '/assets/avatars/man (12).svg'),
+(26, 'Man 13', '/assets/avatars/man.svg'),
+(27, 'Man 14', '/assets/avatars/man-1.svg'),
+(28, 'Man 15', '/assets/avatars/man-2.svg'),
+(29, 'Man 16', '/assets/avatars/man-3.svg'),
+(30, 'Man 17', '/assets/avatars/man-4.svg'),
+(31, 'Man 18', '/assets/avatars/man-5.svg'),
+(32, 'Man 19', '/assets/avatars/man-6.svg'),
+(33, 'Man 20', '/assets/avatars/man-7.svg'),
+(34, 'Man 21', '/assets/avatars/man-8.svg'),
+(35, 'Punk Man', '/assets/avatars/punk.svg'),
+(36, 'Vrouw 10', '/assets/avatars/woman (1).svg'),
+(37, 'Vrouw 11', '/assets/avatars/woman (2).svg'),
+(38, 'Vrouw 12', '/assets/avatars/woman (3).svg'),
+(39, 'Vrouw 13', '/assets/avatars/woman (4).svg'),
+(40, 'Vrouw 14', '/assets/avatars/woman (5).svg'),
+(41, 'Vrouw 15', '/assets/avatars/woman (6).svg'),
+(42, 'Vrouw 16', '/assets/avatars/woman-1.svg'),
+(43, 'Vrouw 17', '/assets/avatars/woman-2.svg'),
+(44, 'Vrouw 18', '/assets/avatars/woman-3.svg'),
+(45, 'Vrouw 19', '/assets/avatars/woman-4.svg'),
+(46, 'Vrouw 20', '/assets/avatars/woman-5.svg'),
+(47, 'Vrouw 21', '/assets/avatars/woman-6.svg'),
+(48, 'Vrouw 22', '/assets/avatars/woman-7.svg'),
+(49, 'Vrouw 23', '/assets/avatars/woman.svg');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `chore`
 --
 
@@ -75,6 +141,17 @@ CREATE TABLE `chore` (
   `choreID` int(11) NOT NULL,
   `description` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `chore`
+--
+
+INSERT INTO `chore` (`choreID`, `description`) VALUES
+(1, 'Not Assigned'),
+(2, 'Household'),
+(3, 'Kitchen'),
+(4, 'Weekday Responsible'),
+(5, 'Weekdend Responsible');
 
 -- --------------------------------------------------------
 
@@ -110,7 +187,10 @@ INSERT INTO `dailyquote` (`dailyQuoteID`, `description`, `date`) VALUES
 (6, 'it is a good day', '2021-04-20'),
 (8, 'test', '2021-04-08'),
 (9, 'test', '2021-04-25'),
-(10, 'test2', '2021-04-22');
+(10, 'test2', '2021-04-22'),
+(11, 'Programming isn\'t about what you know; it\'s about what you can figure out.', '2021-04-27'),
+(12, '', '0000-00-00'),
+(13, 'a quote today?', '2021-04-29');
 
 -- --------------------------------------------------------
 
@@ -155,7 +235,8 @@ CREATE TABLE `employeeadmin` (
 
 INSERT INTO `employeeadmin` (`employeeAdminID`, `userID`, `isAdmin`) VALUES
 (1, 2, 0),
-(2, 6, 1);
+(2, 6, 1),
+(17, 50, 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +310,7 @@ INSERT INTO `events` (`id`, `start1`, `startTime`, `start`, `duration`, `title`,
 (61, '0000-00-00', '00:00:00', '2021-04-25 00:00:00', '00:00:00', 'sdsd', '00:00:00', '', '2021-04-26 00:00:00', ''),
 (62, '0000-00-00', '00:00:00', '2021-03-30 04:06:00', '00:00:00', 'test', '00:00:00', '', '2021-04-08 21:32:00', ''),
 (65, '0000-00-00', '00:00:00', '2021-04-13 00:00:00', '00:00:00', 'azert', '00:00:00', '', '2021-04-10 00:00:00', ''),
-(66, '0000-00-00', '00:00:00', '2021-04-29 00:00:00', '00:00:00', 'azert', '00:00:00', '', '2021-04-29 00:00:00', ''),
+(66, '0000-00-00', '00:00:00', '2021-04-29 12:00:00', '00:00:00', 'azert', '00:00:00', '', '1970-01-01 01:00:00', ''),
 (67, '0000-00-00', '00:00:00', '2021-05-01 00:00:00', '00:00:00', 'azert', '00:00:00', '', '0000-00-00 00:00:00', ''),
 (68, '0000-00-00', '00:00:00', '0000-00-00 00:00:00', '00:00:00', '', '00:00:00', '', '0000-00-00 00:00:00', ''),
 (69, '0000-00-00', '00:00:00', '2021-04-15 00:00:00', '00:00:00', 'green', '00:00:00', '', '2021-04-15 00:00:00', ''),
@@ -244,7 +325,9 @@ INSERT INTO `events` (`id`, `start1`, `startTime`, `start`, `duration`, `title`,
 (79, '0000-00-00', '00:00:00', '2021-03-30 00:00:00', '00:00:00', 'test2', '00:00:00', '', '2021-04-04 00:00:00', '#e66465'),
 (80, '0000-00-00', '00:00:00', '2021-04-20 05:06:00', '00:00:00', 'test2', '00:00:00', '', '2021-04-20 03:00:00', '#e66465'),
 (81, '0000-00-00', '00:00:00', '2021-04-08 17:26:00', '00:00:00', 'jnkdzfv', '00:00:00', '', '2021-04-22 17:27:00', '#b602f7'),
-(82, '0000-00-00', '00:00:00', '2021-04-17 23:18:00', '00:00:00', 'tester', '00:00:00', '', '1970-01-01 01:00:00', '#e66465');
+(82, '0000-00-00', '00:00:00', '2021-04-17 23:18:00', '00:00:00', 'tester', '00:00:00', '', '1970-01-01 01:00:00', '#e66465'),
+(83, '0000-00-00', '00:00:00', '2021-04-27 17:00:00', '00:00:00', 'test', '00:00:00', '', '2021-04-27 18:00:00', '#e66465'),
+(84, '0000-00-00', '00:00:00', '2021-04-29 20:00:00', '00:00:00', 'test', '00:00:00', '', '2021-04-30 00:00:00', '#e66465');
 
 -- --------------------------------------------------------
 
@@ -258,23 +341,24 @@ CREATE TABLE `inhabitant` (
   `godParentID` int(11) DEFAULT NULL,
   `arrivalDate` datetime NOT NULL,
   `halfwayDate` datetime DEFAULT NULL,
-  `departureDate` datetime DEFAULT NULL
+  `departureDate` datetime DEFAULT NULL,
+  `chore` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `inhabitant`
 --
 
-INSERT INTO `inhabitant` (`inhabitantID`, `userID`, `godParentID`, `arrivalDate`, `halfwayDate`, `departureDate`) VALUES
-(1, 3, 2, '2021-03-16 16:28:59', '2021-03-19 16:28:59', NULL),
-(2, 5, 3, '2021-03-16 16:28:59', '2021-03-27 16:28:59', NULL),
-(3, 7, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(4, 8, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(5, 9, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(6, 10, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(7, 11, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(8, 12, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL),
-(9, 14, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL);
+INSERT INTO `inhabitant` (`inhabitantID`, `userID`, `godParentID`, `arrivalDate`, `halfwayDate`, `departureDate`, `chore`) VALUES
+(1, 3, 2, '2021-03-16 16:28:59', '2021-03-19 16:28:59', NULL, 1),
+(2, 5, 3, '2021-03-16 16:28:59', '2021-03-27 16:28:59', NULL, 2),
+(3, 7, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 1),
+(4, 8, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 2),
+(5, 9, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 2),
+(6, 10, 3, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(7, 11, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(8, 12, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5),
+(9, 14, 1, '2021-04-13 00:00:00', '2021-05-04 00:00:00', NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -296,7 +380,10 @@ CREATE TABLE `journalentry` (
 --
 
 INSERT INTO `journalentry` (`journalEntryID`, `inhabitantID`, `title`, `entry`, `date`, `isActive`) VALUES
-(1, 9, 'tst', 'tstsdfqfdq', '2021-04-24 16:55:09', 1);
+(1, 9, 'tst', 'tstsdfqfdq', '2021-04-24 16:55:09', 1),
+(16, 9, 'test', 'test it fit worklqjfklja', '2021-04-27 14:37:55', 1),
+(17, 9, 'fdqf', 'fdqfqfq', '2021-04-27 14:38:10', 1),
+(18, 9, 'fqjfqmj', 'jfqljmlq', '2021-04-27 14:40:39', 1);
 
 -- --------------------------------------------------------
 
@@ -334,96 +421,69 @@ CREATE TABLE `progress` (
 --
 
 INSERT INTO `progress` (`progressID`, `inhabitantID`, `taskID`, `status`, `isCompleted`) VALUES
-(40, 1, 44, NULL, 1),
-(41, 2, 44, NULL, 1),
-(42, 3, 44, NULL, 1),
-(43, 4, 44, NULL, 1),
-(44, 5, 44, NULL, 1),
-(45, 6, 44, NULL, 1),
-(46, 7, 44, NULL, 0),
-(47, 8, 44, NULL, 0),
-(48, 9, 44, NULL, 0),
-(49, 1, 45, NULL, 0),
-(50, 2, 45, NULL, 1),
-(51, 3, 45, NULL, 1),
-(52, 4, 45, NULL, 1),
-(53, 5, 45, NULL, 0),
-(54, 6, 45, NULL, 0),
-(55, 7, 45, NULL, 0),
-(56, 8, 45, NULL, 0),
-(57, 9, 45, NULL, 0),
-(67, 1, 47, NULL, 1),
-(68, 2, 47, NULL, 0),
-(69, 3, 47, NULL, 0),
-(70, 4, 47, NULL, 0),
-(71, 5, 47, NULL, 0),
-(72, 6, 47, NULL, 0),
-(73, 7, 47, NULL, 0),
-(74, 8, 47, NULL, 0),
-(75, 9, 47, NULL, 0),
-(85, 1, 49, NULL, 0),
-(86, 2, 49, NULL, 1),
-(87, 3, 49, NULL, 1),
-(88, 4, 49, NULL, 1),
-(89, 5, 49, NULL, 1),
-(90, 6, 49, NULL, 0),
-(91, 7, 49, NULL, 0),
-(92, 8, 49, NULL, 0),
-(93, 9, 49, NULL, 0),
-(103, 1, 51, NULL, 1),
-(104, 2, 51, NULL, 1),
-(105, 3, 51, NULL, 1),
-(106, 4, 51, NULL, 0),
-(107, 5, 51, NULL, 0),
-(108, 6, 51, NULL, 0),
-(109, 7, 51, NULL, 0),
-(110, 8, 51, NULL, 0),
-(111, 9, 51, NULL, 0),
-(112, 1, 52, NULL, 1),
-(113, 2, 52, NULL, 0),
-(114, 3, 52, NULL, 0),
-(115, 4, 52, NULL, 0),
-(116, 5, 52, NULL, 0),
-(117, 6, 52, NULL, 0),
-(118, 7, 52, NULL, 0),
-(119, 8, 52, NULL, 0),
-(120, 9, 52, NULL, 0),
-(139, 1, 57, NULL, 0),
-(140, 2, 57, NULL, 1),
-(141, 3, 57, NULL, 0),
-(142, 4, 57, NULL, 0),
-(143, 5, 57, NULL, 0),
-(144, 6, 57, NULL, 0),
-(145, 7, 57, NULL, 0),
-(146, 8, 57, NULL, 0),
-(147, 9, 57, NULL, 0),
-(148, 1, 58, NULL, 0),
-(149, 2, 58, NULL, 0),
-(150, 3, 58, NULL, 0),
-(151, 4, 58, NULL, 0),
-(152, 5, 58, NULL, 0),
-(153, 6, 58, NULL, 0),
-(154, 7, 58, NULL, 0),
-(155, 8, 58, NULL, 0),
-(156, 9, 58, NULL, 0),
-(157, 1, 59, NULL, 0),
-(158, 2, 59, NULL, 0),
-(159, 3, 59, NULL, 0),
-(160, 4, 59, NULL, 0),
-(161, 5, 59, NULL, 0),
-(162, 6, 59, NULL, 0),
-(163, 7, 59, NULL, 0),
-(164, 8, 59, NULL, 0),
-(165, 9, 59, NULL, 0),
-(166, 1, 60, NULL, 0),
-(167, 2, 60, NULL, 0),
-(168, 3, 60, NULL, 0),
-(169, 4, 60, NULL, 0),
-(170, 5, 60, NULL, 0),
-(171, 6, 60, NULL, 0),
-(172, 7, 60, NULL, 0),
-(173, 8, 60, NULL, 0),
-(174, 9, 60, NULL, 0);
+(175, 1, 61, NULL, 1),
+(176, 2, 61, NULL, 0),
+(177, 3, 61, NULL, 0),
+(178, 4, 61, NULL, 0),
+(179, 5, 61, NULL, 0),
+(180, 6, 61, NULL, 0),
+(181, 7, 61, NULL, 0),
+(182, 8, 61, NULL, 0),
+(183, 9, 61, NULL, 0),
+(184, 1, 62, NULL, 1),
+(185, 2, 62, NULL, 0),
+(186, 3, 62, NULL, 0),
+(187, 4, 62, NULL, 0),
+(188, 5, 62, NULL, 0),
+(189, 6, 62, NULL, 0),
+(190, 7, 62, NULL, 0),
+(191, 8, 62, NULL, 0),
+(192, 9, 62, NULL, 0),
+(193, 1, 63, NULL, 1),
+(194, 2, 63, NULL, 0),
+(195, 3, 63, NULL, 0),
+(196, 4, 63, NULL, 0),
+(197, 5, 63, NULL, 0),
+(198, 6, 63, NULL, 0),
+(199, 7, 63, NULL, 0),
+(200, 8, 63, NULL, 0),
+(201, 9, 63, NULL, 0),
+(202, 1, 64, NULL, 1),
+(203, 2, 64, NULL, 0),
+(204, 3, 64, NULL, 0),
+(205, 4, 64, NULL, 0),
+(206, 5, 64, NULL, 0),
+(207, 6, 64, NULL, 0),
+(208, 7, 64, NULL, 0),
+(209, 8, 64, NULL, 0),
+(210, 9, 64, NULL, 0),
+(211, 1, 65, NULL, 1),
+(212, 2, 65, NULL, 0),
+(213, 3, 65, NULL, 0),
+(214, 4, 65, NULL, 0),
+(215, 5, 65, NULL, 0),
+(216, 6, 65, NULL, 0),
+(217, 7, 65, NULL, 0),
+(218, 8, 65, NULL, 0),
+(219, 9, 65, NULL, 0),
+(220, 1, 66, NULL, 1),
+(221, 2, 66, NULL, 0),
+(222, 3, 66, NULL, 0),
+(223, 4, 66, NULL, 0),
+(224, 5, 66, NULL, 0),
+(225, 6, 66, NULL, 0),
+(226, 7, 66, NULL, 0),
+(227, 8, 66, NULL, 0),
+(228, 9, 66, NULL, 0),
+(229, 1, 67, NULL, 1),
+(230, 2, 67, NULL, 0),
+(231, 3, 67, NULL, 0),
+(232, 4, 67, NULL, 0),
+(233, 5, 67, NULL, 0),
+(234, 6, 67, NULL, 0),
+(235, 7, 67, NULL, 0),
+(236, 8, 67, NULL, 0),
+(237, 9, 67, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -447,8 +507,8 @@ CREATE TABLE `recurringevents` (
 INSERT INTO `recurringevents` (`id`, `startTime`, `endTime`, `daysOfWeek`, `title`, `color`) VALUES
 (4, '20:54:36', '22:54:36', '1,2,3,4,5', 'recurring event', ''),
 (6, '00:00:00', '00:00:00', '1,5,', '', '#e66465'),
-(7, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e'),
-(8, '10:00:00', '11:00:00', '3,4,', 'test', '#8b0e0e');
+(7, '10:00:00', '11:00:00', '3,4,', 'test recurring event', '#8b0e0e'),
+(8, '10:00:00', '12:00:00', '3,4,', 'test recuring event 2', '#8b0e0e');
 
 -- --------------------------------------------------------
 
@@ -472,23 +532,30 @@ INSERT INTO `task` (`taskID`, `phase`, `description`, `isActive`) VALUES
 (41, '3', 'test of insert 4', 0),
 (42, '1', 'test of post4', 0),
 (43, '1', 'test of insert 2', 0),
-(44, '1', 'test jkmj', 1),
-(45, '2', 'kleren aan doen ', 1),
+(44, '1', 'test jkmj', 0),
+(45, '2', 'kleren aan doen ', 0),
 (46, '1', 'kleren wassen 2', 0),
-(47, '3', 'slapen', 1),
+(47, '3', 'slapen', 0),
 (48, '4', 'sporten', 0),
-(49, '2', 'code schrijven', 1),
+(49, '1', '                                                                                                trye', 0),
 (50, '1', 'leren coderen', 0),
-(51, '2', 'java leren', 1),
-(52, '3', 'html leren', 1),
+(51, '2', '           test test                                                                                ', 0),
+(52, '3', 'html leren', 0),
 (53, '2', 'php leren', 0),
 (54, '4', 'css leren ', 0),
 (55, '1', 'test of post2', 0),
 (56, '1', 'test of post23', 0),
-(57, '2', 'test laatste post', 1),
-(58, '2', 'test laatste post2', 1),
-(59, '2', 'TEST TEST', 1),
-(60, '2', 'new t', 1);
+(57, '2', '                                                                        test laatste post           ', 0),
+(58, '2', '                        test laatste post2                    ', 0),
+(59, '2', '                        TEST TEST                    ', 0),
+(60, '2', 'new t', 0),
+(61, '1', 'description invoegen hier', 1),
+(62, '2', 'test', 1),
+(63, '3', 'Make progress page inhabitant', 1),
+(64, '1', 'Make backbone of site', 1),
+(65, '1', 'get a idea of style', 1),
+(66, '2', 'work hard on site', 1),
+(67, '3', 'present to spiegel', 1);
 
 -- --------------------------------------------------------
 
@@ -514,18 +581,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `username`, `password`, `firstname`, `lastname`, `avatar`, `birthday`, `dateAdded`, `isActive`, `gender`) VALUES
-(2, 'employee', '$2y$10$koZX.rjg4bJEiaxf0LQ6Su6A08tV7orfJFc1HKJe7HoVqrHNjASlG', 'employee', 'Marie', NULL, '2021-04-07', '2021-04-12 15:26:50', 1, 'female'),
-(3, 'inhabitant', '$2y$10$xaGdKPWP90KpAdJd2T7Ytem8vlIqVpq7MFTiEWcD2tBzxVjBChvMy', 'inhabitant', 'Thibault', NULL, '2021-04-02', '2021-04-12 15:28:51', 1, 'male'),
-(4, 'inhabitant2', '$2y$10$wFoiYglpdf7TlpphuMEH4eGLyv8is9/Twdy70PU5hQ2nNOV1zroT.', 'inhabitant', '222', NULL, '2021-04-01', '2021-04-12 15:30:56', 1, 'female'),
-(5, 'inhabitant3', '$2y$10$BoBCtdwxPUm/4wQ5VQcHnuCnLdSy7uY.n3rRVtjwWnN6D0T472Q.q', 'inhabitant', '666', NULL, '2021-04-03', '2021-04-12 15:34:54', 1, 'female'),
-(6, 'admin', '$2y$10$EXaEVl4ZxvOJFdKqCl3B5eYH68q06kv9JLBnltsyOhP3K5.bHbMk6', 'admin', 'Aaron', NULL, '2021-04-02', '2021-04-12 15:37:50', 1, 'female'),
-(7, 'inhabitanttask', '$2y$10$OmYRo9AxeNtJnU5rbTdTqOXzaLIiMuKOtrka2jjkfgHMOJ/nQ7LYu', 'inhabitant', 'testtask', NULL, '2021-04-07', '2021-04-13 17:05:32', 1, 'female'),
-(8, 'inhabitant44324', '$2y$10$rAVDmzeHBW8HT2CdOFSXc.hi0TF/vVmKHiruEJDXc/uy.0keG2GEK', 'inhabitant', 'test with more', NULL, '2021-04-14', '2021-04-13 18:41:07', 1, 'female'),
-(9, 'inhabitant231231', '$2y$10$ui1zRRh6vucrrUFhUdb3MuFsgClkOPJuQunFXG21A4Dufk.mCUba2', 'inhabitant', 'don\'tremeber', NULL, '2021-04-02', '2021-04-13 18:41:32', 1, 'female'),
-(10, 'inhabitantfdqfqqfdq', '$2y$10$rKE9x1k.T6hQkMlaj7Jw8eMXiW3Oc9DaU1VRq5xcA3msRRcCFY4k6', 'inhabitant', 'dqfqfqdfqfq', NULL, '2021-04-02', '2021-04-13 18:42:27', 1, 'female'),
-(11, 'inhabitantjdkfljq', '$2y$10$I6FBuOCqOazFVrrt3ClaT.bRtnlj0ohdfDLUVKYwonGWFQ1.7CQGa', 'inhabitant', 'tjkldjqfmkljqmjfkmqlj', NULL, '2021-04-01', '2021-04-13 18:44:11', 1, 'female'),
-(12, 'inhabitant34243', '$2y$10$gKog/PWPz8VCRroq.Yzscejdg22ApVw2zXCpMYAbGIoWggtZgmeG6', 'inhabitant', 'jdfmlkqjlfmqkfj', NULL, '2021-04-02', '2021-04-13 18:44:36', 1, 'female'),
-(14, 'inhabitanttest4', '$2y$10$/hf0RQkO14546VvDo.lqJ.f6Lez6VzCP5XuZBitg9R25YjVqyx8kO', 'inhabitant', 'test3', NULL, '2021-04-02', '2021-04-13 18:45:52', 1, 'female');
+(2, 'employee', '$2y$10$YW.E5eHZ0nAI2F8q22QFb.6XltSBWRCuJiDON0esLNENXfou5Eiym', 'employee', 'Marie', '1', '2021-04-07', '2021-04-12 15:26:50', 1, 'female'),
+(3, 'inhabitant', '$2y$10$3r/j604B0ZDhLoOD8a5SK.oPZWsLCvCTc3Ih029/RwF.2vg0rBj72', 'inhabitant', 'Thibault', '1', '2021-04-02', '2021-04-12 15:28:51', 1, 'male'),
+(4, 'inhabitant2', '$2y$10$wFoiYglpdf7TlpphuMEH4eGLyv8is9/Twdy70PU5hQ2nNOV1zroT.', 'inhabitant', '222', '1', '2021-04-01', '2021-04-12 15:30:56', 1, 'female'),
+(5, 'inhabitant3', '$2y$10$BoBCtdwxPUm/4wQ5VQcHnuCnLdSy7uY.n3rRVtjwWnN6D0T472Q.q', 'inhabitant', '666', '1', '2021-04-03', '2021-04-12 15:34:54', 1, 'female'),
+(6, 'admin', '$2y$10$EXaEVl4ZxvOJFdKqCl3B5eYH68q06kv9JLBnltsyOhP3K5.bHbMk6', 'admin', 'Aaron', '1', '2021-04-02', '2021-04-12 15:37:50', 1, 'female'),
+(7, 'inhabitanttask', '$2y$10$OmYRo9AxeNtJnU5rbTdTqOXzaLIiMuKOtrka2jjkfgHMOJ/nQ7LYu', 'inhabitant', 'testtask', '1', '2021-04-07', '2021-04-13 17:05:32', 1, 'female'),
+(8, 'inhabitant44324', '$2y$10$rAVDmzeHBW8HT2CdOFSXc.hi0TF/vVmKHiruEJDXc/uy.0keG2GEK', 'inhabitant', 'test with more', '1', '2021-04-14', '2021-04-13 18:41:07', 1, 'female'),
+(9, 'inhabitant231231', '$2y$10$ui1zRRh6vucrrUFhUdb3MuFsgClkOPJuQunFXG21A4Dufk.mCUba2', 'inhabitant', 'don\'tremeber', '1', '2021-04-02', '2021-04-13 18:41:32', 1, 'female'),
+(10, 'inhabitantfdqfqqfdq', '$2y$10$rKE9x1k.T6hQkMlaj7Jw8eMXiW3Oc9DaU1VRq5xcA3msRRcCFY4k6', 'inhabitant', 'dqfqfqdfqfq', '1', '2021-04-02', '2021-04-13 18:42:27', 1, 'female'),
+(11, 'inhabitantjdkfljq', '$2y$10$I6FBuOCqOazFVrrt3ClaT.bRtnlj0ohdfDLUVKYwonGWFQ1.7CQGa', 'inhabitant', 'tjkldjqfmkljqmjfkmqlj', '1', '2021-04-01', '2021-04-13 18:44:11', 1, 'female'),
+(12, 'inhabitant34243', '$2y$10$gKog/PWPz8VCRroq.Yzscejdg22ApVw2zXCpMYAbGIoWggtZgmeG6', 'inhabitant', 'jdfmlkqjlfmqkfj', '1', '2021-04-02', '2021-04-13 18:44:36', 1, 'female'),
+(14, 'inhabitanttest4', '$2y$10$/hf0RQkO14546VvDo.lqJ.f6Lez6VzCP5XuZBitg9R25YjVqyx8kO', 'inhabitant', 'test3', '1', '2021-04-02', '2021-04-13 18:45:52', 1, 'female'),
+(50, 'employeeavatar', '$2y$10$a5pHflcm4NElD2S0xNiJruql0HamLrj3W2A7H0l.fES/2uK5Tm2Te', 'employee', 'avatar', '2', '2021-04-29', '2021-04-29 14:56:59', 1, 'female');
 
 -- --------------------------------------------------------
 
@@ -561,6 +629,9 @@ CREATE TABLE `yellowcard` (
 INSERT INTO `yellowcard` (`yellowCardID`, `employeeAdminID`, `inhabitantID`, `reason`, `date`, `isActive`) VALUES
 (1, 1, 3, 'jljmjkljlmjmljkjmj', '2021-04-20 17:54:13', 1);
 
+--
+-- Indexen voor geëxporteerde tabellen
+--
 
 --
 -- Indexen voor tabel `appointment`
@@ -570,6 +641,12 @@ ALTER TABLE `appointment`
   ADD UNIQUE KEY `appointmentID_UNIQUE` (`appointmentID`),
   ADD KEY `inhabitantToAppointment_idx` (`inhabitantID`),
   ADD KEY `doctorToAppointment_idx` (`doctorID`);
+
+--
+-- Indexen voor tabel `avatars`
+--
+ALTER TABLE `avatars`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `chore`
@@ -628,7 +705,8 @@ ALTER TABLE `events`
 ALTER TABLE `inhabitant`
   ADD PRIMARY KEY (`inhabitantID`),
   ADD UNIQUE KEY `inhabitantID_UNIQUE` (`inhabitantID`),
-  ADD KEY `userID_idx` (`userID`);
+  ADD KEY `userID_idx` (`userID`),
+  ADD KEY `ChoreForeignKey` (`chore`);
 
 --
 -- Indexen voor tabel `journalentry`
@@ -704,10 +782,16 @@ ALTER TABLE `appointment`
   MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT voor een tabel `avatars`
+--
+ALTER TABLE `avatars`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
 -- AUTO_INCREMENT voor een tabel `chore`
 --
 ALTER TABLE `chore`
-  MODIFY `choreID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `choreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT voor een tabel `choreassignment`
@@ -719,7 +803,7 @@ ALTER TABLE `choreassignment`
 -- AUTO_INCREMENT voor een tabel `dailyquote`
 --
 ALTER TABLE `dailyquote`
-  MODIFY `dailyQuoteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `dailyQuoteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT voor een tabel `doctor`
@@ -731,7 +815,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT voor een tabel `employeeadmin`
 --
 ALTER TABLE `employeeadmin`
-  MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `employeeAdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `event`
@@ -743,7 +827,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT voor een tabel `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT voor een tabel `inhabitant`
@@ -755,7 +839,7 @@ ALTER TABLE `inhabitant`
 -- AUTO_INCREMENT voor een tabel `journalentry`
 --
 ALTER TABLE `journalentry`
-  MODIFY `journalEntryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `journalEntryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT voor een tabel `note`
@@ -767,7 +851,7 @@ ALTER TABLE `note`
 -- AUTO_INCREMENT voor een tabel `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `progressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT voor een tabel `recurringevents`
@@ -779,13 +863,13 @@ ALTER TABLE `recurringevents`
 -- AUTO_INCREMENT voor een tabel `task`
 --
 ALTER TABLE `task`
-  MODIFY `taskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `taskID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT voor een tabel `weeklyagenda`
@@ -820,6 +904,7 @@ ALTER TABLE `employeeadmin`
 -- Beperkingen voor tabel `inhabitant`
 --
 ALTER TABLE `inhabitant`
+  ADD CONSTRAINT `ChoreForeignKey` FOREIGN KEY (`chore`) REFERENCES `chore` (`choreID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `godParentToInhabitant` FOREIGN KEY (`inhabitantID`) REFERENCES `inhabitant` (`inhabitantID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `userToInhabitant` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 

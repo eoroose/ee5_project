@@ -1,29 +1,148 @@
 .profile-container {
-    margin-top: 20px;
+    margin-top: 30px;
+
+    --profile-avatar-size: 250px;
+    --profile-avatar-border-width: 7px;
+    --profile-avatar-animation-duration: 300ms;
+
+    --profile-margin-top: 10px;
+    --profile-row-margin-bottom: 20px;
 }
 
 .profile-row {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-bottom: var(--profile-row-margin-bottom);
+    min-height: 100px;
+}
 
+.profile-avatar-col {
+    margin-left: auto;
+    margin-right: auto;
+    height: var(--profile-avatar-size);
+    width: var(--profile-avatar-size);
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--profile-avatar-size) / 2);
+    border: none;
+    margin-top: var(--profile-margin-top);
+    cursor: pointer;
+}
+
+.profile-avatar-col::before {
+    content: "Change Avatar";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--purple);
+    text-align: center;
+    padding-top: 45%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: calc(var(--profile-avatar-size) / 2);
+    transform: translateY(var(--profile-avatar-size));
+    transition: transform var(--profile-avatar-animation-duration) ease-in;
+    cursor: pointer;
+}
+
+.profile-avatar-col:hover::before,
+.profile-avatar-col:focus::before {
+    transform: translateY(0);
+}
+
+.profile-avatar {
+    height: var(--profile-avatar-size);
+    width: var(--profile-avatar-size);
+    align-self: center;
+    border: var(--profile-avatar-border-width) solid var(--purple);
+    border-radius: calc(var(--profile-avatar-size) / 2);
+    background-color: var(--purple);
 }
 
 .profile-col {
+    text-align: center;
+    margin-top: var(--profile-margin-top);
+    border: none;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
-    
+    align-content: center;
+    position: relative;
 }
 
-.profile-title {
+.profile-name-col h1 {
+    font-family: "freestyle script regular";
+    font-weight: bold;
     font-size: 6em;
+    color: var(--purple);
 }
 
-.username-container {
-    flex-flow: row;
+.profile-col h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--purple);
+}
+
+.profile-password-btn {
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 90%;
+    max-width: var(--button-max-width);
 }
 
 .profile-input {
     margin-left: auto;
     margin-right: auto;
-    width: var(--button-width);
+    margin-top: 0;
+    margin-bottom: var(--profile-margin-top);
+    width: 90%;
     max-width: var(--button-max-width);
-    height: var(--button-height);
+    height: var(--button-height);   
+}
+
+.profile-col-godchildren-title {
+    margin-bottom: -20px;
+}
+
+.profile-col-godchildren {
+    margin-bottom: 3px;
+}
+
+.profile-col-godchildren h1 {
+    font-size: 1.8em;
+}
+
+.profile-col-appointment-title {
+    margin-bottom: -20px;
+}
+
+.profile-col-appointment {
+    text-align: center;
+    margin-top: var(--profile-margin-top);
+    border: none;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+    position: relative;
+}
+
+.profile-col-appointment h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.profile-col-appointment h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
 }
