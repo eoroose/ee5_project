@@ -98,7 +98,7 @@
 
         document.getElementById("edit"+no).style.display="block";
         document.getElementById("save"+no).style.display="none";
-        $.post('http://localhost/quote/edit',{id:no,date:date_val,description:description_val})
+        $.post('<?php  echo base_url('quote/edit'); ?>',{id:no,date:date_val,description:description_val})
 
     }
 
@@ -108,7 +108,7 @@
         if(r==true)
         {
             document.getElementById("row"+no+"").outerHTML="";
-            $.post('http://localhost/quote/delete',{id:no})
+            $.post('/quote/delete',{id:no})
         }
 
     }

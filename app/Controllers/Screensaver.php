@@ -12,6 +12,16 @@ class Screensaver extends BaseController
 
     public function index(){
 
+        
+
+
+
+        echo view('templates/header', );
+        echo view('screensaver');
+        echo view('templates/footer');
+    }
+    private function deleted()
+    {
         $taskmodel=new taskmodel();
         $result_tasks=$taskmodel->select()->where('isActive',1)->orderBy('phase','ASC')->get()->getResultArray();
         $db=db_connect();
@@ -39,14 +49,7 @@ class Screensaver extends BaseController
 	    else{
             $data['quote']=$quote['description'];
         }
-
-
-
-        echo view('templates/header', $data);
-        echo view('screensaver');
-        echo view('templates/footer');
     }
-
     private function quote(){
         $quoteModel=new dailyQuote();
         $date=date('Y-m-d');

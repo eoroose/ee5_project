@@ -18,14 +18,11 @@ class Users extends BaseController
 	{
 	    $data= [];
 	    helper(['form']);
-	    #helper geeft je veel mogelijke helper functies die codeigniter heeft
         if($this->request->getMethod()=='post') {
-
             $rules = [
                 'username' => 'required|min_length[3]|max_length[50]',
-				'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
+				'password' => 'required|min_length[4]|max_length[255]|validateUser[username,password]',
             ];
-
             $errors =[
                 'password'=>['validateUser' => 'Email or Password don\'t match']
             ];
@@ -38,13 +35,9 @@ class Users extends BaseController
                     ->first();
                 $user['role']=$this->findRole($user);
                 $this->setUserSession($user);
-
                 return redirect()->to('dashboard');
             }
         }
-
-
-
 	    echo view('templates/header',$data);
         echo view('login');
         echo view('templates/footer');
@@ -137,7 +130,7 @@ class Users extends BaseController
 	            'firstname' => 'required|min_length[3]|max_length[50]',
                 'lastname' => 'required|min_length[3]|max_length[50]',
                 'username' => 'required|min_length[3]|max_length[50]',
-                'password' => 'required|min_length[8]|max_length[255]',
+                'password' => 'required|min_length[4]|max_length[255]',
                 'password_confirm' => 'matches[password]',
                 'birthday' =>'required',
                 'avatar'=>'required'

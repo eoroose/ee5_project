@@ -8,17 +8,25 @@ class UserRules
     {
         $model = new UserModel();
         $user=$model->where('username',$data['username'])->first();
+        echo 'test';
         if(!$user){
-            return false;}
-        return password_verify($data['password'],$user['password']);
+            return false;
+            echo 'false';}
+            $check=password_verify($data['password'],$user['password']);
+            echo print_r($check);
+        return $check;
     }
 
-    public function validate(string $str,string $fields,array $data): bool
+    public function validateUserP(string $str,string $fields,array $data): bool
     {
         $model = new UserModel();
-        $user=$model->where('userId',session()->get('id'))->first();
+        $user=$model->where('username',$data['username'])->first();
+        echo 'test';
         if(!$user){
-            return false;}
-        return password_verify($data['password'],$user['password']);
+            return false;
+            echo 'false';}
+            $check=password_verify($data['old-password'],$user['password']);
+            echo print_r($check);
+        return $check;
     }
 }

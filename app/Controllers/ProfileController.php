@@ -70,21 +70,30 @@ class ProfileController extends BaseController
             return $data;
     }
     public function changePassword(){
+        //echo "here";
+        $id = session()->get('id');
+        $data=$this->getData($id);
         helper(['form']);
         if($this->request->getMethod()=='post'){
             $rules =[
-                'old-password'=>'required',
-                'new-password' => 'required|min_length[8]|max_length[255]',
+                'old-password'=>'required|validateUserP[username,old-password]',
+                'new-password' => 'required|min_length[4]|max_length[255]',
                 'confirm-password' => 'matches[new-password]',
             ];
-            if (!$this->validate($rules)) {
+            $errors =[
+                'old-password'=>['validateUserP' => 'Email or Password don\'t match']
+            ];
+            //echo "here";
+            if (!$this->validate($rules,$errors)) {
                 $data['validation'] = $this->validator;
             }
             else{
+                //echo "here";
                 $model = new UserModel();
-                $user=$model->where('userId',session()->get('id'))->first();
+                $user=$model->where('userId',$id)->first();
+                echo '<pre>'; print_r($user ); echo '</pre>';
                 $correct= password_verify($this->request->getVar('old-password'),$user['password']);
-                echo $correct;
+                echo print_r($correct);
                 if($correct==true){
                     $model->where('userId', session()->get('id'))->set('password',$this->request->getVar('new-password'))->update();
                     $session=session();
@@ -92,14 +101,11 @@ class ProfileController extends BaseController
                     return redirect()->to('/profile');
                 }
                 else{
-                    $data['validation'] = "Passwords don't match";
+                    //$data['validation'] = "Passwords don't match";
                 }
             }
         }
-
-        $id = session()->get('id');
-        $data=$this->getData($id);
-        echo view('templates/header', $data);
+        echo view('templates/header', $data,);
         echo view('profile');
         echo view('templates/footer');
     }

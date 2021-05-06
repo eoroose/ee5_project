@@ -22,43 +22,34 @@ class Dashboard extends BaseController
 	    $data['event']=$this->dashAgenda();
 	    $quote=$this->quote();
 	    if($quote==NULL){
-            $data['quote']= "Geen quote vandaag";
-        }
+            $data['quote']= "Geen quote vandaag";}
 	    else{
-            $data['quote']=$quote['description'];
-        }
+            $data['quote']=$quote['description'];}
 	    if (session()->get('role')=='inhabitant'){
 	        $id=session()->get('id');
 	        $data['progress']=$this->progress($id);
 	        $yellowcard=$this->checkYellowCards($id);
 	        if($yellowcard==null){
-	            $data['yellowCard']=0;
-            }
+	            $data['yellowCard']=0;}
 	        else{
 	            $data['yellowCard']=1;
-                $data['info']=$yellowcard;
-            }
+                $data['info']=$yellowcard;}
 	        $appointment=$this->getDoctorsApointment($id);
 	        if($appointment==null)
             {
-                $data['apointment']=null;
-            }
+                $data['apointment']=null;}
 	        else
             {
-                $data['apointment']=$appointment;
-            }
+                $data['apointment']=$appointment;}
 	        $data['godParent']=$this->getGodparent($id);
             $godchilds=$this->getGodChilds($id);
             if($godchilds==null)
             {
-                $data['godchilds']=null;
-            }
+                $data['godchilds']=null;}
             else
             {
-                $data['godchilds']=$godchilds;
-            }
+                $data['godchilds']=$godchilds;}
 	    }
-
         //echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/header',$data);
         echo view('dashboard',$data);
@@ -93,6 +84,20 @@ class Dashboard extends BaseController
             ->get()->getResultArray();
         //echo '<pre>'; print_r($recurringEvents); echo '</pre>';
         $data=[];
+        if($events==null){
+            foreach ($recurringEvents as $col)
+            {
+
+
+                    $test=array(
+                        'Start'=>$col["startTime"],
+                        'title'=>$col["title"]
+                    );
+                    array_push($data, $test);
+                 
+            }
+        }
+        else{
         foreach ($events as $row)
         {
             $time= strtotime($row['start']);
@@ -113,7 +118,7 @@ class Dashboard extends BaseController
                 'Start'=>$tijd,
                 'title'=>$row["title"]);
             array_push($data,$test);
-        }
+        }}
         //echo '<pre>'; print_r($data); echo '</pre>';
         return $data;
     }

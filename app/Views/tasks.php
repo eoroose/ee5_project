@@ -66,7 +66,7 @@
 </div>
 
 
-<form action="/tasks/insert" id="form2">
+<form action="<?php  echo base_url('/tasks/insert'); ?>" id="form2">
     <input type="hidden" id="phase2" name="phase2" value="">
     <input type="hidden" id="description2" name="description2" value="">
 </form>
@@ -86,8 +86,6 @@
         phase.innerHTML="<input type='number' id='phase_text"+no+"' value='"+phase_data+"'>";
         description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"' style='width: 90%;border-radius: 10px;'>";
     }
-
-
     function save_row(no)
     {
         var phase_val=document.getElementById("phase_text"+no).value;
@@ -100,8 +98,7 @@
         document.getElementById("save"+no).style.display="none";
 
 
-        $.post('/tasks/edit',{id:no,phase:phase_val,description:description_val})
-
+        $.post('<?php  echo base_url('tasks/edit'); ?>',{id:no,phase:phase_val,description:description_val})
     }
 
     function delete_row(no)
@@ -110,7 +107,7 @@
         if(r==true)
         {
             document.getElementById("row"+no+"").outerHTML="";
-            $.post('/tasks/delete',{id:no})
+            $.post('<?php  echo base_url('/tasks/delete'); ?>',{id:no})
         }
     }
 

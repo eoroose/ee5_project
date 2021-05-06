@@ -47,6 +47,7 @@
 
                 <div id="otherFieldDiv" style="display: none">
                     <form class="" action="/changePassword" method="post">
+                        <input name='username' id='username' type='hidden' value='<?php echo session()->get('username')?>'>
                         <input type="password" class="form-control main-input profile-input" name="old-password" id="old-password" value="" placeholder="old password">
                         <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
                         <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
