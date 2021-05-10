@@ -54,7 +54,8 @@ class inhabitantModel2
     {
         $query_text = "SELECT doctor.firstname, doctor.lastname, appointment.date, appointment.reason, appointment.appointmentID
                         FROM appointment LEFT JOIN doctor ON appointment.doctorID = doctor.doctorID
-                        WHERE appointment.inhabitantID = :id:";
+                        LEFT JOIN inhabitant ON appointment.inhabitantID = inhabitant.inhabitantID
+                        WHERE inhabitant.userID = :id:";
         $query = $this->db->query($query_text, ['id' => $id]);
         return $query->getResult();
     }
@@ -160,6 +161,31 @@ class inhabitantModel2
                        SET inhabitant.chore = (SELECT choreID FROM chore WHERE description = :chore:)
                        WHERE inhabitant.userID = :id:";
         $query = $this->db->query($query_text, ['id' => $id, 'chore' => $chore]);
+    }
+
+    public function set_appointment($id, $firstnameDoctor, $lastnameDoctor, $date, $reason)
+    {
+        $query_text = "UPDATE appointment LEFT JOIN inhabitant ON appointment.inhabitantID = inhabitant.inhabitantID
+                       LEFT JOIN doctor ON appointment.doctorID = doctor.doctorID
+                       SET .chore = (SELECT choreID FROM chore WHERE description = :chore:)
+                       WHERE inhabitant.userID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id, 'firstnameDoctor' => $firstnameDoctor, 'lastnameDoctor' => $lastnameDoctor, 'date' => $date, 'reason' => $reaso]);
+    }
+
+    public function delete_appointment($id)
+    {
+        $query_text = "DELETE FROM appointment WHERE appointmentID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id]);
+    }
+
+    public function insert_appointment($id, $doctor, $date, $reason)
+    {
+        $query_text = "INSERT INTO appointment(inhabitantID, doctorID, date, reason)
+                       VALUES ((SELECT inhabitantID FROM inhabitant
+                                LEFT JOIN user ON inhabitant.userID = user.userID
+                                WHERE inhabitant.userID = :id:),
+                                :doctor:, :date:, :reason:)";
+        $query = $this->db->query($query_text, ['id' => $id, 'doctor' => $doctor, 'date' => $date, 'reason' => $reason]);
     }
 
     public function assignCard($employeeId, $inhabitantId, $reason)

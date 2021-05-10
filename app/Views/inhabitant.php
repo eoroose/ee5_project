@@ -145,31 +145,53 @@
         <tr>
             <th>Doctors Appointments:</th>
             <?php foreach ($appointments as $a): ?>
-            <div>
-            <td>
-                <p id="<?php echo "firstnameDoctor".$a->appointmentID?>"><?php echo $a->firstname; ?> </p>
-                <p id="<?php echo "lastnameDoctor".$a->appointmentID?>"><?php echo $a->lastname ?>: </p>
-                <p id="<?php echo "date".$a->appointmentID?>"><?php echo $a->date ?> - </p>
-                <p id="<?php echo "reason".$a->appointmentID?>"><?php echo $a->reason ?> </p>
-            </td>
-            <td>
-                <div class="app-edit-save-container">
-                    <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$a->appointmentID?>" onclick="edit_appointments('<?php echo $a->appointmentID?>')" style="display: block">
-                        <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
-                    </button>
+                <div id="<?php echo "appointment".$a->appointmentID?>">
+                    <td>
+                        <p id="<?php echo "firstnameDoctor".$a->appointmentID?>"><?php echo $a->firstname; ?> </p>
+                        <p id="<?php echo "lastnameDoctor".$a->appointmentID?>"><?php echo $a->lastname ?>: </p>
+                        <p id="<?php echo "date".$a->appointmentID?>"><?php echo $a->date ?> - </p>
+                        <p id="<?php echo "reason".$a->appointmentID?>"><?php echo $a->reason ?> </p>
+                    </td>
+                    <td>
+                        <div class="app-edit-save-container">
+                            <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$a->appointmentID?>" onclick="edit_appointment('<?php echo $a->appointmentID?>')" style="display: block">
+                                <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
+                            </button>
 
-                    <button class="app-btn-edit-save" type="save" id="<?php echo "save".$a->appointmentID?>" onclick="save_appointments('<?php echo $a->appointmentID?>')" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                            <button class="app-btn-edit-save" type="save" id="<?php echo "save".$a->appointmentID?>" onclick="save_appointment('<?php echo $a->appointmentID?>')" style="display: none">
+                                <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="app-btn-delete" type="button" id="<?php echo "delete".$a->appointmentID?>" onclick="delete_appointment('<?php echo $a->appointmentID?>')" style="display: block">
+                            <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
+                        </button>
+                    </td>
+                </div>
+            <?php endforeach; ?>
+
+            <div id="addappointment">
+                <td>
+                <div>
+                    <input type="number" id="new_doctor">
+                </div>
+
+                <div>
+                    <input type="datetime-local" id="new_date">
+                </div>
+
+                <div>
+                    <input type="text" id="new_reason">
+                </div>
+
+                <div>
+                    <button type="button" onclick="add_row();">
+                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
                     </button>
                 </div>
-            </td>
-            <td>
-                <button class="app-btn-delete" type="button" id="<?php echo "delete".$a->appointmentID?>" onclick="delete_appointment('<?php echo $a->appointmentID?>')" style="display: block">
-                    <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
-                </button>
-            </td>
+                </td>
             </div>
-            <?php endforeach; ?>
         </tr>
 
         <tr>
@@ -214,6 +236,15 @@
             <td><?php foreach ($notes as $n): ?><?php echo $n->title; ?>: <?php echo $n->description ?><br><?php endforeach; ?></td>
         </tr>
     </table>
+
+
+
+<form action="/UsersController/insertAppointment" id="appointmentform">
+    <input type="hidden" id="doctor2" name="new_doctor" value="">
+    <input type="hidden" id="date2" name="new_date" value="">
+    <input type="hidden" id="reason2" name="new_reason" value="">
+    <input type="hidden" id="userID" name="userID" value="">
+</form>
 
 <script>
         function edit_username(no)
@@ -442,7 +473,7 @@
             $.post('/UsersController/setChore', {id:<?php echo $userID; ?>, chore:chore_val})
         }
 
-        function edit_appointments(no)
+        function edit_appointment(no)
         {
             document.getElementById("edit"+no).style.display="none";
             document.getElementById("save"+no).style.display="block";
@@ -463,7 +494,7 @@
             reason.innerHTML="<input type='text' id='reason_text"+no+"' value='"+reason_data+"'> ";
         }
 
-        function save_appointments(no)
+        function save_appointment(no)
         {
             var firstnameDoctor_val=document.getElementById("firstnameDoctor_text"+no).value;
             var lastnameDoctor_val = document.getElementById("lastnameDoctor_text"+no).value;
@@ -481,6 +512,30 @@
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setAppointment', {id:<?php echo $userID; ?>, firstnameDoctor:firstnameDoctor_val, lastnameDoctor:lastnameDoctor_val, date:date_val, reason:reason_val})
+        }
+
+        function delete_appointment(no)
+        {
+            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                document.getElementById("appointment"+no+"").outerHTML="";
+                $.post('/UsersController/deleteAppointment', {id:no})
+            }
+        }
+
+        function add_appointment()
+        {
+            var new_doctor=document.getElementById("new_doctor").value;
+            var new_date=document.getElementById("new_date").value;
+            var new_reason=document.getElementById("new_reason").value;
+            var userID=<?php echo $userID; ?>
+
+            document.getElementById("doctor2").value=new_doctor;
+            document.getElementById("date2").value=new_date;
+            document.getElementById("reason2").value=new_reason;
+            document.getElementById("userID").value=userID;
+            document.getElementById("appointmentform").submit();
         }
 
 </script>

@@ -209,12 +209,30 @@ class UsersController extends BaseController
         if(isset($_POST['firstnameDoctor'])){
             $id = $_POST['id'];
             $firstnameDoctor = $_POST['firstnameDoctor'];
-            $lastnameDoctor = $_POST['lastnameDoctor']:
+            $lastnameDoctor = $_POST['lastnameDoctor'];
             $date = $_POST['date'];
             $reason = $_POST['reason'];
         }
         else {
         }
-        $this->inhabitantModel->set_chore($id, $firstnameDoctor, $lastnameDoctor, $date, $reason);
+        $this->inhabitantModel->set_appointment($id, $firstnameDoctor, $lastnameDoctor, $date, $reason);
+    }
+
+    public function deleteAppointment()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->delete_appointment($id);
+    }
+
+    public function insertAppointment()
+    {
+        $doctor = $this->request->getVar('doctor2');
+        $date = $this->request->getVar('date2');
+        $reason = $this->request->getVar('reason2');
+        $id = $this->request->getVar('userID');
+
+        $this->inhabitantModel->insert_appointment($id, $doctor, $date, $reason);
     }
 }
