@@ -54,7 +54,7 @@ class UsersController extends BaseController
         $this->data['notes'] = $this->inhabitantModel->get_notes($userID);
         $this->data['appointments'] = $this->inhabitantModel->get_doctors_appointments($userID);
         $this->data['cards'] = $this->inhabitantModel->get_yellow_cards($userID);
-        $this->data['chores'] = $this->inhabitantModel->get_chores($userID);
+        $this->data['chore'] = $this->inhabitantModel->get_chores($userID);
         $this->data['progress']=$this->progress($userID);
         $this->data['godparent'] = $this->inhabitantModel->get_godparent($userID);
         $this->data['godchildren'] = $this->inhabitantModel->get_godchildren($userID);
@@ -100,4 +100,121 @@ class UsersController extends BaseController
            return $data;
     }
 
+    public function setUsername()
+    {
+        if(isset($_POST['username'])){
+            $id = $_POST['id'];
+            $username = $_POST['username'];
+        }
+        else {
+            $id = 0;
+            $username = 'error';
+        }
+        $this->inhabitantModel->set_username($id, $username);
+    }
+
+    public function setFirstname()
+    {
+        if(isset($_POST['firstname'])){
+            $id = $_POST['id'];
+            $firstname = $_POST['firstname'];
+        }
+        else {
+            $id = 0;
+            $firstname = 'error';
+        }
+        $this->inhabitantModel->set_firstname($id, $firstname);
+    }
+
+    public function setLastname()
+    {
+        if(isset($_POST['lastname'])){
+            $id = $_POST['id'];
+            $lastname = $_POST['lastname'];
+        }
+        else {
+            $id = 0;
+            $lastname = 'error';
+        }
+        $this->inhabitantModel->set_lastname($id, $lastname);
+    }
+
+    public function setBirthday()
+    {
+        if(isset($_POST['birthday'])){
+            $id = $_POST['id'];
+            $birthday = $_POST['birthday'];
+        }
+        else {
+            $id = 0;
+            $birthday = 'error';
+        }
+        $this->inhabitantModel->set_birthday($id, $birthday);
+    }
+
+    public function setDateAdded()
+    {
+        if(isset($_POST['dateAdded'])){
+            $id = $_POST['id'];
+            $dateAdded = $_POST['dateAdded'];
+        }
+        else {
+            $id = 0;
+            $dateAdded = 'error';
+        }
+        $this->inhabitantModel->set_dateAdded($id, $dateAdded);
+    }
+
+    public function setArrivalDate()
+    {
+        if(isset($_POST['arrivalDate'])){
+            $id = $_POST['id'];
+            $arrivalDate = $_POST['arrivalDate'];
+        }
+        else {
+            $id = 0;
+            $arrivalDate = 'error';
+        }
+        $this->inhabitantModel->set_arrivalDate($id, $arrivalDate);
+    }
+
+    public function setDepartureDate()
+    {
+        if(isset($_POST['departureDate'])){
+            $id = $_POST['id'];
+            $departureDate = $_POST['departureDate'];
+        }
+        else {
+            $id = 0;
+            $departureDate = 'error';
+        }
+        $this->inhabitantModel->set_departureDate($id, $departureDate);
+    }
+
+    public function setChore()
+    {
+        if(isset($_POST['chore'])){
+            $id = $_POST['id'];
+            $chore = $_POST['chore'];
+        }
+        else {
+            $id = 0;
+            $chore = 'error';
+        }
+        $this->inhabitantModel->set_chore($id, $chore);
+    }
+
+    public function setAppointment()
+    {
+        if(isset($_POST['firstnameDoctor'])){
+            $id = $_POST['id'];
+            $firstnameDoctor = $_POST['firstnameDoctor'];
+            $lastnameDoctor = $_POST['lastnameDoctor']:
+            $date = $_POST['date'];
+            $reason = $_POST['reason'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_chore($id, $firstnameDoctor, $lastnameDoctor, $date, $reason);
+    }
 }
