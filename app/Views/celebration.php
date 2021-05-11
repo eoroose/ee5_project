@@ -31,6 +31,6 @@
     </div>
     
     <script type="text/javascript" src="<?php echo base_url('/assets/scripts/p5.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/assets/scripts/celebration1.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/assets/scripts/celebration.js'); ?>"></script>
 
 </div>

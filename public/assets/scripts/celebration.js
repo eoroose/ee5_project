@@ -20,6 +20,9 @@ let controllerGetDataInterval;
 let connected = false;
 let connectionFailed = false;
 
+// keyboard
+let keys = [0, 0, 0];
+
 
 // timer
 let startTimer = true;
@@ -37,6 +40,11 @@ let congratsColorInterval;
 let congratsTimeIncrement = 0;
 let congratsTimingLimit = 500;
 let congratsColor;
+let congratsPressFrequency = 100;
+let congratsBeginRotation = false;
+let congratsSpin = false;
+let startMillis = 0;
+let contgratsSpinSpeed = 7;
 
 // fireworks animation
 let fireworks = [];
@@ -47,6 +55,9 @@ let highest = -15;
 let gravityValue = 0.2;
 let frequency = 0.03;
 let particleSpread = 40;
+let fireworkInterval;
+let startFireworks = true;
+let fireworkPressFrequency = 100;
 
 let phase = 1;
 
@@ -65,9 +76,11 @@ function setup() {
     cnv.position(x, y);
 
     btn.mousePressed(() => {
-        inhabitant = sel.value();
-        setting = set.value();
-        start = true;
+        if(!(set.value() === 'controller' && !connected)) {
+            inhabitant = sel.value();
+            setting = set.value();
+            start = true;
+        }
     });
 
     gravity = createVector(0, gravityValue);
@@ -86,12 +99,10 @@ function draw() {
             break;
         }
         case 2: {
-            
             timerAnimation();
             phase += stopTimer ? 1 : 0;
             break;
         }
-
         case 3: {
             if(setting === 'controller' && connected && startGettingData) {
                 controllerGetDataInterval = setInterval(getControllerData, 100);
@@ -100,7 +111,6 @@ function draw() {
             phase++;
             break;
         }
-        
         case 4: {
             fireworkAnimation();
             congratsAnimation();
@@ -150,25 +160,51 @@ async function getControllerData() {
     } catch (err) {
         console.log(err);
     }
-    console.log(buttons, knob);
+    // console.log(buttons, knob);
+}
+
+// keyboard
+function keyPressed() {
+    if(keyCode === LEFT_ARROW) {
+        keys[0] = 1;
+    } else if(keyCode === RIGHT_ARROW) {
+        keys[2] = 1;
+    } else if(keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
+        keys[1] = 1; 
+    }
+}
+
+function keyReleased() {
+    if(keyCode === LEFT_ARROW) {
+        keys[0] = 0;
+    } else if(keyCode === RIGHT_ARROW) {
+        keys[2] = 0;
+    } else if(keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
+        keys[1] = 0; 
+    }
 }
 
 function startingAnimation() {
     textSize(64);
     stroke(purple);
     fill(purple);
-    
     text(`inhabitant: ${sel.value()}`, width/2, height/3 - 100);
     text(`setting: ${set.value()}`, width/2, height/3);
 
     if(set.value() === 'controller') {
         if(connected) {
+            stroke(0, 255, 0);
+            fill(0, 255, 0);
             text(`controller status: success!`, width/2, height/3 + 100);
         } else {
             if(connectionFailed) {
+                stroke(255, 0, 0);
+                fill(255, 0, 0);
                 text(`controller status: connection failed`, width/2, height/3 + 100); 
                 text(`please reset controller & refresh page`, width/2, height/3 + 200);   
             } else {
+                stroke(255, 255, 0);
+                fill(255, 255, 0);
                 text(`controller status: connecting...`, width/2, height/3 + 100);
             }
         }
@@ -181,9 +217,6 @@ function startingAnimation() {
         text(`(arrow keys)`, width/2, height/3 + 100);
     }
 }
-
-
-
 
 function timerAnimation() { 
     textSize(map(timerTimeIncrement, 0, 1000, 0, timerSize));
@@ -202,9 +235,9 @@ function timerAnimation() {
         timerTime--;
     }
 
-    if (timerTime < 0) {
+    if (timerTime < 1) {
         clearInterval(timerInterval);
-        timerTime = 0;
+        timerTime = 1;
         stopTimer = true;
     }
 
@@ -217,30 +250,119 @@ function congratsAnimation() {
         congratsInterval = setInterval(() => {
             congratsTimeIncrement += 10;
         }, 10);
-        congratsColorInterval = setInterval(() => {
-            congratsColor = random(255) | 0;
-        }, 500);
+
+        switch(setting) {
+            case 'automatic': {
+                congratsColorInterval = setInterval(() => {
+                    congratsColor = random(255) | 0;
+                }, 300);
+                break;
+            }
+            case 'controller': {
+                congratsColor = random(255) | 0;
+                congratsColorInterval = setInterval(() => {
+                    if(buttons[2] === 1) {
+                        congratsColor = random(255) | 0;
+                    }
+                }, congratsPressFrequency);
+                break;
+            }
+            case 'keyboard': {
+                congratsColor = random(255) | 0;
+                congratsColorInterval = setInterval(() => {
+                    if(keys[0] === 1) {
+                        congratsColor = random(255) | 0;
+                    }
+                }, congratsPressFrequency);
+                break;
+            }
+        }
         startCongrats = false;
     }
     if(congratsTimeIncrement >= congratsTimingLimit) {
         clearInterval(congratsInterval);
         congratsTimeIncrement = congratsTimingLimit;
+        congratsBeginRotation = true;
     }
 
+    if(congratsBeginRotation) {
+        switch(setting) {
+            case 'controller': {
+                if (buttons[0] === 1 && !congratsSpin) {
+                    console.log('btnpressed', congratsSpin);
+                    startMillis = millis();
+                    congratsSpin = true;
+                }
+                break;
+            }
+            case 'keyboard': {
+                if (keys[2] === 1 && !congratsSpin) {
+                    console.log('keypressed');
+                    startMillis = millis();
+                    congratsSpin = true;
+                }
+                break;
+            }
+        }
+    }
+
+    push();
     textSize(map(congratsTimeIncrement, 0, congratsTimingLimit, 0, congratsSize));
     stroke(purple);
     fill(color(`hsb(${congratsColor}, 100%, 100%)`));
-    text(`Congratulations`, width/2, height/3 - 100);
-    text(`${inhabitant}!`, width/2, height/3 + 100);
+    translate(width/2, height/3);
+
+    if(congratsSpin) {
+        rotate(radians((millis() - startMillis)/contgratsSpinSpeed));
+        if ((startMillis + (360*contgratsSpinSpeed)) <= millis()) {
+            congratsSpin = false;
+        }
+    } else {
+        rotate(radians(0));
+    }
+
+    text(`Congratulations\n${inhabitant}!`, 0, 0);
+    pop();
 }
 
 function fireworkAnimation() {
     
-    if(random(1) < frequency) { 
-        fireworks.push(new Firework(
-            vel0 = random(highest, lowest)
-        ));
-    }
+    switch(setting) {
+        case 'automatic': {
+            if(random(1) < frequency) { 
+                fireworks.push(new Firework(
+                    vel0 = random(highest, lowest)
+                ));
+            }
+            break;
+        }
+        case 'controller': {
+            if(startFireworks) {
+                fireworkInterval = setInterval(() => {
+                    if(buttons[1] === 1) {
+                        fireworks.push(new Firework(
+                            vel0 = random(highest, lowest)
+                        ));
+                    }
+                }, fireworkPressFrequency);
+            }
+            startFireworks = false;
+            break;
+        }
+        case 'keyboard': {
+            if(startFireworks) {
+                fireworkInterval = setInterval(() => {
+                    if(keys[1] === 1) {
+                        fireworks.push(new Firework(
+                            vel0 = random(highest, lowest)
+                        ));
+                    }
+                }, fireworkPressFrequency);
+            }
+            startFireworks = false;
+            break;
+        }
+    } 
 
     for(let i = fireworks.length-1; i >= 0; i--) {
         fireworks[i].update();
