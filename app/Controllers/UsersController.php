@@ -19,7 +19,8 @@ class UsersController extends BaseController
 
         if(session()->get('role')=='admin') {
             echo view('templates/header');
-            $this->data['inhabitants'] = $this->inhabitantModel->get_inhabitants();
+            $this->data['activeinhabitants'] = $this->inhabitantModel->get_active_inhabitants();
+            $this->data['archivedinhabitants'] = $this->inhabitantModel->get_archived_inhabitants();
             $this->data['users'] = $this->inhabitantModel->get_users();
             echo view('users', $this->data);
             echo view('templates/footer');
@@ -32,7 +33,8 @@ class UsersController extends BaseController
 
         if(session()->get('role')=='employee') {
             echo view('templates/header');
-            $this->data['inhabitants'] = $this->inhabitantModel->get_inhabitants();
+            $this->data['activeinhabitants'] = $this->inhabitantModel->get_active_inhabitants();
+            $this->data['archivedinhabitants'] = $this->inhabitantModel->get_archived_inhabitants();
             echo view('inhabitants', $this->data);
             echo view('templates/footer');
         } else {
@@ -206,16 +208,15 @@ class UsersController extends BaseController
 
     public function setAppointment()
     {
-        if(isset($_POST['firstnameDoctor'])){
-            $id = $_POST['id'];
-            $firstnameDoctor = $_POST['firstnameDoctor'];
-            $lastnameDoctor = $_POST['lastnameDoctor'];
+        if(isset($_POST['doctorID'])){
+            $appointmentid = $_POST['appointmentid'];
+            $doctorid = $_POST['doctorID'];
             $date = $_POST['date'];
             $reason = $_POST['reason'];
         }
         else {
         }
-        $this->inhabitantModel->set_appointment($id, $firstnameDoctor, $lastnameDoctor, $date, $reason);
+        $this->inhabitantModel->set_appointment($appointmentid, $doctorid, $date, $reason);
     }
 
     public function deleteAppointment()
@@ -228,11 +229,80 @@ class UsersController extends BaseController
 
     public function insertAppointment()
     {
-        $doctor = $this->request->getVar('doctor2');
-        $date = $this->request->getVar('date2');
-        $reason = $this->request->getVar('reason2');
-        $id = $this->request->getVar('userID');
+        $doctor = $_POST['doctor'];
+        $date = $_POST['date'];
+        $reason = $_POST['reason'];
+        $id = $_POST['id'];
 
         $this->inhabitantModel->insert_appointment($id, $doctor, $date, $reason);
+    }
+
+    public function setCard()
+    {
+        if(isset($_POST['cardid'])){
+            $cardid = $_POST['cardid'];
+            $date = $_POST['date'];
+            $reason = $_POST['reason'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_card($cardid, $date, $reason);
+    }
+
+    public function deleteCard()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->delete_card($id);
+    }
+
+    public function insertCard()
+    {
+        $employeeuserid = session()->get('id');
+        $date = $_POST['date'];
+        $reason = $_POST['reason'];
+        $inhabitantuserid = $_POST['id'];
+
+        $this->inhabitantModel->insert_card($employeeuserid, $inhabitantuserid, $date, $reason);
+    }
+
+    public function setNote()
+    {
+        if(isset($_POST['noteid'])){
+            $noteid = $_POST['noteid'];
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_note($noteid, $title, $description);
+    }
+
+    public function deleteNote()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->delete_note($id);
+    }
+
+    public function insertNote()
+    {
+        $employeeuserid = session()->get('id');
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $inhabitantuserid = $_POST['id'];
+
+        $this->inhabitantModel->insert_note($employeeuserid, $inhabitantuserid, $title, $description);
+    }
+
+
+    public function archiveUser()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->archive_user($id);
     }
 }

@@ -12,12 +12,22 @@ class inhabitantModel2
         $this->db = \Config\Database::connect();
     }
 
-    public function get_inhabitants()
+    public function get_active_inhabitants()
     {
         $query_text = "SELECT avatars.location, user.firstname, user.lastname, user.userID
                         FROM inhabitant LEFT JOIN user ON inhabitant.userID = user.userID
                         LEFT JOIN avatars ON user.avatar = avatars.id
                         WHERE user.isActive = 1";
+        $query = $this->db->query($query_text);
+        return $query->getResult();
+    }
+
+    public function get_archived_inhabitants()
+    {
+        $query_text = "SELECT avatars.location, user.firstname, user.lastname, user.userID
+                        FROM inhabitant LEFT JOIN user ON inhabitant.userID = user.userID
+                        LEFT JOIN avatars ON user.avatar = avatars.id
+                        WHERE user.isActive = 0";
         $query = $this->db->query($query_text);
         return $query->getResult();
     }
@@ -43,28 +53,28 @@ class inhabitantModel2
 
     public function get_notes($id)
     {
-        $query_text = "SELECT title, description
-                        FROM note
-                        WHERE inhabitantID = :id:";
+        $query_text = "SELECT noteID, title, description
+                        FROM note LEFT JOIN inhabitant ON note.inhabitantID = inhabitant.inhabitantID
+                        WHERE inhabitant.userID = :id: AND note.isActive = 1";
         $query = $this->db->query($query_text, ['id' => $id]);
         return $query->getResult();
     }
 
     public function get_doctors_appointments($id)
     {
-        $query_text = "SELECT doctor.firstname, doctor.lastname, appointment.date, appointment.reason, appointment.appointmentID
+        $query_text = "SELECT doctor.doctorID, doctor.firstname, doctor.lastname, appointment.date, appointment.reason, appointment.appointmentID
                         FROM appointment LEFT JOIN doctor ON appointment.doctorID = doctor.doctorID
                         LEFT JOIN inhabitant ON appointment.inhabitantID = inhabitant.inhabitantID
-                        WHERE inhabitant.userID = :id:";
+                        WHERE inhabitant.userID = :id: AND appointment.isActive = 1";
         $query = $this->db->query($query_text, ['id' => $id]);
         return $query->getResult();
     }
 
     public function get_yellow_cards($id)
     {
-        $query_text = "SELECT date, reason
-                        FROM yellowcard
-                        WHERE inhabitantID = :id:";
+        $query_text = "SELECT yellowCardID, date, reason
+                        FROM yellowcard LEFT JOIN inhabitant ON yellowcard.inhabitantID = inhabitant.inhabitantID
+                        WHERE userID = :id: AND isActive = 1";
         $query = $this->db->query($query_text, ['id' => $id]);
         return $query->getResult();
     }
@@ -163,35 +173,74 @@ class inhabitantModel2
         $query = $this->db->query($query_text, ['id' => $id, 'chore' => $chore]);
     }
 
-    public function set_appointment($id, $firstnameDoctor, $lastnameDoctor, $date, $reason)
+    public function set_appointment($appointmentid, $doctorID, $date, $reason)
     {
-        $query_text = "UPDATE appointment LEFT JOIN inhabitant ON appointment.inhabitantID = inhabitant.inhabitantID
-                       LEFT JOIN doctor ON appointment.doctorID = doctor.doctorID
-                       SET .chore = (SELECT choreID FROM chore WHERE description = :chore:)
-                       WHERE inhabitant.userID = :id:";
-        $query = $this->db->query($query_text, ['id' => $id, 'firstnameDoctor' => $firstnameDoctor, 'lastnameDoctor' => $lastnameDoctor, 'date' => $date, 'reason' => $reaso]);
+        $query_text = "UPDATE appointment
+                       SET doctorID = :doctorID:, date = :date:, reason = :reason:
+                       WHERE appointmentID = :appointmentid:";
+        $query = $this->db->query($query_text, ['appointmentid' => $appointmentid, 'doctorID' => $doctorID, 'date' => $date, 'reason' => $reason]);
     }
 
     public function delete_appointment($id)
     {
-        $query_text = "DELETE FROM appointment WHERE appointmentID = :id:";
+        $query_text = "UPDATE appointment SET isActive = 0 WHERE appointmentID = :id:";
         $query = $this->db->query($query_text, ['id' => $id]);
     }
 
     public function insert_appointment($id, $doctor, $date, $reason)
     {
         $query_text = "INSERT INTO appointment(inhabitantID, doctorID, date, reason)
-                       VALUES ((SELECT inhabitantID FROM inhabitant
-                                LEFT JOIN user ON inhabitant.userID = user.userID
-                                WHERE inhabitant.userID = :id:),
+                       VALUES ((SELECT inhabitantID FROM inhabitant WHERE userID = :id:),
                                 :doctor:, :date:, :reason:)";
         $query = $this->db->query($query_text, ['id' => $id, 'doctor' => $doctor, 'date' => $date, 'reason' => $reason]);
     }
 
-    public function assignCard($employeeId, $inhabitantId, $reason)
+    public function set_card($cardid, $date, $reason)
     {
-        $query_text="INSERT INTO yellowcard(employeeAdminID, inhabitantID, reason) VALUES (:employeeId:, :inhabitantId:, :reason:)";
-        $query=$this->db->query($query_text, ['employeeId' => $employeeId, 'inhabitantId' => $inhabitantId, 'reason' => $reason]);
+        $query_text = "UPDATE yellowcard SET date =:date:, reason = :reason:
+                       WHERE yellowCardID = :cardid:";
+        $query = $this->db->query($query_text, ['cardid' => $cardid, 'date' => $date, 'reason' => $reason]);
     }
 
+    public function delete_card($id)
+    {
+        $query_text = "UPDATE yellowcard SET isActive = 0 WHERE yellowCardID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id]);
+    }
+
+    public function insert_card($employeeuserid, $inhabitantuserid, $date, $reason)
+    {
+        $query_text = "INSERT INTO yellowcard(employeeAdminID, inhabitantID, date, reason)
+                       VALUES ((SELECT employeeAdminID FROM employeeadmin WHERE userID = :employeeuserid:),
+                       (SELECT inhabitantID FROM inhabitant WHERE userID = :inhabitantuserid:), :date:, :reason:)";
+        $query = $this->db->query($query_text, ['employeeuserid' => $employeeuserid, 'inhabitantuserid' => $inhabitantuserid, 'date' => $date, 'reason' => $reason]);
+    }
+
+    public function set_note($noteid, $title, $description)
+    {
+        $query_text = "UPDATE note SET title =:title:, description = :description:
+                       WHERE noteID = :noteid:";
+        $query = $this->db->query($query_text, ['noteid' => $noteid, 'title' => $title, 'description' => $description]);
+    }
+
+    public function delete_note($id)
+    {
+        $query_text = "UPDATE note SET isActive = 0 WHERE noteID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id]);
+    }
+
+    public function insert_note($employeeuserid, $inhabitantuserid, $title, $description)
+    {
+        $query_text = "INSERT INTO note(employeeAdminID, inhabitantID, title, description)
+                       VALUES ((SELECT employeeAdminID FROM employeeadmin WHERE userID = :employeeuserid:),
+                       (SELECT inhabitantID FROM inhabitant WHERE userID = :inhabitantuserid:), :title:, :description:)";
+        $query = $this->db->query($query_text, ['employeeuserid' => $employeeuserid, 'inhabitantuserid' => $inhabitantuserid, 'title' => $title, 'description' => $description]);
+    }
+
+
+    public function archive_user($id)
+    {
+        $query_text = "UPDATE user SET isActive = 0 WHERE userID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id]);
+    }
 }

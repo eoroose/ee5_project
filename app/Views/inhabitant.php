@@ -1,6 +1,10 @@
     <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
+    <link href="/assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
-    <button onclick=""> Archive user </button>
+    <h3 class="main-title tasks-title">Inhabitant</h3>
+
+    <button onclick="archive_user()"> Archive user </button>
+    <div class="container tasks-container">
     <table style="width:100%">
 
         <?php foreach ($inhabitant as $i): ?>
@@ -27,7 +31,7 @@
         </tr>
 
         <tr>
-            <th>First Name:</th>
+            <th>First name:</th>
             <td id="<?php echo "firstname".$i->firstname?>"><?php echo $i->firstname; ?></td>
             <td>
                 <div class="firstname-edit-save-container">
@@ -43,7 +47,7 @@
         </tr>
 
         <tr>
-            <th>Last Name:</th>
+            <th>Last name:</th>
             <td id="<?php echo "lastname".$i->lastname?>"><?php echo $i->lastname; ?></td>
             <td>
                 <div class="lastname-edit-save-container">
@@ -143,14 +147,15 @@
         </tr>
 
         <tr>
-            <th>Doctors Appointments:</th>
+            <th>Doctors appointments:</th>
             <?php foreach ($appointments as $a): ?>
                 <div id="<?php echo "appointment".$a->appointmentID?>">
                     <td>
-                        <p id="<?php echo "firstnameDoctor".$a->appointmentID?>"><?php echo $a->firstname; ?> </p>
-                        <p id="<?php echo "lastnameDoctor".$a->appointmentID?>"><?php echo $a->lastname ?>: </p>
-                        <p id="<?php echo "date".$a->appointmentID?>"><?php echo $a->date ?> - </p>
-                        <p id="<?php echo "reason".$a->appointmentID?>"><?php echo $a->reason ?> </p>
+                        <p id="<?php echo "doctorID".$a->appointmentID?>" style="display:inline"><?php echo $a->doctorID; ?> </p>
+                        <p id="<?php echo "firstnameDoctor".$a->appointmentID?>" style="display:inline"><?php echo $a->firstname; ?></p>
+                        <p id="<?php echo "lastnameDoctor".$a->appointmentID?>" style="display:inline"><?php echo $a->lastname ?></p>:
+                        <p id="<?php echo "date".$a->appointmentID?>" style="display:inline"><?php echo $a->date ?></p>-
+                        <p id="<?php echo "reason".$a->appointmentID?>" style="display:inline"><?php echo $a->reason ?></p>
                     </td>
                     <td>
                         <div class="app-edit-save-container">
@@ -168,6 +173,7 @@
                             <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
                         </button>
                     </td>
+                    <br>
                 </div>
             <?php endforeach; ?>
 
@@ -186,7 +192,7 @@
                 </div>
 
                 <div>
-                    <button type="button" onclick="add_row();">
+                    <button type="button" onclick="add_appointment();">
                         <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
                     </button>
                 </div>
@@ -196,7 +202,50 @@
 
         <tr>
             <th>Yellow Cards:</th>
-            <td><?php foreach ($cards as $c): ?><?php echo $c->date ?> - <?php echo $c->reason ?><br><?php endforeach; ?></td>
+            <?php foreach ($cards as $c): ?>
+
+                <div id="<?php echo "card".$c->yellowCardID?>">
+                    <td>
+                        <p id="<?php echo "cardDate".$c->yellowCardID?>" style="display:inline"><?php echo $c->date; ?> </p>
+                        <p id="<?php echo "cardReason".$c->yellowCardID?>" style="display:inline"><?php echo $c->reason; ?> </p>
+                    </td>
+                    <td>
+                        <div class="app-edit-save-container">
+                            <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$c->yellowCardID?>" onclick="edit_card('<?php echo $c->yellowCardID?>')" style="display: block">
+                                <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
+                            </button>
+
+                            <button class="app-btn-edit-save" type="save" id="<?php echo "save".$c->yellowCardID?>" onclick="save_card('<?php echo $c->yellowCardID?>')" style="display: none">
+                                <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="app-btn-delete" type="button" id="<?php echo "delete".$c->yellowCardID?>" onclick="delete_card('<?php echo $c->yellowCardID?>')" style="display: block">
+                            <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
+                        </button>
+                    </td>
+                    <br>
+                </div>
+            <?php endforeach; ?>
+
+            <div id="addcard">
+                <td>
+                <div>
+                    <input type="datetime-local" id="new_card_date">
+                </div>
+
+                <div>
+                    <input type="text" id="new_card_reason">
+                </div>
+
+                <div>
+                    <button type="button" onclick="add_card();">
+                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
+                    </button>
+                </div>
+                </td>
+            </div>
         </tr>
 
         <tr>
@@ -233,20 +282,63 @@
 
         <tr>
             <th>Notes:</th>
-            <td><?php foreach ($notes as $n): ?><?php echo $n->title; ?>: <?php echo $n->description ?><br><?php endforeach; ?></td>
+            <?php foreach ($notes as $n): ?>
+                <div id="<?php echo "note".$n->noteID?>">
+                    <td>
+                        <p id="<?php echo "noteTitle".$n->noteID?>" style="display:inline"><?php echo $n->title; ?> </p>:
+                        <p id="<?php echo "noteDescription".$n->noteID?>" style="display:inline"><?php echo $n->description; ?> </p>
+                    </td>
+                    <td>
+                        <div class="app-edit-save-container">
+                            <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$n->noteID?>" onclick="edit_note('<?php echo $n->noteID?>')" style="display: block">
+                                <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
+                            </button>
+
+                            <button class="app-btn-edit-save" type="save" id="<?php echo "save".$n->noteID?>" onclick="save_note('<?php echo $n->noteID?>')" style="display: none">
+                                <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="app-btn-delete" type="button" id="<?php echo "delete".$n->noteID?>" onclick="delete_note('<?php echo $n->noteID?>')" style="display: block">
+                            <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
+                        </button>
+                    </td>
+                    <br>
+                </div>
+            <?php endforeach; ?>
+            <div id="addnote">
+                <td>
+                <div>
+                    <input type="text" id="new_note_title">
+                </div>
+
+                <div>
+                    <input type="text" id="new_note_description">
+                </div>
+
+                <div>
+                    <button type="button" onclick="add_note();">
+                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
+                    </button>
+                </div>
+                </td>
+            </div>
         </tr>
     </table>
-
-
-
-<form action="/UsersController/insertAppointment" id="appointmentform">
-    <input type="hidden" id="doctor2" name="new_doctor" value="">
-    <input type="hidden" id="date2" name="new_date" value="">
-    <input type="hidden" id="reason2" name="new_reason" value="">
-    <input type="hidden" id="userID" name="userID" value="">
-</form>
+    </div>
 
 <script>
+        function archive_user()
+        {
+            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                $.post('/UsersController/archiveUser', {id:<?php echo $userID; ?>})
+            }
+        }
+
         function edit_username(no)
         {
             document.getElementById("edit"+no).style.display="none";
@@ -440,12 +532,16 @@
             chore.innerHTML='<form id="chore_text">'+
                             '<input type="radio" id="Not Assigned" name="chore" value="Not Assigned"> '+
                             '<label for="Not Assigned">Not Assigned</label>'+
+                            '<br>'+
                             '<input type="radio" id="Household" name="chore" value="Household"> '+
                             '<label for="Household">Household</label>'+
+                            '<br>'+
                             '<input type="radio" id="Kitchen" name="chore" value="Kitchen"> '+
                             '<label for="Kitchen">Kitchen</label>'+
+                            '<br>'+
                             '<input type="radio" id="Weekday Responsible" name="chore" value="Weekday Responsible"> '+
                             '<label for="Weekday Responsible">Weekday Responsible</label>'+
+                            '<br>'+
                             '<input type="radio" id="Weekend Responsible" name="chore" value="Weekend Responsible"> '+
                             '<label for="Weekend Responsible">Weekend Responsible</label></form>';
         }
@@ -478,40 +574,33 @@
             document.getElementById("edit"+no).style.display="none";
             document.getElementById("save"+no).style.display="block";
 
-            var firstnameDoctor=document.getElementById("firstnameDoctor"+no);
-            var lastnameDoctor=document.getElementById("lastnameDoctor"+no);
+            var doctor=document.getElementById("doctorID"+no);
             var date=document.getElementById("date"+no);
             var reason=document.getElementById("reason"+no);
 
-            var firstnameDoctor_data=firstnameDoctor.innerHTML;
-            var lastnameDoctor_data=lastnameDoctor.innerHTML;
+            var doctor_data=doctor.innerHTML;
             var date_data=date.innerHTML;
             var reason_data=reason.innerHTML;
 
-            firstnameDoctor.innerHTML="<input type='text' id='firstnameDoctor_text"+no+"' value='"+firstnameDoctor_data+"'> ";
-            lastnameDoctor.innerHTML="<input type='text' id='lastnameDoctor_text"+no+"' value='"+lastnameDoctor_data+"'> ";
+            doctor.innerHTML="<input type='number' id='doctor_text"+no+"' value='"+doctor_data+"'> ";
             date.innerHTML="<input type='datetime-local' id='date_text"+no+"' value='"+date_data+"'> ";
             reason.innerHTML="<input type='text' id='reason_text"+no+"' value='"+reason_data+"'> ";
         }
 
         function save_appointment(no)
         {
-            var firstnameDoctor_val=document.getElementById("firstnameDoctor_text"+no).value;
-            var lastnameDoctor_val = document.getElementById("lastnameDoctor_text"+no).value;
+            var doctor_val=document.getElementById("doctor_text"+no).value;
             var date_val = document.getElementById("date_text"+no).value;
             var reason_val = document.getElementById("reason_text"+no).value;
 
-            document.getElementById("firstnameDoctor"+no).innerHTML=firstnameDoctor_val;
-            document.getElementById("lastnameDoctor"+no).innerHTML=lastnameDoctor_val;
+            document.getElementById("doctorID"+no).innerHTML=doctor_val;
             document.getElementById("date"+no).innerHTML=date_val;
             document.getElementById("reason"+no).innerHTML=reason_val;
 
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
-
-            $.post('/UsersController/setAppointment', {id:<?php echo $userID; ?>, firstnameDoctor:firstnameDoctor_val, lastnameDoctor:lastnameDoctor_val, date:date_val, reason:reason_val})
+            $.post('/UsersController/setAppointment', {appointmentid:no, doctorID:doctor_val, date:date_val, reason:reason_val})
         }
 
         function delete_appointment(no)
@@ -529,13 +618,108 @@
             var new_doctor=document.getElementById("new_doctor").value;
             var new_date=document.getElementById("new_date").value;
             var new_reason=document.getElementById("new_reason").value;
-            var userID=<?php echo $userID; ?>
 
-            document.getElementById("doctor2").value=new_doctor;
-            document.getElementById("date2").value=new_date;
-            document.getElementById("reason2").value=new_reason;
-            document.getElementById("userID").value=userID;
-            document.getElementById("appointmentform").submit();
+            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+
+            $.post('/UsersController/insertAppointment', {id:<?php echo $userID; ?>, doctor:new_doctor, date:new_date, reason:new_reason})
+        }
+
+        function edit_card(no)
+        {
+            document.getElementById("edit"+no).style.display="none";
+            document.getElementById("save"+no).style.display="block";
+
+            var cardDate=document.getElementById("cardDate"+no);
+            var cardReason=document.getElementById("cardReason"+no);
+
+            var cardDate_data=cardDate.innerHTML;
+            var cardReason_data=cardReason.innerHTML;
+
+            cardDate.innerHTML="<input type='datetime-local' id='cardDate_text"+no+"' value='"+cardDate_data+"'> ";
+            cardReason.innerHTML="<input type='text' id='cardReason_text"+no+"' value='"+cardReason_data+"'> ";
+        }
+
+        function save_card(no)
+        {
+            var cardDate_val=document.getElementById("cardDate_text"+no).value;
+            var cardReason_val = document.getElementById("cardReason_text"+no).value;
+
+            document.getElementById("cardDate"+no).innerHTML=cardDate_val;
+            document.getElementById("cardReason"+no).innerHTML=cardReason_val;
+
+            document.getElementById("edit"+no).style.display="block";
+            document.getElementById("save"+no).style.display="none";
+
+            $.post('/UsersController/setCard', {cardid:no, date:cardDate_val, reason:cardReason_val})
+        }
+
+        function delete_card(no)
+        {
+            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                document.getElementById("card"+no+"").outerHTML="";
+                $.post('/UsersController/deleteCard', {id:no})
+            }
+        }
+
+        function add_card()
+        {
+            var new_cardDate=document.getElementById("new_card_date").value;
+            var new_cardReason=document.getElementById("new_card_reason").value;
+
+            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+
+            $.post('/UsersController/insertCard', {id:<?php echo $userID; ?>, date:new_cardDate, reason:new_cardReason})
+        }
+
+        function edit_note(no)
+        {
+            document.getElementById("edit"+no).style.display="none";
+            document.getElementById("save"+no).style.display="block";
+
+            var noteTitle=document.getElementById("noteTitle"+no);
+            var noteDescription=document.getElementById("noteDescription"+no);
+
+            var noteTitle_data=noteTitle.innerHTML;
+            var noteDescription_data=noteDescription.innerHTML;
+
+            noteTitle.innerHTML="<input type='text' id='noteTitle_text"+no+"' value='"+noteTitle_data+"'> ";
+            noteDescription.innerHTML="<input type='text' id='noteDescription_text"+no+"' value='"+noteDescription_data+"'> ";
+        }
+
+        function save_note(no)
+        {
+            var noteTitle_val=document.getElementById("noteTitle_text"+no).value;
+            var noteDescription_val = document.getElementById("noteDescription_text"+no).value;
+
+            document.getElementById("noteTitle"+no).innerHTML=noteTitle_val;
+            document.getElementById("noteDescription"+no).innerHTML=noteDescription_val;
+
+            document.getElementById("edit"+no).style.display="block";
+            document.getElementById("save"+no).style.display="none";
+
+            $.post('/UsersController/setNote', {noteid:no, title:noteTitle_val, description:noteDescription_val})
+        }
+
+        function delete_note(no)
+        {
+            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                document.getElementById("note"+no+"").outerHTML="";
+                $.post('/UsersController/deleteNote', {id:no})
+            }
+        }
+
+        function add_note()
+        {
+            var new_noteTitle=document.getElementById("new_note_title").value;
+            var new_noteDescription=document.getElementById("new_note_description").value;
+
+            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+
+            $.post('/UsersController/insertNote', {id:<?php echo $userID; ?>, title:new_noteTitle, description:new_noteDescription})
         }
 
 </script>
