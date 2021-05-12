@@ -50,18 +50,3 @@ body {
     color: white;
     border: var(--celebration-border-width) solid var(--purple);
 }
-/* 
-
-.celebration_container {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.celebration_script {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */

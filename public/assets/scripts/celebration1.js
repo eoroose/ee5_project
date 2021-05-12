@@ -7,6 +7,9 @@ let inhabitant;
 let setting;
 let font;
 let purple = '#6959CC';
+let song;
+let songStartingTime = 10;
+let countdownSound;
 
 // controller
 let startConnection = true;
@@ -63,9 +66,13 @@ let phase = 1;
 
 function preload() {
     font = loadFont('/assets/fonts/freestyle-script-regular.ttf');
+    song = document.getElementById('audio');
+    countdownSound = document.getElementById('audio_count');
     sel = select('#inhabitants');
     set = select('#settings');
     btn = select('#button');
+    aud = select('#audioOn');
+    song.currentTime = songStartingTime;
 }
 
 function setup() {
@@ -82,6 +89,7 @@ function setup() {
             start = true;
         }
     });
+    
 
     gravity = createVector(0, gravityValue);
     textFont(font);
@@ -108,10 +116,12 @@ function draw() {
                 controllerGetDataInterval = setInterval(getControllerData, 100);
                 startGettingData = false;
             }
+            song.play();
             phase++;
             break;
         }
         case 4: {
+            potAudio();
             fireworkAnimation();
             congratsAnimation();
             break;
@@ -160,7 +170,7 @@ async function getControllerData() {
     } catch (err) {
         console.log(err);
     }
-    // console.log(buttons, knob);
+    console.log(buttons, knob);
 }
 
 // keyboard
@@ -233,15 +243,27 @@ function timerAnimation() {
     if(timerTimeIncrement <= 0) {
         timerTimeIncrement = 1000;
         timerTime--;
+        
+    }
+
+    if(timerTimeIncrement === 1000) {
+        countdownSound.play();
     }
 
     if (timerTime < 1) {
         clearInterval(timerInterval);
+        countdownSound.volume = 0;
         timerTime = 1;
         stopTimer = true;
     }
 
     text(timerTime, width/2, height/2 - 100);
+}
+
+function potAudio() {
+    if(setting === 'controller') {
+        song.volume = map(knob, 0, 1024, 0, 1);
+    }
 }
 
 function congratsAnimation() {
@@ -289,7 +311,6 @@ function congratsAnimation() {
         switch(setting) {
             case 'controller': {
                 if (buttons[0] === 1 && !congratsSpin) {
-                    console.log('btnpressed', congratsSpin);
                     startMillis = millis();
                     congratsSpin = true;
                 }
@@ -297,7 +318,6 @@ function congratsAnimation() {
             }
             case 'keyboard': {
                 if (keys[2] === 1 && !congratsSpin) {
-                    console.log('keypressed');
                     startMillis = millis();
                     congratsSpin = true;
                 }
@@ -310,7 +330,7 @@ function congratsAnimation() {
     textSize(map(congratsTimeIncrement, 0, congratsTimingLimit, 0, congratsSize));
     stroke(purple);
     fill(color(`hsb(${congratsColor}, 100%, 100%)`));
-    translate(width/2, height/3);
+    translate(width/2, height/2);
 
     if(congratsSpin) {
         rotate(radians((millis() - startMillis)/contgratsSpinSpeed));
