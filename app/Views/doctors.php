@@ -13,7 +13,8 @@
                 <img src="<?php if($row['gender']=="male"){echo base_url('assets/images/doctors/maledoctor.svg');}else{echo base_url('assets/images/doctors/maledoctor.svg');}?>" height="50px" width="50px">
                 <div class="card-body dashboard-card-body">
                     <h5 class="card-title dashboard-card-title"style="text-align: center"><?php echo $row['lastname'].' '.$row['firstname']?></h5>
-                    <a href="/doctor/doctorprofile/<?php echo $row['doctorID'];?>" class="stretched-link"></a>
+                    <a href="/doctors/doctorprofile/<?php echo $row['doctorID'];?>" class="stretched-link"></a>
+                  <!--  nclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo 't ' ?>' -->
                 </div>
             </div>
         <?php }?>

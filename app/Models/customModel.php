@@ -12,7 +12,8 @@ class customModel{
     function getActiveInhabitants(){
        $builder= $this->db->table('inhabitant');
        $builder->join('user','inhabitant.userID=user.userID');
-       return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname')->get()->getResultArray();
+       $builder->join('avatars','user.avatar=avatars.id');
+       return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname,location')->get()->getResultArray();
     }
 
     function getDoctors(){

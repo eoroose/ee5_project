@@ -7,8 +7,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="./assets/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/header.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -22,11 +22,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark header-container">
         <div class="container">
             <a href=/dashboard>
-                <img class="header-logo" src="./assets/images/header/header_logo.svg" alt="header logo image"/>
+                <img class="header-logo" src="/assets/images/header/header_logo.svg" alt="header logo image"/>
             </a>
 
             <a href=/logout>
-                <img class="header-logout" src="./assets/images/header/log_out.svg" alt="logout image"/>
+                <img class="header-logout" src="/assets/images/header/log_out.svg" alt="logout image"/>
             </a>
         </div>
     </nav>
