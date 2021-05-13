@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\customModel;
 use App\Models\inhabitantModel;
+use App\Models\UserModel;
 
 class UsersController extends BaseController
 {
@@ -21,7 +22,8 @@ class UsersController extends BaseController
             echo view('templates/header');
             $this->data['activeinhabitants'] = $this->inhabitantModel->get_active_inhabitants();
             $this->data['archivedinhabitants'] = $this->inhabitantModel->get_archived_inhabitants();
-            $this->data['users'] = $this->inhabitantModel->get_users();
+            $this->data['activeemployees'] = $this->inhabitantModel->get_active_employees();
+            $this->data['archivedemployees'] = $this->inhabitantModel->get_archived_employees();
             echo view('users', $this->data);
             echo view('templates/footer');
         } else {
@@ -47,15 +49,22 @@ class UsersController extends BaseController
         echo view('templates/header');
         $this->data['activeinhabitants'] = [];
         $this->data['archivedinhabitants'] = $this->inhabitantModel->get_archived_inhabitants();
-        echo view('inhabitants', $this->data);
+        $this->data['activeemployees'] = [];
+        $this->data['archivedemployees'] = $this->inhabitantModel->get_archived_employees();
+        echo view('users', $this->data);
         echo view('templates/footer');
     }
 
     public function employee()
     {
         $userID = htmlspecialchars($_GET["user"]);
+        $this->data['isActive'] = $this->inhabitantModel->get_isActive($userID);
+        $this->data['isAdmin'] = $this->inhabitantModel->get_isAdmin($userID);
         $this->data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
-        return view('employee', $this->data);
+        $this->data['password'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        echo view('templates/header');
+        echo view('employee', $this->data);
+        echo view('templates/footer');
     }
 
     public function inhabitant()
@@ -72,6 +81,9 @@ class UsersController extends BaseController
         $this->data['godparent'] = $this->inhabitantModel->get_godparent($userID);
         $this->data['inhabitants'] = $this->inhabitantModel->get_active_inhabitants();
         $this->data['godchildren'] = $this->inhabitantModel->get_godchildren($userID);
+        if(session()->get('role')=='admin') {
+            $this->data['password'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        }
         echo view('templates/header');
         echo view('inhabitant', $this->data);
         echo view('templates/footer');
@@ -207,6 +219,48 @@ class UsersController extends BaseController
         $this->inhabitantModel->set_departureDate($id, $departureDate);
     }
 
+    public function changeInhabitantPassword(){
+        helper(['form']);
+        if($this->request->getMethod()=='post'){
+            $rules =[
+                'new-password' => 'required|min_length[8]|max_length[255]',
+                'confirm-password' => 'matches[new-password]',
+            ];
+            if (!$this->validate($rules)) {
+                $data['validation'] = $this->validator;
+            }
+            else{
+                $model = new UserModel();
+                $user=$model->where('userId',htmlspecialchars($_GET["userID"]))->first();
+                    $model->where('userId', htmlspecialchars($_GET["userID"]))->set('password',$this->request->getVar('new-password'))->update();
+                    $session=session();
+                    $session->setFlashdata('succes','Changed Password');
+                    return redirect()->to('/UsersController/inhabitantsPage');
+            }
+        }
+    }
+
+    public function changeEmployeePassword(){
+        helper(['form']);
+        if($this->request->getMethod()=='post'){
+            $rules =[
+                'new-password' => 'required|min_length[8]|max_length[255]',
+                'confirm-password' => 'matches[new-password]',
+            ];
+            if (!$this->validate($rules)) {
+                $data['validation'] = $this->validator;
+            }
+            else{
+                $model = new UserModel();
+                $user=$model->where('userId',htmlspecialchars($_GET["userID"]))->first();
+                    $model->where('userId', htmlspecialchars($_GET["userID"]))->set('password',$this->request->getVar('new-password'))->update();
+                    $session=session();
+                    $session->setFlashdata('succes','Changed Password');
+                    return redirect()->to('/UsersController/index');
+            }
+        }
+    }
+
     public function setChore()
     {
         if(isset($_POST['chore'])){
@@ -218,6 +272,24 @@ class UsersController extends BaseController
             $chore = 'error';
         }
         $this->inhabitantModel->set_chore($id, $chore);
+    }
+
+    public function getFirstnameDoctor()
+    {
+        if(isset($_GET['doctorID'])){
+            $doctorID = $_GET['doctorID'];
+            $firstname_doctor = $this->inhabitantModel->get_firstname_doctor($doctorID);
+        }
+        return $firstname_doctor;
+    }
+
+    public function getLastnameDoctor()
+    {
+        if(isset($_GET['doctorID'])){
+            $doctorID = $_GET['doctorID'];
+            $lastname_doctor = $this->inhabitantModel->get_lastname_doctor($doctorID);
+        }
+        return $lastname_doctor;
     }
 
     public function setAppointment()
@@ -281,10 +353,10 @@ class UsersController extends BaseController
             $noteid = $_POST['noteid'];
             $title = $_POST['title'];
             $description = $_POST['description'];
+            $this->inhabitantModel->set_note($noteid, $title, $description);
         }
         else {
         }
-        $this->inhabitantModel->set_note($noteid, $title, $description);
     }
 
     public function deleteNote()
@@ -321,5 +393,21 @@ class UsersController extends BaseController
             $id=$_POST['id'];
         }
         $this->inhabitantModel->dearchive_user($id);
+    }
+
+    public function makeAdmin()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->make_admin($id);
+    }
+
+    public function makeEmployee()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->make_employee($id);
     }
 }

@@ -1,11 +1,7 @@
 <div>
     <h1>users page</h1>
 
-    <p>any info given from this page can be changed, such as usernames, first/last names, birthdays, appointments anything from anyone</p>
-    <p>can also assign yellow cards to inhabitants</p>
-    <P>also a list of inhabitants that are no longer in de spiegel will be available</P>
-    <p>with the option to re-enlist them</p>
-
+    <?php if (!empty($activeinhabitants)): ?>
     <h2> List of active inhabitants </h2>
         <table>
                 <tr>
@@ -16,13 +12,15 @@
 
             <?php foreach ($activeinhabitants as $i): ?>
                 <tr onclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo $i->userID; ?>';">
-                    <td><?php echo $i->avatar;?></td>
+                    <td><img src="<?php echo $i->location;?>"></td>
                     <td><?php echo $i->firstname;?></td>
                     <td><?php echo $i->lastname;?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
+    <?php endif; ?>
 
+    <?php if (!empty($archivedinhabitants)): ?>
     <h2> List of archived inhabitants </h2>
         <table>
                 <tr>
@@ -33,14 +31,16 @@
 
             <?php foreach ($archivedinhabitants as $i): ?>
                 <tr onclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo $i->userID; ?>';">
-                    <td><?php echo $i->avatar;?></td>
+                    <td><img src="<?php echo $i->location;?>"></td>
                     <td><?php echo $i->firstname;?></td>
                     <td><?php echo $i->lastname;?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
+    <?php endif; ?>
 
-    <h2> List of employees </h2>
+    <?php if (!empty($activeemployees)): ?>
+    <h2> List of active employees </h2>
         <table>
                     <tr>
                         <th>Avatar</th>
@@ -48,16 +48,39 @@
                         <th>Last Name</th>
                     </tr>
 
-            <?php foreach ($users as $u): ?>
+            <?php foreach ($activeemployees as $u): ?>
                 <?php if($u->employeeAdminID == NULL): ?>
                 <?php else: ?>
                     <tr onclick="window.location.href='http://localhost/UsersController/employee?user=<?php echo $u->userID; ?>';">
-                        <td><?php echo $u->avatar;?></td>
+                        <td><img src="<?php echo $u->location;?>"></td>
                         <td><?php echo $u->firstname;?></td>
                         <td><?php echo $u->lastname;?></td>
                     </tr>
                 <?php endif; ?>
             <?php endforeach; ?>
         </table>
+    <?php endif; ?>
+
+    <?php if (!empty($archivedemployees)): ?>
+    <h2> List of archived employees </h2>
+        <table>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+
+            <?php foreach ($archivedemployees as $u): ?>
+                <?php if($u->employeeAdminID == NULL): ?>
+                <?php else: ?>
+                    <tr onclick="window.location.href='http://localhost/UsersController/employee?user=<?php echo $u->userID; ?>';">
+                        <td><img src="<?php echo $u->location;?>"></td>
+                        <td><?php echo $u->firstname;?></td>
+                        <td><?php echo $u->lastname;?></td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
 
 </div>

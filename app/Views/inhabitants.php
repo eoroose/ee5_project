@@ -17,10 +17,10 @@
             <td><?php echo $i->lastname;?></td>
         </tr>
         <?php endforeach; ?>
-
     </table>
     <?php endif; ?>
 
+    <?php if (!empty($archivedinhabitants)): ?>
     <h2>archived inhabitants</h2>
     <table>
         <tr>
@@ -36,7 +36,7 @@
             <td><?php echo $i->lastname;?></td>
         </tr>
         <?php endforeach; ?>
-
     </table>
+    <?php endif; ?>
 
 </div>

@@ -1,7 +1,9 @@
     <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
     <link href="/assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
-    <h3 class="main-title tasks-title">Inhabitant</h3>
+    <?php foreach ($inhabitant as $i): ?>
+    <h3 class="main-title tasks-title"><?php echo $i->firstname; ?> <?php echo $i->lastname; ?></h3>
+    <?php endforeach; ?>
 
     <?php foreach ($isActive as $iA): ?>
         <?php if($iA->isActive == 1): ?>
@@ -132,8 +134,30 @@
                 </div>
             </td>
         </tr>
-
         <?php endforeach; ?>
+
+                    <?php if (!empty($password)): ?>
+                    <?php foreach($password as $p): ?>
+                    <div class="col-12 card profile-col">
+                        <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">change password</button>
+                        <?php if (isset($validation)): ?>
+                            <div class="main-alert-message">
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $validation->listErrors() ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <div id="otherFieldDiv" style="display: none">
+                            <form class="" action="/UsersController/changeInhabitantPassword?userID=<?php echo $i->userID?>" method="post">
+                                <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
+                                <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
+                                <button type="submit" class="main-btn profile-password-btn">change password</button>
+                            </form>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
 
         <tr>
             <th>Chore:</th>
@@ -313,7 +337,7 @@
             <?php foreach ($notes as $n): ?>
                 <div id="<?php echo "note".$n->noteID?>">
                     <td>
-                        <p id="<?php echo "noteTitle".$n->noteID?>" style="display:inline"><?php echo $n->title; ?> </p>:
+                        <p id="<?php echo "noteTitle".$n->noteID?>" style="display:inline"><?php echo $n->title;?></p>:
                         <p id="<?php echo "noteDescription".$n->noteID?>" style="display:inline"><?php echo $n->description; ?> </p>
                     </td>
                     <td>
@@ -359,6 +383,11 @@
     </div>
 
 <script>
+        function showCangePasword(){
+            $('#otherFieldDiv').show();
+            $('#changeP').hide();
+        }
+
         function archive_user()
         {
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
@@ -634,6 +663,16 @@
             reason.innerHTML="<input type='text' id='reason_text"+no+"' value='"+reason_data+"'> ";
         }
 
+        function get_firstname_doctor(x)
+        {
+            return $.get('/UsersController/getFirstnameDoctor', {doctorID:x})
+        }
+
+        function get_lastname_doctor(x)
+        {
+            return $.get('/UsersController/getLastnameDoctor', {doctorID:x})
+        }
+
         function save_appointment(no)
         {
             var doctor_val=sb.value;
@@ -642,12 +681,15 @@
 
             document.getElementById("date"+no).innerHTML=date_val;
             document.getElementById("reason"+no).innerHTML=reason_val;
+            document.getElementById("firstnameDoctor"+no).innerHTML=get_firstname_doctor(doctor_val);
+            document.getElementById("lastnameDoctor"+no).innerHTML=get_lastname_doctor(doctor_val);
 
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
             document.getElementById("doctorform"+no).style.display="none";
 
             $.post('/UsersController/setAppointment', {appointmentid:no, doctorID:doctor_val, date:date_val, reason:reason_val})
+            setTimeout(function(){location.reload()}, 500);
         }
 
         function delete_appointment(no)
@@ -657,6 +699,7 @@
             {
                 document.getElementById("appointment"+no+"").outerHTML="";
                 $.post('/UsersController/deleteAppointment', {id:no})
+                setTimeout(function(){location.reload()}, 500);
             }
         }
 
@@ -670,6 +713,7 @@
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/insertAppointment', {id:<?php echo $userID; ?>, doctor:new_doctor, date:new_date, reason:new_reason})
+            setTimeout(function(){location.reload()}, 500);
         }
 
         function edit_card(no)
@@ -711,14 +755,14 @@
 
             var cardActive_val=selectedValue;
 
+            document.getElementById("cardDate"+no).innerHTML=cardDate_val;
+            document.getElementById("cardReason"+no).innerHTML=cardReason_val;
+            document.getElementById("cardActive"+no).innerHTML=cardActive_val;
+
             if(cardActive_val == 'YES')
                 { cardActive_val = 1; }
             else
                 { cardActive_val = 0; }
-
-            document.getElementById("cardDate"+no).innerHTML=cardDate_val;
-            document.getElementById("cardReason"+no).innerHTML=cardReason_val;
-            document.getElementById("cardActive"+no).innerHTML=cardActive_val;
 
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
@@ -755,6 +799,7 @@
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setGodparent', {id:<?php echo $userID; ?>, godparentID:godparentID_val})
+            setTimeout(function(){location.reload()}, 500);
         }
 
         function edit_note(no)
@@ -793,6 +838,7 @@
             {
                 document.getElementById("note"+no+"").outerHTML="";
                 $.post('/UsersController/deleteNote', {id:no})
+                setTimeout(function(){location.reload()}, 500);
             }
         }
 
@@ -804,6 +850,7 @@
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/insertNote', {id:<?php echo $userID; ?>, title:new_noteTitle, description:new_noteDescription})
+            setTimeout(function(){location.reload()}, 500);
         }
 
 </script>
