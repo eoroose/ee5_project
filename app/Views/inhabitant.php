@@ -3,7 +3,14 @@
 
     <h3 class="main-title tasks-title">Inhabitant</h3>
 
-    <button onclick="archive_user()"> Archive user </button>
+    <?php foreach ($isActive as $iA): ?>
+        <?php if($iA->isActive == 1): ?>
+            <button onclick="archive_user()"> Archive user </button>
+        <?php elseif($iA->isActive == 0): ?>
+            <button onclick="dearchive_user()"> De-archive user </button>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
     <div class="container tasks-container">
     <table style="width:100%">
 
@@ -151,15 +158,23 @@
             <?php foreach ($appointments as $a): ?>
                 <div id="<?php echo "appointment".$a->appointmentID?>">
                     <td>
-                        <p id="<?php echo "doctorID".$a->appointmentID?>" style="display:inline"><?php echo $a->doctorID; ?> </p>
+                            <form id="<?php echo "doctorform".$a->appointmentID?>" style="display:none">
+                                <label for="doctor">Dokter:</label>
+                                <select id="doctor">
+                                      <?php foreach($doctors as $row): ?>
+                                          <option value="<?php echo $row->doctorID; ?>"><?php echo $row->firstname;?>  <?php echo $row->lastname; ?></option>;
+                                      <?php endforeach; ?>
+                                </select>
+                            </form>
                         <p id="<?php echo "firstnameDoctor".$a->appointmentID?>" style="display:inline"><?php echo $a->firstname; ?></p>
-                        <p id="<?php echo "lastnameDoctor".$a->appointmentID?>" style="display:inline"><?php echo $a->lastname ?></p>:
+                        <p id="<?php echo "lastnameDoctor".$a->appointmentID?>" style="display:inline"><?php echo $a->lastname?>:</p>
                         <p id="<?php echo "date".$a->appointmentID?>" style="display:inline"><?php echo $a->date ?></p>-
                         <p id="<?php echo "reason".$a->appointmentID?>" style="display:inline"><?php echo $a->reason ?></p>
                     </td>
                     <td>
                         <div class="app-edit-save-container">
                             <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$a->appointmentID?>" onclick="edit_appointment('<?php echo $a->appointmentID?>')" style="display: block">
+
                                 <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
                             </button>
 
@@ -180,14 +195,21 @@
             <div id="addappointment">
                 <td>
                 <div>
-                    <input type="number" id="new_doctor">
+                    <p style="display:inline">Dokter:</p>
+                       <select class="form-control main-input register-input" id="new_doctor" name="doctor" value='"+doctor_data+"'>
+                          <?php foreach($doctors as $row): ?>
+                              <option value="<?php echo $row->doctorID; ?>"><?php echo $row->firstname;?>  <?php echo $row->lastname; ?></option>;
+                          <?php endforeach; ?>
+                       </select>
                 </div>
 
                 <div>
+                    <p style="display:inline">Datum:</p>
                     <input type="datetime-local" id="new_date">
                 </div>
 
                 <div>
+                    <p style="display:inline">Reden:</p>
                     <input type="text" id="new_reason">
                 </div>
 
@@ -206,8 +228,13 @@
 
                 <div id="<?php echo "card".$c->yellowCardID?>">
                     <td>
-                        <p id="<?php echo "cardDate".$c->yellowCardID?>" style="display:inline"><?php echo $c->date; ?> </p>
                         <p id="<?php echo "cardReason".$c->yellowCardID?>" style="display:inline"><?php echo $c->reason; ?> </p>
+                        (<p id="<?php echo "cardDate".$c->yellowCardID?>" style="display:inline"><?php echo $c->date;?></p>)
+                        <br> Active? <p id="<?php echo "cardActive".$c->yellowCardID?>" style="display:inline">
+                            <?php if ($c->isActive == 1): ?> YES
+                            <?php else: ?> NO
+                            <?php endif; ?>
+                        </p>
                     </td>
                     <td>
                         <div class="app-edit-save-container">
@@ -220,32 +247,9 @@
                             </button>
                         </div>
                     </td>
-                    <td>
-                        <button class="app-btn-delete" type="button" id="<?php echo "delete".$c->yellowCardID?>" onclick="delete_card('<?php echo $c->yellowCardID?>')" style="display: block">
-                            <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="trash image">
-                        </button>
-                    </td>
                     <br>
                 </div>
             <?php endforeach; ?>
-
-            <div id="addcard">
-                <td>
-                <div>
-                    <input type="datetime-local" id="new_card_date">
-                </div>
-
-                <div>
-                    <input type="text" id="new_card_reason">
-                </div>
-
-                <div>
-                    <button type="button" onclick="add_card();">
-                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-add-svg" alt="add image">
-                    </button>
-                </div>
-                </td>
-            </div>
         </tr>
 
         <tr>
@@ -272,7 +276,31 @@
 
         <tr>
             <th>Godparent:</th>
-            <td><?php foreach ($godparent as $g): ?><?php echo $g->firstname; ?> <?php echo $g->lastname ?><?php endforeach; ?></td>
+            <?php foreach ($godparent as $g): ?>
+            <td>
+                    <form id="<?php echo "godparentForm".$g->godparentID?>" style="display:none">
+                        <label for="godparent">Godparent:</label>
+                        <select id="godparent">
+                              <?php foreach($inhabitants as $row): ?>
+                                  <option value="<?php echo $row->inhabitantID; ?>"><?php echo $row->firstname;?>  <?php echo $row->lastname; ?></option>;
+                              <?php endforeach; ?>
+                        </select>
+                    </form>
+                <p id="<?php echo "firstnameGodp".$g->godparentID?>" style="display:inline"><?php echo $g->firstname; ?> </p>
+                <p id="<?php echo "lastnameGodp".$g->godparentID?>" style="display:inline"><?php echo $g->lastname; ?> </p>
+            </td>
+            <td>
+                <div class="app-edit-save-container">
+                    <button class="app-btn-edit-save" type="edit" id="<?php echo "edit".$g->godparentID?>" onclick="edit_godparent('<?php echo $g->godparentID?>')" style="display: block">
+                        <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image">
+                    </button>
+
+                    <button class="app-btn-edit-save" type="save" id="<?php echo "save".$g->godparentID?>" onclick="save_godparent('<?php echo $g->godparentID?>')" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </td>
+            <?php endforeach; ?>
         </tr>
 
         <tr>
@@ -310,10 +338,12 @@
             <div id="addnote">
                 <td>
                 <div>
+                    <p style="display:inline">Title:</p>
                     <input type="text" id="new_note_title">
                 </div>
 
                 <div>
+                    <p style="display:inline">Description:</p>
                     <input type="text" id="new_note_description">
                 </div>
 
@@ -332,10 +362,20 @@
         function archive_user()
         {
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
-            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
+            var r = confirm("Weet je zeker dat je deze wilt archivere?");
             if(r==true)
             {
                 $.post('/UsersController/archiveUser', {id:<?php echo $userID; ?>})
+            }
+        }
+
+        function dearchive_user()
+        {
+            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+            var r = confirm("Weet je zeker dat je deze wilt de-archiveren?");
+            if(r==true)
+            {
+                $.post('/UsersController/dearchiveUser', {id:<?php echo $userID; ?>})
             }
         }
 
@@ -573,32 +613,39 @@
         {
             document.getElementById("edit"+no).style.display="none";
             document.getElementById("save"+no).style.display="block";
+            document.getElementById("doctorform"+no).style.display="block";
 
-            var doctor=document.getElementById("doctorID"+no);
+            var firstname=document.getElementById("firstnameDoctor"+no);
+            var lastname=document.getElementById("lastnameDoctor"+no);
             var date=document.getElementById("date"+no);
             var reason=document.getElementById("reason"+no);
 
-            var doctor_data=doctor.innerHTML;
+            var firstname_data=firstname.innerHTML;
+            var lastname_data=lastname.innerHTML;
             var date_data=date.innerHTML;
             var reason_data=reason.innerHTML;
 
-            doctor.innerHTML="<input type='number' id='doctor_text"+no+"' value='"+doctor_data+"'> ";
+            document.getElementById("firstnameDoctor"+no).style.display="none";
+            document.getElementById("lastnameDoctor"+no).style.display="none";
+
+            sb = document.querySelector('#doctor');
+
             date.innerHTML="<input type='datetime-local' id='date_text"+no+"' value='"+date_data+"'> ";
             reason.innerHTML="<input type='text' id='reason_text"+no+"' value='"+reason_data+"'> ";
         }
 
         function save_appointment(no)
         {
-            var doctor_val=document.getElementById("doctor_text"+no).value;
+            var doctor_val=sb.value;
             var date_val = document.getElementById("date_text"+no).value;
             var reason_val = document.getElementById("reason_text"+no).value;
 
-            document.getElementById("doctorID"+no).innerHTML=doctor_val;
             document.getElementById("date"+no).innerHTML=date_val;
             document.getElementById("reason"+no).innerHTML=reason_val;
 
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
+            document.getElementById("doctorform"+no).style.display="none";
 
             $.post('/UsersController/setAppointment', {appointmentid:no, doctorID:doctor_val, date:date_val, reason:reason_val})
         }
@@ -616,6 +663,7 @@
         function add_appointment()
         {
             var new_doctor=document.getElementById("new_doctor").value;
+            alert (new_doctor);
             var new_date=document.getElementById("new_date").value;
             var new_reason=document.getElementById("new_reason").value;
 
@@ -631,12 +679,20 @@
 
             var cardDate=document.getElementById("cardDate"+no);
             var cardReason=document.getElementById("cardReason"+no);
+            var cardActive=document.getElementById("cardActive"+no);
 
             var cardDate_data=cardDate.innerHTML;
             var cardReason_data=cardReason.innerHTML;
+            var cardActive_data=cardActive.innerHTML;
 
             cardDate.innerHTML="<input type='datetime-local' id='cardDate_text"+no+"' value='"+cardDate_data+"'> ";
             cardReason.innerHTML="<input type='text' id='cardReason_text"+no+"' value='"+cardReason_data+"'> ";
+            cardActive.innerHTML='<form id="cardActive_text">'+
+                                 '<input type="radio" id="YES" name="cardActive" value="YES"> '+
+                                 '<label for="YES">YES</label>'+
+                                 '<br>'+
+                                 '<input type="radio" id="NO" name="cardActive" value="NO"> '+
+                                 '<label for="NO">NO</label></form>';
         }
 
         function save_card(no)
@@ -644,33 +700,61 @@
             var cardDate_val=document.getElementById("cardDate_text"+no).value;
             var cardReason_val = document.getElementById("cardReason_text"+no).value;
 
+            const rbs = document.querySelectorAll('input[name="cardActive"]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+
+            var cardActive_val=selectedValue;
+
+            if(cardActive_val == 'YES')
+                { cardActive_val = 1; }
+            else
+                { cardActive_val = 0; }
+
             document.getElementById("cardDate"+no).innerHTML=cardDate_val;
             document.getElementById("cardReason"+no).innerHTML=cardReason_val;
+            document.getElementById("cardActive"+no).innerHTML=cardActive_val;
 
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            $.post('/UsersController/setCard', {cardid:no, date:cardDate_val, reason:cardReason_val})
+            $.post('/UsersController/setCard', {cardid:no, date:cardDate_val, reason:cardReason_val, isActive:cardActive_val})
         }
 
-        function delete_card(no)
+        function edit_godparent(no)
         {
-            var r = confirm("Weet je zeker dat je deze wilt verwijderen?");
-            if(r==true)
-            {
-                document.getElementById("card"+no+"").outerHTML="";
-                $.post('/UsersController/deleteCard', {id:no})
-            }
+            document.getElementById("edit"+no).style.display="none";
+            document.getElementById("save"+no).style.display="block";
+            document.getElementById("godparentForm"+no).style.display="block";
+
+            var firstname=document.getElementById("firstnameGodp"+no);
+            var lastname=document.getElementById("lastnameGodp"+no);
+
+            var firstname_data=firstname.innerHTML;
+            var lastname_data=lastname.innerHTML;
+
+            document.getElementById("firstnameGodp"+no).style.display="none";
+            document.getElementById("lastnameGodp"+no).style.display="none";
+
+            sb = document.querySelector('#godparent');
         }
 
-        function add_card()
+        function save_godparent(no)
         {
-            var new_cardDate=document.getElementById("new_card_date").value;
-            var new_cardReason=document.getElementById("new_card_reason").value;
+            var godparentID_val=sb.value;
+
+            document.getElementById("edit"+no).style.display="block";
+            document.getElementById("save"+no).style.display="none";
+            document.getElementById("godparentForm"+no).style.display="none";
 
             <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
-            $.post('/UsersController/insertCard', {id:<?php echo $userID; ?>, date:new_cardDate, reason:new_cardReason})
+            $.post('/UsersController/setGodparent', {id:<?php echo $userID; ?>, godparentID:godparentID_val})
         }
 
         function edit_note(no)

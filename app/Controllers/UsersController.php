@@ -42,6 +42,15 @@ class UsersController extends BaseController
         }
     }
 
+    public function archivedInhabitantsPage()
+    {
+        echo view('templates/header');
+        $this->data['activeinhabitants'] = [];
+        $this->data['archivedinhabitants'] = $this->inhabitantModel->get_archived_inhabitants();
+        echo view('inhabitants', $this->data);
+        echo view('templates/footer');
+    }
+
     public function employee()
     {
         $userID = htmlspecialchars($_GET["user"]);
@@ -52,18 +61,23 @@ class UsersController extends BaseController
     public function inhabitant()
     {
         $userID = htmlspecialchars($_GET["user"]);
+        $this->data['isActive'] = $this->inhabitantModel->get_isActive($userID);
         $this->data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
         $this->data['notes'] = $this->inhabitantModel->get_notes($userID);
         $this->data['appointments'] = $this->inhabitantModel->get_doctors_appointments($userID);
+        $this->data['doctors'] = $this->inhabitantModel->get_doctors();
         $this->data['cards'] = $this->inhabitantModel->get_yellow_cards($userID);
         $this->data['chore'] = $this->inhabitantModel->get_chores($userID);
         $this->data['progress']=$this->progress($userID);
         $this->data['godparent'] = $this->inhabitantModel->get_godparent($userID);
+        $this->data['inhabitants'] = $this->inhabitantModel->get_active_inhabitants();
         $this->data['godchildren'] = $this->inhabitantModel->get_godchildren($userID);
         echo view('templates/header');
         echo view('inhabitant', $this->data);
         echo view('templates/footer');
     }
+
+
 
     private function getInhabitantid($id)
     {
@@ -243,28 +257,22 @@ class UsersController extends BaseController
             $cardid = $_POST['cardid'];
             $date = $_POST['date'];
             $reason = $_POST['reason'];
+            $isActive = $_POST['isActive'];
         }
         else {
         }
-        $this->inhabitantModel->set_card($cardid, $date, $reason);
+        $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
     }
 
-    public function deleteCard()
+    public function setGodparent()
     {
         if(isset($_POST['id'])){
-            $id=$_POST['id'];
+            $id = $_POST['id'];
+            $godparentID = $_POST['godparentID'];
         }
-        $this->inhabitantModel->delete_card($id);
-    }
-
-    public function insertCard()
-    {
-        $employeeuserid = session()->get('id');
-        $date = $_POST['date'];
-        $reason = $_POST['reason'];
-        $inhabitantuserid = $_POST['id'];
-
-        $this->inhabitantModel->insert_card($employeeuserid, $inhabitantuserid, $date, $reason);
+        else {
+        }
+        $this->inhabitantModel->set_godparent($id, $godparentID);
     }
 
     public function setNote()
@@ -298,11 +306,20 @@ class UsersController extends BaseController
     }
 
 
+
     public function archiveUser()
     {
         if(isset($_POST['id'])){
             $id=$_POST['id'];
         }
         $this->inhabitantModel->archive_user($id);
+    }
+
+    public function dearchiveUser()
+    {
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+        }
+        $this->inhabitantModel->dearchive_user($id);
     }
 }

@@ -1,6 +1,7 @@
 <div>
     <h1>inhabitants page</h1>
 
+    <?php if (!empty($activeinhabitants)): ?>
     <h2>active inhabitants</h2>
     <table>
         <tr>
@@ -18,6 +19,7 @@
         <?php endforeach; ?>
 
     </table>
+    <?php endif; ?>
 
     <h2>archived inhabitants</h2>
     <table>
