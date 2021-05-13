@@ -95,7 +95,7 @@
                     <input type="hidden" id='appointValue' value="">
                 <div class="col-sm card main-avatar-modal-card">
                     <img src="<?php echo base_url($row['location']);?>" class="card-img-top main-avatar-modal-img" alt="user image">
-                    <p> <?php echo $row['firstname'].' '.$row['lastname']?></p>
+                    <p id="<?php echo ;?>"> <?php echo $row['firstname'].' '.$row['lastname']?></p>
                     <a onclick="submitInhabitant(<?php $row['inhabitantID'] ?>)" class="stretched-link"></a>
                 </div>
                 <div class="col-sm card main-avatar-modal-card-separator"></div>
@@ -120,7 +120,7 @@
     function submitInhabitant(no){
         document.querySelector('#inhabitantModel').style.display = 'none';
         var procesID=document.getElementById('appointValue').value;
-        $.post('/DoctorsController/editAppointInhabitant',{id:procedID,inhabitantID:no})
+        $.post('/DoctorsController/editAppointInhabitant',{id:procesID,inhabitantID:no})
     }
     function changeapoint(no,id){
         document.getElementById("editappoint"+no).style.display="none";
