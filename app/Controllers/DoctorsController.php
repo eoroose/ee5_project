@@ -54,8 +54,6 @@ class DoctorsController extends BaseController
         $customModel= new customModel($db);
         $inhabitants= $customModel->getActiveInhabitants();
        return $inhabitants;
-
-
     }
     private function afspraken($id)
     {
@@ -74,12 +72,30 @@ class DoctorsController extends BaseController
            // echo '<pre>'; print_r($user ); echo '</pre>';
             $appointment['inhabitant_Firstname']=$user['firstname'];
             $appointment['inhabitant_Lastname']=$user['lastname'];
+            $dateA=$appointment['date'];
+            $appointment['date']=date('d-m-y H:i',strtotime($dateA));
             array_push($data,$appointment);
         }
         //echo '<pre>'; print_r($data ); echo '</pre>';
         return $data;
     }
+    public function editApoint(){
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            if(isset($_POST['id']))
+            {
+                $appointmentModel=new appointmentModel();
+                $id=$_POST['id'];
+                $appointmentModel->where('appointmentID',$id)->set('date',$_POST['date'])->update();
+                $appointmentModel->where('appointmentID',$id)->set('reason',$_POST['reason'])->update();
 
+            }
+        }
+    }
     public function editname(){
         if(session()->get('role')=='inhabitant')
         {

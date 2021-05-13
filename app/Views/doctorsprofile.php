@@ -64,11 +64,14 @@
                                 <th>inhabitant: <span id="<?php echo "inhabitant".$appointment['appointmentID']?>"><?php echo $appointment['inhabitant_Firstname'].' '.$appointment['inhabitant_Lastname']?></span></th>
                                         <th>reason: <span id="<?php echo "reason".$appointment['appointmentID']?>"><?php echo $appointment['reason']?></span></th>
                                         <th>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']?>,<?php echo $appointment['inhabitantID'] ?>)">
+                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']; ?>,<?php echo $appointment['inhabitantID'] ?>)">
                                                 <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
                                             </button>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "saveappoint".$appointment['appointmentID']?>" onclick="saveapoint(<?php echo $appointment['appointmentID']?>)" style="display: none">
+                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "saveappoint".$appointment['appointmentID']?>" onclick="saveapoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
                                                 <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
+                                            </button>
+                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "deleteappoint".$appointment['appointmentID']?>" onclick="deleteappoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
+                                                <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
                                             </button>
                                         </th>
                             </tr>
@@ -84,7 +87,7 @@
 </div>
 
 
-<div id="inhabitantModel" class="main-modal" style="display:block;">
+<div id="inhabitantModel" class="main-modal" style="display:none;">
     <div class="main-avatar-modal-content card main-card">
         <h4>Kies Avatar</h4>
         <div class="row main-avatar-modal-row">
@@ -104,6 +107,9 @@
 
 
 <script>
+    function deleteappoint(){
+
+    }
     function chooseInhabitant(no){
         document.querySelector('#inhabitantModel').style.display = 'block';
 
@@ -114,11 +120,12 @@
     function submitInhabitant(no){
         document.querySelector('#inhabitantModel').style.display = 'none';
         var procesID=document.getElementById('appointValue').value;
-        $.post('/DoctorsController/editAppoint',{id:procedID,inhabitantID:no})
+        $.post('/DoctorsController/editAppointInhabitant',{id:procedID,inhabitantID:no})
     }
     function changeapoint(no,id){
         document.getElementById("editappoint"+no).style.display="none";
         document.getElementById("saveappoint"+no).style.display="block";
+        document.getElementById("deleteappoint"+no).style.display="block";
 
         var date=document.getElementById("date"+no);
         var reason=document.getElementById("reason"+no);
@@ -137,6 +144,18 @@
     function saveapoint(no){
         document.getElementById("editappoint"+no).style.display="block";
         document.getElementById("saveappoint"+no).style.display="none";
+        document.getElementById("deleteappoint"+no).style.display="none";
+
+
+        var date=document.getElementById("phase_text"+no).value;
+        var reason=document.getElementById("description_text"+no).value;
+        var inhabitant=document.getElementById('chooseInhabitant').value;
+
+        document.getElementById("date"+no).innerHTML=date;
+        document.getElementById("reason"+no).innerHTML=reason;
+        document.getElementById("inhabitant"+no).innerHTML=inhabitant;
+
+        $.post('/DoctorsController/editApoint',{id:no,date:date,reason:reason})
     }
     function changegender(){
         document.getElementById("editgender").style.display="none";
