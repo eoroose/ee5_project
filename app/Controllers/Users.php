@@ -23,7 +23,7 @@ class Users extends BaseController
 
             $rules = [
                 'username' => 'required|min_length[3]|max_length[50]',
-				'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
+				'password' => 'required|min_length[4]|max_length[255]|validateUser[email,password]',
             ];
 
             $errors =[

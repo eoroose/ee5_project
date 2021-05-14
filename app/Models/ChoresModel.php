@@ -37,4 +37,24 @@ class ChoresModel
         $this->db->query($query_text, ['inhabitantID' => $inhabitantID, 'choreID'=>$choreID]);
     }
 
+    public function unasign($choreID){
+        $query_text = "UPDATE inhabitant
+                        SET chore = 1
+                        WHERE chore = :choreID:";
+        $this->db->query($query_text, ['choreID' => $choreID]);
+    }
+
+    public function addChore($choreTitle){
+        $query_text = "INSERT INTO chore (description)
+                        VALUES (:choreTitle:)";
+        $this->db->query($query_text, ['choreTitle' => $choreTitle]);
+    }
+
+    public function removeChore($choreID){
+
+        $query_text2 = "DELETE FROM chore
+                        WHERE choreID = :choreID:";
+        $this->db->query($query_text2, ['choreID' => $choreID]);
+    }
+
 }

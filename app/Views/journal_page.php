@@ -18,9 +18,15 @@
                     <div class="card-body journal-card-body">
                         <img src="/assets/images/journal_page/agenda.svg" alt="agenda image">
                         <p> <?php echo $entry->title?></p>
+
                     </div>
+
                     <a id="<?php echo $entry->journalEntryID?>" onclick="openPage(this)" class="stretched-link"></a>
                 </div>
+
+            <button id="remove<?php echo $entry->journalEntryID?>" onclick="removeEntry(this.id)">Remove</button>
+            <button id="change<?php echo $entry->journalEntryID?>" onclick="openChangeModal(this.id)">change</button>
+
             <?php endforeach; ?>
         </div>
     </div>
@@ -48,6 +54,26 @@
                 <div id="content">
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="changeEntryModal" style="display:none;">
+        <div >
+
+            <h4>New journal entry</h4>
+
+            <input type="text" id="CEID">
+
+            <label for="CETitle"><b>title</b></label>
+            <input type="text" class="form-control main-input journal-input" placeholder="Enter title" id="CETitle" required>
+
+            <label for="CEText"><b>entry</b></label>
+            <textarea class="form-control main-input journal-input" cols="40" rows="5" placeholder="Enter entry" id="CEText" required></textarea>
+            <div class="journal-modal-btns">
+                <button type="submit" class="main-modal-btn" onclick="changeEntry()">Change</button>
+                <button type="submit" class="main-modal-btn" onclick="closeFormCE()">Cancel</button>
             </div>
         </div>
     </div>
@@ -105,7 +131,46 @@
         // div.innerHTML += title;
         // div.innerHTML += "</li>";
         document.querySelector('#newEntryModal').style.display = 'none';
-        location.reload();
+
+        setTimeout(() => {  location.reload(); }, 500);
+    }
+
+    function delete_row(id){
+        alert(id);
+    }
+
+    function removeEntry(id){
+        alert(id);
+        $.get('/JournalController/removeEntry',{ID:id.substring(6,14)});
+    }
+
+    function openChangeModal(id){
+        alert('hoi');
+        document.getElementById("CEID").style.display = "none";
+        document.querySelector("#CEID").value = id;
+        $.get('/JournalController/getJournalEntry',{id:id.substring(6,14)}, function (data) {
+            let Js = data.substring(1, data.length -1);
+            let Json = JSON.parse(Js);
+
+
+            document.querySelector("#CETitle").value = Json["title"];
+            document.querySelector("#CEText").value = Json["entry"];
+        })
+        document.getElementById("changeEntryModal").style.display = "block";
+    }
+
+    function changeEntry(){
+        var id = document.querySelector("#CEID").value;
+        var titleZ = document.querySelector("#CETitle").value;
+        var textZ = document.querySelector("#CEText").value;
+        $.get('/JournalController/changeJournalEntry',{id:id.substring(6,14),title:titleZ,text:textZ});
+
+        setTimeout(() => {  location.reload(); }, 500);
+
+    }
+
+    function closeFormCE(){
+        document.getElementById("changeEntryModal").style.display = "none";
     }
 
 </script>

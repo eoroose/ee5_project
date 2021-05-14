@@ -28,7 +28,8 @@
                     if (!confirm(info.event.title + " was dropped on " + info.event.start)) {
                         info.revert();
                     }else{
-                        $.post('/agendaController/alterInDatabase2',{id:info.event.id, start:info.event.startStr, end:info.event.endStr});
+                        alert(info.event.id);
+                        $.post('/agendaController/alterInDatabase2',{id:info.event.id.substring(1), start:info.event.startStr, end:info.event.endStr});
                     }
                 },
                 select: function(info) {
@@ -102,7 +103,7 @@
                     {
                         url: '/agendaController/getBirthdays',
                         color: 'green',
-                        editable: 'false'
+                        editable: false
                     }
                 ],
 

@@ -39,4 +39,18 @@ class JournalModel
         return $this->db->insertID();
     }
 
+    public function removeEntry($id)
+    {
+        $query_text2 = "DELETE FROM journalentry
+                        WHERE journalEntryID = :id:";
+        $this->db->query($query_text2, ['id' => $id]);
+    }
+
+    public function changeJournalEntry($id, $title, $text){
+        $query_text2 = "UPDATE journalentry
+                        SET title = :title:, entry = :text:
+                        WHERE journalEntryID = :id:";
+        $this->db->query($query_text2, ['id' => $id, 'title'=>$title, 'text'=>$text]);
+    }
+
 }
