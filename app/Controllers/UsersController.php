@@ -130,15 +130,21 @@ class UsersController extends BaseController
 
     public function setUsername()
     {
-        if(isset($_POST['username'])){
-            $id = $_POST['id'];
-            $username = $_POST['username'];
+        if($this->request->getMethod()=='post'){
+            $rules = [ 'username' => 'required|min_length[3]|max_length[50]|validateUserName[email,password]' ];
+            $errors = [ 'username' => ['validateUserName' => 'Kies een unieke username'] ];
+            if(!$this->validate($rules,$errors)){
+                $data['validation'] = $this->validator;
+            }
+            else{
+                $user_model = new UserModel();
+                $userID = $_POST['id'];
+                $user=$user_model->where('userId',$userID)->first();
+                $user_model->where('userId',$userID)->set('username',$this->request->getVar('username'))->update();
+                $session=session();
+                $session->setFlashdata('succes','Changed username');
+            }
         }
-        else {
-            $id = 0;
-            $username = 'error';
-        }
-        $this->inhabitantModel->set_username($id, $username);
     }
 
     public function setFirstname()
@@ -219,7 +225,7 @@ class UsersController extends BaseController
         $this->inhabitantModel->set_departureDate($id, $departureDate);
     }
 
-    public function changeInhabitantPassword(){
+    public function changePassword(){
         helper(['form']);
         if($this->request->getMethod()=='post'){
             $rules =[
@@ -231,29 +237,9 @@ class UsersController extends BaseController
             }
             else{
                 $model = new UserModel();
-                $user=$model->where('userId',htmlspecialchars($_GET["userID"]))->first();
-                    $model->where('userId', htmlspecialchars($_GET["userID"]))->set('password',$this->request->getVar('new-password'))->update();
-                    $session=session();
-                    $session->setFlashdata('succes','Changed Password');
-                    return redirect()->to('/UsersController/inhabitantsPage');
-            }
-        }
-    }
-
-    public function changeEmployeePassword(){
-        helper(['form']);
-        if($this->request->getMethod()=='post'){
-            $rules =[
-                'new-password' => 'required|min_length[8]|max_length[255]',
-                'confirm-password' => 'matches[new-password]',
-            ];
-            if (!$this->validate($rules)) {
-                $data['validation'] = $this->validator;
-            }
-            else{
-                $model = new UserModel();
-                $user=$model->where('userId',htmlspecialchars($_GET["userID"]))->first();
-                    $model->where('userId', htmlspecialchars($_GET["userID"]))->set('password',$this->request->getVar('new-password'))->update();
+                $userID=$this->request->getVar("userID");
+                $user=$model->where('userId',$userID)->first();
+                    $model->where('userId',$userID)->set('password',$this->request->getVar('new-password'))->update();
                     $session=session();
                     $session->setFlashdata('succes','Changed Password');
                     return redirect()->to('/UsersController/index');

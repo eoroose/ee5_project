@@ -126,7 +126,8 @@
             <?php endif; ?>
 
             <div id="otherFieldDiv" style="display: none">
-                <form class="" action="/UsersController/changeEmployeePassword?userID=<?php echo $i->userID?>" method="post">
+                <form class="" action="/UsersController/changePassword" method="post">
+                    <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
                     <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
                     <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
                     <button type="submit" class="main-btn profile-password-btn">change password</button>

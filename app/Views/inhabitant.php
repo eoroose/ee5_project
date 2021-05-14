@@ -136,28 +136,29 @@
         </tr>
         <?php endforeach; ?>
 
-                    <?php if (!empty($password)): ?>
-                    <?php foreach($password as $p): ?>
-                    <div class="col-12 card profile-col">
-                        <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">change password</button>
-                        <?php if (isset($validation)): ?>
-                            <div class="main-alert-message">
-                                <div class="alert alert-danger" role="alert">
-                                    <?= $validation->listErrors() ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-
-                        <div id="otherFieldDiv" style="display: none">
-                            <form class="" action="/UsersController/changeInhabitantPassword?userID=<?php echo $i->userID?>" method="post">
-                                <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
-                                <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
-                                <button type="submit" class="main-btn profile-password-btn">change password</button>
-                            </form>
-                        </div>
+        <?php if (!empty($password)): ?>
+        <?php foreach($password as $p): ?>
+        <div class="col-12 card profile-col">
+            <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">change password</button>
+            <?php if (isset($validation)): ?>
+                <div class="main-alert-message">
+                    <div class="alert alert-danger" role="alert">
+                        <?= $validation->listErrors() ?>
                     </div>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <div id="otherFieldDiv" style="display: none">
+                <form class="" action="/UsersController/changePassword" method="post">
+                    <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
+                    <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
+                    <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
+                    <button type="submit" class="main-btn profile-password-btn">change password</button>
+                </form>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
 
         <tr>
             <th>Chore:</th>
@@ -381,6 +382,7 @@
         </tr>
     </table>
     </div>
+
 
 <script>
         function showCangePasword(){

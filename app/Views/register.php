@@ -48,13 +48,13 @@
                             <!-- PASSWORD & CONFIRM PASSWORD -->
                             <div class="col-sm-6">
                                 <div class="form-group register-input-container">
-                                    <label class="register-input-label" for="password">Passwoord</label>
+                                    <label class="register-input-label" for="password">Paswoord</label>
                                     <input type="password" class="form-control main-input register-input" name="password" id="password" value="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group register-input-container">
-                                    <label class="register-input-label" for="password_confirm">Bevestig passwoord</label>
+                                    <label class="register-input-label" for="password_confirm">Bevestig paswoord</label>
                                     <input type="password" class="form-control main-input register-input" name="password_confirm" id="password_confirm" value="">
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ class UserRules
     }
     public function validateUserName(string $str,string $fields,array $data): bool
     {
-        $model= new UserModel();
+        $model = new UserModel();
         $user=$model->where('username',$data['username'])->first();
         if(!$user){
             return true;
