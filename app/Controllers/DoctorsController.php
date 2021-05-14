@@ -24,6 +24,47 @@ class DoctorsController extends BaseController
         }
     }
 
+    public function register(){
+        $data=[];
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            helper(['form']);
+            $rules =[
+                'firstname' => 'required|min_length[3]|max_length[75]',
+                'Achternaam' => 'required|min_length[3]|max_length[75]',
+                'Land' => 'required|min_length[3]|max_length[75]',
+                'Stad' => 'required|min_length[3]|max_length[75]',
+                'Address' => 'required|min_length[3]|max_length[75]',
+                'phone'=>'required|min_length[3]|max_length[16]',
+                'Gender'=>"required"
+            ];
+            if(!$this->validate($rules))
+            {
+                return $this->validator->listErrors();
+
+            }
+            else{
+                $newData=array(
+                    'firstname'=>$this->request->getVar('firstname'),
+                    'lastname'=>$this->request->getVar('Achternaam'),
+                    'country'=>$this->request->getVar('Land'),
+                    'city'=>$this->request->getVar('Stad'),
+                    'address'=>$this->request->getVar('Address'),
+                    'phoneNumber'=>$this->request->getVar('phone'),
+                    'gender'=>$this->request->getVar('Gender'),
+                );
+                $docterModel=new doctorModel();
+                $docterModel->save($newData);
+                return redirect()->to("/doctors");
+            }
+        }
+
+    }
+
     private function getDoctors()
     {
         $doctorsModel= new doctorModel();
@@ -74,11 +115,89 @@ class DoctorsController extends BaseController
             $appointment['inhabitant_Lastname']=$user['lastname'];
             $dateA=$appointment['date'];
             $appointment['date']=date('d-m-y H:i',strtotime($dateA));
+            $appointment['date2']=date('Y-m-d\TH:i',strtotime($dateA));
             array_push($data,$appointment);
         }
         //echo '<pre>'; print_r($data ); echo '</pre>';
         return $data;
     }
+
+    public function deleteAppoint(){
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            if(isset($_POST['id']))
+            {
+                $appointmentModel=new appointmentModel();
+                $id=$_POST['id'];
+               $appointmentModel->where('appointmentID',$id)->set('isActive',false)->update();
+            }
+        }
+    }
+    public function insert(){
+        $data=[];
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            helper(['form']);
+            $rules =[
+                'date' => 'required',
+                'reason' => 'required|min_length[3]',
+                'doctorID' => 'required',
+                'inhabitantID' => 'required',
+            ];
+            if(!$this->validate($rules))
+            {
+                $data['validation']= $this->validator;
+            }
+            else{
+                $appointmentModel=new appointmentModel();
+                $newData=array(
+                    'date'=>$this->request->getVar('date'),
+                    'reason'=>$this->request->getVar('reason'),
+                    'doctorID'=>$this->request->getVar('doctorID'),
+                    'inhabitantID'=>$this->request->getVar('inhabitantID'),
+                    "isActive"=>true
+                );
+                $appointmentModel->save($newData);
+                return redirect()->to("/doctors/doctorprofile/1");
+
+            }
+            $doctorsModel= new doctorModel();
+            $id=$this->request->getVar('doctorID');
+            $data['doctor']=$doctorsModel->select()->where('doctorID',$id)->first();
+            $data['appointments']=$this->afspraken($id);
+            $data['inhabitants']=$this->inhabitants();
+            //echo '<pre>'; print_r($data ); echo '</pre>';
+
+            echo view('templates/header',$data);
+            echo view('doctorsprofile');
+            echo view('templates/footer');
+        }
+    }
+    public function editAppointInhabitant(){
+
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            if(isset($_POST['id']))
+            {
+                $appointmentModel=new appointmentModel();
+                $id=$_POST['id'];
+                $appointmentModel->where('appointmentID',$id)->set('inhabitantID',$_POST['inhabitantID'])->update();
+            }
+        }
+    }
+
     public function editApoint(){
         if(session()->get('role')=='inhabitant')
         {

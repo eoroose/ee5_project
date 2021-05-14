@@ -56,6 +56,7 @@ $routes->match(['get','post'],'backup','BackupController::index',['filter'=>'aut
 $routes->match(['get','post'],'doctors','DoctorsController::index',['filter'=>'auth']);
 $routes->match(['get','post'],'doctors/doctorprofile/(:num)','DoctorsController::doctorprofile/$1',['filter'=>'auth']);
 
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

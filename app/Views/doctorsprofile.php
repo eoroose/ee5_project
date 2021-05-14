@@ -1,4 +1,4 @@
-
+<?php $date=date('Y-m-d\TH:i');?>
 <div>
     <div class="container">
         <div class="container">
@@ -58,13 +58,14 @@
                     <div>
                         <table>
 
-                        <?php foreach ($appointments as $appointment){?>
+                        <?php  if($appointments!=null){foreach ($appointments as $appointment){?>
                             <tr>
-                                <th>date: <span id="<?php echo "date".$appointment['appointmentID']?>"> <?php echo $appointment['date'];?></span> </th>
+
+                                <th>date: <span id="<?php echo "date".$appointment['appointmentID'];?>"> <?php echo $appointment['date'];?></span> <input type="hidden" id="<?php echo "dateFormat".$appointment['appointmentID'];?>"  value="<?php echo $appointment["date2"];?>"></th>
                                 <th>inhabitant: <span id="<?php echo "inhabitant".$appointment['appointmentID']?>"><?php echo $appointment['inhabitant_Firstname'].' '.$appointment['inhabitant_Lastname']?></span></th>
                                         <th>reason: <span id="<?php echo "reason".$appointment['appointmentID']?>"><?php echo $appointment['reason']?></span></th>
                                         <th>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']; ?>,<?php echo $appointment['inhabitantID'] ?>)">
+                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']; ?>)">
                                                 <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
                                             </button>
                                             <button class="tasks-btn-edit-save" type="edit" id="<?php echo "saveappoint".$appointment['appointmentID']?>" onclick="saveapoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
@@ -75,9 +76,27 @@
                                             </button>
                                         </th>
                             </tr>
-                        <?php } ?>
+                        <?php }} ?>
+                            <tr>
+                                <th> date: <input type="datetime-local" id="new_appoint_date" class='form-control' min="<?php echo $date;?>"></th>
+                                <th> inhabitant:<button id='new_appoint_inhabitant'  onclick='chooseInhabitantnewAppoint()'>selecteer inwonner</button></th>
+                                <th> reason: <input type="text" id="new_appoint_reason"></th>
+                                <th>
+                                    <button class="tasks-btn-edit-save" type="edit" id="<?php echo "addAppoint"?>" onclick="AddAppointment()">
+                                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
+                                    </button>
+                                </th>
+                            </tr>
 
                         </table>
+                        <?php if (isset($validation)):?>
+
+                            <div class="col-12">
+                                <div class="alert alert-danger main-alert-message register-alert-message" role="alert">
+                                    <?= $validation->listErrors() ?>
+                                </div>
+                            </div>
+                        <?php endif;?>
                     </div>
 
                 </div>
@@ -86,6 +105,12 @@
     </div>
 </div>
 
+<form action="/DoctorsController/insert" id="form2">
+<input type="hidden" id="date" name="date" value="">
+<input type="hidden" id="reason" name="reason" value="">
+<input type="hidden" id="doctorID" name="doctorID" value="<?php  echo $doctor["doctorID"];?>">
+    <input type="hidden" id="inhabitantID" name="inhabitantID" value="">
+</form>
 
 <div id="inhabitantModel" class="main-modal" style="display:none;">
     <div class="main-avatar-modal-content card main-card">
@@ -95,47 +120,102 @@
                     <input type="hidden" id='appointValue' value="">
                 <div class="col-sm card main-avatar-modal-card">
                     <img src="<?php echo base_url($row['location']);?>" class="card-img-top main-avatar-modal-img" alt="user image">
-                    <p id="<?php echo ;?>"> <?php echo $row['firstname'].' '.$row['lastname']?></p>
-                    <a onclick="submitInhabitant(<?php $row['inhabitantID'] ?>)" class="stretched-link"></a>
+                    <p id="<?php echo 'name'.$row['inhabitantID'];?>"> <?php echo $row['firstname'].' '.$row['lastname']?></p>
+                    <a onclick="submitInhabitant(<?php echo $row['inhabitantID'] ;?>)" class="stretched-link" ></a>
                 </div>
                 <div class="col-sm card main-avatar-modal-card-separator"></div>
             <?php }?>
         </div>
-        <button type="submit" class="main-modal-btn" onclick="cancelInhabitant()">cancel</button>
+        <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelInhabitant()">cancel</button>
+   </div>
+</div>
+<div id="inhabitantModel1" class="main-modal" style="display:none;">
+    <div class="main-avatar-modal-content card main-card">
+        <h4>Kies Avatar</h4>
+        <div class="row main-avatar-modal-row">
+            <?php foreach ($inhabitants as $row) { ?>
+                <input type="hidden" id='appointValue' value="">
+                <div class="col-sm card main-avatar-modal-card">
+                    <img src="<?php echo base_url($row['location']);?>" class="card-img-top main-avatar-modal-img" alt="user image">
+                    <p id="<?php echo 'name1'.$row['inhabitantID'];?>"> <?php echo $row['firstname'].' '.$row['lastname']?></p>
+                    <a onclick="submitInhabitantnewAppoint(<?php echo $row['inhabitantID'] ;?>)" class="stretched-link" ></a>
+                </div>
+                <div class="col-sm card main-avatar-modal-card-separator"></div>
+            <?php }?>
+        </div>
+        <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelInhabitantnewAppoint()">cancel</button>
     </div>
 </div>
 
 
 <script>
-    function deleteappoint(){
+    function deleteappoint(no){
+        var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+        if(r==true)
+        {
+            $.post('/DoctorsController/deleteAppoint',{id:no})
+            window.location.reload();
+        }
+    }
+    function AddAppointment(){
+        document.getElementById("date").value=document.getElementById("new_appoint_date").value;
+        document.getElementById("reason").value=document.getElementById("new_appoint_reason").value;
+        document.getElementById("form2").submit();
+    }
+    function chooseInhabitantnewAppoint(){
+        document.querySelector('#inhabitantModel1').style.display='block';
+    }
+    function cancelInhabitantnewAppoint(){
+        document.querySelector('#inhabitantModel1').style.display='none';
 
+    }
+    function submitInhabitantnewAppoint(no){
+        var r= confirm("Weet je zeker dat je deze wilt kiezen?");
+        if(r==true)
+        {
+            document.querySelector('#inhabitantModel1').style.display = 'none';
+            var name= document.getElementById('name1'+no).innerHTML;
+            document.getElementById('new_appoint_inhabitant').innerHTML=name;
+            document.getElementById('inhabitantID').value=no
+
+        }
     }
     function chooseInhabitant(no){
         document.querySelector('#inhabitantModel').style.display = 'block';
-
     }
     function cancelInhabitant(){
         document.querySelector('#inhabitantModel').style.display = 'none';
     }
     function submitInhabitant(no){
-        document.querySelector('#inhabitantModel').style.display = 'none';
-        var procesID=document.getElementById('appointValue').value;
-        $.post('/DoctorsController/editAppointInhabitant',{id:procesID,inhabitantID:no})
+
+        var r= confirm("Weet je zeker dat je deze wilt kiezen?");
+        if(r==true)
+        {
+            document.querySelector('#inhabitantModel').style.display = 'none';
+            var procesID=document.getElementById('appointValue').value;
+            var name= document.getElementById('name'+no).innerHTML;
+            document.getElementById('chooseInhabitant').innerHTML=name;
+
+            $.post('/DoctorsController/editAppointInhabitant',{id:procesID,inhabitantID:no})
+        }
+
     }
-    function changeapoint(no,id){
+    function changeapoint(no){
         document.getElementById("editappoint"+no).style.display="none";
         document.getElementById("saveappoint"+no).style.display="block";
         document.getElementById("deleteappoint"+no).style.display="block";
 
-        var date=document.getElementById("date"+no);
+        var date=document.getElementById("dateFormat"+no);
+        var date2=document.getElementById("date"+no);
         var reason=document.getElementById("reason"+no);
         var inhabitant=document.getElementById("inhabitant"+no);
 
-        var date_data=date.innerHTML;
+        var date_data=date.value;
         var reason_data=reason.innerHTML;
         var inhabitant_data=inhabitant.innerHTML;
 
-        date.innerHTML="<input type='datetime-local' id='phase_text"+no+"' value='"+date_data+"'>";
+
+        date2.innerHTML="<input type='datetime-local' class='form-control' id='phase_text"+no+"' value='"+date_data+"' min='<?php  echo $date;?>'>";
         reason.innerHTML="<input type='text' id='description_text"+no+"' value='"+reason_data+"' style='width: 90%;border-radius: 10px;'>";
         inhabitant.innerHTML="<button id='chooseInhabitant' value='"+inhabitant_data+"' onclick='chooseInhabitant()'></button>";
         document.getElementById('chooseInhabitant').innerHTML=inhabitant_data;
@@ -151,7 +231,23 @@
         var reason=document.getElementById("description_text"+no).value;
         var inhabitant=document.getElementById('chooseInhabitant').value;
 
-        document.getElementById("date"+no).innerHTML=date;
+        const date_time= new Date(date);
+        var year= date_time.getFullYear().toString().substr(-2);
+        var month= date_time.getMonth()+1;
+        var dag=date_time.getDate();
+        var uur=date_time.getHours();
+        var min=date_time.getMinutes();
+
+        if (uur.toString().length < 2)
+            uur = '0' + uur;
+        if (min.toString().length < 2)
+            min = '0' + min;
+        if (month.toString().length < 2)
+            month = '0' + month;
+        if (dag.toString().length < 2)
+            dag = '0' + dag;
+
+        document.getElementById("date"+no).innerHTML=dag+'-'+month+'-'+year+' '+uur+':'+min;
         document.getElementById("reason"+no).innerHTML=reason;
         document.getElementById("inhabitant"+no).innerHTML=inhabitant;
 

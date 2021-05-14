@@ -128,10 +128,11 @@ class tasks extends BaseController
             return redirect()->to('/');
         }
         else{
-        $progressmodel=new progressmodel();
-        $id=$this->request->getVar('id');
-        $progressmodel->where('progressID',$id)->set('isCompleted',1)->update();
-        return redirect()->to('/note-progress');
+            if(isset($_POST['id'])){
+                $id=$_POST['id'];
+                $progressmodel=new progressmodel();
+                $progressmodel->where('progressID',$id)->set('isCompleted',true)->update();
+            }
     }}
 
     public function uncomplete(){
@@ -140,10 +141,12 @@ class tasks extends BaseController
             return redirect()->to('/');
         }
         else{
-        $progressmodel=new progressmodel();
-        $id=$this->request->getVar('id2');
-        $progressmodel->where('progressID',$id)->set('isCompleted',0)->update();
-        return redirect()->to('/note-progress');
+            if(isset($_POST['id']))
+            {
+                $id=$_POST['id'];
+                $progressmodel=new progressmodel();
+                $progressmodel->where('progressID',$id)->set('isCompleted',false)->update();
+            }
     }}
 }
 

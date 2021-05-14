@@ -44,6 +44,28 @@ class choreController extends BaseController
 
         $this->choresModel->changeChore($inhabitantID,$choreID);
     }
+
+    public function removeChore(){
+        header('Content-Type: application/json');
+
+        $choreID=$_GET['choreID'];
+
+        $this->choresModel->unasign($choreID);
+
+        sleep(0.5);
+
+        $this->choresModel->removeChore($choreID);
+
+    }
+
+    public function addChore(){
+        header('Content-Type: application/json');
+
+        $choreTitle=$_GET['choreTitle'];
+
+        $this->choresModel->addChore($choreTitle);
+
+    }
     private function getavatar(){
         $user = $this->choresModel->getInhabitants();
        // echo '<pre>'; print_r($user); echo '</pre>';
