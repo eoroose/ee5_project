@@ -55,6 +55,8 @@ $routes->match(['get','post'],'celebration','CelebrationController::index',['fil
 $routes->match(['get','post'],'backup','BackupController::index',['filter'=>'auth']);
 $routes->match(['get','post'],'doctors','DoctorsController::index',['filter'=>'auth']);
 $routes->match(['get','post'],'archivedInhabitants','UsersController::archivedInhabitantsPage',['filter'=>'auth']);
+$routes->match(['get','post'],'doctors/doctorprofile/(:num)','DoctorsController::doctorprofile/$1',['filter'=>'auth']);
+
 
 /*
  * --------------------------------------------------------------------

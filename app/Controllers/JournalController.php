@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\inhabitantModel;
+
 class JournalController extends BaseController
 {
 
@@ -17,7 +19,8 @@ class JournalController extends BaseController
     {
         if(session()->get('role')=='inhabitant')
         {
-            $this->data['entries'] = $this->journalModel->get_entries(9);
+            $inhabitantID=$this->getInhabitantid(session()->get('id'));
+            $this->data['entries'] = $this->journalModel->get_entries($inhabitantID);
             echo view('templates/header');
             echo view('journal_page', $this->data);
             echo view('templates/footer');
@@ -27,6 +30,11 @@ class JournalController extends BaseController
         }
     }
 
+    private function getInhabitantid($id){
+        $inhabitantmodel=new inhabitantModel();
+        $inhabitantID= $inhabitantmodel->select('inhabitantID')->where('userID',$id)->first();
+        return $inhabitantID;
+    }
 
     public function getJournalEntry()
     {
@@ -46,11 +54,31 @@ class JournalController extends BaseController
         $title=$_GET['title'];
         $text=$_GET['text'];
 
-        $id = 9;
+        $id = session()->get('id');
+        $inhabitantID=$this->getInhabitantid($id);
 
+        echo json_encode($this->journalModel->addJournalEntry($title,$text,$inhabitantID));
+        return redirect()->to('/journal');
+    }
 
-        echo json_encode($this->journalModel->addJournalEntry($title,$text,$id));
-        return;
+    public function removeEntry()
+    {
+        header('Content-Type: application/json');
+
+        $id=$_GET['ID'];
+
+        $this->journalModel->removeEntry($id);
+
+    }
+
+    public function changeJournalEntry(){
+        header('Content-Type: application/json');
+
+        $id=$_GET['id'];
+        $title=$_GET['title'];
+        $text=$_GET['text'];
+
+        $this->journalModel->changeJournalEntry($id, $title, $text);
     }
 
 }

@@ -12,7 +12,8 @@ class customModel{
     function getActiveInhabitants(){
        $builder= $this->db->table('inhabitant');
        $builder->join('user','inhabitant.userID=user.userID');
-       return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname')->get()->getResultArray();
+       $builder->join('avatars','user.avatar=avatars.id');
+       return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname,location')->get()->getResultArray();
     }
 
     function getDoctors(){
@@ -43,7 +44,7 @@ class customModel{
     }
     function getCompletedTasksPhases($id)
     {
-        $query_text="SELECT PHASE , COUNT(PHASE) AS Quantity FROM `progress` INNER JOIN task ON progress.taskID=task.taskID WHERE inhabitantID=:id: AND task.isActive=1 AND isCompleted=1 GROUP BY PHASE";
+        $query_text="SELECT PHASE , COUNT(PHASE) AS Quantity FROM `progress` INNER JOIN task ON progress.taskID=task.taskID WHERE inhabitantID=:id: AND task.isActive=1 AND isCompleted=1 GROUP BY PHASE ORDER BY PHASE ASC";
         $query=$this->db->query($query_text,['id'=>$id]);
         return $query->getResultArray();
     }

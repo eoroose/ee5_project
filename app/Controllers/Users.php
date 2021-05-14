@@ -136,13 +136,16 @@ class Users extends BaseController
 	        $rules =[
 	            'firstname' => 'required|min_length[3]|max_length[50]',
                 'lastname' => 'required|min_length[3]|max_length[50]',
-                'username' => 'required|min_length[3]|max_length[50]',
+                'username' => 'required|min_length[3]|max_length[50]|validateUserName[email,password]',
                 'password' => 'required|min_length[8]|max_length[255]',
                 'password_confirm' => 'matches[password]',
                 'birthday' =>'required',
                 'avatar'=>'required'
             ];
-	        if(!$this->validate($rules)){
+            $errors =[
+                'username'=>['validateUserName' => 'Kies een unieke username']
+            ];
+	        if(!$this->validate($rules,$errors)){
 	            $data['validation']= $this->validator;
             }else{
 

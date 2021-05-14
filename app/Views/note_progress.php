@@ -86,21 +86,19 @@
 <script>
     function complete(no)
     {
-        document.getElementById("complete"+no).style.display="none";
-        document.getElementById("uncomplete"+no).style.display="block";
+        document.getElementById("complete"+no).style.display="block";
+        document.getElementById("uncomplete"+no).style.display="none";
 
-        document.getElementById("id").value=no;
-        document.getElementById("form1").submit();
+        $.post('tasks/complete',{id:no})
     }
 
 
     function uncomplete(no)
     {
-        document.getElementById("complete"+no).style.display="block";
-        document.getElementById("uncomplete"+no).style.display="none";
+        document.getElementById("complete"+no).style.display="none";
+        document.getElementById("uncomplete"+no).style.display="block";
 
-        document.getElementById("id2").value=no;
-        document.getElementById("form2").submit();
+        $.post('tasks/uncomplete',{id:no})
     }
 
     function delete_row(no)
