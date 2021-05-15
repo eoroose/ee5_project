@@ -121,7 +121,7 @@ function draw() {
             break;
         }
         case 4: {
-            potAudio();
+            // potAudio();
             fireworkAnimation();
             congratsAnimation();
             break;
