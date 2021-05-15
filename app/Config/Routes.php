@@ -56,6 +56,15 @@ $routes->match(['get','post'],'backup','BackupController::index',['filter'=>'aut
 $routes->match(['get','post'],'doctors','DoctorsController::index',['filter'=>'auth']);
 $routes->match(['get','post'],'archivedInhabitants','UsersController::archivedInhabitantsPage',['filter'=>'auth']);
 $routes->match(['get','post'],'doctors/doctorprofile/(:num)','DoctorsController::doctorprofile/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'users/inhabitant/(:num)','UsersController::inhabitant/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'users/employee/(:num)','UsersController::employee/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'archivedInhabitantsPage','UsersController::archivedInhabitantsPage',['filter'=>'auth']);
+$routes->match(['get','post'],'users/employee/setUsername','UsersController::setUsernameEmployee',['filter'=>'auth']);
+$routes->match(['get','post'],'users/inhabitant/setUsername','UsersController::setUsernameInhabitant',['filter'=>'auth']);
+
+
+
+
 
 
 /*

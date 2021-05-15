@@ -7,7 +7,7 @@ class progressmodel extends  Model{
 
     protected $table='progress';
     protected $primaryKey='progressID';
-    protected $allowedFields=['inhabitantID','taskID','isCompleted','status'];
+    protected $allowedFields=['inhabitantID','taskID','isCompleted','status','isCelebrated'];
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
 

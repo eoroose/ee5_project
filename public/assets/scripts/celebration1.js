@@ -1,4 +1,5 @@
 // DOMS
+let id;
 let sel;
 let set;
 let btn;
@@ -68,7 +69,9 @@ function preload() {
     font = loadFont('/assets/fonts/freestyle-script-regular.ttf');
     song = document.getElementById('audio');
     countdownSound = document.getElementById('audio_count');
-    sel = select('#inhabitants');
+    id= select('#inhabitants');
+    sel = select('#inhabitant'+id.value());
+
     set = select('#settings');
     btn = select('#button');
     aud = select('#audioOn');
@@ -84,6 +87,7 @@ function setup() {
 
     btn.mousePressed(() => {
         if(!(set.value() === 'controller' && !connected)) {
+            sel = select('#inhabitant'+id.value());
             inhabitant = sel.value();
             setting = set.value();
             start = true;
@@ -198,6 +202,7 @@ function startingAnimation() {
     textSize(64);
     stroke(purple);
     fill(purple);
+    sel = select('#inhabitant'+id.value());
     text(`inhabitant: ${sel.value()}`, width/2, height/3 - 100);
     text(`setting: ${set.value()}`, width/2, height/3);
 

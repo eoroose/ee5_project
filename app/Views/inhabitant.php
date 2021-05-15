@@ -383,7 +383,10 @@
     </table>
     </div>
 
-
+    <form id="form1" action="/users/inhabitant/setUsername" method="post">
+        <input type="hidden" id="username" name="username">
+        <input type="hidden" id="from2id" name="from2id">
+    </form>
 <script>
         function showCangePasword(){
             $('#otherFieldDiv').show();
@@ -392,7 +395,6 @@
 
         function archive_user()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt archivere?");
             if(r==true)
             {
@@ -402,7 +404,6 @@
 
         function dearchive_user()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt de-archiveren?");
             if(r==true)
             {
@@ -425,14 +426,15 @@
         {
             var username_val=document.getElementById("username_text"+no).value;
 
-            document.getElementById("username"+no).innerHTML=username_val;
 
-            document.getElementById("edit"+no).style.display="block";
-            document.getElementById("save"+no).style.display="none";
+            document.getElementById("username" + no).innerHTML = username_val;
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+            document.getElementById("username").value=username_val;
+            document.getElementById('from2id').value=<?php echo $userID;?>;
+            document.getElementById("form1").submit();
+            document.getElementById("edit" + no).style.display = "block";
+            document.getElementById("save" + no).style.display = "none";
 
-            $.post('/UsersController/setUsername', {id:<?php echo $userID; ?>, username:username_val})
         }
 
         function edit_firstname(no)
@@ -456,7 +458,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setFirstname', {id:<?php echo $userID; ?>, firstname:firstname_val})
         }
@@ -482,7 +483,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setLastname', {id:<?php echo $userID; ?>, lastname:lastname_val})
         }
@@ -508,7 +508,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setBirthday', {id:<?php echo $userID; ?>, birthday:birthday_val})
         }
@@ -534,7 +533,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setDateAdded', {id:<?php echo $userID; ?>, dateAdded:dateAdded_val})
         }
@@ -560,7 +558,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setArrivalDate', {id:<?php echo $userID; ?>, arrivalDate:arrivalDate_val})
         }
@@ -586,7 +583,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setDepartureDate', {id:<?php echo $userID; ?>, departureDate:departureDate_val})
         }
@@ -635,7 +631,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setChore', {id:<?php echo $userID; ?>, chore:chore_val})
         }
@@ -711,8 +706,6 @@
             alert (new_doctor);
             var new_date=document.getElementById("new_date").value;
             var new_reason=document.getElementById("new_reason").value;
-
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/insertAppointment', {id:<?php echo $userID; ?>, doctor:new_doctor, date:new_date, reason:new_reason})
             setTimeout(function(){location.reload()}, 500);
@@ -798,7 +791,6 @@
             document.getElementById("save"+no).style.display="none";
             document.getElementById("godparentForm"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setGodparent', {id:<?php echo $userID; ?>, godparentID:godparentID_val})
             setTimeout(function(){location.reload()}, 500);
@@ -849,7 +841,6 @@
             var new_noteTitle=document.getElementById("new_note_title").value;
             var new_noteDescription=document.getElementById("new_note_description").value;
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/insertNote', {id:<?php echo $userID; ?>, title:new_noteTitle, description:new_noteDescription})
             setTimeout(function(){location.reload()}, 500);

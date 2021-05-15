@@ -11,7 +11,7 @@
                 </tr>
 
             <?php foreach ($activeinhabitants as $i): ?>
-                <tr onclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo $i->userID; ?>';">
+                <tr onclick="window.location.href='users/inhabitant/<?php echo $i->userID; ?>';">
                     <td><img src="<?php echo $i->location;?>"></td>
                     <td><?php echo $i->firstname;?></td>
                     <td><?php echo $i->lastname;?></td>
@@ -30,7 +30,7 @@
                 </tr>
 
             <?php foreach ($archivedinhabitants as $i): ?>
-                <tr onclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo $i->userID; ?>';">
+                <tr onclick="window.location.href='users/inhabitant/<?php echo $i->userID; ?>';">
                     <td><img src="<?php echo $i->location;?>"></td>
                     <td><?php echo $i->firstname;?></td>
                     <td><?php echo $i->lastname;?></td>
@@ -51,7 +51,7 @@
             <?php foreach ($activeemployees as $u): ?>
                 <?php if($u->employeeAdminID == NULL): ?>
                 <?php else: ?>
-                    <tr onclick="window.location.href='http://localhost/UsersController/employee?user=<?php echo $u->userID; ?>';">
+                    <tr onclick="window.location.href='users/employee/<?php echo $u->userID; ?>';">
                         <td><img src="<?php echo $u->location;?>"></td>
                         <td><?php echo $u->firstname;?></td>
                         <td><?php echo $u->lastname;?></td>
@@ -73,7 +73,7 @@
             <?php foreach ($archivedemployees as $u): ?>
                 <?php if($u->employeeAdminID == NULL): ?>
                 <?php else: ?>
-                    <tr onclick="window.location.href='http://localhost/UsersController/employee?user=<?php echo $u->userID; ?>';">
+                    <tr onclick="window.location.href='users/employee/<?php echo $u->userID; ?>';">
                         <td><img src="<?php echo $u->location;?>"></td>
                         <td><?php echo $u->firstname;?></td>
                         <td><?php echo $u->lastname;?></td>
