@@ -15,9 +15,7 @@
 
                 <div class="register-top-btn-container">
                     <hr class="register-hr">
-                    <form action="">
-                        <button type="submit" class="main-btn register-btn">Activeer vorige bewonner</button>
-                    </form>
+                        <button class="main-btn register-btn" onclick="window.location.href='http://localhost/UsersController/archivedInhabitantsPage';">Activeer vorige bewonner</button>
                     <hr class="register-hr">
                 </div>
 
@@ -50,13 +48,13 @@
                             <!-- PASSWORD & CONFIRM PASSWORD -->
                             <div class="col-sm-6">
                                 <div class="form-group register-input-container">
-                                    <label class="register-input-label" for="password">Passwoord</label>
+                                    <label class="register-input-label" for="password">Paswoord</label>
                                     <input type="password" class="form-control main-input register-input" name="password" id="password" value="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group register-input-container">
-                                    <label class="register-input-label" for="password_confirm">Bevestig passwoord</label>
+                                    <label class="register-input-label" for="password_confirm">Bevestig paswoord</label>
                                     <input type="password" class="form-control main-input register-input" name="password_confirm" id="password_confirm" value="">
                                 </div>
                             </div>
@@ -118,7 +116,7 @@
                                             <label class="register-input-label" for="doctor">Doktor</label>
                                             <select class="form-control main-input register-input" id="doctor" name="doctor">
                                                 <?php foreach($doctors as $row) { ?>
-                                                    <option value="<?php echo $row['doctorID']; ?>"><?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?></option>';
+                                                    <option value="<?php echo $row['doctorID']; ?>"><?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?></option>;
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -150,7 +148,7 @@
                                             <label class="register-input-label" for="godfather">Peter</label>
                                             <select class="form-control main-input register-input" id="godfather" name="godfather">
                                                 <?php foreach($godfathers as $row) { ?>
-                                                    <option value="<?php echo $row['inhabitantID']; ?>"><?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?></option>';
+                                                    <option value="<?php echo $row['inhabitantID']; ?>"><?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?></option>;
                                                 <?php }?>
                                             </select>
                                         </div>

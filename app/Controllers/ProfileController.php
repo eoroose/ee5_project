@@ -16,9 +16,9 @@ class ProfileController extends BaseController
         $data=$this->getData($id);
         echo view('templates/header', $data);
         echo view('profile');
-        //echo '<pre>'; print_r($data); echo '</pre>';
         echo view('templates/footer');
     }
+
     private function getData($id){
         $user=$this->getInfo($id);
         $avatar=$this->getAvatar($user['avatar']);
