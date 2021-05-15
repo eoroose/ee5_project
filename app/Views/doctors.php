@@ -19,7 +19,7 @@
     <div class="container">
         <?php foreach ($doctors as $row){?>
             <div class="row justif-content-md-center card">
-                <img src="<?php if($row['gender']=="male"){echo base_url('assets/images/doctors/maledoctor.svg');}else{echo base_url('assets/images/doctors/maledoctor.svg');}?>" height="50px" width="50px">
+                <img src="<?php if($row['gender']=="male"){echo base_url('assets/images/doctors/maledoctor.svg');}else{echo base_url('assets/images/doctors/femaledoctor.svg');}?>" height="50px" width="50px">
                 <div class="card-body dashboard-card-body">
                     <h5 class="card-title dashboard-card-title"style="text-align: center"><?php echo $row['lastname'].' '.$row['firstname']?></h5>
                     <a href="/doctors/doctorprofile/<?php echo $row['doctorID'];?>" class="stretched-link"></a>
