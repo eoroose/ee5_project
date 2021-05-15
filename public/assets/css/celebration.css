@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+
+.celebration_container {
+    padding-top: 20px;
+    --celebration-border-width: 3px;
+    --celebration-border-radius: 10px;
+}
+
+.celebration_row {
+    
+}
+
+.celebration_input {
+    background-color: var(--black);
+    color: white;
+    flex-grow: inherit;
+    border: var(--celebration-border-width) solid var(--purple);
+    border-radius: var(--celebration-border-radius);
+    width: 100%;
+    height: 35px;
+}
+
+.celebration_input:hover,
+.celebration_input:focus {
+    cursor: pointer;
+    background-color: var(--black);
+    color: white;
+    box-shadow: none;
+    border: var(--celebration-border-width) solid var(--purple);
+}
+
+.celebration_option {
+    background-color: var(--black);
+    color: white;
+}
+
+.celebration_btn {
+    border: var(--celebration-border-width) solid var(--purple);
+    border-radius: var(--celebration-border-radius);
+    background-color: var(--purple);
+    color: white;
+}
+
+.celebration_btn:hover,
+.celebration_btn:active {
+    background-color: var(--black);
+    color: white;
+    border: var(--celebration-border-width) solid var(--purple);
+}

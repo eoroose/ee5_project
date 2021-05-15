@@ -1,7 +1,7 @@
 <div>
 
-    <link href="./assets/css/login.css" rel="stylesheet" type="text/css" />
-    <link href="./assets/css/background_animation.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/background_animation.css" rel="stylesheet" type="text/css" />
 
     <div class="bg"></div>
     <div class="bg bg2"></div>
