@@ -15,7 +15,9 @@
 
                 <div class="register-top-btn-container">
                     <hr class="register-hr">
-                        <button class="main-btn register-btn" onclick="window.location.href='http://localhost/UsersController/archivedInhabitantsPage';">Activeer vorige bewonner</button>
+                       <form action="archivedInhabitantsPage">
+                           <button class="main-btn register-btn" >Activeer vorige bewonner</button>
+                       </form>
                     <hr class="register-hr">
                 </div>
 

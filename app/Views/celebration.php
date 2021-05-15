@@ -15,9 +15,9 @@
             <div class="col-4">
                 <select class="celebration_input" id="inhabitants" name="inhabitants">
                     <?php foreach($inhabitants as $row) { ?>
-                        <option class="celebration_option" value="<?php echo $row['firstname'];?> <?php echo $row['lastname'];?>">
+                        <option class="celebration_option"  value="<?php echo $row['inhabitantID'];?>">
                             <?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?>
-                        </option>';
+                        </option>
                     <?php }?>
                 </select>
             </div>
@@ -30,7 +30,7 @@
                 </select>
             </div>
 
-            <button class="col-4 celebration_btn" id="button">
+            <button class="col-4 celebration_btn" id="button" onclick="setCelebrated()">
                 start
             </button>
             
@@ -39,5 +39,14 @@
     
     <script type="text/javascript" src="<?php echo base_url('/assets/scripts/p5.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/assets/scripts/celebration1.js'); ?>"></script>
+    <?php foreach($inhabitants as $row) { ?>
+        <input type="hidden" id="<?php  echo "inhabitant".$row['inhabitantID']?>" name="<?php echo "inhabitant".$row['inhabitantID']?>" value="<?php echo $row['firstname'];?>  <?php echo $row['lastname']; ?>">
+    <?php }?>
 
 </div>
+<script>
+    function setCelebrated(){
+        var no=document.getElementById("inhabitants").value;
+        $.post('/CelebrationController/setCelebrated',{id:no})
+    }
+</script>

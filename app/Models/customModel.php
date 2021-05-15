@@ -16,6 +16,13 @@ class customModel{
        return $builder->where(['isActive' => 1])->select('inhabitantID,firstname,lastname,location')->get()->getResultArray();
     }
 
+    function getNonCelebratedInhabitants(){
+        $builder= $this->db->table('inhabitant');
+        $builder->join('user','inhabitant.userID=user.userID');
+        $builder->join('progress','progress.inhabitantID=inhabitant.inhabitantID');
+        return $builder->where(['isActive' => 1])->where('isCompleted',true)->where('isCelebrated',false)->select()->groupBy('inhabitant.inhabitantID')->get()->getResultArray();
+
+    }
     function getDoctors(){
         $builder= $this->db->table('doctor');
         return $builder->where(['isActive' => 1])->select('doctorID,firstname,lastname')->get()->getResultArray();

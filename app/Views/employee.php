@@ -1,7 +1,9 @@
     <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
     <link href="/assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
-    <?php foreach ($inhabitant as $i): ?>
+    <?php use App\Models\UserModel;
+
+    foreach ($inhabitant as $i): ?>
     <h3 class="main-title tasks-title"><?php echo $i->firstname; ?> <?php echo $i->lastname; ?></h3>
     <?php endforeach; ?>
 
@@ -117,13 +119,7 @@
         <?php foreach($password as $p): ?>
         <div class="col-12 card profile-col">
             <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">change password</button>
-            <?php if (isset($validation)): ?>
-                <div class="main-alert-message">
-                    <div class="alert alert-danger" role="alert">
-                        <?= $validation->listErrors() ?>
-                    </div>
-                </div>
-            <?php endif; ?>
+
 
             <div id="otherFieldDiv" style="display: none">
                 <form class="" action="/UsersController/changePassword" method="post">
@@ -140,8 +136,17 @@
     </table>
     </div>
 
-
-
+<form id="form1" action="/users/employee/setUsername" method="post">
+    <input type="hidden" id="username" name="username">
+    <input type="hidden" id="from2id" name="from2id">
+</form>
+    <?php if (isset($validation)): ?>
+        <div class="main-alert-message">
+            <div class="alert alert-danger" role="alert">
+                <?= $validation->listErrors() ?>
+            </div>
+        </div>
+    <?php endif; ?>
 <script>
         function showCangePasword(){
             $('#otherFieldDiv').show();
@@ -150,7 +155,6 @@
 
         function archive_user()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt archiveren?");
             if(r==true)
             {
@@ -160,7 +164,6 @@
 
         function dearchive_user()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt de-archiveren?");
             if(r==true)
             {
@@ -170,7 +173,6 @@
 
         function make_employee()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt wijzigen naar employee?");
             if(r==true)
             {
@@ -180,7 +182,6 @@
 
         function make_admin()
         {
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
             var r = confirm("Weet je zeker dat je deze wilt wijzigen naar admin?");
             if(r==true)
             {
@@ -201,16 +202,19 @@
 
         function save_username(no)
         {
+
             var username_val=document.getElementById("username_text"+no).value;
 
-            document.getElementById("username"+no).innerHTML=username_val;
 
-            document.getElementById("edit"+no).style.display="block";
-            document.getElementById("save"+no).style.display="none";
+                document.getElementById("username" + no).innerHTML = username_val;
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
+                document.getElementById("username").value=username_val;
+                document.getElementById('from2id').value=<?php echo $userID;?>;
+                document.getElementById("form1").submit();
+                document.getElementById("edit" + no).style.display = "block";
+                document.getElementById("save" + no).style.display = "none";
 
-            $.post('/UsersController/setUsername', {id:<?php echo $userID; ?>, username:username_val})
+
         }
 
         function edit_firstname(no)
@@ -234,7 +238,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setFirstname', {id:<?php echo $userID; ?>, firstname:firstname_val})
         }
@@ -260,7 +263,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setLastname', {id:<?php echo $userID; ?>, lastname:lastname_val})
         }
@@ -286,7 +288,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setBirthday', {id:<?php echo $userID; ?>, birthday:birthday_val})
         }
@@ -312,7 +313,6 @@
             document.getElementById("edit"+no).style.display="block";
             document.getElementById("save"+no).style.display="none";
 
-            <?php $userID = htmlspecialchars($_GET["user"]); ?>
 
             $.post('/UsersController/setDateAdded', {id:<?php echo $userID; ?>, dateAdded:dateAdded_val})
         }

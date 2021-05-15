@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\appointmentModel;
 use App\Models\customModel;
 use App\Models\inhabitantModel;
 use App\Models\UserModel;
+use phpDocumentor\Reflection\Types\True_;
 
 class UsersController extends BaseController
 {
@@ -55,9 +57,10 @@ class UsersController extends BaseController
         echo view('templates/footer');
     }
 
-    public function employee()
+
+    public function employee($userID)
     {
-        $userID = htmlspecialchars($_GET["user"]);
+        $this->data['userID']=$userID;
         $this->data['isActive'] = $this->inhabitantModel->get_isActive($userID);
         $this->data['isAdmin'] = $this->inhabitantModel->get_isAdmin($userID);
         $this->data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
@@ -67,9 +70,9 @@ class UsersController extends BaseController
         echo view('templates/footer');
     }
 
-    public function inhabitant()
+    public function inhabitant($userID)
     {
-        $userID = htmlspecialchars($_GET["user"]);
+        $this->data['userID']=$userID;
         $this->data['isActive'] = $this->inhabitantModel->get_isActive($userID);
         $this->data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
         $this->data['notes'] = $this->inhabitantModel->get_notes($userID);
@@ -128,8 +131,9 @@ class UsersController extends BaseController
            return $data;
     }
 
-    public function setUsername()
+    public function setUsernameEmployee()
     {
+        $data=[];
         if($this->request->getMethod()=='post'){
             $rules = [ 'username' => 'required|min_length[3]|max_length[50]|validateUserName[email,password]' ];
             $errors = [ 'username' => ['validateUserName' => 'Kies een unieke username'] ];
@@ -145,6 +149,54 @@ class UsersController extends BaseController
                 $session->setFlashdata('succes','Changed username');
             }
         }
+        $userID=$this->request->getVar('from2id');
+        $data['userID']=$userID;
+        $data['isActive'] = $this->inhabitantModel->get_isActive($userID);
+        $data['isAdmin'] = $this->inhabitantModel->get_isAdmin($userID);
+        $data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        $data['password'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        echo view('templates/header');
+        echo view('employee', $data);
+        echo view('templates/footer');
+    }
+
+
+    public function setUsernameInhabitant()
+    {
+        $data=[];
+        $userID=$this->request->getVar('from2id');
+        if($this->request->getMethod()=='post'){
+            $rules = [ 'username' => 'required|min_length[3]|max_length[50]|validateUserName[email,password]' ];
+            $errors = [ 'username' => ['validateUserName' => 'Kies een unieke username'] ];
+            if(!$this->validate($rules,$errors)){
+                $data['validation'] = $this->validator;
+            }
+            else{
+                $user_model = new UserModel();
+                $user=$user_model->where('userId',$userID)->first();
+                $user_model->where('userId',$userID)->set('username',$this->request->getVar('username'))->update();
+                $session=session();
+                $session->setFlashdata('succes','Changed username');
+            }
+        }
+        $data['userID']=$userID;
+        $data['isActive'] = $this->inhabitantModel->get_isActive($userID);
+        $data['inhabitant'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        $data['notes'] = $this->inhabitantModel->get_notes($userID);
+        $data['appointments'] = $this->inhabitantModel->get_doctors_appointments($userID);
+        $data['doctors'] = $this->inhabitantModel->get_doctors();
+        $data['cards'] = $this->inhabitantModel->get_yellow_cards($userID);
+        $data['chore'] = $this->inhabitantModel->get_chores($userID);
+        $data['progress']=$this->progress($userID);
+        $data['godparent'] = $this->inhabitantModel->get_godparent($userID);
+        $data['inhabitants'] = $this->inhabitantModel->get_active_inhabitants();
+        $data['godchildren'] = $this->inhabitantModel->get_godchildren($userID);
+        if(session()->get('role')=='admin') {
+            $data['password'] = $this->inhabitantModel->get_inhabitant_info($userID);
+        }
+        echo view('templates/header');
+        echo view('inhabitant', $data);
+        echo view('templates/footer');
     }
 
     public function setFirstname()
