@@ -35,40 +35,7 @@
             border: 1px solid black;
         }
     </style>
-    <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
 
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            //data is the ID of the dragged item. It is in the form drag#
-            //ev.target.id is the ID of the place the item is dragged to. It is in the form drop#
-            if(ev.target.id.substring(0,4) == "drop"){
-                $.get('/choreController/changeChore',{inhabitantID:data.substring(4,10),choreID:ev.target.id.substring(4,10)})
-                ev.target.appendChild(document.getElementById(data));
-            }
-        }
-
-        function removeChore(id) {
-            $.get('/choreController/removeChore',{choreID:id});
-            setTimeout(() => {  location.reload(); }, 500);
-        }
-
-        function addChore() {
-            var title = document.querySelector("#NewChoreTitle").value;
-            $.get('/choreController/addChore',{choreTitle:title});
-            setTimeout(() => {  location.reload(); }, 500);
-        }
-
-
-
-    </script>
 
 
 
@@ -113,5 +80,40 @@
             <button type="submit" class="btn" onclick="addChore()">Create</button>
         </div>
     </div>
+<?php if(session()->get('role')=='inhabitant'){} else {?>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
 
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            //data is the ID of the dragged item. It is in the form drag#
+            //ev.target.id is the ID of the place the item is dragged to. It is in the form drop#
+            if(ev.target.id.substring(0,4) == "drop"){
+                $.get('/choreController/changeChore',{inhabitantID:data.substring(4,10),choreID:ev.target.id.substring(4,10)})
+                ev.target.appendChild(document.getElementById(data));
+            }
+        }
+
+        function removeChore(id) {
+            $.get('/choreController/removeChore',{choreID:id});
+            setTimeout(() => {  location.reload(); }, 500);
+        }
+
+        function addChore() {
+            var title = document.querySelector("#NewChoreTitle").value;
+            $.get('/choreController/addChore',{choreTitle:title});
+            setTimeout(() => {  location.reload(); }, 500);
+        }
+
+
+
+    </script>
+    <?php } ?>
 
