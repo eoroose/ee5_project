@@ -14,20 +14,29 @@
             </div>
 
             <?php foreach ($entries as $entry): ?>
-                <div class="col-12 card journal-card">
-                    <div class="card-body journal-card-body">
-                        <img src="/assets/images/journal_page/agenda.svg" alt="agenda image">
-                        <p> <?php echo $entry->title?></p>
+                <div class="journal-card">
 
+                    <div class="card journal-card-clickable">
+                        <div class="card-body journal-card-body">
+                            <img src="/assets/images/journal_page/agenda.svg" alt="agenda image">
+                            <p> <?php echo $entry->title?></p>
+                        </div>
+                        <a id="<?php echo $entry->journalEntryID?>" onclick="openPage(this)" class="stretched-link"></a>
                     </div>
 
-                    <a id="<?php echo $entry->journalEntryID?>" onclick="openPage(this)" class="stretched-link"></a>
+                    <div class="journal-card-buttons">
+                        <button class="journal-card-btn" id="change<?php echo $entry->journalEntryID?>" onclick="openChangeModal(this.id)">
+                            <img src="/assets/images/tasks_page/edit.svg" class="journal-btn-svg" alt="edit image">
+                        </button>
+
+                        <button class="journal-card-btn" id="remove<?php echo $entry->journalEntryID?>" onclick="removeEntry(this.id)">
+                            <img src="/assets/images/tasks_page/trash.svg" class="journal-btn-svg" alt="trash image">
+                        </button>
+                    </div>
+
                 </div>
-
-            <button id="remove<?php echo $entry->journalEntryID?>" onclick="removeEntry(this.id)">Remove</button>
-            <button id="change<?php echo $entry->journalEntryID?>" onclick="openChangeModal(this.id)">change</button>
-
             <?php endforeach; ?>
+
         </div>
     </div>
 
@@ -58,12 +67,11 @@
         </div>
     </div>
 
-
-    <div id="changeEntryModal" style="display:none;">
-        <div >
-
-            <h4>New journal entry</h4>
-
+    <div id="changeEntryModal" class="main-modal">
+        <div class="journal-modal-content card main-card">
+    
+            <h4>edit journal entry</h4>
+            
             <input type="text" id="CEID">
 
             <label for="CETitle"><b>title</b></label>
@@ -72,7 +80,7 @@
             <label for="CEText"><b>entry</b></label>
             <textarea class="form-control main-input journal-input" cols="40" rows="5" placeholder="Enter entry" id="CEText" required></textarea>
             <div class="journal-modal-btns">
-                <button type="submit" class="main-modal-btn" onclick="changeEntry()">Change</button>
+                <button type="submit" class="main-modal-btn" onclick="changeEntry()">apply</button>
                 <button type="submit" class="main-modal-btn" onclick="closeFormCE()">Cancel</button>
             </div>
         </div>
@@ -145,7 +153,7 @@
     }
 
     function openChangeModal(id){
-        alert('hoi');
+        // alert('hoi');
         document.getElementById("CEID").style.display = "none";
         document.querySelector("#CEID").value = id;
         $.get('/JournalController/getJournalEntry',{id:id.substring(6,14)}, function (data) {
