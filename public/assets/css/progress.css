@@ -187,8 +187,8 @@
 }
 
 .progress-info-incomplete img {
-    width: calc(var(--info-img-size) + 10px);
-    height: calc(var(--info-img-size) + 10px);
+    width: calc(var(--info-img-size) + 5px);
+    height: calc(var(--info-img-size) + 5px);
 }
 
 .progress-info-btn {

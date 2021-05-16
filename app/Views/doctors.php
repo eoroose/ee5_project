@@ -1,80 +1,100 @@
 <div>
-    <h4>doctors page</h4>
-    <h4>Check DoctorsController.php</h4>
+    <link href="/assets/css/doctors.css" rel="stylesheet" type="text/css" />
 
-    <p>page where there will be a list of doctors, and their appointments</p>
-    <p>possibility to add new doctors</p>
-</div>
-<div>
-    <div class="row justif-content-md-center card">
-        <img src="assets/images/dashboard_page/verify.svg" height="50px" width="50px">
-        <div class="card-body dashboard-card-body">
-            <h5 class="card-title dashboard-card-title"style="text-align: center">Registreer een nieuwe Dokter</h5>
-            <a onclick="registerDoctor()" class="stretched-link"></a>
-            <!--  nclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo 't ' ?>' -->
-        </div>
-    </div>
-</div>
-<div>
-    <div class="container">
-        <?php foreach ($doctors as $row){?>
-            <div class="row justif-content-md-center card">
-                <img src="<?php if($row['gender']=="male"){echo base_url('assets/images/doctors/maledoctor.svg');}else{echo base_url('assets/images/doctors/femaledoctor.svg');}?>" height="50px" width="50px">
-                <div class="card-body dashboard-card-body">
-                    <h5 class="card-title dashboard-card-title"style="text-align: center"><?php echo $row['lastname'].' '.$row['firstname']?></h5>
-                    <a href="/doctors/doctorprofile/<?php echo $row['doctorID'];?>" class="stretched-link"></a>
-                  <!--  nclick="window.location.href='http://localhost/UsersController/inhabitant?user=<?php echo 't ' ?>' -->
+    <div class="container doctors-container main-bottom-padding">
+        <h3 class="main-title doctors-title">Doctors</h3>
+
+        <div class="row journal-row">
+            
+            <div class="col-12 card doctors-register-card">
+                <img src="/assets/images/doctors/verify.svg" class="card-img-top" alt="verify image">
+                <div class="card-body doctors-register-card-body">
+                    <h5 class="card-title doctors-register-title" style="text-align: center">Registreer een nieuwe Dokter</h5>
+                    <a onclick="registerDoctor()" class="stretched-link"></a>
                 </div>
             </div>
-        <?php }?>
+
+            <?php foreach ($doctors as $doctor): ?>
+                <div class="doctor-card">
+
+                    <div class="card doctor-card-clickable">
+                        
+                        <div class="card-body doctor-card-body">   
+                            <img src="
+                                <?php if($doctor['gender']=="male") {
+                                    echo base_url('assets/images/doctors/maledoctor.svg');
+                                } elseif($doctor['gender']=="female") {
+                                    echo base_url('assets/images/doctors/femaledoctor.svg');
+                                } else {
+                                    echo base_url('assets/images/doctors/doctor.svg');
+                                }?>
+                            " alt="doctor image">
+                            <p><?php echo $doctor['lastname'].' '.$doctor['firstname']?></p>
+                        </div>
+
+                        <a href="/doctors/doctorprofile/<?php echo $doctor['doctorID'];?>" class="stretched-link"></a>
+                    </div>
+                    
+                    <div class="doctor-btn-container">
+                        <button class="doctor-card-delete">
+                            <img src="/assets/images/tasks_page/trash.svg" class="doctor-card-delete-svg" alt="trash image">
+                        </button>
+                    </div>
+
+                </div>
+            <?php endforeach; ?>
+
+        </div>
     </div>
-</div>
 
 
-<div id="model" class="main-modal" style="display:none;">
-    <div class="card main-card">
-        <h4>Registreer Dokter</h4>
-        <div class="row main-avatar-modal-row">
-            <form action="/DoctorsController/register" id="form2" name="form2" onsubmit="return(validate());">
-                <div>
-                    <label class="register-input-label" for="firstname">Voornaam</label>
-                    <input type="text" id="firstname" name="firstname" placeholder="Voornaam" value="" maxlength="75">
+    <div id="model" class="main-modal">
+        <div class="doctors-modal-content card main-card">
+    
+            <h4>Registreer Dokter</h4>
+            
+            <form class="doctors-modal-form" action="/DoctorsController/register" id="form2" name="form2" onsubmit="return(validate());">
+                <div class="doctors-modal-input-label">
+                    <label for="firstname">Voornaam</label>
+                    <input class="form-control main-input" type="text" id="firstname" name="firstname" placeholder="Voornaam" value="" maxlength="75">
                 </div>
-                <div>
-                    <label class="register-input-label" for="Achternaam">Achternaam</label>
-                    <input type="text" id="Achternaam" name="Achternaam" placeholder="Achternaam" value="" maxlength="75">
+                <div class="doctors-modal-input-label">
+                    <label for="Achternaam">Achternaam</label>
+                    <input class="form-control main-input" type="text" id="Achternaam" name="Achternaam" placeholder="Achternaam" value="" maxlength="75">
                 </div>
-                <div>
-                    <label class="register-input-label" for="Land">Land</label>
-                    <input type="text" id="Land" name="Land" placeholder="Land" value="" maxlength="75">
+                <div class="doctors-modal-input-label">
+                    <label for="Land">Land</label>
+                    <input class="form-control main-input" type="text" id="Land" name="Land" placeholder="Land" value="" maxlength="75">
                 </div>
-                <div>
-                    <label class="register-input-label" for="Stad">Stad</label>
-                    <input type="text" id="Stad" name="Stad" placeholder="Stad" value="" maxlength="75">
+                <div class="doctors-modal-input-label">
+                    <label for="Stad">Stad</label>
+                    <input class="form-control main-input" type="text" id="Stad" name="Stad" placeholder="Stad" value="" maxlength="75">
                 </div>
-                <div>
-                    <label class="register-input-label" for="Address">Address</label>
-                    <input type="text" id="Address" name="Address" placeholder="Address" value="" maxlength="75">
+                <div class="doctors-modal-input-label">
+                    <label for="Address">Address</label>
+                    <input class="form-control main-input" type="text" id="Address" name="Address" placeholder="Address" value="" maxlength="75">
                 </div>
-                <div>
-                    <label class="register-input-label" for="phone">Telefoonnummer</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Telefoonnummer" value="" maxlength="16">
+                <div class="doctors-modal-input-label">
+                    <label for="phone">Telefoonnummer</label>
+                    <input class="form-control main-input" type="tel" id="phone" name="phone" placeholder="Telefoonnummer" value="" maxlength="16">
                 </div>
-                <div>
-                    <label class="register-input-label" for="Gender">Geslacht</label>
-                    <select id='Gender' name='Gender'>
+                <div class="doctors-modal-input-label">
+                    <label for="Gender">Geslacht</label>
+                    <select class="main-input" id='Gender' name='Gender'>
                         <option value='male' >male</option>
                         <option value='female' >female</option>
                         <option value='none of the above'>none of the above</option>
                     </select>
                 </div>
-                <button type="submit" value="submit">Registreer </button>
+                
+                <button type="submit" value="submit" class="main-modal-btn doctors-modal-btn">Registreer</button>
             </form>
+            
+            <button id="submit_model_1" type="submit" class="main-modal-btn doctors-modal-btn" onclick="cancelDoctor()">cancel</button>
         </div>
-        <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelDoctor()">cancel</button>
     </div>
-</div>
 
+</div>
 
 <script>
     function registerDoctor()
