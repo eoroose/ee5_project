@@ -255,3 +255,114 @@ a {
 .main-modal-btn:focus::before {
     transform: scaleX(1) scaleY(1);
 }
+
+
+/* INHABITANT MODAL */
+
+.main-inhabitant-modal-content {
+    position: absolute;
+    width: var(--modal-card-width);
+    max-width: var(--modal-card-max-width);
+    display: block;
+    top: var(--modal-card-top);
+    left: calc((100% - var(--modal-card-width)) / 2);
+    padding-top: 10px;
+    text-align: center;
+    animation: 500ms ease-in 0s 1 login-alert-popup;
+
+    max-height: 90%;
+    overflow: auto;
+
+}
+
+.main-inhabitant-modal-content h4 {
+    font-family: "freestyle script regular";
+    color: var(--purple);
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.main-inhabitant-modal-row {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+.main-inhabitant-modal-card-separator {
+    max-width: var(--modal-separator-width);
+    margin-bottom: 10px;
+    border: none;
+}
+
+.main-inhabitant-modal-card {
+    min-width: 175px;
+    margin-bottom: 10px;
+    /* height: calc(var(--modal-img-size) + 15px); */
+    border: var(--modal-card-border-width) solid var(--purple);
+    border-radius: var(--modal-card-border-radius);
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: border var(--modal-animation-duration) ease-in-out;
+    /* white-space: nowrap; */
+    text-align: center;
+}
+
+.main-inhabitant-modal-card p {
+    /* font-weight: bold; */
+    color: var(--black);
+    transition: color var(--modal-animation-duration) ease-in-out;
+}
+
+.main-inhabitant-modal-card:hover,
+.main-inhabitant-modal-card:focus {
+    border: var(--modal-card-border-width) solid white;
+}
+
+.main-inhabitant-modal-card:hover p,
+.main-inhabitant-modal-card:focus p {
+    color: white;
+}
+
+
+
+.main-inhabitant-modal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--modal-card-border-radius);
+
+    transition: transform var(--modal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.main-inhabitant-modal-card:hover::before,
+.main-inhabitant-modal-card:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.main-inhabitant-modal-img {
+    width: var(--modal-img-size);
+    height: var(--modal-img-size);
+    border-radius: calc(var(--modal-img-size) / 2);
+    
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: auto;
+    background-color: var(--purple);
+    border: var(--modal-img-border-size) solid var(--purple);
+    transition: background-color var(--modal-animation-duration) ease-in-out, border var(--modal-animation-duration) ease-in-out;
+}
+
+.main-inhabitant-modal-card:hover .main-inhabitant-modal-img,
+.main-inhabitant-modal-card:focus .main-inhabitant-modal-img {
+    background-color: white;
+    border: var(--modal-img-border-size) solid white;
+}

@@ -242,6 +242,7 @@
     
     /* MODAL */
     --doctors-modal-input-margin-top-bottom: 10px;
+    --doctors-modal-input-border-radius: 15px;
     /* display: flex; */
 }
 
@@ -277,10 +278,12 @@
 
 .doctors-modal-input-label input {
     flex: 1;
+    border-radius: var(--doctors-modal-input-border-radius);
 }
 
 .doctors-modal-input-label select {
-    height: 35px;
+    height: 40px;
+    border-radius: var(--doctors-modal-input-border-radius);
 }
 
 .doctors-modal-btn {

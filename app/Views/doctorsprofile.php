@@ -1,108 +1,234 @@
 <?php $date=date('Y-m-d\TH:i');?>
+
 <div>
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 card profile-col">
-                    <h1 ><b>Naam: </b> <span id="firstname" ><?php echo $doctor['firstname']?></span> <span id="lastname"><?php echo ' '.$doctor['lastname'] ?></span>
-                        <button class="tasks-btn-edit-save" type="edit" id="editname" onclick="changeName()">
-                            <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                        <button class="tasks-btn-edit-save" type="edit" id="savename" onclick="saveName(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                            <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-12 card profile-col">
-                    <h1><b>Stad: </b> <span id="stad"><?php echo $doctor['city']?></span>
-                        <button class="tasks-btn-edit-save" type="edit" id="editStad" onclick="changeStad()">
-                            <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                        <button class="tasks-btn-edit-save" type="edit" id="saveStad" onclick="saveStad(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                            <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-12 card profile-col">
-                    <h1><b>Adres: </b> <span id="addres"><?php echo $doctor['address']?></span>
-                        <button class="tasks-btn-edit-save" type="edit" id="editaddres" onclick="changeAddres()">
-                            <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                        <button class="tasks-btn-edit-save" type="edit" id="saveaddres" onclick="saveAddres(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                            <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-12 card profile-col">
-                    <h1><b>Telefoonnummer: </b> <span id="telefoon"><?php echo $doctor['phoneNumber']?></span>
-                        <button class="tasks-btn-edit-save" type="edit" id="edittelefoon" onclick="changetelefooon()">
-                            <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                        <button class="tasks-btn-edit-save" type="edit" id="savetelefoon" onclick="savetelefoon(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                            <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-12 card profile-col">
-                    <h1><b>geslacht: </b> <span id="gender"><?php echo $doctor['gender']?></span>
-                        <button class="tasks-btn-edit-save" type="edit" id="editgender" onclick="changegender()">
-                            <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                        <button class="tasks-btn-edit-save" type="edit" id="savegender" onclick="savegender(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                            <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-12 card profile-col">
-                    <h1><b>Afspraken: </b></h1>
-                    <div>
-                        <table>
+    <link href="/assets/css/doctors_profile.css" rel="stylesheet" type="text/css" />
 
-                        <?php  if($appointments!=null){foreach ($appointments as $appointment){?>
-                            <tr>
+    <div class="container doctor-prof-container main-bottom-padding">
 
-                                <th>date: <span id="<?php echo "date".$appointment['appointmentID'];?>"> <?php echo $appointment['date'];?></span> <input type="hidden" id="<?php echo "dateFormat".$appointment['appointmentID'];?>"  value="<?php echo $appointment["date2"];?>"></th>
-                                <th>inhabitant: <span id="<?php echo "inhabitant".$appointment['appointmentID']?>"><?php echo $appointment['inhabitant_Firstname'].' '.$appointment['inhabitant_Lastname']?></span></th>
-                                        <th>reason: <span id="<?php echo "reason".$appointment['appointmentID']?>"><?php echo $appointment['reason']?></span></th>
-                                        <th>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']; ?>)">
-                                                <img src="/assets/images/tasks_page/edit.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                                            </button>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "saveappoint".$appointment['appointmentID']?>" onclick="saveapoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
-                                                <img src="/assets/images/tasks_page/save.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                                            </button>
-                                            <button class="tasks-btn-edit-save" type="edit" id="<?php echo "deleteappoint".$appointment['appointmentID']?>" onclick="deleteappoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
-                                                <img src="/assets/images/tasks_page/trash.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                                            </button>
-                                        </th>
-                            </tr>
-                        <?php }} ?>
-                            <tr>
-                                <th> date: <input type="datetime-local" id="new_appoint_date" class='form-control' min="<?php echo $date;?>"></th>
-                                <th> inhabitant:<button id='new_appoint_inhabitant'  onclick='chooseInhabitantnewAppoint()'>selecteer inwonner</button></th>
-                                <th> reason: <input type="text" id="new_appoint_reason"></th>
-                                <th>
-                                    <button class="tasks-btn-edit-save" type="edit" id="<?php echo "addAppoint"?>" onclick="AddAppointment()">
-                                        <img src="/assets/images/tasks_page/add.svg" class="tasks-btn-svg" alt="edit image" height="50px" width="50px">
-                                    </button>
-                                </th>
-                            </tr>
+        <div class="card doctor-prof-back-arrow">
+            <img src="/assets/images/doctors/back-arrow.svg" class="card-img-top" alt="back-arrow image">  
+            <a href="/doctors" class="stretched-link"></a>
+        </div>
 
-                        </table>
-                        <?php if (isset($validation)):?>
+        <div class="row doctor-prof-row card main-card">
 
-                            <div class="col-12">
-                                <div class="alert alert-danger main-alert-message register-alert-message" role="alert">
-                                    <?= $validation->listErrors() ?>
-                                </div>
-                            </div>
-                        <?php endif;?>
+            <!-- AVATAR -->
+            <div class="col-12 card doctor-prof-avatar-col">
+                <img src="<?php if($doctor['gender']=="male") {
+                        echo base_url('assets/images/doctors/maledoctor.svg');
+                    } elseif($doctor['gender']=="female") {
+                        echo base_url('assets/images/doctors/femaledoctor.svg');
+                    } else {
+                        echo base_url('assets/images/doctors/doctor.svg');
+                    }
+                ?>" id='avatarImg'>
+            </div>
+            
+            <!-- NAME -->
+            <div class="col-12 doctor-prof-col">
+                <h1><b>Naam: </b>
+                    <span id="firstname"><?php echo $doctor['firstname']?> </span>
+                    <span id="lastname"><?php echo $doctor['lastname']?></span>
+                </h1>
+                <div class="doctor-prof-edit-save-container">
+                    <button class="doctor-prof-btn-edit-save" type="edit" id="editname" onclick="changeName()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    </button>
+                    <button class="doctor-prof-btn-edit-save" type="save" id="savename" onclick="saveName(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </div>
+
+            <!-- CITY -->
+            <div class="col-12 doctor-prof-col">
+                <h1><b>Stad: </b>
+                    <span id="stad"><?php echo $doctor['city']?> </span>
+                </h1>
+                <div class="doctor-prof-edit-save-container">
+                    <button class="doctor-prof-btn-edit-save" type="edit" id="editStad" onclick="changeStad()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    </button>
+                    <button class="doctor-prof-btn-edit-save" type="save" id="saveStad" onclick="saveStad(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ADDRESS -->
+            <div class="col-12 doctor-prof-col">
+                <h1><b>Adres: </b>
+                    <span id="addres"><?php echo $doctor['address']?> </span>
+                </h1>
+                <div class="doctor-prof-edit-save-container">
+                    <button class="doctor-prof-btn-edit-save" type="edit" id="editaddres" onclick="changeAddres()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    </button>
+                    <button class="doctor-prof-btn-edit-save" type="save" id="saveaddres" onclick="saveAddres(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </div>
+
+            <!-- TELEPHONE NUMBER -->
+            <div class="col-12 doctor-prof-col">
+                <h1><b>Telefoonnummer: </b>
+                    <span id="telefoon"><?php echo $doctor['phoneNumber']?> </span>
+                </h1>
+                <div class="doctor-prof-edit-save-container">
+                    <button class="doctor-prof-btn-edit-save" type="edit" id="edittelefoon" onclick="changetelefooon()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    </button>
+                    <button class="doctor-prof-btn-edit-save" type="save" id="savetelefoon" onclick="savetelefoon(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </div>
+            
+            <!-- GENDER -->
+            <div class="col-12 doctor-prof-col">
+                <h1><b>Geslacht: </b>
+                    <span id="gender"><?php echo $doctor['gender']?> </span>
+                </h1>
+                <div class="doctor-prof-edit-save-container">
+                    <button class="doctor-prof-btn-edit-save" type="edit" id="editgender" onclick="changegender()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    </button>
+                    <button class="doctor-prof-btn-edit-save" type="save" id="savegender" onclick="savegender(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- APPOINTMENTS -->
+        <div class="row doctor-prof-row card main-card doctor-prof-appointment-container">
+            <div class="col-12 card doctor-prof-col-appointment-title">
+                <h1><b>Appointments:</b></h1>
+            </div>
+
+            <?php  if($appointments!=null) { foreach($appointments as $appointment) {?>
+                <div class="col-12 doctor-prof-col-appointment">
+
+                    <div class="appointment-text">
+                        <h1><b>date: </b>
+                            <span id="<?php echo "date".$appointment['appointmentID'];?>">
+                                <?php echo $appointment['date'];?>
+                            </span>
+                            <input type="hidden" id="<?php echo "dateFormat".$appointment['appointmentID'];?>"  value="<?php echo $appointment["date2"];?>">
+                        </h1>
+
+                        <h1><b>inhabitant: </b>
+                            <span id="<?php echo "inhabitant".$appointment['appointmentID']?>">
+                                <?php echo $appointment['inhabitant_Firstname']?> <?php echo $appointment['inhabitant_Lastname']?>
+                            </span>
+                        </h1>
+
+                        <h1><b>reason: </b>
+                            <span id="<?php echo "reason".$appointment['appointmentID']?>">
+                                <?php echo $appointment['reason']?>
+                            </span>
+                        </h1>
+                    </div>
+
+                    <div class="appointment-btns">
+                        <div class="doctor-prof-edit-save-container">
+                            <button class="doctor-prof-btn-edit-save" type="edit" id="<?php echo "editappoint".$appointment['appointmentID']?>" onclick="changeapoint(<?php echo $appointment['appointmentID']; ?>)">
+                                <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                            </button>
+                            <button class="doctor-prof-btn-edit-save" type="save" id="<?php echo "saveappoint".$appointment['appointmentID']?>" onclick="saveapoint(<?php echo $appointment['appointmentID']; ?>)" style="display: none">
+                                <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                            </button>
+                        </div>
+
+                        <button class="doctor-prof-btn-delete" type="button" id="<?php echo "deleteappoint".$appointment['appointmentID']?>" onclick="deleteappoint(<?php echo $appointment['appointmentID']; ?>)">
+                            <img src="/assets/images/tasks_page/trash.svg" class="doctor-prof-btn-svg" alt="trash image">
+                        </button>
                     </div>
 
                 </div>
+            <?php }} ?>
+        </div>
+            
+        <!-- NEW APPOINTMENT -->    
+        <div class="row doctor-prof-row card main-card doctor-prof-appointment-container">
+
+            <div class="col-12 card doctor-prof-col-appointment-title">
+                <h1><b>New Appointment:</b></h1>
             </div>
+
+            <div class="col-12 appointment-inputs">
+                <h1><b>date: </b>
+                    <input type="datetime-local" id="new_appoint_date" class='form-control main-input appointment-inputs-input' min="<?php echo $date;?>">
+                </h1>
+
+                <h1><b>inhabitant: </b>
+                    <button class="form-control appointment-inputs-btn appointment-inhabitant-btn" id='new_appoint_inhabitant'  onclick='chooseInhabitantnewAppoint()'>inwonner</button> 
+                </h1>
+
+                <h1><b>reason: </b>
+                    <input type="text" id="new_appoint_reason" class="form-control main-input appointment-inputs-input">
+                </h1>
+
+                <h1>
+                    <button class="form-control appointment-inputs-btn appointment-inhabitant-btn appointment-add-btn" type="edit" id="<?php echo "addAppoint"?>" onclick="AddAppointment()">
+                        <img src="/assets/images/tasks_page/add.svg" class="appointment-btn-svg" alt="edit image">
+                    </button>
+                </h1>
+            </div>
+
+            <?php if (isset($validation)):?>
+                <div class="col-12">
+                    <div class="alert alert-danger main-alert-message doctors-prof-alert-message" role="alert">
+                        <?= $validation->listErrors() ?>
+                    </div>
+                </div>
+            <?php endif;?>
+
+        </div>
+
+    </div>
+
+    <!-- MODALS -->
+    <div id="inhabitantModel" class="main-modal">
+        <div class="main-inhabitant-modal-content card main-card">
+            <h4>Choose Inhabitant</h4>
+            <div class="row main-inhabitant-modal-row">
+                <?php foreach ($inhabitants as $row) { ?>
+                    <input type="hidden" id='appointValue' value="">
+                    <div class="col-sm card main-inhabitant-modal-card">
+                        <img src="<?php echo base_url($row['location']);?>" class="card-img-top main-inhabitant-modal-img" alt="user image">
+                        <p id="<?php echo 'name'.$row['inhabitantID'];?>"><?php echo $row["firstname"]?> <?php echo $row["lastname"]?></p>
+                        <a onclick="submitInhabitant(<?php echo $row['inhabitantID'] ;?>)" class="stretched-link" ></a>
+                    </div>
+
+                    <div class="col-sm card main-inhabitant-modal-card-separator"></div>
+                <?php }?>
+            </div>
+            <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelInhabitant()">cancel</button>
         </div>
     </div>
+
+    <div id="inhabitantModel1" class="main-modal">
+        <div class="main-inhabitant-modal-content card main-card">
+            <h4>Choose Inhabitant</h4>
+            <div class="row main-inhabitant-modal-row">
+                <?php foreach ($inhabitants as $row) { ?>
+                    <input type="hidden" id='appointValue' value="">
+                    <div class="col-sm card main-inhabitant-modal-card">
+                        <img src="<?php echo base_url($row['location']);?>" class="card-img-top main-inhabitant-modal-img" alt="user image">
+                        <p id="<?php echo 'name'.$row['inhabitantID'];?>"><?php echo $row["firstname"]?> <?php echo $row["lastname"]?></p>
+                        <a onclick="submitInhabitantnewAppoint(<?php echo $row['inhabitantID'] ;?>)" class="stretched-link" ></a>
+                    </div>
+
+                    <div class="col-sm card main-inhabitant-modal-card-separator"></div>
+                <?php }?>
+            </div>
+            <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelInhabitantnewAppoint()">cancel</button>
+        </div>
+    </div>
+
 </div>
 
 <form action="/DoctorsController/insert" id="form2">
@@ -129,6 +255,7 @@
         <button id="submit_model_1" type="submit" class="main-modal-btn" onclick="cancelInhabitant()">cancel</button>
    </div>
 </div>
+
 <div id="inhabitantModel1" class="main-modal" style="display:none;">
     <div class="main-avatar-modal-content card main-card">
         <h4>Kies Avatar</h4>
@@ -215,16 +342,16 @@
         var inhabitant_data=inhabitant.innerHTML;
 
 
-        date2.innerHTML="<input type='datetime-local' class='form-control' id='phase_text"+no+"' value='"+date_data+"' min='<?php  echo $date;?>'>";
-        reason.innerHTML="<input type='text' id='description_text"+no+"' value='"+reason_data+"' style='width: 90%;border-radius: 10px;'>";
-        inhabitant.innerHTML="<button id='chooseInhabitant' value='"+inhabitant_data+"' onclick='chooseInhabitant()'></button>";
+        date2.innerHTML="<input type='datetime-local' class='form-control main-input appointment-inputs-input' id='phase_text"+no+"' value='"+date_data+"' min='<?php  echo $date;?>'>";
+        reason.innerHTML="<input type='text' class='form-control main-input appointment-inputs-input' id='description_text"+no+"' value='"+reason_data+"' >";
+        inhabitant.innerHTML="<button id='chooseInhabitant' class='form-control appointment-inputs-btn appointment-inhabitant-btn' value='"+inhabitant_data+"' onclick='chooseInhabitant()'></button>";
         document.getElementById('chooseInhabitant').innerHTML=inhabitant_data;
         document.getElementById('appointValue').value=no;
     }
     function saveapoint(no){
         document.getElementById("editappoint"+no).style.display="block";
         document.getElementById("saveappoint"+no).style.display="none";
-        document.getElementById("deleteappoint"+no).style.display="none";
+        document.getElementById("deleteappoint"+no).style.display="block";
 
 
         var date=document.getElementById("phase_text"+no).value;
@@ -261,15 +388,15 @@
         var phase_data=phase.innerHTML;
 
         if(phase_data=='male') {
-            phase.innerHTML = "<select id='Gender' name='Gender'> <option value='male'selected='selected' >male</option><option value='female' >female</option> <option value='none of the above'>none of the above</option></select>";
+            phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male'selected='selected' >male</option><option value='female' >female</option> <option value='none of the above'>none of the above</option></select>";
         }
         else{
             if(phase_data=='female'){
-                phase.innerHTML = "<select id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above'>none of the above</option></select>";
+                phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above'>none of the above</option></select>";
 
             }
             else{
-                phase.innerHTML = "<select id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above' selected='selected'>none of the above</option></select>";
+                phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above' selected='selected'>none of the above</option></select>";
 
             }
         }
@@ -293,7 +420,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input type='tel' id='Telefoon' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input' type='tel' id='Telefoon' value='"+phase_data+"'>";
     }
     function savetelefoon(no){
         document.getElementById("edittelefoon").style.display="block";
@@ -316,8 +443,8 @@
         var lastname_data=lastname.innerHTML;
 
 
-        phase.innerHTML="<input type='text' id='firstName' value='"+phase_data+"'>";
-        lastname.innerHTML="<input type='text' id='lastName' value='"+lastname_data+"'>";
+        phase.innerHTML="<input class='form-control main-input' type='text' id='firstName' value='"+phase_data+"' style='margin-bottom:10px'>";
+        lastname.innerHTML="<input class='form-control main-input' type='text' id='lastName' value='"+lastname_data+"'>";
     }
     function saveName(no){
         var phase_val=document.getElementById("firstName").value;
@@ -340,7 +467,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input type='text' id='Stad' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input' type='text' id='Stad' value='"+phase_data+"'>";
 
     }
     function saveStad(no){
@@ -362,7 +489,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input type='text' id='Addres' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input' type='text' id='Addres' value='"+phase_data+"'>";
     }
     function saveAddres(no){
         var phase_val=document.getElementById("Addres").value;
