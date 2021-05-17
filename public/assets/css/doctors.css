@@ -1,0 +1,298 @@
+.doctors-container {
+    margin-top: 20px;
+    --doctors-register-svg-size: 65px;
+    --doctors-register-svg-margin-top: 15px;
+
+    --doctors-register-btn-border: 3px;
+    --doctors-register-btn-border-radius: 20px;
+
+    --doctors-animation-duaration: 300ms;
+
+    --doctor-svg-size: 50px;
+
+    /* delete button */
+    --doctor-delete-button-svg-size: 40px;
+    --doctor-delete-button-size: 60px;
+    --doctor-delete-btn-border-radius: 15px;
+    --doctor-delete-animation-duration: 200ms;
+}
+
+.doctors-title {
+    font-size: 4em;
+}
+
+/* REGISTER CARD */
+
+.doctors-register-card {
+    width: 50%;
+    min-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: var(--doctors-register-btn-border) solid var(--purple);
+    border-radius: var(--doctors-register-btn-border-radius);
+    background-color: white;
+    transition: border var(--doctors-animation-duaration) ease-in-out;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.doctors-register-card:hover,
+.doctors-register-card:focus {
+    border: var(--doctors-register-btn-border) solid white;
+}
+
+.doctors-register-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--doctors-register-btn-border-radius);
+
+    transition: transform var(--doctors-animation-duaration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctors-register-card:hover::before,
+.doctors-register-card:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctors-register-card img {
+    margin-top: var(--doctors-register-svg-margin-top);
+    width: var(--doctors-register-svg-size);
+    height: var(--doctors-register-svg-size);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    filter: brightness(1) invert(0);
+    transition: filter var(--doctors-animation-duaration) ease-in-out;
+}
+
+.doctors-register-card:hover img,
+.doctors-register-card:focus img {
+    filter: brightness(0) invert(1);
+}
+
+.doctors-register-card-body {
+
+}
+
+.doctors-register-card-body h5 {
+    color: var(--purple);
+    transition: color var(--doctors-animation-duaration) ease-in-out;
+}
+.doctors-register-card:hover .doctors-register-card-body h5,
+.doctors-register-card:focus .doctors-register-card-body h5 {
+    color: white;
+}
+
+/* DOCTOR CARD */
+
+.doctor-card {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    /* cursor: pointer; */
+    border: 2px solid var(--purple);
+    border-radius: var(--doctors-register-btn-border-radius);
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    transition: border var(--doctors-animation-duaration) ease-in-out;
+}
+
+.doctor-card:hover,
+.doctor-card:focus {
+    border: 2px solid white;
+}
+
+.doctor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--doctors-register-btn-border-radius);
+
+    transition: transform var(--doctors-animation-duaration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-card:hover::before,
+.doctor-card:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-card-clickable {
+    flex: 1;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.doctor-card-body {
+    display: flex;
+}
+
+.doctor-card-body img {
+    width: var(--doctor-svg-size);
+    height: var(--doctor-svg-size);
+    transition: filter var(--doctors-animation-duaration) ease-in-out;
+    margin-right: 7px;
+}
+
+.doctor-card:hover .doctor-card-body img,
+.doctor-card:focus .doctor-card-body img {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-card-body p {
+    color: black;
+    margin-top: 1em;
+    margin-left: 10px;
+    transition: color var(--doctors-animation-duaration) ease-in-out;
+}
+
+.doctor-card:hover .doctor-card-body p,
+.doctor-card:focus .doctor-card-body p {
+    color: white
+}
+
+.doctor-button-container {
+    align-items: center;
+}
+
+.doctor-card-delete {
+    width:  var(--doctor-delete-button-size);
+    height: var(--doctor-delete-button-size);
+    border:none;
+    background: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-right: 1em;
+    margin-top: 0.8em;
+}
+
+.doctor-card-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: white;
+    border-radius: var(--doctor-delete-btn-border-radius);
+
+    transition: transform var(--doctor-delete-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-card-delete:hover::before,
+.doctor-card-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-card-delete-svg {
+    width: var(--doctor-delete-button-svg-size);
+    height: var(--doctor-delete-button-svg-size);
+    filter: brightness(1) invert(0);
+    transition: filter var(--doctor-delete-animation-duration) ease-in-out;
+}
+
+.doctor-card:hover .doctor-card-delete-svg,
+.doctor-card:focus .doctor-card-delete-svg {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-card-delete:hover .doctor-card-delete-svg,
+.doctor-card-delete:focus .doctor-card-delete-svg {
+    filter: brightness(1) invert(0);
+}
+
+/* MODAL */
+
+.doctors-modal-content {
+    position: absolute;
+    width: var(--modal-card-width);
+    max-width: var(--modal-card-max-width);
+    
+    top: var(--modal-card-top);
+    left: calc((100% - var(--modal-card-width)) / 2);
+    padding-top: 10px;
+    text-align: center;
+    animation: 500ms ease-in 0s 1 login-alert-popup;
+
+    max-height: 90%;
+    
+    /* MODAL */
+    --doctors-modal-input-margin-top-bottom: 10px;
+    --doctors-modal-input-border-radius: 15px;
+    /* display: flex; */
+}
+
+.doctors-modal-content h4 {
+    font-family: "freestyle script regular";
+    color: var(--purple);
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.doctors-modal-form {
+    
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+}
+
+.doctors-modal-input-label {
+    margin-top: var(--doctors-modal-input-margin-top-bottom);
+    margin-bottom: var(--doctors-modal-input-margin-top-bottom);
+    display: flex;
+    
+}
+
+.doctors-modal-input-label label {
+    color: var(--purple);
+    font-weight: bold;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+
+.doctors-modal-input-label input {
+    flex: 1;
+    border-radius: var(--doctors-modal-input-border-radius);
+}
+
+.doctors-modal-input-label select {
+    height: 40px;
+    border-radius: var(--doctors-modal-input-border-radius);
+}
+
+.doctors-modal-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 175px;
+    max-width: 175px;
+    margin-top: -5px;
+    
+}
+

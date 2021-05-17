@@ -78,11 +78,12 @@
 }
 
 .journal-card {
+    display: flex;
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     align-content: center;
-    cursor: pointer;
+    /* cursor: pointer; */
     border: 2px solid var(--purple);
     border-radius: var(--journal-btn-border-radius);
 
@@ -117,6 +118,12 @@
     transform: scaleX(1) scaleY(1);
 }
 
+.journal-card-clickable {
+    flex: 1;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
 
 .journal-card-body {
     display: flex;
@@ -136,6 +143,7 @@
 
 .journal-card-body p {
     color: black;
+    /* margin-top: 5px; */
     transition: color var(--journal-animation-duration) ease-in-out;
 }
 
@@ -144,6 +152,65 @@
     color: white
 }
 
+.journal-card-buttons {
+    --tasks-border-width: 1px;
+    --journal-btn-animation-duration: 200ms;
+    --journal-btn-margins: 15%;
+    --journal-btn-border-radius: 15px;
+
+    --journal-button-size: 60px;
+    --journal-button-svg-size: 35px;
+}
+
+.journal-card-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.journal-card-btn {
+    width:  var(--journal-button-size);
+    height: var(--journal-button-size);
+    border:none;
+    background: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.journal-card-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: white;
+    border-radius: var(--journal-btn-border-radius);
+
+    transition: transform var(--journal-btn-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.journal-card-btn:hover::before,
+.journal-card-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.journal-btn-svg {
+    width: var(--journal-button-svg-size);
+    transition: filter var(--journal-btn-animation-duration) ease-in-out;
+}
+
+.journal-card:hover .journal-btn-svg,
+.journal-card:focus .journal-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.journal-card-btn:hover .journal-btn-svg,
+.journal-card-btn:focus .journal-btn-svg {
+    filter: brightness(1) invert(0);
+}
 
 /* MODAL */
 

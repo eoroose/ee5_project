@@ -172,6 +172,7 @@
 .dashboard-quote-of-the-day {
     text-align: center;
     font-size: 3em;
+    transition: color var(--dashboard-card-animation-duration) ease-in-out;
 }
 
 .dashboard-card-animation:hover .dashboard-quote-of-the-day,
