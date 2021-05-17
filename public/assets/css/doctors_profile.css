@@ -1,0 +1,373 @@
+.doctor-prof-container {
+    margin-top: 30px;
+
+    --doctor-prof-avatar-size: 250px;
+    --doctor-prof-avatar-border-width: 7px;
+    --doctor-prof-animation-duration: 200ms;
+
+    --doctor-prof-margin-top: 15px;
+    --doctor-prof-row-margin-bottom: 20px;
+
+
+    /* EDIT SAVE */
+    --doctor-prof-button-svg-size: 40px;
+    --doctor-prof-button-size: 60px;
+    --doctor-prof-btn-margins: 15%;
+    --doctor-prof-btn-border-radius: 15px;
+    --doctor-prof-col-margins: 5px;
+}
+
+.doctor-prof-row {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-bottom: var(--doctor-prof-row-margin-bottom);
+    min-height: 100px;
+}
+
+.doctor-prof-avatar-col {
+    margin-left: auto;
+    margin-right: auto;
+    height: var(--doctor-prof-avatar-size);
+    width: var(--doctor-prof-avatar-size);
+    position: relative;
+    border-radius: calc(var(--doctor-prof-avatar-size) / 2);
+    border: none;
+    margin-top: var(--doctor-prof-margin-top);
+}
+
+.doctor-prof-avatar-col img {
+    height: var(--doctor-prof-avatar-size);
+    width: var(--doctor-prof-avatar-size);
+    align-self: center;
+    border: var(--doctor-prof-avatar-border-width) solid var(--purple);
+    border-radius: calc(var(--doctor-prof-avatar-size) / 2);
+}
+
+.doctor-prof-col {
+    margin-top: var(--doctor-prof-margin-top);
+    border: none;
+    width: 95%;
+    display: flex;
+    margin-top: var(--doctor-prof-col-margins);
+    margin-bottom: var(--doctor-prof-col-margins);
+}
+
+.doctor-prof-col h1 {
+    margin-right: 0.5em;
+}
+
+.doctor-prof-col h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--purple);
+}
+
+.doctor-prof-edit-save-container {
+    /* display: flex; */
+}
+
+.doctor-prof-btn-edit-save {
+    width:  var(--doctor-prof-button-size);
+    height: var(--doctor-prof-button-size);
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 5px;
+    background: none;
+}
+
+.doctor-prof-btn-edit-save::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--doctor-prof-btn-border-radius);
+
+    transition: transform var(--doctor-prof-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-edit-save:hover::before,
+.doctor-prof-btn-edit-save:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-prof-btn-svg {
+    width: var(--doctor-prof-button-svg-size);
+    filter: brightness(0) invert(1);
+    transition: filter var(--doctor-prof-animation-duration) ease-in-out;
+}
+
+.doctor-prof-col:hover .doctor-prof-btn-svg,
+.doctor-prof-col:focus .doctor-prof-btn-svg {
+    filter: brightness(1) invert(0);
+}
+
+.doctor-prof-btn-edit-save:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-edit-save:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+
+/* APPOINTMENTS */
+
+.doctor-prof-appointment-container {
+    
+}
+
+.doctor-prof-col-appointment-title {
+    text-align: center;
+    margin-top: var(--doctor-prof-margin-top);
+    border: none;
+    width: 95%;
+    display: flex;
+    margin-top: var(--doctor-prof-col-margins);
+    margin-bottom: var(--doctor-prof-col-margins);
+    background: none;
+}
+
+.doctor-prof-col-appointment-title h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--purple);
+}
+
+.doctor-prof-col-appointment {
+    margin-top: var(--profile-margin-top);
+    /* border: none; */
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+    position: relative;
+    border: 2px solid white;
+    border-radius: var(--doctor-prof-btn-border-radius);
+    display: flex;
+    /* position: relative; */
+    padding-bottom: 10px;
+}
+
+.doctor-prof-col-appointment:hover,
+.doctor-prof-col-appointment:focus {
+    border: 2px solid var(--purple);
+    transition: border var(--doctor-prof-animation-duration) ease-in-out;
+}
+
+.appointment-text {
+    flex: 1;
+    /* margin-right: 2em; */
+}
+
+.doctor-prof-col-appointment h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.doctor-prof-col-appointment h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-btns {
+    /* margin-top: 5px; */
+    align-content: center;
+}
+
+.doctor-prof-btn-delete {
+    width:  var(--doctor-prof-button-size);
+    height: var(--doctor-prof-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    background: none;
+    /* margin-left:  var(--doctor-prof-btn-margins);
+    margin-right: var(--doctor-prof-btn-margins); */
+}
+
+.doctor-prof-btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--doctor-prof-btn-border-radius);
+
+    transition: transform var(--doctor-prof-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-delete:hover::before,
+.doctor-prof-btn-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-prof-col-appointment:hover .doctor-prof-btn-svg,
+.doctor-prof-col-appointment:focus .doctor-prof-btn-svg {
+    filter: brightness(1) invert(0);
+}
+
+.doctor-prof-btn-edit-save:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-edit-save:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-prof-btn-delete:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-delete:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+/* APPOINTMENT INPUTS */
+
+.appointment-inputs {
+    --inputs-top-bottom-margins: 10px;
+    display: block;
+    width: 95%;
+    position: relative;
+
+    margin-top: var(--profile-margin-top);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+}
+
+.appointment-inputs h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    display: flex;
+    color: var(--purple);
+}
+
+.appointment-inputs h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-inputs-input {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    flex: 1;
+    border-radius: var(--doctor-prof-btn-border-radius);
+    width: 90%;
+}
+
+.appointment-inhabitant-btn {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    max-width: none;
+    flex: 1;
+    color: var(--purple);
+    border-color: var(--purple);
+    border-radius: var(--doctor-prof-btn-border-radius);
+    border-width: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color var(--doctor-prof-animation-duration) ease-in-out, color var(--doctor-prof-animation-duration) ease-in-out;
+    width: 90%;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn:hover,
+.appointment-inhabitant-btn:focus {
+    border-color: white;
+    color: white;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--doctor-prof-btn-border-radius);
+
+    transition: transform var(--doctor-prof-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.appointment-inhabitant-btn:hover::before,
+.appointment-inhabitant-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.appointment-add-btn {
+    height: 50px;
+    border-width: 4px;
+}
+
+.appointment-btn-svg {
+    width: 25px;
+    transition: filter var(--doctor-prof-animation-duration) ease-in-out;
+}
+
+.appointment-add-btn:hover .appointment-btn-svg,
+.appointment-add-btn:focus .appointment-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-prof-hr {
+    background: var(--purple);
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    align-self: center;
+    background-image: linear-gradient(to right, var(--purple), var(--black), var(--purple));
+}
+
+.doctors-prof-alert-message {
+    width: 90%;
+}
+
+.doctor-prof-back-arrow {
+    --arrow-size: 50px;
+    --arrow-animation: 300ms;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    background: none;
+    border: none;
+}
+
+.doctor-prof-back-arrow img {
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    transition: transform var(--arrow-animation) ease-in-out;
+}
+
+.doctor-prof-back-arrow:hover img,
+.doctor-prof-back-arrow:focus img {
+    transform: rotate(-360deg);
+}

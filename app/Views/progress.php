@@ -40,15 +40,15 @@
 
                                     <?php if($row["completed"]==1) { ?>
                                         <div class="progress-info-completed">
-                                        <img src="/assets/images/note_progress_page/check.svg" alt="check image">    
-                                        <h5><?php echo $row['description'];?></h5>
+                                            <!-- <img src="/assets/images/note_progress_page/check.svg" alt="check image">     -->
+                                            <h5><?php echo $row['description'];?></h5>
                                             <img src="/assets/images/note_progress_page/check.svg" alt="check image">
                                         </div>
                                     <?php } else {?>
                                         <div class="progress-info-incomplete">
-                                            <img src="/assets/images/note_progress_page/development.svg" alt="cross image">    
+                                            <!-- <img src="/assets/images/note_progress_page/development.svg" alt="cross image">     -->
                                             <h5><?php echo $row['description'];?></h5>
-                                            <img src="/assets/images/note_progress_page/development.svg" alt="cross image">
+                                            <img src="/assets/images/note_progress_page/development.svg" alt="development image">
                                         </div>
                                     <?php } ?>
 

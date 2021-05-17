@@ -83,8 +83,8 @@
         var phase_data=phase.innerHTML;
         var description_data=description.innerHTML;
 
-        phase.innerHTML="<input type='number' id='phase_text"+no+"' value='"+phase_data+"'>";
-        description.innerHTML="<input type='text' id='description_text"+no+"' value='"+description_data+"' style='width: 90%;border-radius: 10px;'>";
+        phase.innerHTML="<input class='form-control main-input tasks-input' type='number' id='phase_text"+no+"' value='"+phase_data+"' '>";
+        description.innerHTML="<input class='form-control main-input tasks-input' type='text' id='description_text"+no+"' value='"+description_data+"' '>";
     }
 
 
