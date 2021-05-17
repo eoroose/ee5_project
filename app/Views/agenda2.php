@@ -1,187 +1,187 @@
-    <meta charset='utf-8' />
+<meta charset='utf-8' />
 
-    <link href='/fullcalendar/lib/main.css' rel='stylesheet' />
-    <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
-    <script src='/fullcalendar/lib/main.js'></script>
-    <link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" />
+<link href='/fullcalendar/lib/main.css' rel='stylesheet' />
+<script src='/assets/scripts/jquery-3.6.0.min.js'></script>
+<script src='/fullcalendar/lib/main.js'></script>
+<link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" />
 
 
-    <script>
+<script>
 
 
     var calendar;
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
-            var calendarEl = document.getElementById('calendar');
-            calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                editable:true,
-                selectable:true,
-                firstDay:1,
-                eventTimeFormat: { // like '14:30:00'
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    meridiem: true
-                },
-                eventDrop: function(info) {
-                    if (!confirm(info.event.title + " was dropped on " + info.event.start)) {
-                        info.revert();
-                    }else{
-                        alert(info.event.id);
-                        $.post('/agendaController/alterInDatabase2',{id:info.event.id.substring(1), start:info.event.startStr, end:info.event.endStr});
+        var calendarEl = document.getElementById('calendar');
+        calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            editable:true,
+            selectable:true,
+            firstDay:1,
+            eventTimeFormat: { // like '14:30:00'
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                meridiem: true
+            },
+            eventDrop: function(info) {
+                if (!confirm(info.event.title + " was dropped on " + info.event.start)) {
+                    info.revert();
+                }else{
+                    alert(info.event.id);
+                    $.post('/agendaController/alterInDatabase2',{id:info.event.id.substring(1), start:info.event.startStr, end:info.event.endStr});
+                }
+            },
+            select: function(info) {
+                // Ask for a title. If empty it will default to "New event"
+
+
+                document.getElementById("selectEventModal").style.display = "block";
+                document.querySelector('#SEFromDate').value = addTime(info.start);
+                document.querySelector('#SEToDate').value = addTime(info.end);
+                // Whatever happens, unselect selection
+                calendar.unselect();
+
+            }, // End select callback
+
+            // Make events editable, globally
+            editable : true,
+
+            // Callback triggered when we click on an event
+
+            eventClick: function(info){
+                // Ask for a title. If empty it will default to "New event"
+                if(info.event.id.startsWith('e')){
+                    alert(info.event.id)
+                    document.getElementById("existingEventModal").style.display = "block";
+                    document.getElementById("EEID").style.display = "none";
+                    document.querySelector('#EEID').value = info.event.id;
+                    document.querySelector('#EETitle').value = info.event.title;
+                    document.querySelector('#EEFromDate').value = dateTime(info.event.start);
+                    document.querySelector('#EEToDate').value = dateTime(info.event.end);
+                    document.querySelector('#EEcolor').value = info.event.backgroundColor;
+                }else if(info.event.id.startsWith('a')){
+                    alert(info.event.id)
+                    document.getElementById("existingAppointmentModal").style.display = "block";
+                    document.getElementById("EAID").style.display = "none";
+                    document.querySelector('#EAID').value = info.event.id;
+                    document.querySelector('#EADate').value = dateTime(info.event.start);
+                }else if(info.event.groupId.startsWith('r')){
+                    if(confirm('Do you want to delete this recurring event?')){
+                        $.get('/agendaController/removeRecurring',{id:info.event.groupId.substring(1)})
+                        info.event.remove();
+
                     }
+                    // //alert(info.event.end);
+                    // document.getElementById("ERID").style.display = "none";
+                    // document.querySelector('#ERID').value = info.event.groupId;
+                    // document.querySelector('#ERTitle').value = info.event.title;
+                    // document.querySelector('#ERStart').value = getTime(info.event.start);
+                    // document.querySelector('#EREnd').value = getTime(info.event.end);
+                    // document.getElementById("existingReccuringModal").style.display = "block";
+                }
+
+            }, // End callback eventClick
+            headerToolbar:{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+
+            eventSources: [
+
+                {
+                    url: '/agendaController/getEvents'
                 },
-                select: function(info) {
-                    // Ask for a title. If empty it will default to "New event"
-
-
-                    document.getElementById("selectEventModal").style.display = "block";
-                    document.querySelector('#SEFromDate').value = addTime(info.start);
-                    document.querySelector('#SEToDate').value = addTime(info.end);
-                    // Whatever happens, unselect selection
-                    calendar.unselect();
-
-                }, // End select callback
-
-                // Make events editable, globally
-                editable : true,
-
-                // Callback triggered when we click on an event
-
-                eventClick: function(info){
-                    // Ask for a title. If empty it will default to "New event"
-                    if(info.event.id.startsWith('e')){
-                        alert(info.event.id)
-                        document.getElementById("existingEventModal").style.display = "block";
-                        document.getElementById("EEID").style.display = "none";
-                        document.querySelector('#EEID').value = info.event.id;
-                        document.querySelector('#EETitle').value = info.event.title;
-                        document.querySelector('#EEFromDate').value = dateTime(info.event.start);
-                        document.querySelector('#EEToDate').value = dateTime(info.event.end);
-                        document.querySelector('#EEcolor').value = info.event.backgroundColor;
-                    }else if(info.event.id.startsWith('a')){
-                        alert(info.event.id)
-                        document.getElementById("existingAppointmentModal").style.display = "block";
-                        document.getElementById("EAID").style.display = "none";
-                        document.querySelector('#EAID').value = info.event.id;
-                        document.querySelector('#EADate').value = dateTime(info.event.start);
-                    }else if(info.event.groupId.startsWith('r')){
-                        if(confirm('Do you want to delete this recurring event?')){
-                            $.get('/agendaController/removeRecurring',{id:info.event.groupId.substring(1)})
-                            info.event.remove();
-
-                        }
-                        // //alert(info.event.end);
-                        // document.getElementById("ERID").style.display = "none";
-                        // document.querySelector('#ERID').value = info.event.groupId;
-                        // document.querySelector('#ERTitle').value = info.event.title;
-                        // document.querySelector('#ERStart').value = getTime(info.event.start);
-                        // document.querySelector('#EREnd').value = getTime(info.event.end);
-                        // document.getElementById("existingReccuringModal").style.display = "block";
-                    }
-
-                }, // End callback eventClick
-                headerToolbar:{
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                {
+                    url:'/agendaController/getAppointments',
+                    color: 'yellow'
                 },
+                {
+                    url: '/agendaController/getRecurringEvents'
+                },
+                {
+                    url: '/agendaController/getBirthdays',
+                    color: 'green',
+                    editable: false
+                }
+            ],
 
-                eventSources: [
+            //events: 'http://localhost:8081/public/agendaController/getEvents'
 
-                    {
-                        url: '/agendaController/getEvents'
-                    },
-                    {
-                        url:'/agendaController/getAppointments',
-                        color: 'yellow'
-                    },
-                    {
-                        url: '/agendaController/getRecurringEvents'
-                    },
-                    {
-                        url: '/agendaController/getBirthdays',
-                        color: 'green',
-                        editable: false
-                    }
-                ],
+            customButtons: {
+                addEventButton: {
+                    text: 'Add event',
+                    click: function() {
+                        var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+                        var titleStr = prompt('Enter a title');
+                        var date = new Date(dateStr + 'T00:00:00'); // will be in local time
 
-                //events: 'http://localhost:8081/public/agendaController/getEvents'
+                        $.post('/home/agenda3',{title:titleStr,date:dateStr})
 
-                customButtons: {
-                    addEventButton: {
-                        text: 'Add event',
-                        click: function() {
-                            var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-                            var titleStr = prompt('Enter a title');
-                            var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+                        if (!isNaN(date.valueOf())) { // valid?
+                            calendar.addEvent({
+                                title: titleStr,
+                                start: date,
+                                allDay: true
+                            });
 
-                            $.post('/home/agenda3',{title:titleStr,date:dateStr})
-
-                            if (!isNaN(date.valueOf())) { // valid?
-                                calendar.addEvent({
-                                    title: titleStr,
-                                    start: date,
-                                    allDay: true
-                                });
-
-                            } else {
-                                alert('Invalid date.');
-                            }
+                        } else {
+                            alert('Invalid date.');
                         }
                     }
                 }
-            });
-            calendar.render();
-
+            }
         });
+        calendar.render();
+
+    });
 
 
-        function openForm() {
-            document.getElementById("myModal").style.display = "block";
-        }
+    function openForm() {
+        document.getElementById("myModal").style.display = "block";
+    }
 
-        function openFormAppointment() {
-            document.getElementById("myModalAppointment").style.display = "block";
-        }
-
-
-        function openFormRecurring() {
-            document.getElementById("newRecurringModal").style.display = "block";
-        }
+    function openFormAppointment() {
+        document.getElementById("myModalAppointment").style.display = "block";
+    }
 
 
+    function openFormRecurring() {
+        document.getElementById("newRecurringModal").style.display = "block";
+    }
 
-        function closeForm() {
-            document.getElementById("myModal").style.display = "none";
-        }
 
-        function closeFormAppointment() {
-            document.getElementById("myModalAppointment").style.display = "none";
-        }
 
-        function closeFormNR() {
-            document.getElementById("newRecurringModal").style.display = "none";
-        }
+    function closeForm() {
+        document.getElementById("myModal").style.display = "none";
+    }
 
-        function submitForm() {
-            var titleStr = document.querySelector('#eventName').value;
-            var startStr = document.querySelector('#fromDate').value;
-            var endStr = document.querySelector('#toDate').value;
-            var colorStr = document.querySelector('#color').value;
-            $.get('/agendaController/addEvent',{title:titleStr,start:startStr,end:endStr,color:colorStr}, function (data) {
-                calendar.addEvent({
-                    id: data,
-                    title: titleStr,
-                    start: startStr,
-                    end: endStr,
-                    color: colorStr
+    function closeFormAppointment() {
+        document.getElementById("myModalAppointment").style.display = "none";
+    }
+
+    function closeFormNR() {
+        document.getElementById("newRecurringModal").style.display = "none";
+    }
+
+    function submitForm() {
+        var titleStr = document.querySelector('#eventName').value;
+        var startStr = document.querySelector('#fromDate').value;
+        var endStr = document.querySelector('#toDate').value;
+        var colorStr = document.querySelector('#color').value;
+        $.get('/agendaController/addEvent',{title:titleStr,start:startStr,end:endStr,color:colorStr}, function (data) {
+            calendar.addEvent({
+                id: data,
+                title: titleStr,
+                start: startStr,
+                end: endStr,
+                color: colorStr
             })
 
-            })
-            document.getElementById("myModal").style.display = "none";
-        }
+        })
+        document.getElementById("myModal").style.display = "none";
+    }
 
 
     function submitFormNR() {
@@ -247,7 +247,7 @@
 
 
     function submitFormEE() {
-            
+
         var idV = document.querySelector("#EEID").value;
         alert(document.querySelector("#EEID").value);
         var startStr = document.querySelector('#EEFromDate').value;
@@ -415,7 +415,7 @@
 
 
 
-    </script>
+</script>
 
 
 <button class="open-button" onclick="openForm()">Add Event</button>
@@ -555,25 +555,25 @@
     <input type="color" class="form-control" value="#e66465" id="NRColor">
 
     <label for="NRMon">Mon:</label>
-    <input type="checkbox" class="form-control"  id="NRMon">
+    <input type="checkbox"   id="NRMon">
 
     <label for="NRTue">Tue:</label>
-    <input type="checkbox" class="form-control"  id="NRTue">
+    <input type="checkbox"   id="NRTue">
 
     <label for="NRWed">Wed:</label>
-    <input type="checkbox" class="form-control"  id="NRWed">
+    <input type="checkbox"   id="NRWed">
 
     <label for="NRThu">Thu:</label>
-    <input type="checkbox" class="form-control"  id="NRThu">
+    <input type="checkbox"   id="NRThu">
 
     <label for="NRFri">Fri:</label>
-    <input type="checkbox" class="form-control"  id="NRFri">
+    <input type="checkbox"   id="NRFri">
 
     <label for="NRSat">Sat:</label>
-    <input type="checkbox" class="form-control"  id="NRSat">
+    <input type="checkbox"   id="NRSat">
 
     <label for="NRSun">Sun:</label>
-    <input type="checkbox" class="form-control"  id="NRSun">
+    <input type="checkbox"   id="NRSun">
 
     <button type="submit" class="btn" onclick="submitFormNR()">Create</button>
     <button type="submit" class="btn cancel" onclick="closeFormNR()">Cancel</button>
@@ -581,25 +581,25 @@
 </div>
 
 <div id="myModal" class="modal"">
-    <div class="modal-content">
+<div class="modal-content">
 
-        <h1>Login</h1>
+    <h1>Login</h1>
 
-        <label for="title"><b>Title</b></label>
-        <input type="text" class="form-control" placeholder="Enter event" id="eventName" required>
+    <label for="title"><b>Title</b></label>
+    <input type="text" class="form-control" placeholder="Enter event" id="eventName" required>
 
-        <label for="fromDate">From:</label>
-        <input type="datetime-local" class="form-control" placeholder="Enter from date" id="fromDate">
+    <label for="fromDate">From:</label>
+    <input type="datetime-local" class="form-control" placeholder="Enter from date" id="fromDate">
 
-        <label for="toDate">From:</label>
-        <input type="datetime-local" class="form-control" placeholder="Enter from date" id="toDate">
+    <label for="toDate">From:</label>
+    <input type="datetime-local" class="form-control" placeholder="Enter from date" id="toDate">
 
-        <label for="color">From:</label>
-        <input type="color" class="form-control" value="#e66465" id="color">
+    <label for="color">From:</label>
+    <input type="color" class="form-control" value="#e66465" id="color">
 
-        <button type="submit" class="btn" onclick="submitForm()">Add Event</button>
-        <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
-    </div>
+    <button type="submit" class="btn" onclick="submitForm()">Add Event</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+</div>
 </div>
 
 
