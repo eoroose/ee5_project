@@ -146,26 +146,28 @@ class ProfileController extends BaseController
         return $inhabitantID;
     }
 
-    private function getAppointments($id){
-	   // echo $id;
+    private function getAppointments($inhabitantid){
+	    $id=$this->getInhabitantid($inhabitantid);
+        echo '<pre>'; print_r($id ); echo '</pre>';
+
 	    $appointmentModel=new appointmentModel();
 	    $apoint=$appointmentModel->where('inhabitantId',$id)->get()->getResultArray();
-       // echo '<pre>'; print_r($apoint ); echo '</pre>';
+        echo '<pre>'; print_r($apoint ); echo '</pre>';
         $doctorModel=new doctorModel();
         $data=[];
         foreach ($apoint as $apppointment){
             $doctor=$doctorModel->select('firstname, lastname')->where('doctorID',$apppointment['doctorID'])->first();
-           // echo '<pre>'; print_r($doctor ); echo '</pre>';
+            echo '<pre>'; print_r($doctor ); echo '</pre>';
             $testData=array(
                 'doctorFirstname'=>$doctor['firstname'],
                 'doctorLasttname'=>$doctor['lastname'],
                 'dateAppointment'=>$apppointment['date'],
                 'reason'=>$apppointment['reason']
             );
-            //echo '<pre>'; print_r($testData ); echo '</pre>';
+            echo '<pre>'; print_r($testData ); echo '</pre>';
             array_push($data,$testData);
         }
-        //echo '<pre>'; print_r($data ); echo '</pre>';
+        echo '<pre>'; print_r($data ); echo '</pre>';
         return $data;
     }
 }

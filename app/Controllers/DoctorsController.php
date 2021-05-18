@@ -64,7 +64,22 @@ class DoctorsController extends BaseController
         }
 
     }
-
+    public function deletedoctor(){
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else
+        {
+            if(isset($_POST['id'])) {
+                $id = $_POST['id'];
+                $doctorModel = new doctorModel();
+                $doctorModel->where('doctorID', $id)->set('isActive', false)->update();
+                $apointmentModel= new appointmentModel();
+                $apointmentModel->where('doctorID', $id)->set('isActive', false)->update();
+            }
+        }
+    }
     private function getDoctors()
     {
         $doctorsModel= new doctorModel();
@@ -166,11 +181,12 @@ class DoctorsController extends BaseController
                     "isActive"=>true
                 );
                 $appointmentModel->save($newData);
-                return redirect()->to("/doctors/doctorprofile/1");
+                return redirect()->to("/doctors/doctorprofile/".$this->request->getVar('doctorID'));
 
             }
             $doctorsModel= new doctorModel();
             $id=$this->request->getVar('doctorID');
+            echo $id;
             $data['doctor']=$doctorsModel->select()->where('doctorID',$id)->first();
             $data['appointments']=$this->afspraken($id);
             $data['inhabitants']=$this->inhabitants();
