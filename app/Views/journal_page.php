@@ -148,8 +148,14 @@
     }
 
     function removeEntry(id){
-        alert(id);
-        $.get('/JournalController/removeEntry',{ID:id.substring(6,14)});
+        var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+        if(r==true)
+        {
+            $.get('/JournalController/removeEntry',{ID:id.substring(6,14)});
+            document.location.reload();
+        }
+
+
     }
 
     function openChangeModal(id){

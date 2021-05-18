@@ -37,7 +37,7 @@
                     
                     <div class="doctor-btn-container">
                         <button class="doctor-card-delete">
-                            <img src="/assets/images/tasks_page/trash.svg" class="doctor-card-delete-svg" alt="trash image">
+                            <img src="/assets/images/tasks_page/trash.svg" class="doctor-card-delete-svg" alt="trash image" onclick="delete_doctor(<?php echo $doctor['doctorID']; ?>)">
                         </button>
                     </div>
 
@@ -97,6 +97,10 @@
 </div>
 
 <script>
+    function delete_doctor(no){
+        $.post('/DoctorsController/deletedoctor',{id:no})
+        window.location.reload();
+    }
     function registerDoctor()
     {
         document.getElementById("model").style.display="block";

@@ -19,7 +19,7 @@ class UserRules
         $user=$model->where('userId',session()->get('id'))->first();
         if(!$user){
             return false;}
-        return password_verify($data['password'],$user['password']);
+        return password_verify($data['old-password'],$user['password']);
     }
     public function validateUserName(string $str,string $fields,array $data): bool
     {
