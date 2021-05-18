@@ -1,4 +1,208 @@
+<div>
     <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
+    <link href="/assets/css/inhabitant.css" rel="stylesheet" type="text/css" />
+
+    <div class="container inhabitant-container main-bottom-padding">
+
+        <div class="row inhabitant-row card main-card">
+
+            <!-- AVATAR -->
+            <?php foreach ($inhabitant as $i): ?>
+                <div class="col-12 card inhabitant-avatar-col">
+                    <img src="<?php echo $i->location;?>">
+                </div>
+            <?php endforeach; ?>
+
+            <!-- ARCHIVE -->
+            <?php foreach ($isActive as $iA): ?>
+                <div class="col-12 card inhabitant-col">
+                    <?php if($iA->isActive == 1): ?>
+                        <button class="main-btn inhabitant-archive-btn" onclick="archive_user()"> Archive user </button>
+                    <?php elseif($iA->isActive == 0): ?>
+                        <button class="main-btn inhabitant-archive-btn" onclick="dearchive_user()"> De-archive user </button>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+
+        <div class="row inhabitant-row card main-card">
+            <?php foreach ($inhabitant as $i): ?>
+
+                <!-- USERNAME -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Username: </b>
+                        <span id="<?php echo "username".$i->username?>"><?php echo $i->username; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->username?>" onclick="edit_username('<?php echo $i->username?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->username?>" onclick="save_username('<?php echo $i->username?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FIRST NAME -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>First name: </b>
+                        <span id="<?php echo "firstname".$i->firstname?>"><?php echo $i->firstname; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->firstname?>" onclick="edit_firstname('<?php echo $i->firstname?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->firstname?>" onclick="save_firstname('<?php echo $i->firstname?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LAST NAME -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Last name: </b>
+                        <span id="<?php echo "lastname".$i->lastname?>"><?php echo $i->lastname; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->lastname?>" onclick="edit_lastname('<?php echo $i->lastname?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->lastname?>" onclick="save_lastname('<?php echo $i->lastname?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BIRTHDAY -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Birthday: </b>
+                        <span id="<?php echo "birthday".$i->birthday?>"><?php echo $i->birthday; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->birthday?>" onclick="edit_birthday('<?php echo $i->birthday?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->birthday?>" onclick="save_birthday('<?php echo $i->birthday?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DATE ADDED -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Date of first arrival: </b>
+                        <span id="<?php echo "dateAdded".$i->dateAdded?>"><?php echo $i->dateAdded; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->dateAdded?>" onclick="edit_dateAdded('<?php echo $i->dateAdded?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->dateAdded?>" onclick="save_dateAdded('<?php echo $i->dateAdded?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ARRIVAL DATE -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Date of latest arrival: </b>
+                        <span id="<?php echo "arrivalDate".$i->arrivalDate?>"><?php echo $i->arrivalDate; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->arrivalDate?>" onclick="edit_arrivalDate('<?php echo $i->arrivalDate?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->arrivalDate?>" onclick="save_arrivalDate('<?php echo $i->arrivalDate?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DEPARTURE DATE -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Date of departure: </b>
+                        <span id="<?php echo "departureDate".$i->departureDate?>"><?php echo $i->departureDate; ?> </span>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->departureDate?>" onclick="edit_departureDate('<?php echo $i->departureDate?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->departureDate?>" onclick="save_departureDate('<?php echo $i->departureDate?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+            
+            <!-- CHORE -->
+            <!-- </?php foreach ($chore as $c): ?>
+                <div class="col-12 inhabitant-col">
+                    <h1><b>Chore: </b>
+                        <span id="</?php echo "chore".$c->description?>"></?php echo $c->description ?> </span>
+                    </h1>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save" type="edit" id="</?php echo "edit".$c->description?>" onclick="edit_chore('</?php echo $c->description?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save" type="save" id="</?php echo "save".$c->description?>" onclick="save_chore('</?php echo $c->description?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg" alt="save image">
+                        </button>
+                    </div>
+                </div>
+            </?php endforeach; ?> -->
+
+            <!-- PASSWORD -->
+            <?php if(!empty($password)): ?>
+                <?php foreach($password as $p): ?>
+                    <div class="col-12 card inhabitant-col">
+                        <button type="button" class="main-btn inhabitant-password-btn" onclick="showCangePasword()" id="changeP">reset password</button>
+                        <?php if (isset($validation)): ?>
+                            <div class="main-alert-message inhabitant-alert-message">
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $validation->listErrors() ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <div id="otherFieldDiv" style="display: none">
+                            <form class="" action="/UsersController/changePassword" method="post">
+                                <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
+                                <input type="password" class="form-control main-input inhabitant-password-input" name="new-password" id="new-password" value="" placeholder="new password">
+                                <input type="password" class="form-control main-input inhabitant-password-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
+                                <button type="submit" class="main-btn inhabitant-password-btn">change password</button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            
+        </div>
+        
+        <!-- APPOINTMENTS -->
+        <div class="row inhabitant-row card main-card">
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Appointments:</b></h1>
+            
+            <?php foreach ($appointments as $a): ?>
+                <div class="col-12 card inhabitant-appointment">
+                    <h1><b>date: </b> <?php echo $a->date ?></h1>    
+                    <h1><b>doctor: </b> <?php echo $a->firstname; ?> <?php echo $a->lastname; ?></h1>
+                    <h1><b>reden: </b> <?php echo $a->reason ?></h1>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- YELLOW CARDS -->
+        <div class="row inhabitant-row card main-card">
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Yellow cards:</b></h1>
+        </div>
+
+    </div>
+</div>
+
+
+<script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
     <link href="/assets/css/tasks.css" rel="stylesheet" type="text/css" />
 
     <?php foreach ($inhabitant as $i): ?>
@@ -596,21 +800,38 @@
             var chore=document.getElementById("chore"+no);
             var chore_data=chore.innerHTML;
 
-            chore.innerHTML='<form id="chore_text">'+
-                            '<input type="radio" id="Not Assigned" name="chore" value="Not Assigned"> '+
-                            '<label for="Not Assigned">Not Assigned</label>'+
-                            '<br>'+
-                            '<input type="radio" id="Household" name="chore" value="Household"> '+
-                            '<label for="Household">Household</label>'+
-                            '<br>'+
-                            '<input type="radio" id="Kitchen" name="chore" value="Kitchen"> '+
-                            '<label for="Kitchen">Kitchen</label>'+
-                            '<br>'+
-                            '<input type="radio" id="Weekday Responsible" name="chore" value="Weekday Responsible"> '+
-                            '<label for="Weekday Responsible">Weekday Responsible</label>'+
-                            '<br>'+
-                            '<input type="radio" id="Weekend Responsible" name="chore" value="Weekend Responsible"> '+
-                            '<label for="Weekend Responsible">Weekend Responsible</label></form>';
+            // chore.innerHTML='<form id="chore_text">'+
+            //                 '<input type="radio" id="Not Assigned" name="chore" value="Not Assigned"> '+
+            //                 '<label for="Not Assigned">Not Assigned</label>'+
+            //                 '<br>'+
+            //                 '<input type="radio" id="Household" name="chore" value="Household"> '+
+            //                 '<label for="Household">Household</label>'+
+            //                 '<br>'+
+            //                 '<input type="radio" id="Kitchen" name="chore" value="Kitchen"> '+
+            //                 '<label for="Kitchen">Kitchen</label>'+
+            //                 '<br>'+
+            //                 '<input type="radio" id="Weekday Responsible" name="chore" value="Weekday Responsible"> '+
+            //                 '<label for="Weekday Responsible">Weekday Responsible</label>'+
+            //                 '<br>'+
+            //                 '<input type="radio" id="Weekend Responsible" name="chore" value="Weekend Responsible"> '+
+            //                 '<label for="Weekend Responsible">Weekend Responsible</label></form>';
+            chore.innerHTML='<select id="chore_text">'+
+                                '<option id="Not Assigned" value="Not Assigned" selected="selected" name="chore">'+
+                                    'Not Assigned'+
+                                '</option>'+
+                                '<option id="Household" value="Household" name="chore">'+
+                                    'Household'+
+                                '</option>'+
+                                '<option id="Kitchen" value="Kitchen" name="chore">'+
+                                    'Kitchen'+
+                                '</option>'+
+                                '<option id="Weekday Responsible" value="Weekday Responsible" name="chore">'+
+                                    'Weekday Responsible'+
+                                '</option>'+
+                                '<option id="Weekend Responsible" value="Weekend Responsible" name="chore">'+
+                                    'Weekend Responsible'+
+                                '</option>'+
+                            '</select>'
         }
 
         function save_chore(no)

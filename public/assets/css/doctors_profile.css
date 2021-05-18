@@ -55,11 +55,11 @@
     margin-bottom: var(--doctor-prof-col-margins);
 }
 
-.doctor-prof-col h1 {
+.doctor-prof-col h2 {
     margin-right: 0.5em;
 }
 
-.doctor-prof-col h1 b {
+.doctor-prof-col h2 b {
     font-family: "freestyle script regular";
     font-weight: bold;
     font-size: 1.5em;
@@ -80,6 +80,11 @@
     z-index: 1;
     margin-top: 5px;
     background: none;
+}
+
+.btn-smaller {
+    width: calc(var(--doctor-prof-button-size) - 10px);
+    height: calc(var(--doctor-prof-button-size) - 10px);
 }
 
 .doctor-prof-btn-edit-save::before {
@@ -106,6 +111,10 @@
     width: var(--doctor-prof-button-svg-size);
     filter: brightness(0) invert(1);
     transition: filter var(--doctor-prof-animation-duration) ease-in-out;
+}
+
+.svg-smaller {
+    width: calc(var(--doctor-prof-button-svg-size) - 10px);
 }
 
 .doctor-prof-col:hover .doctor-prof-btn-svg,

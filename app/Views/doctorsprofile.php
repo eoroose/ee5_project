@@ -26,76 +26,76 @@
             
             <!-- NAME -->
             <div class="col-12 doctor-prof-col">
-                <h1><b>Naam: </b>
+                <h2><b>Naam: </b>
                     <span id="firstname"><?php echo $doctor['firstname']?> </span>
                     <span id="lastname"><?php echo $doctor['lastname']?></span>
-                </h1>
+                </h2>
                 <div class="doctor-prof-edit-save-container">
-                    <button class="doctor-prof-btn-edit-save" type="edit" id="editname" onclick="changeName()">
-                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="edit" id="editname" onclick="changeName()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg svg-smaller" alt="edit image">
                     </button>
-                    <button class="doctor-prof-btn-edit-save" type="save" id="savename" onclick="saveName(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="save" id="savename" onclick="saveName(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg svg-smaller" alt="save image">
                     </button>
                 </div>
             </div>
 
             <!-- CITY -->
             <div class="col-12 doctor-prof-col">
-                <h1><b>Stad: </b>
+                <h2><b>Stad: </b>
                     <span id="stad"><?php echo $doctor['city']?> </span>
-                </h1>
+                </h2>
                 <div class="doctor-prof-edit-save-container">
-                    <button class="doctor-prof-btn-edit-save" type="edit" id="editStad" onclick="changeStad()">
-                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="edit" id="editStad" onclick="changeStad()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg svg-smaller" alt="edit image">
                     </button>
-                    <button class="doctor-prof-btn-edit-save" type="save" id="saveStad" onclick="saveStad(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="save" id="saveStad" onclick="saveStad(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg svg-smaller" alt="save image">
                     </button>
                 </div>
             </div>
             
             <!-- ADDRESS -->
             <div class="col-12 doctor-prof-col">
-                <h1><b>Adres: </b>
+                <h2><b>Adres: </b>
                     <span id="addres"><?php echo $doctor['address']?> </span>
-                </h1>
+                </h2>
                 <div class="doctor-prof-edit-save-container">
-                    <button class="doctor-prof-btn-edit-save" type="edit" id="editaddres" onclick="changeAddres()">
-                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="edit" id="editaddres" onclick="changeAddres()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg svg-smaller" alt="edit image">
                     </button>
-                    <button class="doctor-prof-btn-edit-save" type="save" id="saveaddres" onclick="saveAddres(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="save" id="saveaddres" onclick="saveAddres(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg svg-smaller" alt="save image">
                     </button>
                 </div>
             </div>
 
             <!-- TELEPHONE NUMBER -->
             <div class="col-12 doctor-prof-col">
-                <h1><b>Telefoonnummer: </b>
+                <h2><b>Telefoonnummer: </b>
                     <span id="telefoon"><?php echo $doctor['phoneNumber']?> </span>
-                </h1>
+                </h2>
                 <div class="doctor-prof-edit-save-container">
-                    <button class="doctor-prof-btn-edit-save" type="edit" id="edittelefoon" onclick="changetelefooon()">
-                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="edit" id="edittelefoon" onclick="changetelefooon()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg svg-smaller" alt="edit image">
                     </button>
-                    <button class="doctor-prof-btn-edit-save" type="save" id="savetelefoon" onclick="savetelefoon(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="save" id="savetelefoon" onclick="savetelefoon(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg svg-smaller" alt="save image">
                     </button>
                 </div>
             </div>
             
             <!-- GENDER -->
             <div class="col-12 doctor-prof-col">
-                <h1><b>Geslacht: </b>
+                <h2><b>Geslacht: </b>
                     <span id="gender"><?php echo $doctor['gender']?> </span>
-                </h1>
+                </h2>
                 <div class="doctor-prof-edit-save-container">
-                    <button class="doctor-prof-btn-edit-save" type="edit" id="editgender" onclick="changegender()">
-                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="edit" id="editgender" onclick="changegender()">
+                        <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg svg-smaller" alt="edit image">
                     </button>
-                    <button class="doctor-prof-btn-edit-save" type="save" id="savegender" onclick="savegender(<?php echo $doctor['doctorID']; ?>)" style="display: none">
-                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                    <button class="doctor-prof-btn-edit-save btn-smaller" type="save" id="savegender" onclick="savegender(<?php echo $doctor['doctorID']; ?>)" style="display: none">
+                        <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg svg-smaller" alt="save image">
                     </button>
                 </div>
             </div>
