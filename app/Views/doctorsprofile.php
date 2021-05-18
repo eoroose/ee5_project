@@ -388,15 +388,15 @@
         var phase_data=phase.innerHTML;
 
         if(phase_data=='male') {
-            phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male'selected='selected' >male</option><option value='female' >female</option> <option value='none of the above'>none of the above</option></select>";
+            phase.innerHTML = "<select class='form-control main-input doctor-prof-input' id='Gender' name='Gender'> <option value='male'selected='selected' >male</option><option value='female' >female</option> <option value='none of the above'>none of the above</option></select>";
         }
         else{
             if(phase_data=='female'){
-                phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above'>none of the above</option></select>";
+                phase.innerHTML = "<select class='form-control main-input doctor-prof-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above'>none of the above</option></select>";
 
             }
             else{
-                phase.innerHTML = "<select class='form-control main-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above' selected='selected'>none of the above</option></select>";
+                phase.innerHTML = "<select class='form-control main-input doctor-prof-input' id='Gender' name='Gender'> <option value='male' >male</option><option value='female' selected='selected'>female</option> <option value='none of the above' selected='selected'>none of the above</option></select>";
 
             }
         }
@@ -420,7 +420,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input class='form-control main-input' type='tel' id='Telefoon' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input doctor-prof-input' type='tel' id='Telefoon' value='"+phase_data+"'>";
     }
     function savetelefoon(no){
         document.getElementById("edittelefoon").style.display="block";
@@ -443,8 +443,8 @@
         var lastname_data=lastname.innerHTML;
 
 
-        phase.innerHTML="<input class='form-control main-input' type='text' id='firstName' value='"+phase_data+"' style='margin-bottom:10px'>";
-        lastname.innerHTML="<input class='form-control main-input' type='text' id='lastName' value='"+lastname_data+"'>";
+        phase.innerHTML="<input class='form-control main-input doctor-prof-input' type='text' id='firstName' value='"+phase_data+"' style='margin-bottom:10px'>";
+        lastname.innerHTML="<input class='form-control main-input doctor-prof-input' type='text' id='lastName' value='"+lastname_data+"'>";
     }
     function saveName(no){
         var phase_val=document.getElementById("firstName").value;
@@ -467,7 +467,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input class='form-control main-input' type='text' id='Stad' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input doctor-prof-input' type='text' id='Stad' value='"+phase_data+"'>";
 
     }
     function saveStad(no){
@@ -489,7 +489,7 @@
         var phase_data=phase.innerHTML;
 
 
-        phase.innerHTML="<input class='form-control main-input' type='text' id='Addres' value='"+phase_data+"'>";
+        phase.innerHTML="<input class='form-control main-input doctor-prof-input' type='text' id='Addres' value='"+phase_data+"'>";
     }
     function saveAddres(no){
         var phase_val=document.getElementById("Addres").value;

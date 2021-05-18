@@ -194,3 +194,169 @@
     font-size: 2em;
 }
 
+.inhabitant-yellowcard h1 {
+    margin-bottom: 5px;
+}
+
+.inhabitant-yellowcard-edit-btn {
+    margin-top: -20px;
+}
+
+
+
+.inhabitant-yellowcard-display {
+    width: 100px;
+    height: 40px;
+    border: 3px solid green;
+    border-radius: var(--modal-button-radius);
+    color: green;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--modal-animation-duration) ease-in-out, border-color var(--modal-animation-duration) ease-in-out;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+.inhabitant-yellowcard-display:hover,
+.inhabitant-yellowcard-display:focus {
+    border-color: white;
+    color: white;
+}
+
+.inhabitant-yellowcard-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--modal-button-radius);
+
+    transition: transform var(--modal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.inhabitant-yellowcard-display:hover::before,
+.inhabitant-yellowcard-display:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+
+.inhabitant-yellowcard-delete {
+    width: 100px;
+    height: 40px;
+    border: 3px solid red;
+    border-radius: var(--modal-button-radius);
+    color: red;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--modal-animation-duration) ease-in-out, border-color var(--modal-animation-duration) ease-in-out;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+.inhabitant-yellowcard-delete:hover,
+.inhabitant-yellowcard-delete:focus {
+    border-color: white;
+    color: white;
+}
+
+.inhabitant-yellowcard-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--modal-button-radius);
+
+    transition: transform var(--modal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.inhabitant-yellowcard-delete:hover::before,
+.inhabitant-yellowcard-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.inhabitant-input {
+    position: relative;
+    border-radius: 10px;
+    max-width: none;
+    min-width: none;
+    width: 100%;
+    
+}
+
+
+
+
+
+
+.inhabitant-progress-row {
+
+}
+
+.inhabitant-progress-card {
+    background: none;
+    border: none;
+    margin-bottom: -10px;
+}
+
+.inhabitant-progress-card-body {
+    display: flex;
+    align-content: center;
+    color: var(--purple);
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.inhabitant-progress-rounded-pill {
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    background-color: lightgray;
+}
+
+
+.inhabitant-progress-percentage {
+    background-color: var(--purple);
+    color: white;
+}
+
+
+
+
+.inhabitant-back-arrow {
+    --arrow-size: 50px;
+    --arrow-animation: 300ms;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    background: none;
+    border: none;
+}
+
+.inhabitant-back-arrow img {
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    transition: transform var(--arrow-animation) ease-in-out;
+}
+
+.inhabitant-back-arrow:hover img,
+.inhabitant-back-arrow:focus img {
+    transform: rotate(-360deg);
+}

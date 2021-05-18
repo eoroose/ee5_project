@@ -380,3 +380,12 @@
 .doctor-prof-back-arrow:focus img {
     transform: rotate(-360deg);
 }
+
+
+.doctor-prof-input {
+    position: relative;
+    border-radius: 10px;
+    max-width: none;
+    min-width: none;
+    width: 100%;   
+}

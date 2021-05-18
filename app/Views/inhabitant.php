@@ -4,6 +4,15 @@
 
     <div class="container inhabitant-container main-bottom-padding">
 
+        <div class="card inhabitant-back-arrow">
+            <img src="/assets/images/doctors/back-arrow.svg" class="card-img-top" alt="back-arrow image">
+            <?php if(session()->get('role')=='admin'): ?>
+                <a href="/users" class="stretched-link"></a>
+            <?php else: ?>
+                <a href="/inhabitants" class="stretched-link"></a>
+            <?php endif; ?>
+        </div>
+
         <div class="row inhabitant-row card main-card">
 
             <!-- AVATAR -->
@@ -135,23 +144,52 @@
                 </div>
 
             <?php endforeach; ?>
+
+            <!-- GODPARENT -->
+            <?php foreach ($godparent as $g): ?>
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Godparent: </b>
+                        <span id="<?php echo "firstnameGodp".$g->godparentID?>"><?php echo $g->firstname; ?> </span>
+                        <span id="<?php echo "lastnameGodp".$g->godparentID?>"><?php echo $i->lastname; ?> </span>
+
+                        <form id="<?php echo "godparentForm".$g->godparentID?>" style="display:none">
+                            
+                            <select class='form-control main-input inhabitant-input' id="godparent">
+                                <?php foreach($inhabitants as $row): ?>
+                                    <option value="<?php echo $row->inhabitantID; ?>"><?php echo $row->firstname;?>  <?php echo $row->lastname; ?></option>;
+                                <?php endforeach; ?>
+                            </select>
+                        </form>
+                    </h2>
+
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$g->godparentID?>" onclick="edit_godparent('<?php echo $g->godparentID?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$g->godparentID?>" onclick="save_godparent('<?php echo $g->godparentID?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
             
             <!-- CHORE -->
-            <!-- </?php foreach ($chore as $c): ?>
+            <?php foreach ($chore as $c): ?>
                 <div class="col-12 inhabitant-col">
-                    <h1><b>Chore: </b>
-                        <span id="</?php echo "chore".$c->description?>"></?php echo $c->description ?> </span>
-                    </h1>
-                    <div class="inhabitant-edit-save-container">
+                    <h2><b>Chore: </b>
+                        <span id="<?php echo "chore".$c->description?>"><?php echo $c->description ?> </span>
+                    </h2>
+
+                    <!-- <div class="inhabitant-edit-save-container">
                         <button class="inhabitant-btn-edit-save" type="edit" id="</?php echo "edit".$c->description?>" onclick="edit_chore('</?php echo $c->description?>')">
                             <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg" alt="edit image">
                         </button>
                         <button class="inhabitant-btn-edit-save" type="save" id="</?php echo "save".$c->description?>" onclick="save_chore('</?php echo $c->description?>')" style="display: none">
                             <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg" alt="save image">
                         </button>
-                    </div>
+                    </div> -->
                 </div>
-            </?php endforeach; ?> -->
+            <?php endforeach; ?>
 
             <!-- PASSWORD -->
             <?php if(!empty($password)): ?>
@@ -184,18 +222,99 @@
         <div class="row inhabitant-row card main-card">
             <h1 class="col-12 card inhabitant-appointment-title"><b>Appointments:</b></h1>
             
-            <?php foreach ($appointments as $a): ?>
+            <?php if(count($appointments) > 0): ?>
+                <?php foreach ($appointments as $a): ?>
+                    <div class="col-12 card inhabitant-appointment">
+                        <h1><b>date: </b> <?php echo $a->date ?></h1>    
+                        <h1><b>doctor: </b> <?php echo $a->firstname; ?> <?php echo $a->lastname; ?></h1>
+                        <h1><b>reden: </b> <?php echo $a->reason ?></h1>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <div class="col-12 card inhabitant-appointment">
-                    <h1><b>date: </b> <?php echo $a->date ?></h1>    
-                    <h1><b>doctor: </b> <?php echo $a->firstname; ?> <?php echo $a->lastname; ?></h1>
-                    <h1><b>reden: </b> <?php echo $a->reason ?></h1>
+                    <h1> none </h1>
                 </div>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
-        <!-- YELLOW CARDS -->
+        <!-- YELLOW CARD -->
+        <?php foreach ($cards as $c): ?>
+            <div class="row inhabitant-row card main-card">
+                <h1 class="col-12 card inhabitant-appointment-title"><b>Yellow card:</b></h1>
+                
+                <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
+                    <?php if ($c->isActive == 1): ?>
+                        <h1><b>reason: </b>
+                            <span id="<?php echo "cardReason".$c->yellowCardID?>">
+                                <?php echo $c->reason ?>
+                            </span>
+                        </h1>
+
+                        <h1><b>date: </b>
+                            <span id="<?php echo "cardDate".$c->yellowCardID?>">
+                                <?php echo $c->date ?>
+                            </span>
+                        </h1>
+
+                        <div id="<?php echo "cardActive".$c->yellowCardID?>"></div>
+
+                    <?php else: ?>
+                        <h1><b>No yellow card Assigned</b>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
+                    <button class="main-btn inhabitant-archive-btn" type="edit" id="<?php echo "edit".$c->yellowCardID?>" onclick="edit_card('<?php echo $c->yellowCardID?>')"> edit </button>
+                </div>
+ 
+            </div>
+        <?php endforeach; ?>
+
+        <!-- PROGRESS -->
         <div class="row inhabitant-row card main-card">
-            <h1 class="col-12 card inhabitant-appointment-title"><b>Yellow cards:</b></h1>
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Progress:</b></h1>
+
+            <?php foreach ($progress as $row){?>
+                <div class="row inhabitant-progress-row">
+                    <div class="card inhabitant-progress-card">
+                        <div class="card-body inhabitant-progress-card-body">
+                            <p class="inhabitant-progress-card-text">
+                                Phase <?php echo $row['phase']?> (<?php echo $row['tasks_completed']?>/<?php echo $row['tasks_total']?>)
+                            </p>
+                            <div class="progress rounded-pill inhabitant-progress-rounded-pill">
+                                <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill inhabitant-progress-percentage"><?php echo $row['percentage']?>%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }?>
+        </div>
+
+        <!-- GOD CHILDREN -->
+        <?php foreach ($godparent as $g): ?>
+            <div class="row inhabitant-row card main-card">
+                <h1 class="col-12 card inhabitant-appointment-title"><b>Godchildren:</b></h1>
+
+                <?php if(count($godchildren) > 0): ?>
+                    <?php foreach ($godchildren as $g): ?>
+                        <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
+                            <h1><span>
+                                <?php echo $g->firstname; ?> <?php echo $g->lastname ?>
+                            </span></h1>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
+                        <h1><span> none </span></h1>
+                    </div>
+                <?php endif ?>
+
+            </div>
+        <?php endforeach; ?>
+
+        <!-- NOTES -->
+        <div class="row inhabitant-row card main-card">
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Notes:</b></h1>
         </div>
 
     </div>
@@ -623,7 +742,7 @@
             var username=document.getElementById("username"+no);
             var username_data=username.innerHTML;
 
-            username.innerHTML="<input type='text' id='username_text"+no+"' value='"+username_data+"' style='width: 90%;border-radius: 10px;'>";
+            username.innerHTML="<input class='form-control main-input inhabitant-input' type='text' id='username_text"+no+"' value='"+username_data+"'>";
         }
 
         function save_username(no)
@@ -649,7 +768,7 @@
             var firstname=document.getElementById("firstname"+no);
             var firstname_data=firstname.innerHTML;
 
-            firstname.innerHTML="<input type='text' id='firstname_text"+no+"' value='"+firstname_data+"' style='width: 90%;border-radius: 10px;'>";
+            firstname.innerHTML="<input class='form-control main-input inhabitant-input' type='text' id='firstname_text"+no+"' value='"+firstname_data+"'>";
         }
 
 
@@ -674,7 +793,7 @@
             var lastname=document.getElementById("lastname"+no);
             var lastname_data=lastname.innerHTML;
 
-            lastname.innerHTML="<input type='text' id='lastname_text"+no+"' value='"+lastname_data+"' style='width: 90%;border-radius: 10px;'>";
+            lastname.innerHTML="<input class='form-control main-input inhabitant-input' type='text' id='lastname_text"+no+"' value='"+lastname_data+"'>";
         }
 
 
@@ -699,7 +818,7 @@
             var birthday=document.getElementById("birthday"+no);
             var birthday_data=birthday.innerHTML;
 
-            birthday.innerHTML="<input type='date' id='birthday_text"+no+"' value='"+birthday_data+"' style='width: 90%;border-radius: 10px;'>";
+            birthday.innerHTML="<input class='form-control main-input inhabitant-input' type='date' id='birthday_text"+no+"' value='"+birthday_data+"'>";
         }
 
 
@@ -725,7 +844,7 @@
             var dateAdded=document.getElementById("dateAdded"+no);
             var dateAdded_data=dateAdded.innerHTML;
 
-            dateAdded.innerHTML="<input type='date' id='dateAdded_text"+no+"' value='"+dateAdded_data+"' style='width: 90%;border-radius: 10px;'>";
+            dateAdded.innerHTML="<input class='form-control main-input inhabitant-input' type='date' id='dateAdded_text"+no+"' value='"+dateAdded_data+"'>";
         }
 
         function save_dateAdded(no)
@@ -750,7 +869,7 @@
             var arrivalDate=document.getElementById("arrivalDate"+no);
             var arrivalDate_data=arrivalDate.innerHTML;
 
-            arrivalDate.innerHTML="<input type='date' id='arrivalDate_text"+no+"' value='"+arrivalDate_data+"' style='width: 90%;border-radius: 10px;'>";
+            arrivalDate.innerHTML="<input class='form-control main-input inhabitant-input' type='date' id='arrivalDate_text"+no+"' value='"+arrivalDate_data+"'>";
         }
 
         function save_arrivalDate(no)
@@ -775,7 +894,7 @@
             var departureDate=document.getElementById("departureDate"+no);
             var departureDate_data=departureDate.innerHTML;
 
-            departureDate.innerHTML="<input type='date' id='departureDate_text"+no+"' value='"+departureDate_data+"' style='width: 90%;border-radius: 10px;'>";
+            departureDate.innerHTML="<input class='form-control main-input inhabitant-input' type='date' id='departureDate_text"+no+"' value='"+departureDate_data+"'>";
         }
 
         function save_departureDate(no)
@@ -945,14 +1064,20 @@
             var cardReason_data=cardReason.innerHTML;
             var cardActive_data=cardActive.innerHTML;
 
-            cardDate.innerHTML="<input type='datetime-local' id='cardDate_text"+no+"' value='"+cardDate_data+"'> ";
-            cardReason.innerHTML="<input type='text' id='cardReason_text"+no+"' value='"+cardReason_data+"'> ";
-            cardActive.innerHTML='<form id="cardActive_text">'+
-                                 '<input type="radio" id="YES" name="cardActive" value="YES"> '+
-                                 '<label for="YES">YES</label>'+
-                                 '<br>'+
-                                 '<input type="radio" id="NO" name="cardActive" value="NO"> '+
-                                 '<label for="NO">NO</label></form>';
+            cardDate.innerHTML="<input class='form-control main-input inhabitant-input' type='datetime-local' id='cardDate_text"+no+"' value='"+cardDate_data+"'> ";
+            cardReason.innerHTML="<input class='form-control main-input inhabitant-input' type='text' id='cardReason_text"+no+"' value='"+cardReason_data+"'> ";
+
+            // cardActive.innerHTML='<form id="cardActive_text">'+
+            //                         '<input type="radio" id="YES" name="cardActive" value="YES"> '+
+            //                         '<label for="YES">Display card</label>'+
+            //                      '<br>'+
+            //                      '<input type="radio" id="NO" name="cardActive" value="NO"> '+
+            //                      '<label for="NO">Delete card</label></form>';
+
+            cardActive.innerHTML=   '<form id="cardActive_text">'+
+                                        '<button class="inhabitant-yellowcard-display" type="submit" id="YES "value="YES" name="cardActive">Display</button>'+
+                                        '<button class="inhabitant-yellowcard-delete" type="submit" id="NO "value="NO" name="cardActive">Delete</button>'+
+                                    '</form>'
         }
 
         function save_card(no)

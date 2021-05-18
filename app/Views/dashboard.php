@@ -240,7 +240,7 @@
                                 <div class="card dashboard-progress-card">
                                     <div class="card-body dashboard-progress-card-body">
                                         <h5 class="dashboard-progress-card-text">
-                                            Phase <?php echo $row['phase']?>
+                                            Phase <?php echo $row['phase']?> (<?php echo $row['tasks_completed']?>/<?php echo $row['tasks_total']?>)
                                         </h5>
                                         <div class="progress rounded-pill dashboard-progress-rounded-pill">
                                             <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage">
