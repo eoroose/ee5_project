@@ -360,3 +360,252 @@
 .inhabitant-back-arrow:focus img {
     transform: rotate(-360deg);
 }
+
+
+/* NOTES */
+
+.inhabitant-notes-container {
+    --inhabitant-note-border-radius: 15px;
+    --inhabitant-note-btn-border-radius: 15px;
+
+    --inhabitant-note-button-svg-size: 40px;
+    --inhabitant-note-button-size: 60px;
+
+    --inputs-top-bottom-margins: 10px;
+}
+
+
+.doctor-prof-col-appointment {
+    margin-top: var(--profile-margin-top);
+    /* border: none; */
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+    position: relative;
+    border: 2px solid white;
+    border-radius: var(--inhabitant-note-border-radius);
+    display: flex;
+    /* position: relative; */
+    padding-bottom: 10px;
+}
+
+.doctor-prof-col-appointment:hover,
+.doctor-prof-col-appointment:focus {
+    border: 2px solid var(--purple);
+    transition: border var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.appointment-text {
+    flex: 1;
+    /* margin-right: 2em; */
+}
+
+.doctor-prof-col-appointment h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.doctor-prof-col-appointment h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-btns {
+    /* margin-top: 5px; */
+    align-content: center;
+}
+
+.doctor-prof-btn-svg {
+    width: var(--inhabitant-note-button-svg-size);
+    filter: brightness(0) invert(1);
+    transition: filter var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.doctor-prof-btn-edit-save {
+    width:  var(--inhabitant-note-button-size);
+    height: var(--inhabitant-note-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    background: none;
+}
+
+.doctor-prof-btn-edit-save::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-edit-save:hover::before,
+.doctor-prof-btn-edit-save:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+.doctor-prof-btn-delete {
+    width:  var(--inhabitant-note-button-size);
+    height: var(--inhabitant-note-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    background: none;
+}
+
+.doctor-prof-btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-delete:hover::before,
+.doctor-prof-btn-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-prof-col-appointment:hover .doctor-prof-btn-svg,
+.doctor-prof-col-appointment:focus .doctor-prof-btn-svg {
+    filter: brightness(1) invert(0);
+}
+
+.doctor-prof-btn-edit-save:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-edit-save:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-prof-btn-delete:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-delete:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.appointment-inputs-input {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    flex: 1;
+    border-radius: var(--inhabitant-note-border-radius);
+    width: 90%;
+}
+
+
+
+
+/* NEW NOTE */
+.appointment-inputs {
+    display: block;
+    width: 95%;
+    position: relative;
+
+    margin-top: var(--profile-margin-top);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+}
+
+.appointment-inputs h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    display: flex;
+    color: var(--purple);
+}
+
+.appointment-inputs h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-inhabitant-btn {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    max-width: none;
+    flex: 1;
+    color: var(--purple);
+    border-color: var(--purple);
+    border-radius: var(--inhabitant-note-btn-border-radius);
+    border-width: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color var(--inhabitant-animation-duration) ease-in-out, color var(--doctor-prof-animation-duration) ease-in-out;
+    width: 90%;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn:hover,
+.appointment-inhabitant-btn:focus {
+    border-color: white;
+    color: white;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.appointment-inhabitant-btn:hover::before,
+.appointment-inhabitant-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.appointment-add-btn {
+    height: 50px;
+    border-width: 4px;
+}
+
+.appointment-btn-svg {
+    width: 25px;
+    transition: filter var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.appointment-add-btn:hover .appointment-btn-svg,
+.appointment-add-btn:focus .appointment-btn-svg {
+    filter: brightness(0) invert(1);
+}

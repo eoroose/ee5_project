@@ -313,12 +313,79 @@
         <?php endforeach; ?>
 
         <!-- NOTES -->
-        <div class="row inhabitant-row card main-card">
+        <div class="row inhabitant-row card main-card inhabitant-notes-container">
             <h1 class="col-12 card inhabitant-appointment-title"><b>Notes:</b></h1>
+        
+            <?php foreach ($notes as $n): ?>
+                <div class="col-12 doctor-prof-col-appointment">
+                    
+                    <div class="appointment-text" id="<?php echo "note".$n->noteID?>">
+                        <h1><b>title: </b>
+                            <span id="<?php echo "noteTitle".$n->noteID?>">
+                                <?php echo $n->title;?>
+                            </span>
+                        </h1>
+
+                        <h1><b>description: </b>
+                            <span id="<?php echo "noteDescription".$n->noteID?>">
+                                <?php echo $n->description;?>
+                            </span>
+                        </h1>
+                    </div>
+
+                    <div class="appointment-btns">
+                        <div class="doctor-prof-edit-save-container">
+                            <button class="doctor-prof-btn-edit-save" type="edit" id="<?php echo "edit".$n->noteID?>" onclick="edit_note('<?php echo $n->noteID?>')">
+                                <img src="/assets/images/tasks_page/edit.svg" class="doctor-prof-btn-svg" alt="edit image">
+                            </button>
+                            <button class="doctor-prof-btn-edit-save" type="save" id="<?php echo "save".$n->noteID?>" onclick="save_note('<?php echo $n->noteID?>')" style="display: none">
+                                <img src="/assets/images/tasks_page/save.svg" class="doctor-prof-btn-svg" alt="save image">
+                            </button>
+                        </div>
+
+                        <button class="doctor-prof-btn-delete" type="button" id="<?php echo "delete".$n->noteID?>" onclick="delete_note('<?php echo $n->noteID?>')">
+                            <img src="/assets/images/tasks_page/trash.svg" class="doctor-prof-btn-svg" alt="trash image">
+                        </button>
+                    </div>
+
+
+                </div>
+            <?php endforeach; ?>
+        
+        </div>
+
+        <!-- NEW NOTE -->
+        <div class="row inhabitant-row card main-card inhabitant-notes-container">
+            <h1 class="col-12 card inhabitant-appointment-title"><b>New note:</b></h1>
+                      
+            <div id="addnote" class="col-12 appointment-inputs">
+
+                <h1><b>Title: </b>
+                    <input type="text" id="new_note_title" class="form-control main-input appointment-inputs-input">
+                </h1>
+
+                <h1><b>Description: </b>
+                    <input type="text" id="new_note_description" class="form-control main-input appointment-inputs-input">
+                </h1>
+
+                <h1>
+                    <button class="form-control appointment-inputs-btn appointment-inhabitant-btn appointment-add-btn" type="edit"  onclick="add_note();">
+                        <img src="/assets/images/tasks_page/add.svg" class="appointment-btn-svg" alt="edit image">
+                    </button>
+                </h1>
+
+            </div>
         </div>
 
     </div>
+    
+    <form id="form1" action="/users/inhabitant/setUsername" method="post">
+        <input type="hidden" id="username" name="username">
+        <input type="hidden" id="from2id" name="from2id">
+    </form>
+
 </div>
+
 
 
 <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
@@ -1153,8 +1220,8 @@
             var noteTitle_data=noteTitle.innerHTML;
             var noteDescription_data=noteDescription.innerHTML;
 
-            noteTitle.innerHTML="<input type='text' id='noteTitle_text"+no+"' value='"+noteTitle_data+"'> ";
-            noteDescription.innerHTML="<input type='text' id='noteDescription_text"+no+"' value='"+noteDescription_data+"'> ";
+            noteTitle.innerHTML=        "<input class='form-control main-input appointment-inputs-input' type='text' id='noteTitle_text"+no+"' value='"+noteTitle_data+"'> ";
+            noteDescription.innerHTML=  "<input class='form-control main-input appointment-inputs-input' type='text' id='noteDescription_text"+no+"' value='"+noteDescription_data+"'> ";
         }
 
         function save_note(no)
