@@ -18,7 +18,7 @@
                 <div class="card note-progress-card-head note-progress-card-head-task">Task</div>
                 <?php foreach ($inhabitants as $row1){ ?>
                     <div class="card note-progress-card-head note-progress-card-head-inhabitant">
-                        <?php echo $row1['firstname'] ?> <?php echo $row1['lastname'] ?>
+                        <?php echo $row1['firstname'] ?> <?php echo $row1['lastname'] ?> <?php echo $row1['location']?>
                     </div>
                 <?php }?>
 
