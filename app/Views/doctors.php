@@ -4,7 +4,7 @@
     <div class="container doctors-container main-bottom-padding">
         <h3 class="main-title doctors-title">Doctors</h3>
 
-        <div class="row journal-row">
+        <div class="row doctors-row">
             
             <div class="col-12 card doctors-register-card">
                 <img src="/assets/images/doctors/verify.svg" class="card-img-top" alt="verify image">
