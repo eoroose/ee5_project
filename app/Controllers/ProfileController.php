@@ -81,8 +81,8 @@ class ProfileController extends BaseController
                 'old-password'=>['validate' => 'Kies een unieke username']
             ];
             if (!$this->validate($rules,$errors)) {
-                echo "test";
-                $data['validation'] = $this->validator;
+
+                $validation = $this->validator;
             }
             else{
                 $model = new UserModel();
@@ -103,6 +103,7 @@ class ProfileController extends BaseController
 
         $id = session()->get('id');
         $data=$this->getData($id);
+        if($validation==null){}else {$data["validation"]=$validation;}
         echo view('templates/header', $data);
         echo view('profile');
         echo view('templates/footer');
