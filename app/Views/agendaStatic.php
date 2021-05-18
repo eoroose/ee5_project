@@ -1,9 +1,22 @@
-
-    <meta charset='utf-8' />
+<div>
     <link href='/fullcalendar/lib/main.css' rel='stylesheet' />
     <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
     <script src='/fullcalendar/lib/main.js'></script>
     <link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" />
+
+    <div class="container agenda-container main-bottom-padding agenda-calendar-inhabitant">
+        <div class="row agenda-row">
+            <div class="col-12 card agenda-calendar" id='calendar'></div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- <meta charset='utf-8' />
+    <link href='/fullcalendar/lib/main.css' rel='stylesheet' />
+    <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
+    <script src='/fullcalendar/lib/main.js'></script>
+    <link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" /> -->
 
     <script>
 
@@ -141,4 +154,4 @@
 
 
     </script>
-<div id='calendar'></div>
+<!-- <div id='calendar'></div> -->

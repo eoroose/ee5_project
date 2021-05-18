@@ -1,9 +1,176 @@
-<meta charset='utf-8' />
+<div>
+    <link href='/fullcalendar/lib/main.css' rel='stylesheet' />
+    <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
+    <script src='/fullcalendar/lib/main.js'></script>
+    <link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" />
+
+    <div class="container agenda-container main-bottom-padding">
+
+        <div class="row agenda-row">
+            
+            <div class="col-12 card agenda-btns">
+                <button class="main-modal-btn" onclick="openForm()">Add Event</button>
+                <button class="main-modal-btn" onclick="openFormRecurring()">Add Recurring Event</button>
+            </div>
+
+            <div class="col-12 card agenda-calendar" id='calendar'></div>
+        </div>
+    </div>
+
+    <!-- ADD EVENT MODAL -->
+    <div id="myModal" class="main-modal"">
+        <div class="agenda-modal-content card main-card">
+
+            <h4>New Event</h4>
+
+            <label for="title"><b>title</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="eventName" required>
+
+            <label class="agenda-modal-label" for="fromDate"><b>starting</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter starting date" id="fromDate">
+
+            <label class="agenda-modal-label" for="toDate"><b>ending</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter ending date" id="toDate">
+
+            <label class="agenda-modal-label" for="color"><b>color</b></label>
+            <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="color">
+
+            <div class="row agenda-modal-btns">
+                <button type="submit" class="col main-modal-btn" onclick="submitForm()">Add</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeForm()">Cancel</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- SELECT EVENT MODAL -->
+    <div id="selectEventModal" class="main-modal"">
+        <div class="agenda-modal-content card main-card">
+
+            <h4>New Event</h4>
+
+            <label for="SETitle"><b>title</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="SETitle" required>
+
+            <label class="agenda-modal-label" for="SEFromDate"><b>starting</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter starting date" id="SEFromDate">
+
+            <label class="agenda-modal-label" for="SEToDate"><b>ending</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter ending date" id="SEToDate">
+
+            <label class="agenda-modal-label" for="SEcolor"><b>color</b></label>
+            <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="SEcolor">
+
+            <div class="row agenda-modal-btns">
+                <button type="submit" class="col main-modal-btn" onclick="submitFormSE()">Add</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormSE()">Cancel</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- CHANGE EVENT MODAL -->
+    <div id="existingEventModal" class="main-modal"">
+        <div class="agenda-modal-content card main-card">
+
+            <h4>Update Event</h4>
+
+            <input type="text" class="form-control" placeholder="5" id="EEID" required>
+            
+            <label for="EETitle"><b>title</b></label>
+            <input type="text" class="form-control main-input agenda-input" id="EETitle" required>
+
+            <label class="agenda-modal-label" for="EEFromDate"><b>starting</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" id="EEFromDate">
+
+            <label class="agenda-modal-label" for="EEToDate"><b>ending</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" id="EEToDate">
+
+            <label class="agenda-modal-label" for="EEcolor"><b>color</b></label>
+            <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="EEcolor">
+
+            <div class="row agenda-modal-btns">
+                <button type="submit" class="col main-modal-btn" onclick="submitFormEE()">Update</button>
+                <button type="submit" class="col main-modal-btn" onclick="removeEvent()">Remove</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormEE()">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ADD RECURRING EVENT MODAL -->
+    <div id="newRecurringModal" class="main-modal">
+        <div class="agenda-modal-content card main-card">
+
+            <h4>New Recurring Event</h4>
+
+            <label for="NRTitle"><b>title</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="NRTitle" required>
+
+            <label class="agenda-modal-label" for="NRStart"><b>starting</b></label>
+            <input type="time" class="form-control main-input agenda-input" placeholder="Enter starting time" id="NRStart">
+
+            <label class="agenda-modal-label" for="NREnd"><b>ending</b></label>
+            <input type="time" class="form-control main-input agenda-input" placeholder="Enter ending time" id="NREnd">
+
+            <label class="agenda-modal-label" for="NRColor"><b>color</b></label>
+            <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="NRColor">
+
+            <label class="agenda-modal-label"><b>days</b></label>
+            <div class="row agenda-modal-checkboxes">
+
+                <div class="col">
+                    <label for="NRMon">Mon:</label>
+                    <input type="checkbox"   id="NRMon">
+                </div>
+
+                <div class="col">
+                    <label for="NRTue">Tue:</label>
+                    <input type="checkbox"   id="NRTue">
+                </div>
+
+                <div class="col">
+                    <label for="NRWed">Wed:</label>
+                    <input type="checkbox"   id="NRWed">
+                </div>
+
+                <div class="col">
+                    <label for="NRThu">Thu:</label>
+                    <input type="checkbox"   id="NRThu">
+                </div>
+
+                <div class="col">
+                    <label for="NRFri">Fri:</label>
+                    <input type="checkbox"   id="NRFri">
+                </div>
+
+                <div class="col">
+                    <label for="NRSat">Sat:</label>
+                    <input type="checkbox"   id="NRSat">
+                </div>
+
+                <div class="col">
+                    <label for="NRSun">Sun:</label>
+                    <input type="checkbox"   id="NRSun">
+                </div>
+            </div>
+
+            <div class="row agenda-modal-btns">
+                <button type="submit" class="col main-modal-btn" onclick="submitFormNR()">Add</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormNR()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<!-- <meta charset='utf-8' />
 
 <link href='/fullcalendar/lib/main.css' rel='stylesheet' />
 <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
 <script src='/fullcalendar/lib/main.js'></script>
-<link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/agenda.css" rel="stylesheet" type="text/css" /> -->
 
 
 <script>
@@ -418,7 +585,7 @@
 </script>
 
 
-<button class="open-button" onclick="openForm()">Add Event</button>
+<!-- <button class="open-button" onclick="openForm()">Add Event</button>
 
 <button class="open-button" onclick="openFormAppointment()">Add Appointment</button>
 
@@ -490,7 +657,7 @@
     <button type="submit" class="btn" onclick="removeAppointment()">Remove</button>
     <button type="submit" class="btn cancel" onclick="closeFormEA()">Cancel</button>
 </div>
-</div>
+</div> -->
 
 
 <!--<div id="existingReccuringModal" class="modal"">-->
@@ -537,7 +704,7 @@
 <!--</div>-->
 
 
-<div id="newRecurringModal" class="modal"">
+<!-- <div id="newRecurringModal" class="modal"">
 <div class="modal-content">
 
     <h1>Create Recurring Event</h1>
@@ -614,4 +781,4 @@
     <button type="submit" class="btn" onclick="submitFormAppointment()">Add Event</button>
     <button type="submit" class="btn cancel" onclick="closeFormAppointment()">Cancel</button>
 </div>
-</div>
+</div> -->
