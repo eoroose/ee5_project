@@ -2,14 +2,14 @@
     <link href="/assets/css/doctors.css" rel="stylesheet" type="text/css" />
 
     <div class="container doctors-container main-bottom-padding">
-        <h3 class="main-title doctors-title">Doctors</h3>
+        <h3 class="main-title doctors-title">Dokters</h3>
 
         <div class="row doctors-row">
             
             <div class="col-12 card doctors-register-card">
                 <img src="/assets/images/doctors/verify.svg" class="card-img-top" alt="verify image">
                 <div class="card-body doctors-register-card-body">
-                    <h5 class="card-title doctors-register-title" style="text-align: center">Registreer een nieuwe Dokter</h5>
+                    <h5 class="card-title doctors-register-title" style="text-align: center">Registreer een nieuwe dokter</h5>
                     <a onclick="registerDoctor()" class="stretched-link"></a>
                 </div>
             </div>

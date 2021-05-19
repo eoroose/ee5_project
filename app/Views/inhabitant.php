@@ -26,9 +26,9 @@
             <?php foreach ($isActive as $iA): ?>
                 <div class="col-12 card inhabitant-col">
                     <?php if($iA->isActive == 1): ?>
-                        <button class="main-btn inhabitant-archive-btn" onclick="archive_user()"> Archive user </button>
+                        <button class="main-btn inhabitant-archive-btn" onclick="archive_user()"> Archiveer bewoner </button>
                     <?php elseif($iA->isActive == 0): ?>
-                        <button class="main-btn inhabitant-archive-btn" onclick="dearchive_user()"> De-archive user </button>
+                        <button class="main-btn inhabitant-archive-btn" onclick="dearchive_user()"> De-archiveer bewoner </button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
@@ -40,7 +40,7 @@
 
                 <!-- USERNAME -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Username: </b>
+                    <h2><b>Gebruikersnaam: </b>
                         <span id="<?php echo "username".$i->username?>"><?php echo $i->username; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -55,7 +55,7 @@
 
                 <!-- FIRST NAME -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>First name: </b>
+                    <h2><b>Voornaam: </b>
                         <span id="<?php echo "firstname".$i->firstname?>"><?php echo $i->firstname; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -70,7 +70,7 @@
 
                 <!-- LAST NAME -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Last name: </b>
+                    <h2><b>Achternaam: </b>
                         <span id="<?php echo "lastname".$i->lastname?>"><?php echo $i->lastname; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -85,7 +85,7 @@
 
                 <!-- BIRTHDAY -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Birthday: </b>
+                    <h2><b>Verjaardag: </b>
                         <span id="<?php echo "birthday".$i->birthday?>"><?php echo $i->birthday; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -100,7 +100,7 @@
 
                 <!-- DATE ADDED -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Date of first arrival: </b>
+                    <h2><b>Datum van eerste aankomst: </b>
                         <span id="<?php echo "dateAdded".$i->dateAdded?>"><?php echo $i->dateAdded; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -115,7 +115,7 @@
 
                 <!-- ARRIVAL DATE -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Date of latest arrival: </b>
+                    <h2><b>Datum van laatste aankomst: </b>
                         <span id="<?php echo "arrivalDate".$i->arrivalDate?>"><?php echo $i->arrivalDate; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -130,7 +130,7 @@
 
                 <!-- DEPARTURE DATE -->
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Date of departure: </b>
+                    <h2><b>Datum van laatste vertrek: </b>
                         <span id="<?php echo "departureDate".$i->departureDate?>"><?php echo $i->departureDate; ?> </span>
                     </h2>
                     <div class="inhabitant-edit-save-container">
@@ -148,7 +148,7 @@
             <!-- GODPARENT -->
             <?php foreach ($godparent as $g): ?>
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Godparent: </b>
+                    <h2><b>Peetouder: </b>
                         <span id="<?php echo "firstnameGodp".$g->godparentID?>"><?php echo $g->firstname; ?> </span>
                         <span id="<?php echo "lastnameGodp".$g->godparentID?>"><?php echo $i->lastname; ?> </span>
 
@@ -176,7 +176,7 @@
             <!-- CHORE -->
             <?php foreach ($chore as $c): ?>
                 <div class="col-12 inhabitant-col">
-                    <h2><b>Chore: </b>
+                    <h2><b>Klusje: </b>
                         <span id="<?php echo "chore".$c->description?>"><?php echo $c->description ?> </span>
                     </h2>
 
@@ -195,7 +195,7 @@
             <?php if(!empty($password)): ?>
                 <?php foreach($password as $p): ?>
                     <div class="col-12 card inhabitant-col">
-                        <button type="button" class="main-btn inhabitant-password-btn" onclick="showCangePasword()" id="changeP">reset password</button>
+                        <button type="button" class="main-btn inhabitant-password-btn" onclick="showCangePasword()" id="changeP">verander wachtwoord</button>
                         <?php if (isset($validation)): ?>
                             <div class="main-alert-message inhabitant-alert-message">
                                 <div class="alert alert-danger" role="alert">
@@ -207,9 +207,9 @@
                         <div id="otherFieldDiv" style="display: none">
                             <form class="" action="/UsersController/changePassword" method="post">
                                 <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
-                                <input type="password" class="form-control main-input inhabitant-password-input" name="new-password" id="new-password" value="" placeholder="new password">
-                                <input type="password" class="form-control main-input inhabitant-password-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
-                                <button type="submit" class="main-btn inhabitant-password-btn">change password</button>
+                                <input type="password" class="form-control main-input inhabitant-password-input" name="new-password" id="new-password" value="" placeholder="nieuw wachtwoord">
+                                <input type="password" class="form-control main-input inhabitant-password-input" name="confirm-password" id="confirm-password" value="" placeholder="bevestig nieuw wachtwoord">
+                                <button type="submit" class="main-btn inhabitant-password-btn">verander wachtwoord</button>
                             </form>
                         </div>
                     </div>
@@ -220,13 +220,13 @@
         
         <!-- APPOINTMENTS -->
         <div class="row inhabitant-row card main-card">
-            <h1 class="col-12 card inhabitant-appointment-title"><b>Appointments:</b></h1>
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Doktersafspraken:</b></h1>
             
             <?php if(count($appointments) > 0): ?>
                 <?php foreach ($appointments as $a): ?>
                     <div class="col-12 card inhabitant-appointment">
-                        <h1><b>date: </b> <?php echo $a->date ?></h1>    
-                        <h1><b>doctor: </b> <?php echo $a->firstname; ?> <?php echo $a->lastname; ?></h1>
+                        <h1><b>datum: </b> <?php echo $a->date ?></h1>
+                        <h1><b>dokter: </b> <?php echo $a->firstname; ?> <?php echo $a->lastname; ?></h1>
                         <h1><b>reden: </b> <?php echo $a->reason ?></h1>
                     </div>
                 <?php endforeach; ?>
@@ -240,17 +240,17 @@
         <!-- YELLOW CARD -->
         <?php foreach ($cards as $c): ?>
             <div class="row inhabitant-row card main-card">
-                <h1 class="col-12 card inhabitant-appointment-title"><b>Yellow card:</b></h1>
+                <h1 class="col-12 card inhabitant-appointment-title"><b>Gele kaart:</b></h1>
                 
                 <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
                     <?php if ($c->isActive == 1): ?>
-                        <h1><b>reason: </b>
+                        <h1><b>reden: </b>
                             <span id="<?php echo "cardReason".$c->yellowCardID?>">
                                 <?php echo $c->reason ?>
                             </span>
                         </h1>
 
-                        <h1><b>date: </b>
+                        <h1><b>datum: </b>
                             <span id="<?php echo "cardDate".$c->yellowCardID?>">
                                 <?php echo $c->date ?>
                             </span>
@@ -259,12 +259,12 @@
                         <div id="<?php echo "cardActive".$c->yellowCardID?>"></div>
 
                     <?php else: ?>
-                        <h1><b>No yellow card Assigned</b>
+                        <h1><b>Geen gele kaart toegewezen</b>
                     <?php endif; ?>
                 </div>
                 
                 <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
-                    <button class="main-btn inhabitant-archive-btn" type="edit" id="<?php echo "edit".$c->yellowCardID?>" onclick="edit_card('<?php echo $c->yellowCardID?>')"> edit </button>
+                    <button class="main-btn inhabitant-archive-btn" type="edit" id="<?php echo "edit".$c->yellowCardID?>" onclick="edit_card('<?php echo $c->yellowCardID?>')"> wijzig </button>
                 </div>
  
             </div>
@@ -272,14 +272,14 @@
 
         <!-- PROGRESS -->
         <div class="row inhabitant-row card main-card">
-            <h1 class="col-12 card inhabitant-appointment-title"><b>Progress:</b></h1>
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Vooruitgang:</b></h1>
 
             <?php foreach ($progress as $row){?>
                 <div class="row inhabitant-progress-row">
                     <div class="card inhabitant-progress-card">
                         <div class="card-body inhabitant-progress-card-body">
                             <p class="inhabitant-progress-card-text">
-                                Phase <?php echo $row['phase']?> (<?php echo $row['tasks_completed']?>/<?php echo $row['tasks_total']?>)
+                                Fase <?php echo $row['phase']?> (<?php echo $row['tasks_completed']?>/<?php echo $row['tasks_total']?>)
                             </p>
                             <div class="progress rounded-pill inhabitant-progress-rounded-pill">
                                 <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill inhabitant-progress-percentage"><?php echo $row['percentage']?>%</div>
@@ -293,7 +293,7 @@
         <!-- GOD CHILDREN -->
         <?php foreach ($godparent as $g): ?>
             <div class="row inhabitant-row card main-card">
-                <h1 class="col-12 card inhabitant-appointment-title"><b>Godchildren:</b></h1>
+                <h1 class="col-12 card inhabitant-appointment-title"><b>Petekinderen:</b></h1>
 
                 <?php if(count($godchildren) > 0): ?>
                     <?php foreach ($godchildren as $g): ?>
@@ -305,7 +305,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
-                        <h1><span> none </span></h1>
+                        <h1><span> geen </span></h1>
                     </div>
                 <?php endif ?>
 
@@ -314,19 +314,19 @@
 
         <!-- NOTES -->
         <div class="row inhabitant-row card main-card inhabitant-notes-container">
-            <h1 class="col-12 card inhabitant-appointment-title"><b>Notes:</b></h1>
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Nota's:</b></h1>
         
             <?php foreach ($notes as $n): ?>
                 <div class="col-12 doctor-prof-col-appointment">
                     
                     <div class="appointment-text" id="<?php echo "note".$n->noteID?>">
-                        <h1><b>title: </b>
+                        <h1><b>titel: </b>
                             <span id="<?php echo "noteTitle".$n->noteID?>">
                                 <?php echo $n->title;?>
                             </span>
                         </h1>
 
-                        <h1><b>description: </b>
+                        <h1><b>beschrijving: </b>
                             <span id="<?php echo "noteDescription".$n->noteID?>">
                                 <?php echo $n->description;?>
                             </span>
@@ -356,15 +356,15 @@
 
         <!-- NEW NOTE -->
         <div class="row inhabitant-row card main-card inhabitant-notes-container">
-            <h1 class="col-12 card inhabitant-appointment-title"><b>New note:</b></h1>
+            <h1 class="col-12 card inhabitant-appointment-title"><b>Nieuwe nota:</b></h1>
                       
             <div id="addnote" class="col-12 appointment-inputs">
 
-                <h1><b>Title: </b>
+                <h1><b>Titel: </b>
                     <input type="text" id="new_note_title" class="form-control main-input appointment-inputs-input">
                 </h1>
 
-                <h1><b>Description: </b>
+                <h1><b>Beschrijving: </b>
                     <input type="text" id="new_note_description" class="form-control main-input appointment-inputs-input">
                 </h1>
 
@@ -394,7 +394,7 @@
 
         function archive_user()
         {
-            var r = confirm("Weet je zeker dat je deze wilt archivere?");
+            var r = confirm("Weet je zeker dat je deze wilt archiveren?");
             if(r==true)
             {
                 $.post('/UsersController/archiveUser', {id:<?php echo $userID; ?>})
@@ -595,21 +595,6 @@
             var chore=document.getElementById("chore"+no);
             var chore_data=chore.innerHTML;
 
-            // chore.innerHTML='<form id="chore_text">'+
-            //                 '<input type="radio" id="Not Assigned" name="chore" value="Not Assigned"> '+
-            //                 '<label for="Not Assigned">Not Assigned</label>'+
-            //                 '<br>'+
-            //                 '<input type="radio" id="Household" name="chore" value="Household"> '+
-            //                 '<label for="Household">Household</label>'+
-            //                 '<br>'+
-            //                 '<input type="radio" id="Kitchen" name="chore" value="Kitchen"> '+
-            //                 '<label for="Kitchen">Kitchen</label>'+
-            //                 '<br>'+
-            //                 '<input type="radio" id="Weekday Responsible" name="chore" value="Weekday Responsible"> '+
-            //                 '<label for="Weekday Responsible">Weekday Responsible</label>'+
-            //                 '<br>'+
-            //                 '<input type="radio" id="Weekend Responsible" name="chore" value="Weekend Responsible"> '+
-            //                 '<label for="Weekend Responsible">Weekend Responsible</label></form>';
             chore.innerHTML='<select id="chore_text">'+
                                 '<option id="Not Assigned" value="Not Assigned" selected="selected" name="chore">'+
                                     'Not Assigned'+
