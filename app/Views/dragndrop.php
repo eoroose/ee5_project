@@ -1,85 +1,78 @@
-
-
+<div>
     <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
+    <link href="/assets/css/chores.css" rel="stylesheet" type="text/css" />
 
-    <style>
-        .drop{
-            float: left;
-            width: 40%;
-            height: 80%;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid black;
-        }
-        .drag{
-            box-sizing: border-box;
-            width: fit-content;
-            height: fit-content;
-            padding: 1px;
-            border: 1px solid black;
-        }
-        .img{
-            user-drag: none;
-            user-select: none;
-            -moz-user-select: none;
-            -webkit-user-drag: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-        #div1, #div2 {
-            float: left;
-            width: 40%;
-            height: 80%;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid black;
-        }
-    </style>
+    <div class="container chores-container main-bottom-padding">
+        <h3 class="main-title chores-title">Chores</h3>
 
-
-
-
-<?php foreach ($chores as $chore): ?>
-    <div>
-        <?php echo $chore->choreID?>
-        <div id="title<?php echo $chore->choreID?>"><?php echo $chore->description?></div>
-        <div class="drop" id="drop<?php echo $chore->choreID?>" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <?php foreach ($users as $user): ?>
-                <?php if ($user['chore'] == $chore->choreID): ?>
-
-                    <div class="drag" draggable="true" ondragstart="drag(event)" id="drag<?php echo $user['inhabitantID'];?>">
-                        <img class="img" src="<?php echo $user['location'];?>"  width="88" height="31">
-                        <p><?php echo $user['firstname'];?>, <?php echo $user['lastname'];?></p>
-                    </div>
-
-
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-
-    <div id="removeChoresModal" >
-        <div>
+        <div class="row chores-row">
             <?php foreach ($chores as $chore): ?>
-                <?php if ($chore->choreID!=1): ?>
-                    <div>
-                        <button id="<?php echo $chore->choreID?>" class="open-button" onclick="removeChore(this.id)">Remove <?php echo $chore->description?> </button>
+            
+                <div class="card chores-chore-card">
+                    <h3 class="main-title chores-chore-title" id="title<?php echo $chore->choreID?>"><?php echo $chore->description?></h3>
+                    
+                    <!-- REMOVE BUTTON -->
+                    <?php if(session()->get('role') !='inhabitant'): ?>
+                        <?php if ($chore->choreID!=1): ?>
+                                <div class="chores-chore-remove-container">
+                                    <button class="chores-chore-remove-btn" id="<?php echo $chore->choreID?>" class="open-button" onclick="removeChore(this.id)">
+                                        <img src="/assets/images/tasks_page/trash.svg" class="chores-chore-remove-svg" alt="trash image">
+                                    </button>
+                                </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
+
+                    <!-- DRAG & DROP AREA -->
+                    <div class="row chores-drop-area" id="drop<?php echo $chore->choreID?>" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+                        <?php foreach ($users as $user): ?>
+                            <?php if($user['chore'] == $chore->choreID): ?>
+
+                                <?php if(session()->get('role') !='inhabitant'): ?>
+                                    <div class="col chores-inhabitant" draggable="true" ondragstart="drag(event)" id="drag<?php echo $user['inhabitantID'];?>">
+                                <?php else: ?>
+                                    <div class="col chores-inhabitant">
+                                <?php endif; ?>
+                                
+                                    <img class="card-img-top chores-inhabitant-img" src="<?php echo $user['location'];?>">
+                                    <p><?php echo $user['firstname'];?> <?php echo $user['lastname'];?></p>
+                                </div>
+
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-    </div>
 
-    <div id="addChoreModal" >
-        <div>
-            <label for="NewChoreTitle"><b>Title</b></label>
-            <input type="text" class="form-control" placeholder="Enter title" id="NewChoreTitle" required>
-            <button type="submit" class="btn" onclick="addChore()">Create</button>
+                </div>
+
+            <?php endforeach; ?>
+            
+            <!-- NEW CHORE -->
+            <?php if(session()->get('role') !='inhabitant'): ?>
+                <div class="card chores-chore-card chores-new-chore">
+                    <h3 class="main-title chores-chore-title">New Chore</h3>
+
+                    <div class="col-12 chores-inputs">
+                        <h1><b>Title: </b>
+                            <input type="text" id="NewChoreTitle" class="form-control main-input chores-inputs-input" placeholder="add chore title" required>
+                        </h1>
+
+                        <h1>
+                            <button class="form-control chores-btn chores-add-btn" type="edit" onclick="addChore()">
+                                <img src="/assets/images/tasks_page/add.svg" class="chores-btn-svg" alt="edit image">
+                            </button>
+                        </h1>
+                    </div>
+                </div>
+            <?php endif; ?>
+
         </div>
+
+
     </div>
+</div>
+
+
 <?php if(session()->get('role')=='inhabitant'){} else {?>
     <script>
         function allowDrop(ev) {
