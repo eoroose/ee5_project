@@ -173,7 +173,7 @@
                 <div class="col-12 inhabitant-col">
                     <h2><b>Peetouder: </b>
                         <span id="<?php echo "firstnameGodp".$g->godparentID?>"><?php echo $g->firstname; ?> </span>
-                        <span id="<?php echo "lastnameGodp".$g->godparentID?>"><?php echo $i->lastname; ?> </span>
+                        <span id="<?php echo "lastnameGodp".$g->godparentID?>"><?php echo $g->lastname; ?> </span>
 
                         <form id="<?php echo "godparentForm".$g->godparentID?>" style="display:none">
                             
