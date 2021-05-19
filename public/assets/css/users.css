@@ -30,6 +30,7 @@
 .users-card-title {
     font-size: 3em;
     text-align: center;
+    color: black;
 }
 
 .users-card-row {
@@ -49,19 +50,16 @@
 .users-inhabitant-card {
     min-width: var(--user-card-min-width);
     margin-bottom: var(--users-card-margin-bottom);
-    /* height: calc(var(--modal-img-size) + 15px); */
     border: var(--modal-card-border-width) solid var(--purple);
     border-radius: var(--modal-card-border-radius);
     position: relative;
     z-index: 1;
     cursor: pointer;
     transition: border var(--modal-animation-duration) ease-in-out;
-    /* white-space: nowrap; */
     text-align: center;
 }
 
 .users-inhabitant-card p {
-    /* font-weight: bold; */
     color: var(--black);
     transition: color var(--modal-animation-duration) ease-in-out;
     text-align: center;
