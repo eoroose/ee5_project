@@ -26,17 +26,17 @@
         <div class="row profile-row card main-card">
             <!-- USERNAME -->
             <div class="col-12 card profile-col">
-                <h1><b>username: </b> <?php echo $user['username']?> </h1>
+                <h1><b>gebruikersnaam: </b> <?php echo $user['username']?> </h1>
             </div>
 
             <!-- BIRTHDAY -->
             <div class="col-12 card profile-col">
-                <h1><b>birthday: </b> <?php echo $user['birthday']?> </h1>
+                <h1><b>verjaardag: </b> <?php echo $user['birthday']?> </h1>
             </div>
 
             <!-- CHANGE PASSWORD -->
             <div class="col-12 card profile-col">
-                <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">change password</button>
+                <button type="button" class="main-btn profile-password-btn" onclick="showCangePasword()" id="changeP">verander wachtwoord</button>
                 <?php if (isset($validation)): ?>
                     <div class="main-alert-message">
                         <div class="alert alert-danger" role="alert">
@@ -47,10 +47,10 @@
 
                 <div id="otherFieldDiv" style="display: none">
                     <form class="" action="/changePassword" method="post">
-                        <input type="password" class="form-control main-input profile-input" name="old-password" id="old-password" value="" placeholder="old password">
-                        <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="new password">
-                        <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="confirm password">
-                        <button type="submit" class="main-btn profile-password-btn">change password</button>
+                        <input type="password" class="form-control main-input profile-input" name="old-password" id="old-password" value="" placeholder="oud wachtwoord">
+                        <input type="password" class="form-control main-input profile-input" name="new-password" id="new-password" value="" placeholder="nieuw wachtwoord">
+                        <input type="password" class="form-control main-input profile-input" name="confirm-password" id="confirm-password" value="" placeholder="bevestig nieuw wachtwoord">
+                        <button type="submit" class="main-btn profile-password-btn">verander wachtwoord</button>
                     </form>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
                 <?php if($godchilds==null) { ?>
                     <div class="col-12 card profile-col profile-col-godchildren">
-                        <h1>none</h1>
+                        <h1>geen</h1>
                     </div>
                 <?php } else { foreach ($godchilds as $childs) { ?>
                     <div class="col-12 card profile-col profile-col-godchildren">
@@ -83,13 +83,13 @@
             <div class="row profile-row card main-card">
                 <!-- APPOINTMENTS -->
                 <div class="col-12 card profile-col profile-col-appointment-title">
-                    <h1><b>appointments:</b></h1>
+                    <h1><b>doktersafspraken:</b></h1>
                 </div>
 
                 <?php foreach ($appointments as $appoints) { ?>
                     <div class="col-12 card profile-col-appointment">
-                        <h1><b>date: </b> <?php echo $appoints['dateAppointment'] ?></h1>    
-                        <h1><b>doctor: </b> <?php echo $appoints['doctorFirstname'].' '.$appoints['doctorLasttname']; ?></h1>
+                        <h1><b>datum: </b> <?php echo $appoints['dateAppointment'] ?></h1>
+                        <h1><b>dokter: </b> <?php echo $appoints['doctorFirstname'].' '.$appoints['doctorLasttname']; ?></h1>
                         <h1><b>reden: </b> <?php echo $appoints['reason'] ?></h1>
                     </div>
                 <?php } ?>

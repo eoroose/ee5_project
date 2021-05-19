@@ -2,12 +2,12 @@
     <link href="/assets/css/users.css" rel="stylesheet" type="text/css" />
 
     <div class="container users-container main-bottom-padding">
-        <h3 class="main-title users-title">Inhabitants</h3>
+        <h3 class="main-title users-title">Bewoners</h3>
 
         <!-- INHABITANTS -->
         <?php if (!empty($activeinhabitants)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Active</h3>
+                <h3 class="main-title users-card-title">Actief</h3>
 
                 <div class="row users-card-row">
                     <?php foreach ($activeinhabitants as $user): ?>
@@ -25,7 +25,7 @@
         <!-- ARCHIVED INHABITANTS -->
         <?php if (!empty($archivedinhabitants)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Archived</h3>
+                <h3 class="main-title users-card-title">Gearchiveerd</h3>
 
                 <div class="row users-card-row">
                     <?php foreach ($archivedinhabitants as $user): ?>

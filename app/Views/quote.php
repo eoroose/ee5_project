@@ -3,11 +3,11 @@
 
     <div class="container quote-container">
         
-        <h3 class="main-title tasks-title">Quote of the day</h3>
+        <h3 class="main-title tasks-title">Quote van de dag</h3>
 
         <div class="row tasks-row main-bottom-padding">
             <div class="col-12 tasks-col">
-                <div class="card tasks-card-head tasks-card-head-phase">Date</div>
+                <div class="card tasks-card-head tasks-card-head-phase">Datum</div>
                 <div class="card tasks-card-head tasks-card-head-description">Quote</div>
                 <div class="card tasks-card-head tasks-card-head-edit"></div>
             </div>

@@ -2,12 +2,12 @@
     <link href="/assets/css/users.css" rel="stylesheet" type="text/css" />
 
     <div class="container users-container main-bottom-padding">
-        <h3 class="main-title users-title">Users</h3>
+        <h3 class="main-title users-title">Gebruikers</h3>
 
         <!-- INHABITANTS -->
         <?php if (!empty($activeinhabitants)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Inhabitants</h3>
+                <h3 class="main-title users-card-title">Bewoners</h3>
 
                 <div class="row users-card-row">
                     <?php foreach ($activeinhabitants as $user): ?>
@@ -25,7 +25,7 @@
         <!-- EMPLOYEES -->
         <?php if (!empty($activeemployees)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Employees</h3>
+                <h3 class="main-title users-card-title">Werknemers</h3>
                 
                 <div class="row users-card-row">
                     <?php foreach ($activeemployees as $user): ?>
@@ -45,7 +45,7 @@
         <!-- ARCHIVED INHABITANTS -->
         <?php if (!empty($archivedinhabitants)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Archived inhabitants</h3>
+                <h3 class="main-title users-card-title">Gearchiveerde bewoners</h3>
 
                 <div class="row users-card-row">
                     <?php foreach ($archivedinhabitants as $user): ?>
@@ -63,7 +63,7 @@
         <!-- ARCHIVED EMPLOYEES -->
         <?php if (!empty($archivedemployees)): ?>
             <div class="card users-card main-card">
-                <h3 class="main-title users-card-title">Archived employees</h3>
+                <h3 class="main-title users-card-title">Gearchiveerde werknemers</h3>
 
                 <div class="row users-card-row">
                     <?php foreach ($archivedemployees as $user): ?>
