@@ -114,16 +114,20 @@ class UsersController extends BaseController
            foreach ($resulttask as $tasks)
            {
                $percentage=0;
+               $tasks_completed=0;
                foreach ($resultProgress as $progress)
                {
                    if($tasks['PHASE']==$progress['PHASE'])
                    {
                        $percentage= round(($progress['Quantity']/$tasks['Quantity'])*100,2);
+                       $tasks_completed = $progress['Quantity'];
                 //       echo '<pre>'; echo  $percentage; echo '</pre>';
                    }
                }
                $a=array('phase'=>$tasks['PHASE']
-               ,'percentage'=>$percentage);
+               ,'percentage'=>$percentage
+               ,'tasks_completed'=>$tasks_completed
+               ,'tasks_total'=>$tasks['Quantity']);
                array_push($data,$a);
 
            }
@@ -294,10 +298,14 @@ class UsersController extends BaseController
                     $model->where('userId',$userID)->set('password',$this->request->getVar('new-password'))->update();
                     $session=session();
                     $session->setFlashdata('succes','Changed Password');
-                    return redirect()->to('/UsersController/index');
+                    return redirect()->to('/users/inhabitant/$userID');
+
             }
         }
+
+
     }
+
 
     public function setChore()
     {
@@ -368,10 +376,11 @@ class UsersController extends BaseController
             $date = $_POST['date'];
             $reason = $_POST['reason'];
             $isActive = $_POST['isActive'];
+            $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
         }
         else {
         }
-        $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
+
     }
 
     public function setGodparent()
@@ -383,6 +392,17 @@ class UsersController extends BaseController
         else {
         }
         $this->inhabitantModel->set_godparent($id, $godparentID);
+    }
+
+    public function setGender()
+    {
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $gender = $_POST['gender'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_gender($id, $gender);
     }
 
     public function setNote()

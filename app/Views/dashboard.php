@@ -11,7 +11,7 @@
         
         <div class="dashboard-greetings-container">
             
-            <h1 class="main-title dashboard-greetings">Hello, <?=session()->get('firstname')?> <?=session()->get('lastname')?></h1>
+            <h1 class="main-title dashboard-greetings">Hallo, <?=session()->get('firstname')?> <?=session()->get('lastname')?></h1>
 
             <?php if(session()->get('role')=='inhabitant'): ?>
                 <?php if($yellowCard==1){ ?>
@@ -46,7 +46,7 @@
             <?php endif; ?>
 
                 <div class="card-body dashboard-quote-card-body">
-                    <h5 class="card-title main-title dashboard-quote-of-the-day">Quote of the day</h5>
+                    <h5 class="card-title main-title dashboard-quote-of-the-day">Quote van de dag</h5>
                     <p class="dashboard-quote-text"><?php echo $quote;?></p>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                     <table id="productSizes" class="table">
                         <thead>
                             <tr>
-                                <th>Start hour</th>
-                                <th>Activity</th>
+                                <th>Startuur</th>
+                                <th>Activiteit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +77,7 @@
 
                     <?php if(session()->get('role')=='inhabitant'){if($apointment==null) {
                     } else { ?>
-                        <h5 class="card-title dashboard-card-title" style="text-align: center">Doctors Apointment today at <?php echo $apointment['time']?></h5>
+                        <h5 class="card-title dashboard-card-title" style="text-align: center">Doktersafspraak vandaag om <?php echo $apointment['time']?></h5>
                     <?php }} ?>
 
                 </div>  
@@ -94,7 +94,7 @@
                 <div class="col-md card dashboard-card-animation">
                     <img src="/assets/images/dashboard_page/user.svg" class="card-img-top dashboard-card-logo" alt="user image">
                     <div class="card-body dashboard-card-body">
-                        <h5 class="card-title dashboard-card-title"style="text-align: center">Profile</h5>
+                        <h5 class="card-title dashboard-card-title"style="text-align: center">Profiel</h5>
                         <a href="/profile" class="stretched-link"></a>
                     </div>
                 </div>
@@ -105,19 +105,19 @@
                     <?php if(session()->get('role')=='admin'): ?>
                         <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title" style="text-align: center">Users</h5>
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Gebruikers</h5>
                             <a href="/users" class="stretched-link"></a>
                         </div>
                     <?php elseif(session()->get('role')=='employee'): ?>
                         <img src="/assets/images/dashboard_page/users.svg" class="card-img-top dashboard-card-logo" alt="users image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title" style="text-align: center">Inhabitants</h5>
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Bewoners</h5>
                             <a href="/inhabitants" class="stretched-link"></a>
                         </div>
                     <?php else:?>
                         <img src="/assets/images/dashboard_page/journal.svg" class="card-img-top dashboard-card-logo" alt="journal image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title" style="text-align: center">Journal</h5>
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Dagboek</h5>
                             <a href="/journal" class="stretched-link"></a>
                         </div>
                     <?php endif; ?>
@@ -130,7 +130,7 @@
                     <div class="col card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="sweeping image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title" style="text-align: center">Chores</h5>
+                            <h5 class="card-title dashboard-card-title" style="text-align: center">Klusjes</h5>
                             <a href="/chore" class="stretched-link"></a>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/clipboard.svg" class="card-img-top dashboard-card-logo" alt="clipboard image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Tasks</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Taken</h5>
                             <a href="/tasks" class="stretched-link"></a>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/development.svg" class="card-img-top dashboard-card-logo" alt="development image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Note progress</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Vooruitgang</h5>
                             <a href="/note-progress" class="stretched-link"></a>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/sweeping.svg" class="card-img-top dashboard-card-logo" alt="sweeping image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Chores</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Klusjes</h5>
                             <a href="/chore" class="stretched-link"></a>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/party.svg" class="card-img-top dashboard-card-logo" alt="party image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Celebration</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Feest</h5>
                             <a href="/celebration" class="stretched-link"></a>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-card-logo" alt="verify image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Register</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Registreer</h5>
                             <a href="/register" class="stretched-link"></a>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/stethoscope.svg" class="card-img-top dashboard-card-logo" alt="stethoscope image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Doctors</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Dokters</h5>
                             <a href="/doctors" class="stretched-link"></a>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                     <div class="col card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/stethoscope.svg" class="card-img-top dashboard-card-logo" alt="stethoscope image">
                         <div class="card-body dashboard-card-body">
-                            <h5 class="card-title dashboard-card-title"style="text-align: center">Doctors</h5>
+                            <h5 class="card-title dashboard-card-title"style="text-align: center">Dokters</h5>
                             <a href="/doctors" class="stretched-link"></a>
                         </div>
                     </div>
@@ -233,14 +233,14 @@
                 <div class="row dashboard-row main-bottom-padding">
 
                     <div class="card dashboard-card-animation dashboard-progress-container">
-                        <h4 class="card-title dashboard-card-title dashboard-card-title-top">Progress</h4>
+                        <h4 class="card-title dashboard-card-title dashboard-card-title-top">Vooruitgang</h4>
                         <a href="/progress" class="stretched-link"></a>
                         <?php foreach ($progress as $row){?>
                             <div class="row dashboard-progress-row">
                                 <div class="card dashboard-progress-card">
                                     <div class="card-body dashboard-progress-card-body">
                                         <h5 class="dashboard-progress-card-text">
-                                            Phase <?php echo $row['phase']?>
+                                            Phase <?php echo $row['phase']?> (<?php echo $row['tasks_completed']?>/<?php echo $row['tasks_total']?>)
                                         </h5>
                                         <div class="progress rounded-pill dashboard-progress-rounded-pill">
                                             <div role="progressbar" aria-valuenow="<?php echo $row['percentage']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $row['percentage']?>%" class="progress-bar rounded-pill dashboard-progress-percentage">

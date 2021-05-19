@@ -188,17 +188,21 @@ class Dashboard extends BaseController
         foreach ($resulttask as $tasks)
         {
             $percentage=0;
+            $tasks_completed=0;
             foreach ($resultProgress as $progress)
             {
                 if($tasks['PHASE']==$progress['PHASE'])
                 {
                     $percentage= round(($progress['Quantity']/$tasks['Quantity'])*100,2);
+                    $tasks_completed=$progress['Quantity'];
              //       echo '<pre>'; echo  $percentage; echo '</pre>';
                 }
             }
             $a=array('phase'=>$tasks['PHASE']
-            ,'percentage'=>$percentage);
-            array_push($data,$a);
+               ,'percentage'=>$percentage
+               ,'tasks_completed'=>$tasks_completed
+               ,'tasks_total'=>$tasks['Quantity']);
+               array_push($data,$a);
 
         }
         //echo '<pre>'; print_r($data); echo '</pre>';

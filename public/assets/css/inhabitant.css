@@ -1,0 +1,611 @@
+.inhabitant-container {
+    margin-top: 30px;
+
+    --inhabitant-avatar-size: 250px;
+    --inhabitant-margin-top: 15px;
+    --inhabitant-row-margin-bottom: 20px;
+    --inhabitant-avatar-border-width: 7px;
+
+    --inhabitant-animation-duration: 200ms;
+}
+
+.inhabitant-row {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-bottom: var(--inhabitant-row-margin-bottom);
+    min-height: 100px;
+}
+
+.inhabitant-avatar-col {
+    margin-left: auto;
+    margin-right: auto;
+    height: var(--inhabitant-avatar-size);
+    width: var(--inhabitant-avatar-size);
+    position: relative;
+    border-radius: calc(var(--inhabitant-avatar-size) / 2);
+    border: none;
+    margin-top: var(--inhabitant-margin-top);
+}
+
+.inhabitant-avatar-col img {
+    height: var(--inhabitant-avatar-size);
+    width: var(--inhabitant-avatar-size);
+    align-self: center;
+    border: var(--inhabitant-avatar-border-width) solid var(--purple);
+    border-radius: calc(var(--inhabitant-avatar-size) / 2);
+}
+
+
+
+
+.inhabitant-col {
+    --inhabitant-col-margins: 5px;
+    margin-top: var(--inhabitant-margin-top);
+    border: none;
+    width: 95%;
+    display: flex;
+    margin-top: var(--inhabitant-col-margins);
+    margin-bottom: var(--inhabitant-col-margins);
+}
+
+.inhabitant-col h2 {
+    margin-right: 0.5em;
+}
+
+.inhabitant-col h2 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--purple);
+}
+
+
+
+.inhabitant-edit-save-container {
+    --inhabitant-button-svg-size: 40px;
+    --inhabitant-button-size: 60px;
+    --inhabitant-btn-margins: 15%;
+    --inhabitant-btn-border-radius: 15px;
+}
+
+.inhabitant-btn-edit-save {
+    width:  var(--inhabitant-button-size);
+    height: var(--inhabitant-button-size);
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 5px;
+    background: none;
+}
+
+.btn-smaller {
+    width: calc(var(--inhabitant-button-size) - 10px);
+    height: calc(var(--inhabitant-button-size) - 10px);
+}
+
+.inhabitant-btn-edit-save::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--inhabitant-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.inhabitant-btn-edit-save:hover::before,
+.inhabitant-btn-edit-save:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.inhabitant-btn-svg {
+    width: var(--inhabitant-button-svg-size);
+    filter: brightness(0) invert(1);
+    transition: filter var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.svg-smaller {
+    width: calc(var(--inhabitant-button-svg-size) - 10px);
+}
+
+.inhabitant-col:hover .inhabitant-btn-svg,
+.inhabitant-col:focus .inhabitant-btn-svg {
+    filter: brightness(1) invert(0);
+}
+
+.inhabitant-btn-edit-save:hover .inhabitant-btn-svg,
+.inhabitant-btn-edit-save:focus .inhabitant-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+
+
+.inhabitant-password-btn {
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 90%;
+    max-width: var(--button-max-width);
+}
+
+.inhabitant-password-input {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 10px;
+    width: 90%;
+    max-width: var(--button-max-width);
+    height: var(--button-height);
+}
+
+.inhabitant-archive-btn {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 90%;
+    max-width: var(--button-max-width);
+}
+
+.inhabitant-alert-message {
+    width: 90%;
+}
+
+
+.inhabitant-appointment-title {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 4em;
+    color: var(--purple);
+    text-align: center;
+    border: none;
+    background: none;
+    margin-bottom: -10px;
+}
+
+.inhabitant-appointment {
+    text-align: center;
+    margin-top: 10px;
+    border: none;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+    position: relative;
+}
+
+.inhabitant-appointment h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.inhabitant-appointment h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.inhabitant-yellowcard h1 {
+    margin-bottom: 5px;
+}
+
+.inhabitant-yellowcard-edit-btn {
+    margin-top: -20px;
+}
+
+
+
+.inhabitant-yellowcard-display {
+    width: 100px;
+    height: 40px;
+    border: 3px solid green;
+    border-radius: var(--modal-button-radius);
+    color: green;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--modal-animation-duration) ease-in-out, border-color var(--modal-animation-duration) ease-in-out;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+.inhabitant-yellowcard-display:hover,
+.inhabitant-yellowcard-display:focus {
+    border-color: white;
+    color: white;
+}
+
+.inhabitant-yellowcard-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--modal-button-radius);
+
+    transition: transform var(--modal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.inhabitant-yellowcard-display:hover::before,
+.inhabitant-yellowcard-display:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+
+.inhabitant-yellowcard-delete {
+    width: 100px;
+    height: 40px;
+    border: 3px solid red;
+    border-radius: var(--modal-button-radius);
+    color: red;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--modal-animation-duration) ease-in-out, border-color var(--modal-animation-duration) ease-in-out;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 15px;
+}
+
+.inhabitant-yellowcard-delete:hover,
+.inhabitant-yellowcard-delete:focus {
+    border-color: white;
+    color: white;
+}
+
+.inhabitant-yellowcard-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--modal-button-radius);
+
+    transition: transform var(--modal-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.inhabitant-yellowcard-delete:hover::before,
+.inhabitant-yellowcard-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.inhabitant-input {
+    position: relative;
+    border-radius: 10px;
+    max-width: none;
+    min-width: none;
+    width: 100%;
+    
+}
+
+
+
+
+
+
+.inhabitant-progress-row {
+
+}
+
+.inhabitant-progress-card {
+    background: none;
+    border: none;
+    margin-bottom: -10px;
+}
+
+.inhabitant-progress-card-body {
+    display: flex;
+    align-content: center;
+    color: var(--purple);
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.inhabitant-progress-rounded-pill {
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    background-color: lightgray;
+}
+
+
+.inhabitant-progress-percentage {
+    background-color: var(--purple);
+    color: white;
+}
+
+
+
+
+.inhabitant-back-arrow {
+    --arrow-size: 50px;
+    --arrow-animation: 300ms;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    background: none;
+    border: none;
+}
+
+.inhabitant-back-arrow img {
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    transition: transform var(--arrow-animation) ease-in-out;
+}
+
+.inhabitant-back-arrow:hover img,
+.inhabitant-back-arrow:focus img {
+    transform: rotate(-360deg);
+}
+
+
+/* NOTES */
+
+.inhabitant-notes-container {
+    --inhabitant-note-border-radius: 15px;
+    --inhabitant-note-btn-border-radius: 15px;
+
+    --inhabitant-note-button-svg-size: 40px;
+    --inhabitant-note-button-size: 60px;
+
+    --inputs-top-bottom-margins: 10px;
+}
+
+
+.doctor-prof-col-appointment {
+    margin-top: var(--profile-margin-top);
+    /* border: none; */
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+    position: relative;
+    border: 2px solid white;
+    border-radius: var(--inhabitant-note-border-radius);
+    display: flex;
+    /* position: relative; */
+    padding-bottom: 10px;
+}
+
+.doctor-prof-col-appointment:hover,
+.doctor-prof-col-appointment:focus {
+    border: 2px solid var(--purple);
+    transition: border var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.appointment-text {
+    flex: 1;
+    /* margin-right: 2em; */
+}
+
+.doctor-prof-col-appointment h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.doctor-prof-col-appointment h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-btns {
+    /* margin-top: 5px; */
+    align-content: center;
+}
+
+.doctor-prof-btn-svg {
+    width: var(--inhabitant-note-button-svg-size);
+    filter: brightness(0) invert(1);
+    transition: filter var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.doctor-prof-btn-edit-save {
+    width:  var(--inhabitant-note-button-size);
+    height: var(--inhabitant-note-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    background: none;
+}
+
+.doctor-prof-btn-edit-save::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: green;
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-edit-save:hover::before,
+.doctor-prof-btn-edit-save:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+
+.doctor-prof-btn-delete {
+    width:  var(--inhabitant-note-button-size);
+    height: var(--inhabitant-note-button-size);
+    align-items: center;
+    justify-items: center;
+    border:none;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    background: none;
+}
+
+.doctor-prof-btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: red;
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.doctor-prof-btn-delete:hover::before,
+.doctor-prof-btn-delete:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.doctor-prof-col-appointment:hover .doctor-prof-btn-svg,
+.doctor-prof-col-appointment:focus .doctor-prof-btn-svg {
+    filter: brightness(1) invert(0);
+}
+
+.doctor-prof-btn-edit-save:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-edit-save:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.doctor-prof-btn-delete:hover .doctor-prof-btn-svg,
+.doctor-prof-btn-delete:focus .doctor-prof-btn-svg {
+    filter: brightness(0) invert(1);
+}
+
+.appointment-inputs-input {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    flex: 1;
+    border-radius: var(--inhabitant-note-border-radius);
+    width: 90%;
+}
+
+
+
+
+/* NEW NOTE */
+.appointment-inputs {
+    display: block;
+    width: 95%;
+    position: relative;
+
+    margin-top: var(--profile-margin-top);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    align-content: center;
+}
+
+.appointment-inputs h1 {
+    font-size: 1.5em;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    display: flex;
+    color: black;
+}
+
+.appointment-inputs h1 b {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.appointment-inhabitant-btn {
+    height: 40px;
+    margin-top: var(--inputs-top-bottom-margins);
+    margin-bottom: var(--inputs-top-bottom-margins);
+    margin-left: 10px;
+    max-width: none;
+    flex: 1;
+    color: var(--purple);
+    border-color: var(--purple);
+    border-radius: var(--inhabitant-note-btn-border-radius);
+    border-width: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: border-color var(--inhabitant-animation-duration) ease-in-out, color var(--inhabitant-animation-duration) ease-in-out;
+    width: 90%;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn:hover,
+.appointment-inhabitant-btn:focus {
+    border-color: white;
+    color: white;
+    box-shadow: none;
+}
+
+.appointment-inhabitant-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--purple);
+    border-radius: var(--inhabitant-note-btn-border-radius);
+
+    transition: transform var(--inhabitant-animation-duration) ease-in-out;
+    transform: scaleX(0) scaleY(0);
+}
+
+.appointment-inhabitant-btn:hover::before,
+.appointment-inhabitant-btn:focus::before {
+    transform: scaleX(1) scaleY(1);
+}
+
+.appointment-add-btn {
+    height: 50px;
+    border-width: 4px;
+}
+
+.appointment-btn-svg {
+    width: 25px;
+    transition: filter var(--inhabitant-animation-duration) ease-in-out;
+}
+
+.appointment-add-btn:hover .appointment-btn-svg,
+.appointment-add-btn:focus .appointment-btn-svg {
+    filter: brightness(0) invert(1);
+}

@@ -241,6 +241,12 @@ class inhabitantModel2
         $query = $this->db->query($query_text, ['id' => $id, 'godparentID' => $godparentID]);
     }
 
+    public function set_gender($id, $gender)
+    {
+        $query_text = "UPDATE user SET gender = :gender: WHERE userID = :id:";
+        $query = $this->db->query($query_text, ['id' => $id, 'gender' => $gender]);
+    }
+
     public function set_note($noteid, $title, $description)
     {
         $query_text = "UPDATE note SET title =:title:, description = :description:

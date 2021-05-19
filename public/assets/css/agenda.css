@@ -1,40 +1,110 @@
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+.agenda-container {
+    --agenda-btns-top-bottom-margins: 15px;
+    --agenda-btn-side-margins: 10px;
+    --agenda-btn-width: 200px;
+    --agenda-btn-height: 40px;
+}
+
+.agenda-row {
 
 }
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+.agenda-btns {
+    /* display: flex; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    margin-top: var(--agenda-btns-top-bottom-margins);
+    margin-bottom: 0px;
+    background: none;
+    border: none;
 }
 
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+.agenda-btns button {
+    width: var(--agenda-btn-width);
+    height: var(--agenda-btn-height);
+    margin-left: var(--agenda-btn-side-margins);
+    margin-right: var(--agenda-btn-side-margins);
+}
+
+.agenda-calendar {
+    background: none;
+    border: none;
+}
+
+/* MODAL */
+
+.agenda-modal-content {
+    position: absolute;
+    width: var(--modal-card-width);
+    max-width: var(--modal-card-max-width);
+    
+    top: var(--modal-card-top);
+    left: calc((100% - var(--modal-card-width)) / 2);
+    padding-top: 10px;
+    text-align: center;
+    animation: 500ms ease-in 0s 1 login-alert-popup;
+
+    max-height: 90%;
+}
+
+.agenda-modal-content h4 {
+    font-family: "freestyle script regular";
+    color: var(--purple);
+    font-size: 3em;
     font-weight: bold;
 }
 
+.agenda-modal-label {
+    margin-top: 15px;
+}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.agenda-input {
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    width: 95%;
+}
+
+.agenda-modal-btns {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.agenda-modal-btns button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.agenda-modal-color {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.agenda-modal-checkboxes {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+}
+
+.agenda-modal-checkboxes div {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.agenda-modal-checkboxes div label {
+    margin-top: -8px;
+    margin-right: 5px;
+}
+
+.agenda-calendar-inhabitant {
+    margin-top: 40px;
 }
 

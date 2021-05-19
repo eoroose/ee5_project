@@ -1,86 +1,84 @@
 <div>
-    <h1>users page</h1>
+    <link href="/assets/css/users.css" rel="stylesheet" type="text/css" />
 
-    <?php if (!empty($activeinhabitants)): ?>
-    <h2> List of active inhabitants </h2>
-        <table>
-                <tr>
-                    <th>Avatar</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </tr>
+    <div class="container users-container main-bottom-padding">
+        <h3 class="main-title users-title">Gebruikers</h3>
 
-            <?php foreach ($activeinhabitants as $i): ?>
-                <tr onclick="window.location.href='users/inhabitant/<?php echo $i->userID; ?>';">
-                    <td><img src="<?php echo $i->location;?>"></td>
-                    <td><?php echo $i->firstname;?></td>
-                    <td><?php echo $i->lastname;?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+        <!-- INHABITANTS -->
+        <?php if (!empty($activeinhabitants)): ?>
+            <div class="card users-card main-card">
+                <h3 class="main-title users-card-title">Bewoners</h3>
 
-    <?php if (!empty($archivedinhabitants)): ?>
-    <h2> List of archived inhabitants </h2>
-        <table>
-                <tr>
-                    <th>Avatar</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </tr>
+                <div class="row users-card-row">
+                    <?php foreach ($activeinhabitants as $user): ?>
+                        <div class="col-sm card users-inhabitant-card">
+                            <img src="<?php echo base_url($user->location);?>" class="card-img-top users-inhabitant-card-img" alt="user image">
+                            <p><?php echo $user->firstname?> <?php echo $user->lastname?></p>
+                            <a onclick="window.location.href='users/inhabitant/<?php echo $user->userID; ?>';" class="stretched-link" ></a>
+                        </div>
+                        <div class="col-sm card users-inhabitant-card-separator"></div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <!-- EMPLOYEES -->
+        <?php if (!empty($activeemployees)): ?>
+            <div class="card users-card main-card">
+                <h3 class="main-title users-card-title">Werknemers</h3>
+                
+                <div class="row users-card-row">
+                    <?php foreach ($activeemployees as $user): ?>
+                        <?php if($user->employeeAdminID != NULL): ?>
+                            <div class="col-sm card users-inhabitant-card">
+                                <img src="<?php echo base_url($user->location);?>" class="card-img-top users-inhabitant-card-img" alt="user image">
+                                <p><?php echo $user->firstname?> <?php echo $user->lastname?></p>
+                                <a onclick="window.location.href='users/employee/<?php echo $user->userID; ?>';" class="stretched-link" ></a>
+                            </div>
+                            <div class="col-sm card users-inhabitant-card-separator"></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
 
-            <?php foreach ($archivedinhabitants as $i): ?>
-                <tr onclick="window.location.href='users/inhabitant/<?php echo $i->userID; ?>';">
-                    <td><img src="<?php echo $i->location;?>"></td>
-                    <td><?php echo $i->firstname;?></td>
-                    <td><?php echo $i->lastname;?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+        <!-- ARCHIVED INHABITANTS -->
+        <?php if (!empty($archivedinhabitants)): ?>
+            <div class="card users-card main-card">
+                <h3 class="main-title users-card-title">Gearchiveerde bewoners</h3>
 
-    <?php if (!empty($activeemployees)): ?>
-    <h2> List of active employees </h2>
-        <table>
-                    <tr>
-                        <th>Avatar</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                    </tr>
+                <div class="row users-card-row">
+                    <?php foreach ($archivedinhabitants as $user): ?>
+                        <div class="col-sm card users-inhabitant-card users-archived-card">
+                            <img src="<?php echo base_url($user->location);?>" class="card-img-top users-inhabitant-card-img" alt="user image">
+                            <p><?php echo $user->firstname?> <?php echo $user->lastname?></p>
+                            <a onclick="window.location.href='users/inhabitant/<?php echo $user->userID; ?>';" class="stretched-link" ></a>
+                        </div>
+                        <div class="col-sm card users-inhabitant-card-separator"></div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <!-- ARCHIVED EMPLOYEES -->
+        <?php if (!empty($archivedemployees)): ?>
+            <div class="card users-card main-card">
+                <h3 class="main-title users-card-title">Gearchiveerde werknemers</h3>
 
-            <?php foreach ($activeemployees as $u): ?>
-                <?php if($u->employeeAdminID == NULL): ?>
-                <?php else: ?>
-                    <tr onclick="window.location.href='users/employee/<?php echo $u->userID; ?>';">
-                        <td><img src="<?php echo $u->location;?>"></td>
-                        <td><?php echo $u->firstname;?></td>
-                        <td><?php echo $u->lastname;?></td>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+                <div class="row users-card-row">
+                    <?php foreach ($archivedemployees as $user): ?>
+                        <?php if($user->employeeAdminID != NULL): ?>
+                            <div class="col-sm card users-inhabitant-card users-archived-card">
+                                <img src="<?php echo base_url($user->location);?>" class="card-img-top users-inhabitant-card-img" alt="user image">
+                                <p><?php echo $user->firstname?> <?php echo $user->lastname?></p>
+                                <a onclick="window.location.href='users/employee/<?php echo $user->userID; ?>';" class="stretched-link" ></a>
+                            </div>
+                            <div class="col-sm card users-inhabitant-card-separator"></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
 
-    <?php if (!empty($archivedemployees)): ?>
-    <h2> List of archived employees </h2>
-        <table>
-                    <tr>
-                        <th>Avatar</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                    </tr>
-
-            <?php foreach ($archivedemployees as $u): ?>
-                <?php if($u->employeeAdminID == NULL): ?>
-                <?php else: ?>
-                    <tr onclick="window.location.href='users/employee/<?php echo $u->userID; ?>';">
-                        <td><img src="<?php echo $u->location;?>"></td>
-                        <td><?php echo $u->firstname;?></td>
-                        <td><?php echo $u->lastname;?></td>
-                    </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
-
+    </div>
 </div>
