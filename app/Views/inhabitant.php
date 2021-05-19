@@ -227,6 +227,14 @@
                             </div>
                         <?php endif; ?>
 
+                                                <?php if (isset($alert)): ?>
+                                                    <div class="main-alert-message inhabitant-alert-message">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            <?= $alert ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+
                         <div id="otherFieldDiv" style="display: none">
                             <form class="" action="/UsersController/changePassword" method="post">
                                 <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
@@ -281,14 +289,21 @@
 
                         <div id="<?php echo "cardActive".$c->yellowCardID?>"></div>
 
+                        <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
+                            <button class="main-btn inhabitant-archive-btn" type="edit" id="editcard" onclick="edit_card('<?php echo $c->yellowCardID?>')"> wijzig </button>
+                        </div>
+
                     <?php else: ?>
                         <h1><b>Geen gele kaart toegewezen</b>
+
+                        <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
+                            <button class="main-btn inhabitant-archive-btn" type="edit" id="editcard" onclick="assign_card('<?php echo $c->yellowCardID?>')"> gele kaart toewijzen </button>
+                        </div>
+
                     <?php endif; ?>
                 </div>
                 
-                <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
-                    <button class="main-btn inhabitant-archive-btn" type="edit" id="<?php echo "edit".$c->yellowCardID?>" onclick="edit_card('<?php echo $c->yellowCardID?>')"> wijzig </button>
-                </div>
+
  
             </div>
         <?php endforeach; ?>
@@ -737,8 +752,7 @@
 
         function edit_card(no)
         {
-            document.getElementById("edit"+no).style.display="none";
-            document.getElementById("save"+no).style.display="block";
+            document.getElementById("editcard").style.display="none";
 
             var cardDate=document.getElementById("cardDate"+no);
             var cardReason=document.getElementById("cardReason"+no);
@@ -759,8 +773,8 @@
             //                      '<label for="NO">Delete card</label></form>';
 
             cardActive.innerHTML=   '<form id="cardActive_text">'+
-                                        '<button class="inhabitant-yellowcard-display" type="submit" id="YES "value="YES" name="cardActive">Display</button>'+
-                                        '<button class="inhabitant-yellowcard-delete" type="submit" id="NO "value="NO" name="cardActive">Delete</button>'+
+                                        '<button class="inhabitant-yellowcard-display" type="submit" id="1" value="1" name="cardActive">Display</button>'+
+                                        '<button class="inhabitant-yellowcard-delete" type="submit" id="0" value="0" name="cardActive">Delete</button>'+
                                     '</form>'
         }
 
@@ -784,13 +798,7 @@
             document.getElementById("cardReason"+no).innerHTML=cardReason_val;
             document.getElementById("cardActive"+no).innerHTML=cardActive_val;
 
-            if(cardActive_val == 'YES')
-                { cardActive_val = 1; }
-            else
-                { cardActive_val = 0; }
-
-            document.getElementById("edit"+no).style.display="block";
-            document.getElementById("save"+no).style.display="none";
+            document.getElementById("cardedit").style.display="block";
 
             $.post('/UsersController/setCard', {cardid:no, date:cardDate_val, reason:cardReason_val, isActive:cardActive_val})
         }
