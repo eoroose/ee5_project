@@ -298,10 +298,14 @@ class UsersController extends BaseController
                     $model->where('userId',$userID)->set('password',$this->request->getVar('new-password'))->update();
                     $session=session();
                     $session->setFlashdata('succes','Changed Password');
-                    return redirect()->to('/UsersController/index');
+                    return redirect()->to('/users/inhabitant/$userID');
+
             }
         }
+
+
     }
+
 
     public function setChore()
     {
@@ -372,10 +376,11 @@ class UsersController extends BaseController
             $date = $_POST['date'];
             $reason = $_POST['reason'];
             $isActive = $_POST['isActive'];
+            $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
         }
         else {
         }
-        $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
+
     }
 
     public function setGodparent()
@@ -387,6 +392,17 @@ class UsersController extends BaseController
         else {
         }
         $this->inhabitantModel->set_godparent($id, $godparentID);
+    }
+
+    public function setGender()
+    {
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $gender = $_POST['gender'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_gender($id, $gender);
     }
 
     public function setNote()
