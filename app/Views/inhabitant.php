@@ -26,9 +26,9 @@
             <?php foreach ($isActive as $iA): ?>
                 <div class="col-12 card inhabitant-col">
                     <?php if($iA->isActive == 1): ?>
-                        <button class="main-btn inhabitant-archive-btn" onclick="archive_user()"> Archiveer bewoner </button>
+                        <button class="main-btn inhabitant-archive-btn" onclick="archive_user()"> archiveer bewoner </button>
                     <?php elseif($iA->isActive == 0): ?>
-                        <button class="main-btn inhabitant-archive-btn" onclick="dearchive_user()"> De-archiveer bewoner </button>
+                        <button class="main-btn inhabitant-archive-btn" onclick="dearchive_user()"> de-archiveer bewoner </button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
@@ -93,6 +93,29 @@
                             <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
                         </button>
                         <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->birthday?>" onclick="save_birthday('<?php echo $i->birthday?>')" style="display: none">
+                            <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GENDER -->
+                <div class="col-12 inhabitant-col">
+                    <h2><b>Geslacht: </b>
+                        <span id="<?php echo "gender".$i->gender?>"><?php echo $i->gender; ?> </span>
+                        <form id="<?php echo "genderForm".$i->gender?>" style="display:none">
+
+                            <select class='form-control main-input inhabitant-input' id="genderForm">
+                                <option value="man">man</option>;
+                                <option value="vrouw">vrouw</option>;
+                                <option value="geen van bovenstaande">geen van bovenstaande</option>;
+                            </select>
+                        </form>
+                    </h2>
+                    <div class="inhabitant-edit-save-container">
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="edit" id="<?php echo "edit".$i->gender?>" onclick="edit_gender('<?php echo $i->gender?>')">
+                            <img src="/assets/images/tasks_page/edit.svg" class="inhabitant-btn-svg svg-smaller" alt="edit image">
+                        </button>
+                        <button class="inhabitant-btn-edit-save btn-smaller" type="save" id="<?php echo "save".$i->gender?>" onclick="save_gender('<?php echo $i->gender?>')" style="display: none">
                             <img src="/assets/images/tasks_page/save.svg" class="inhabitant-btn-svg svg-smaller" alt="save image">
                         </button>
                     </div>
@@ -195,7 +218,7 @@
             <?php if(!empty($password)): ?>
                 <?php foreach($password as $p): ?>
                     <div class="col-12 card inhabitant-col">
-                        <button type="button" class="main-btn inhabitant-password-btn" onclick="showCangePasword()" id="changeP">verander wachtwoord</button>
+                        <button type="button" class="main-btn inhabitant-password-btn" onclick="showCangePasword()" id="changeP">wijzig wachtwoord</button>
                         <?php if (isset($validation)): ?>
                             <div class="main-alert-message inhabitant-alert-message">
                                 <div class="alert alert-danger" role="alert">
@@ -209,7 +232,7 @@
                                 <input type="hidden" id="userID" name="userID" value="<?php echo $i->userID?>">
                                 <input type="password" class="form-control main-input inhabitant-password-input" name="new-password" id="new-password" value="" placeholder="nieuw wachtwoord">
                                 <input type="password" class="form-control main-input inhabitant-password-input" name="confirm-password" id="confirm-password" value="" placeholder="bevestig nieuw wachtwoord">
-                                <button type="submit" class="main-btn inhabitant-password-btn">verander wachtwoord</button>
+                                <button type="submit" class="main-btn inhabitant-password-btn">wijzig wachtwoord</button>
                             </form>
                         </div>
                     </div>
@@ -801,6 +824,34 @@
 
             $.post('/UsersController/setGodparent', {id:<?php echo $userID; ?>, godparentID:godparentID_val})
             setTimeout(function(){location.reload()}, 500);
+        }
+
+        function edit_gender(no)
+        {
+            document.getElementById("edit"+no).style.display="none";
+            document.getElementById("save"+no).style.display="block";
+            document.getElementById("genderForm"+no).style.display="block";
+
+            var gender=document.getElementById("gender"+no);
+
+            var gender_data=gender.innerHTML;
+
+            document.getElementById("gender"+no).style.display="none";
+
+            sb = document.querySelector('#genderForm');
+        }
+
+        function save_gender(no)
+        {
+            var gender_val=sb.value;
+
+            document.getElementById("edit"+no).style.display="block";
+            document.getElementById("save"+no).style.display="none";
+            document.getElementById("genderForm"+no).style.display="none";
+
+
+            $.post('/UsersController/setGender', {id:<?php echo $userID; ?>, gender:gender_val})
+            setTimeout(function(){location.reload()}, 300);
         }
 
         function edit_note(no)

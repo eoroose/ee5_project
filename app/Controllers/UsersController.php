@@ -389,6 +389,17 @@ class UsersController extends BaseController
         $this->inhabitantModel->set_godparent($id, $godparentID);
     }
 
+    public function setGender()
+    {
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $gender = $_POST['gender'];
+        }
+        else {
+        }
+        $this->inhabitantModel->set_gender($id, $gender);
+    }
+
     public function setNote()
     {
         if(isset($_POST['noteid'])){
