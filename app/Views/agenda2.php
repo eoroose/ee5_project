@@ -9,8 +9,8 @@
         <div class="row agenda-row">
             
             <div class="col-12 card agenda-btns">
-                <button class="main-modal-btn" onclick="openForm()">Add Event</button>
-                <button class="main-modal-btn" onclick="openFormRecurring()">Add Recurring Event</button>
+                <button class="main-modal-btn" onclick="openForm()">Voeg een activiteit toe</button>
+                <button class="main-modal-btn" onclick="openFormRecurring()">Voeg een herhalende activiteit toe</button>
             </div>
 
             <div class="col-12 card agenda-calendar" id='calendar'></div>
@@ -21,23 +21,23 @@
     <div id="myModal" class="main-modal"">
         <div class="agenda-modal-content card main-card">
 
-            <h4>New Event</h4>
+            <h4>Nieuwe activiteit</h4>
 
-            <label for="title"><b>title</b></label>
-            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="eventName" required>
+            <label for="title"><b>Titel</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Geen een titel" id="eventName" required>
 
-            <label class="agenda-modal-label" for="fromDate"><b>starting</b></label>
-            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter starting date" id="fromDate">
+            <label class="agenda-modal-label" for="fromDate"><b>start</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Geef een start datum" id="fromDate">
 
-            <label class="agenda-modal-label" for="toDate"><b>ending</b></label>
-            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter ending date" id="toDate">
+            <label class="agenda-modal-label" for="toDate"><b>einde</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Geef een eind datum" id="toDate">
 
-            <label class="agenda-modal-label" for="color"><b>color</b></label>
+            <label class="agenda-modal-label" for="color"><b>kleur</b></label>
             <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="color">
 
             <div class="row agenda-modal-btns">
-                <button type="submit" class="col main-modal-btn" onclick="submitForm()">Add</button>
-                <button type="submit" class="col main-modal-btn" onclick="closeForm()">Cancel</button>
+                <button type="submit" class="col main-modal-btn" onclick="submitForm()">Voeg toe</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeForm()">Annuleer</button>
             </div>
             
         </div>
@@ -47,23 +47,23 @@
     <div id="selectEventModal" class="main-modal"">
         <div class="agenda-modal-content card main-card">
 
-            <h4>New Event</h4>
+            <h4>Activiteit</h4>
 
-            <label for="SETitle"><b>title</b></label>
-            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="SETitle" required>
+            <label for="SETitle"><b>Titel</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Geen een titel" id="SETitle" required>
 
-            <label class="agenda-modal-label" for="SEFromDate"><b>starting</b></label>
-            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter starting date" id="SEFromDate">
+            <label class="agenda-modal-label" for="SEFromDate"><b>start</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Geef een start datum" id="SEFromDate">
 
-            <label class="agenda-modal-label" for="SEToDate"><b>ending</b></label>
-            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Enter ending date" id="SEToDate">
+            <label class="agenda-modal-label" for="SEToDate"><b>einde</b></label>
+            <input type="datetime-local" class="form-control main-input agenda-input" placeholder="Geef een eind datum" id="SEToDate">
 
-            <label class="agenda-modal-label" for="SEcolor"><b>color</b></label>
+            <label class="agenda-modal-label" for="SEcolor"><b>kleur</b></label>
             <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="SEcolor">
 
             <div class="row agenda-modal-btns">
-                <button type="submit" class="col main-modal-btn" onclick="submitFormSE()">Add</button>
-                <button type="submit" class="col main-modal-btn" onclick="closeFormSE()">Cancel</button>
+                <button type="submit" class="col main-modal-btn" onclick="submitFormSE()">Verander</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormSE()">Annuleer</button>
             </div>
             
         </div>
@@ -73,26 +73,26 @@
     <div id="existingEventModal" class="main-modal"">
         <div class="agenda-modal-content card main-card">
 
-            <h4>Update Event</h4>
+            <h4>Verander Activiteit</h4>
 
             <input type="text" class="form-control" placeholder="5" id="EEID" required>
             
-            <label for="EETitle"><b>title</b></label>
+            <label for="EETitle"><b>Titel</b></label>
             <input type="text" class="form-control main-input agenda-input" id="EETitle" required>
 
-            <label class="agenda-modal-label" for="EEFromDate"><b>starting</b></label>
+            <label class="agenda-modal-label" for="EEFromDate"><b>start</b></label>
             <input type="datetime-local" class="form-control main-input agenda-input" id="EEFromDate">
 
-            <label class="agenda-modal-label" for="EEToDate"><b>ending</b></label>
+            <label class="agenda-modal-label" for="EEToDate"><b>einde</b></label>
             <input type="datetime-local" class="form-control main-input agenda-input" id="EEToDate">
 
-            <label class="agenda-modal-label" for="EEcolor"><b>color</b></label>
+            <label class="agenda-modal-label" for="EEcolor"><b>kleur</b></label>
             <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="EEcolor">
 
             <div class="row agenda-modal-btns">
-                <button type="submit" class="col main-modal-btn" onclick="submitFormEE()">Update</button>
-                <button type="submit" class="col main-modal-btn" onclick="removeEvent()">Remove</button>
-                <button type="submit" class="col main-modal-btn" onclick="closeFormEE()">Cancel</button>
+                <button type="submit" class="col main-modal-btn" onclick="submitFormEE()">Verander</button>
+                <button type="submit" class="col main-modal-btn" onclick="removeEvent()">Verwijder</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormEE()">Annuleer</button>
             </div>
 
         </div>
@@ -102,62 +102,62 @@
     <div id="newRecurringModal" class="main-modal">
         <div class="agenda-modal-content card main-card">
 
-            <h4>New Recurring Event</h4>
+            <h4>Nieuwe Herhalende Activiteit</h4>
 
-            <label for="NRTitle"><b>title</b></label>
-            <input type="text" class="form-control main-input agenda-input" placeholder="Enter event" id="NRTitle" required>
+            <label for="NRTitle"><b>Titel</b></label>
+            <input type="text" class="form-control main-input agenda-input" placeholder="Geef een titel" id="NRTitle" required>
 
-            <label class="agenda-modal-label" for="NRStart"><b>starting</b></label>
-            <input type="time" class="form-control main-input agenda-input" placeholder="Enter starting time" id="NRStart">
+            <label class="agenda-modal-label" for="NRStart"><b>start</b></label>
+            <input type="time" class="form-control main-input agenda-input" placeholder="Geef een start tijd" id="NRStart">
 
-            <label class="agenda-modal-label" for="NREnd"><b>ending</b></label>
-            <input type="time" class="form-control main-input agenda-input" placeholder="Enter ending time" id="NREnd">
+            <label class="agenda-modal-label" for="NREnd"><b>end</b></label>
+            <input type="time" class="form-control main-input agenda-input" placeholder="Geef een eind tijd" id="NREnd">
 
-            <label class="agenda-modal-label" for="NRColor"><b>color</b></label>
+            <label class="agenda-modal-label" for="NRColor"><b>kleur</b></label>
             <input type="color" class="form-control main-input agenda-input agenda-modal-color" value="#e66465" id="NRColor">
 
             <label class="agenda-modal-label"><b>days</b></label>
             <div class="row agenda-modal-checkboxes">
 
                 <div class="col">
-                    <label for="NRMon">Mon:</label>
+                    <label for="NRMon">Maa:</label>
                     <input type="checkbox"   id="NRMon">
                 </div>
 
                 <div class="col">
-                    <label for="NRTue">Tue:</label>
+                    <label for="NRTue">Din:</label>
                     <input type="checkbox"   id="NRTue">
                 </div>
 
                 <div class="col">
-                    <label for="NRWed">Wed:</label>
+                    <label for="NRWed">Woe:</label>
                     <input type="checkbox"   id="NRWed">
                 </div>
 
                 <div class="col">
-                    <label for="NRThu">Thu:</label>
+                    <label for="NRThu">Don:</label>
                     <input type="checkbox"   id="NRThu">
                 </div>
 
                 <div class="col">
-                    <label for="NRFri">Fri:</label>
+                    <label for="NRFri">Vri:</label>
                     <input type="checkbox"   id="NRFri">
                 </div>
 
                 <div class="col">
-                    <label for="NRSat">Sat:</label>
+                    <label for="NRSat">Zat:</label>
                     <input type="checkbox"   id="NRSat">
                 </div>
 
                 <div class="col">
-                    <label for="NRSun">Sun:</label>
+                    <label for="NRSun">Zon:</label>
                     <input type="checkbox"   id="NRSun">
                 </div>
             </div>
 
             <div class="row agenda-modal-btns">
-                <button type="submit" class="col main-modal-btn" onclick="submitFormNR()">Add</button>
-                <button type="submit" class="col main-modal-btn" onclick="closeFormNR()">Cancel</button>
+                <button type="submit" class="col main-modal-btn" onclick="submitFormNR()">Voeg toe</button>
+                <button type="submit" class="col main-modal-btn" onclick="closeFormNR()">Annuleer</button>
             </div>
         </div>
     </div>
@@ -182,6 +182,7 @@
         var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
+            locale: 'nl',
             editable:true,
             selectable:true,
             firstDay:1,
@@ -192,10 +193,9 @@
                 meridiem: true
             },
             eventDrop: function(info) {
-                if (!confirm(info.event.title + " was dropped on " + info.event.start)) {
+                if (!confirm("Wil je " + info.event.title + " verplaatsen? ")) {
                     info.revert();
                 }else{
-                    alert(info.event.id);
                     $.post('/agendaController/alterInDatabase2',{id:info.event.id.substring(1), start:info.event.startStr, end:info.event.endStr});
                 }
             },
@@ -219,7 +219,6 @@
             eventClick: function(info){
                 // Ask for a title. If empty it will default to "New event"
                 if(info.event.id.startsWith('e')){
-                    alert(info.event.id)
                     document.getElementById("existingEventModal").style.display = "block";
                     document.getElementById("EEID").style.display = "none";
                     document.querySelector('#EEID').value = info.event.id;
@@ -228,13 +227,12 @@
                     document.querySelector('#EEToDate').value = dateTime(info.event.end);
                     document.querySelector('#EEcolor').value = info.event.backgroundColor;
                 }else if(info.event.id.startsWith('a')){
-                    alert(info.event.id)
                     document.getElementById("existingAppointmentModal").style.display = "block";
                     document.getElementById("EAID").style.display = "none";
                     document.querySelector('#EAID').value = info.event.id;
                     document.querySelector('#EADate').value = dateTime(info.event.start);
                 }else if(info.event.groupId.startsWith('r')){
-                    if(confirm('Do you want to delete this recurring event?')){
+                    if(confirm('Wil je deze herhalende activiteit veranderen?')){
                         $.get('/agendaController/removeRecurring',{id:info.event.groupId.substring(1)})
                         info.event.remove();
 
@@ -376,6 +374,7 @@
 
         })
         document.getElementById("newRecurringModal").style.display = "none";
+        setTimeout(() => {  location.reload(); }, 500);
     }
 
 
@@ -416,7 +415,6 @@
     function submitFormEE() {
 
         var idV = document.querySelector("#EEID").value;
-        alert(document.querySelector("#EEID").value);
         var startStr = document.querySelector('#EEFromDate').value;
         var endStr = document.querySelector('#EEToDate').value;
         var titleStr = document.querySelector('#EETitle').value;
@@ -438,7 +436,6 @@
     function submitFormEA() {
 
         var idV = document.querySelector("#EAID").value;
-        alert(idV);
         var startStr = document.querySelector('#EADate').value;
 
         var event = calendar.getEventById(idV);
