@@ -185,7 +185,7 @@
 
             <!--ADMIN REGISTER & DOCTORS & BACKUP -->
             <?php if(session()->get('role')=='admin'): ?>
-                <div class="row dashboard-row">
+                <div class="row dashboard-row main-bottom-padding">
                     
                     <div class="col-md card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/verify.svg" class="card-img-top dashboard-card-logo" alt="verify image">
@@ -206,7 +206,7 @@
                     </div>
                 </div>
 
-                <div class="row dashboard-row main-bottom-padding">
+                <!-- <div class="row dashboard-row main-bottom-padding">
                     <div class="col card dashboard-card-animation">
                         <img src="/assets/images/dashboard_page/backup.svg" class="card-img-top dashboard-card-logo" alt="backup image">
                         <div class="card-body dashboard-card-body">
@@ -214,7 +214,7 @@
                             <a href="/backup" class="stretched-link"></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             
             <!-- EMPLOYEE DOCTORS -->
             <?php elseif(session()->get('role')=='employee'): ?>
