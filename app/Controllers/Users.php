@@ -11,6 +11,7 @@ use App\Models\inhabitantModel;
 use App\Models\JournalModel;
 use App\Models\UserModel;
 use App\Models\customModel;
+use App\Models\yellowCardModel;
 
 class Users extends BaseController
 {
@@ -121,8 +122,28 @@ class Users extends BaseController
 	    return redirect()->to('/');
     }
 
+
+
+    public function setYellowCards(){
+        $inhabitantModel=new inhabitantModel();
+        $date=date('Y-m-d');
+        $data=$inhabitantModel->select()->get()->getResultArray();
+        echo '<pre>'; print_r($data); echo '</pre>';
+        $yellowCardModel=new yellowCardModel();
+        foreach ($data as $row){
+
+            $yellowCard=[
+                'employeeAdminID'=>1,
+                'inhabitantID'=>$row['inhabitantID'],
+                'reason'=>'',
+                'date'=>$date,
+                'isActive'=>false
+            ];
+            $yellowCardModel->save($yellowCard);
+        }
+    }
     public function register(){
-        if(session()->get('role')==='admin')
+        if(session()->get('role')=='admin')
 	    {
 	    helper(['form']);
 
@@ -196,6 +217,18 @@ class Users extends BaseController
                     $appointmentmodel->save($appointmentdata1);
                     $appointmentmodel->save($appointmentdata2);
                     $customModel->newInhabitantProgress($inhabitantId);
+
+                    $yellowCardModel=new yellowCardModel();
+                    $employeemodel=new employeeModel();
+                    $admin=$employeemodel->select()->where('userID',session()->get('id'))->first();
+                    $yellowCard=[
+                        'employeeAdminID'=>$admin['employeeAdminID'],
+                        'inhabitantID'=>$inhabitantId,
+                        'reason'=>'',
+                        'date'=>$this->request->getVar('arrival_data'),
+                        'isActive'=>false
+                    ];
+                    $yellowCardModel->save($yellowCard);
                 }
                 else {
                     $employeemodel = new employeeModel();

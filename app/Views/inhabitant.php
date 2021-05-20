@@ -1,5 +1,11 @@
+<?php
+date_default_timezone_set('Europe/Amsterdam');
+$today = date("Y-m-d H:i");
+//echo $today;
+?>
 <div>
-    <script src='C:\xampp\htdocs\ee5_project\public\assets\scripts\jquery-3.6.0.min.js'></script>
+    <input type="hidden" id="today" value="<?php echo $today?>">
+    <script src='/assets/scripts/jquery-3.6.0.min.js'></script>
     <link href="/assets/css/inhabitant.css" rel="stylesheet" type="text/css" />
 
     <div class="container inhabitant-container main-bottom-padding">
@@ -275,17 +281,12 @@
                 
                 <div class="col-12 card inhabitant-appointment inhabitant-yellowcard">
                     <?php if ($c->isActive == 1): ?>
-                        <h1><b>reden: </b>
-                            <span id="<?php echo "cardReason".$c->yellowCardID?>">
-                                <?php echo $c->reason ?>
-                            </span>
-                        </h1>
+                        <h1><b>reden: </b></h1>
+                        <span><h1 id="<?php echo "cardReason".$c->yellowCardID?>"><?php echo $c->reason ?></h1></span>
 
-                        <h1><b>datum: </b>
-                            <span id="<?php echo "cardDate".$c->yellowCardID?>">
-                                <?php echo $c->date ?>
-                            </span>
-                        </h1>
+
+                        <h1><b>datum: </b></h1>
+                        <span style="margin-bottom: 1em"><h1 id="<?php echo "cardDate".$c->yellowCardID?>"><?php echo $c->date ?></h1></span>
 
                         <div id="<?php echo "cardActive".$c->yellowCardID?>"></div>
 
@@ -294,7 +295,7 @@
                         </div>
 
                     <?php else: ?>
-                        <h1><b>Geen gele kaart toegewezen</b>
+                        <h1><b>Geen gele kaart toegewezen</b></h1>
 
                         <div class="col-12 card inhabitant-appointment inhabitant-yellowcard-edit-btn">
                             <button class="main-btn inhabitant-archive-btn" type="edit" id="editcard" onclick="assign_card('<?php echo $c->yellowCardID?>')"> gele kaart toewijzen </button>
@@ -762,7 +763,7 @@
             var cardReason_data=cardReason.innerHTML;
             var cardActive_data=cardActive.innerHTML;
 
-            cardDate.innerHTML="<input class='form-control main-input inhabitant-input' type='datetime-local' id='cardDate_text"+no+"' value='"+cardDate_data+"'> ";
+            cardDate.innerHTML="<input class='form-control main-input inhabitant-input' type='datetime-local' id='cardDate_text"+no+"'> ";
             cardReason.innerHTML="<input class='form-control main-input inhabitant-input' type='text' id='cardReason_text"+no+"' value='"+cardReason_data+"'> ";
 
             // cardActive.innerHTML='<form id="cardActive_text">'+
@@ -773,34 +774,47 @@
             //                      '<label for="NO">Delete card</label></form>';
 
             cardActive.innerHTML=   '<form id="cardActive_text">'+
-                                        '<button class="inhabitant-yellowcard-display" type="submit" id="1" value="1" name="cardActive">Display</button>'+
-                                        '<button class="inhabitant-yellowcard-delete" type="submit" id="0" value="0" name="cardActive">Delete</button>'+
+                                        '<button class="inhabitant-yellowcard-display" type="submit" id="1" value="1" name="cardActive" onclick="save_card('+no+')">Display</button>'+
+                                        '<button class="inhabitant-yellowcard-delete" type="submit" id="0" value="0" name="cardActive" onclick="delete_card('+no+')">Delete</button>'+
                                     '</form>'
         }
 
         function save_card(no)
         {
-            var cardDate_val=document.getElementById("cardDate_text"+no).value;
-            var cardReason_val = document.getElementById("cardReason_text"+no).value;
-
-            const rbs = document.querySelectorAll('input[name="cardActive"]');
-            let selectedValue;
-            for (const rb of rbs) {
-                if (rb.checked) {
-                    selectedValue = rb.value;
-                    break;
-                }
+            if( document.getElementById("cardDate_text" + no).value== "" ) {
+                alert( "Vergeet de datum niet" );
             }
+            else {
+                var cardDate_val = document.getElementById("cardDate_text" + no).value;
+                var cardReason_val = document.getElementById("cardReason_text" + no).value;
 
-            var cardActive_val=selectedValue;
 
-            document.getElementById("cardDate"+no).innerHTML=cardDate_val;
-            document.getElementById("cardReason"+no).innerHTML=cardReason_val;
-            document.getElementById("cardActive"+no).innerHTML=cardActive_val;
 
-            document.getElementById("cardedit").style.display="block";
 
-            $.post('/UsersController/setCard', {cardid:no, date:cardDate_val, reason:cardReason_val, isActive:cardActive_val})
+
+                const date_time = new Date(cardDate_val);
+                var year = date_time.getFullYear().toString().substr(-2);
+                var month = date_time.getMonth() + 1;
+                var dag = date_time.getDate();
+                var uur = date_time.getHours();
+                var min = date_time.getMinutes();
+
+                if (uur.toString().length < 2)
+                    uur = '0' + uur;
+                if (min.toString().length < 2)
+                    min = '0' + min;
+                if (month.toString().length < 2)
+                    month = '0' + month;
+                if (dag.toString().length < 2)
+                    dag = '0' + dag;
+
+                var date = dag + '-' + month + '-' + year + ' ' + uur + ':' + min;
+                alert(date);
+                document.getElementById("cardDate" + no).innerHTML = date;
+                document.getElementById("cardReason" + no).innerHTML = cardReason_val;
+                document.getElementById("cardActive" + no).innerHTML = "";
+                $.post('/UsersController/setCard', {cardid: no, date: date, reason: cardReason_val})
+            }
         }
 
         function edit_godparent(no)
@@ -909,6 +923,37 @@
 
 
             $.post('/UsersController/insertNote', {id:<?php echo $userID; ?>, title:new_noteTitle, description:new_noteDescription})
+            setTimeout(function(){location.reload()}, 500);
+        }
+        function delete_card(no){
+            var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                $.post('/UsersController/deleteCard',{id:no})
+                setTimeout(function(){location.reload()}, 500);
+            }
+        }
+        function assign_card(id){
+            var today=document.getElementById('today').value;
+            const date_time= new Date(today);
+            var year= date_time.getFullYear().toString().substr(-2);
+            var month= date_time.getMonth()+1;
+            var dag=date_time.getDate();
+            var uur=date_time.getHours();
+            var min=date_time.getMinutes();
+
+            if (uur.toString().length < 2)
+                uur = '0' + uur;
+            if (min.toString().length < 2)
+                min = '0' + min;
+            if (month.toString().length < 2)
+                month = '0' + month;
+            if (dag.toString().length < 2)
+                dag = '0' + dag;
+
+            var date=dag+'-'+month+'-'+year+' '+uur+':'+min;
+            var reason=prompt("Reden voor gele kaart","reason");
+            $.post('/UsersController/changeCard', {id:<?php echo $userID; ?>,yellowCardID:id, reason:reason, date:date})
             setTimeout(function(){location.reload()}, 500);
         }
 

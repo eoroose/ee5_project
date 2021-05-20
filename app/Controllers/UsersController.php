@@ -4,8 +4,11 @@ namespace App\Controllers;
 
 use App\Models\appointmentModel;
 use App\Models\customModel;
+use App\Models\employeeModel;
 use App\Models\inhabitantModel;
+use App\Models\progressmodel;
 use App\Models\UserModel;
+use App\Models\yellowCardModel;
 use phpDocumentor\Reflection\Types\True_;
 
 class UsersController extends BaseController
@@ -338,6 +341,37 @@ class UsersController extends BaseController
         return $lastname_doctor;
     }
 
+    public function changeCard()
+    {
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
+            if(isset($_POST['id'])){
+                $yellowCardModel=new yellowCardModel();
+                $employeemodel=new employeeModel();
+                $admin=$employeemodel->select()->where('userID',session()->get('id'))->first();
+                $inhabitantModel=new inhabitantModel();
+                $inhabitant=$inhabitantModel->where('userID',$_POST['id'])->first();
+                $yellowCard=[
+                    'employeeAdminID'=>$admin['employeeAdminID'],
+                    'inhabitantID'=>$inhabitant['inhabitantID'],
+                    'reason'=>$_POST["reason"],
+                    'date'=>date('d-m-y H:i',strtotime($_POST["date"])),
+                    'isActive'=>true
+                ];
+                $yellowCardID=$_POST["yellowCardID"];
+                //$yellowCardModel->where('yellowCardID',$yellowCardID)->update($yellowCard);
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('date',$_POST["date"])->update();
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('isActive',true)->update();
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('reason',$_POST["reason"])->update();
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('employeeAdminID',$admin['employeeAdminID'])->update();
+
+            }
+        }
+    }
+
     public function setAppointment()
     {
         if(isset($_POST['doctorID'])){
@@ -371,14 +405,22 @@ class UsersController extends BaseController
 
     public function setCard()
     {
-        if(isset($_POST['cardid'])){
-            $cardid = $_POST['cardid'];
-            $date = $_POST['date'];
-            $reason = $_POST['reason'];
-            $isActive = $_POST['isActive'];
-            $this->inhabitantModel->set_card($cardid, $date, $reason, $isActive);
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
         }
-        else {
+        else{
+            if(isset($_POST['cardid'])){
+                $yellowCardModel=new yellowCardModel();
+                $employeemodel=new employeeModel();
+                $admin=$employeemodel->select()->where('userID',session()->get('id'))->first();
+                $yellowCardID=$_POST["cardid"];
+
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('date',$_POST["date"])->update();
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('reason',$_POST["reason"])->update();
+                $yellowCardModel->where('yellowCardID',$yellowCardID)->set('employeeAdminID',$admin['employeeAdminID'])->update();
+
+            }
         }
 
     }
@@ -423,6 +465,19 @@ class UsersController extends BaseController
             $id=$_POST['id'];
         }
         $this->inhabitantModel->delete_note($id);
+    }
+
+    public function deleteCard(){
+        if(session()->get('role')=='inhabitant')
+        {
+            return redirect()->to('/');
+        }
+        else{
+            if(isset($_POST['id'])){
+                $yellowCardModel=new yellowCardModel();
+                $yellowCardModel->set('isActive',false)->where('yellowCardID',$_POST['id'])->update();
+            }
+        }
     }
 
     public function insertNote()
