@@ -27,6 +27,7 @@
             var calendarEl = document.getElementById('calendar');
             calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
+                locale: 'nl',
                 editable:false,
                 selectable:false,
                 firstDay:1,
