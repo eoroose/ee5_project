@@ -1,0 +1,159 @@
+.screensaver-progress-container {
+    --screensaver-cells-height: 70px;
+    --screensaver-cells-avatar-size: calc(var(--screensaver-cells-height) - 10px);
+
+
+    border: 5px solid var(--purple);
+    border-radius: 30px;
+    width: 90vw;
+    max-width: 90vw;
+    min-width: 90vw;
+    position: relative;
+    margin-top: 20px;
+
+    height: 60vh;
+    overflow: hidden;
+    /* background: white; */
+}
+
+.screensaver-progress {
+    width: 95%;
+    max-width: 95%;
+    min-width: 95%;
+    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.screensaver-col {
+    display: flex;
+}
+
+.screensaver-table-header {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background: var(--purple);
+    border-radius: 0;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    text-align: center;
+}
+
+.screensaver-table-header p {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+}
+
+.screensaver-table-cells {
+    margin-left: auto;
+    margin-right: auto;
+    height: var(--screensaver-cells-height);
+    border-radius: 0;
+    border-bottom: 3px solid var(--purple);
+    border-top: 0;
+    border-right: 2px solid var(--purple);
+
+}
+
+.screensaver-table-avatar {
+    background: var(--purple);
+    border-left: 2px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-right: 0;
+
+}
+
+.screensaver-table-avatar img {
+    height: var(--screensaver-cells-avatar-size);
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+.screensaver-table-name {
+    background: var(--purple);
+    border-right: 1px solid var(--purple);
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 0;
+}
+
+.screensaver-table-name p {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    /* font-weight: bold; */
+}
+
+.screensaver-table-checked {
+
+}
+
+.screensaver-table-checked img {
+    height: var(--screensaver-cells-avatar-size);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* TOP */
+
+.screensaver-top-container {
+    margin-top: 30px;
+}
+
+.screensaver-top-row {
+    --screensaver-logo-padding: 10px;
+    --screensaver-top-border-radius: 15px;
+    --screensaver-top-border-width: 3px;
+}
+
+.screensaver-top-col {
+    margin-top: auto;
+    margin-bottom: auto;
+    align-content: center;
+}
+
+.screensaver-top-logo {
+    border: none;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: var(--screensaver-top-border-width) solid var(--purple);
+    border-radius: var(--screensaver-top-border-radius);
+    padding-right: var(--screensaver-logo-padding);
+    padding-left: var(--screensaver-logo-padding);
+    padding-top: var(--screensaver-logo-padding);
+    padding-bottom: var(--screensaver-logo-padding);
+}
+
+.screensaver-top-logo img {
+    width: 35vh;
+    
+}
+
+.screensaver-top-quote {
+    text-align: center;
+    border: var(--screensaver-top-border-width) solid var(--purple);
+    border-radius: var(--screensaver-top-border-radius);
+}
+
+.screensaver-top-quote h1 {
+    font-family: "freestyle script regular";
+    font-weight: bold;
+    color: var(--purple);
+    white-space: nowrap;
+    font-size: 4em;
+}
+
+.screensaver-top-quote p {
+    font-family: "garamond";
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+
