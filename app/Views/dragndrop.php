@@ -95,8 +95,13 @@
         }
 
         function removeChore(id) {
-            $.get('/choreController/removeChore',{choreID:id});
-            setTimeout(() => {  location.reload(); }, 500);
+            var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+            if(r==true)
+            {
+                $.get('/choreController/removeChore',{choreID:id});
+                setTimeout(() => {  location.reload(); }, 500);
+            }
+
         }
 
         function addChore() {

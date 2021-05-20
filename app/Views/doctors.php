@@ -98,8 +98,13 @@
 
 <script>
     function delete_doctor(no){
-        $.post('/DoctorsController/deletedoctor',{id:no})
-        window.location.reload();
+        var r= confirm("Weet je zeker dat je deze wilt verwijderen?");
+        if(r==true)
+        {
+            $.post('/DoctorsController/deletedoctor',{id:no})
+            window.location.reload();
+        }
+
     }
     function registerDoctor()
     {
